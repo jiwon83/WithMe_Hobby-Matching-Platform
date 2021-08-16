@@ -33,7 +33,7 @@ import com.cookandroid.withmetabbar.toolbar.MainActivity4;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  {
-    //갑자기안되서다시시도
+    //주석으로 test
 
     UserFragment userFragment= new UserFragment();
     AlarmFragment alarmFragment= new AlarmFragment();

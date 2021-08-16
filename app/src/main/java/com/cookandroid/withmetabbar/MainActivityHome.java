@@ -56,6 +56,10 @@ public class MainActivityHome extends Fragment {
     private ListView listView;//검색을 보여줄 리스변수
     private ArrayList<String> arrayList_search;
 
+    //2021-08-16 검색기능 구현
+    private List<String> list_search_recycle; //meet의 제목만 따로 담을 리스트
+    private ArrayList<String> arrayList_search_recycle;
+
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
@@ -67,6 +71,12 @@ public class MainActivityHome extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();//Meet객체를 담을 어레이리스트 (어뎁터 쪽으로)
+
+
+        //2021-08-16 검색기능 구현
+        list_search_recycle= new ArrayList<String>();
+        arrayList_search_recycle= new ArrayList<String>();//리스트의 모든 데이터를 arraylist_search에 복사
+
 
 
         //data
@@ -82,7 +92,22 @@ public class MainActivityHome extends Fragment {
                     arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
                     Log.d("arrayList", String.valueOf(arrayList));
 
+                    //단어 검색
+                    //2021-08-16 검색기능 구현
+                    // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
+                    if (meet.title!=null){
+                        list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
+                        //Log.d("list_search_recycle", String.valueOf(list_search_recycle));
+                    }
+
+
                 }
+
+
+                //2021-08-16 검색기능 구현
+                arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
+
+
                 customAdapter= new CustomAdapter(arrayList,getContext());
                 recyclerView.setAdapter(customAdapter);
                 //adapter.notifyDataSetChanged();//리스트 저장 및 새로고침
@@ -98,17 +123,12 @@ public class MainActivityHome extends Fragment {
         });
 
         //검색기능
-
         editSearch=(EditText)vGroup.findViewById(R.id.editSearch);
         listView=(ListView)vGroup.findViewById(R.id.listView);
 
 
-        //검색기능-리스트 생성
-        list_search= new ArrayList<String>();
-        settingList();// 검색에 사용할 데이터 저장
-        arrayList_search= new ArrayList<String>();//리스트의 모든 데이터를 arraylist_search에 복사
-        arrayList_search.addAll(list_search);
-        searchAdapter = new SearchAdapter(list_search,getContext());
+        //arrayList_search.addAll(list_search); 궅이 필요 x 제거해도 된다.
+        searchAdapter = new SearchAdapter(list_search_recycle,getContext());
         listView.setAdapter(searchAdapter);
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -129,53 +149,41 @@ public class MainActivityHome extends Fragment {
                 // input창에 문자를 입력할때마다 호출된다.
                 // search 메소드를 호출한다.
                 String searchText = editSearch.getText().toString();
-                search(searchText);
+                searchInMeet(searchText);
 
+                //2021-08-16 검색기능 구현
+                //검색된 단어가 제목에 들어가는 게시물 띄어보이기(recycler view)
+                //검색한 단어와 meetName이 같은 모임만 다시 띄운다.
+                //customAdapter= new CustomAdapter(arrayList_search_recycle,getContext());
+                //recyclerView.setAdapter(customAdapter);
 
             }
 
         });
-
-
         return vGroup;
     }
 
+    //검색기능메서드
+    private void searchInMeet(String searchText) {
 
+        list_search_recycle.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
 
-    private void settingList() {
-        list_search.add("채수빈");
-        list_search.add("박지현");
-        list_search.add("수지");
-        list_search.add("남태현");
-        list_search.add("하성운");
-        list_search.add("크리스탈");
-        list_search.add("강승윤");
-        list_search.add("손나은");
-        list_search.add("남주혁");
-        list_search.add("루이");
-        list_search.add("진영");
-        list_search.add("슬기");
-        list_search.add("이해인");
-
-    }
-
-    private void search(String searchText) {
-
-        list_search.clear();
-
-        // 문자 입력이 없을때는 모든 데이터를 보여준다.
+         //문자 입력이 없을때는 모든 데이터를 보여준다.
         if (searchText.length()==0){
-            list_search.addAll(arrayList_search);
+            list_search_recycle.addAll(arrayList_search_recycle);//list_search_recycler실제 검색이 끝난 후 리스트, arrayList_search_recycle: 모든 값이 들어있는 리스트
 
         }
         //문자 입력 있을 때
         else {
             // 리스트의 모든 데이터를 검색
-            for (int i=0;i<arrayList_search.size();i++){
+            for (int i=0;i<arrayList_search_recycle.size();i++){
 
                 // arraylist_search의 모든 데이터에 입력받은 단어(searchText)가 포함되어 있으면 true를 반환
-                if(arrayList_search.get(i).toLowerCase().contains(searchText)){
-                    list_search.add(arrayList_search.get(i));//검색된 데이터를 리스트에 추가
+                if(arrayList_search_recycle.get(i).toLowerCase().contains(searchText)){
+                    list_search_recycle.add(arrayList_search_recycle.get(i));//검색된 데이터를 리스트에 추가
+                    //검색한 값만 잘 들어온다.
+                    Log.d("list_search_recycle", String.valueOf(list_search_recycle));
+
                 }
             }//for
         }//else
