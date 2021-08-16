@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -41,6 +42,7 @@ public class MainActivityHome extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Meet> arrayList;//? 검색을 보여줄 리스트 변수
+    private ArrayList<Meet> arrayList_copy;
     //
     private List<Meet> list;
     private CustomAdapter customAdapter;
@@ -71,12 +73,16 @@ public class MainActivityHome extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();//Meet객체를 담을 어레이리스트 (어뎁터 쪽으로)
+        arrayList_copy = new ArrayList<>();
+
+        Button btn_back= vGroup.findViewById(R.id.btn_back);
+        Button btn_search= vGroup.findViewById(R.id.btn_search);
+
 
 
         //2021-08-16 검색기능 구현
         list_search_recycle= new ArrayList<String>();
         arrayList_search_recycle= new ArrayList<String>();//리스트의 모든 데이터를 arraylist_search에 복사
-
 
 
         //data
@@ -91,6 +97,8 @@ public class MainActivityHome extends Fragment {
                     Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
                     arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
                     Log.d("arrayList", String.valueOf(arrayList));
+
+                    arrayList_copy.addAll(arrayList);//arrayList_copy에 복사
 
                     //단어 검색
                     //2021-08-16 검색기능 구현
@@ -111,6 +119,11 @@ public class MainActivityHome extends Fragment {
                 customAdapter= new CustomAdapter(arrayList,getContext());
                 recyclerView.setAdapter(customAdapter);
                 //adapter.notifyDataSetChanged();//리스트 저장 및 새로고침
+
+                //test
+                for (int i=0;i<arrayList_copy.size();i++){
+                    Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getTitle()));
+                }
             }
 
             @Override
@@ -121,6 +134,7 @@ public class MainActivityHome extends Fragment {
 
             }
         });
+
 
         //검색기능
         editSearch=(EditText)vGroup.findViewById(R.id.editSearch);
@@ -160,6 +174,16 @@ public class MainActivityHome extends Fragment {
             }
 
         });
+
+        //검색버튼 클릭하면면
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText =editSearch.getText().toString();//검색어를 가져와서
+                searchInMeetToRecyclerView(searchText);//검색기능 메서드호출
+
+            }
+        });
         return vGroup;
     }
 
@@ -188,6 +212,38 @@ public class MainActivityHome extends Fragment {
             }//for
         }//else
         searchAdapter.notifyDataSetChanged();
+
+    }
+
+    //검색기능-> recyclerview
+    private void searchInMeetToRecyclerView(String searchText) {
+
+        arrayList.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
+
+        //문자 입력이 없을때는 모든 데이터를 보여준다.
+        if (searchText.length()==0){
+            arrayList.addAll(arrayList_copy);
+            Log.d("arrayList_copy_method", String.valueOf(arrayList));//값이 안나온다
+
+        }
+        //문자 입력 있을 때
+        else {
+            // 리스트의 모든 데이터를 검색
+            for (int i=0;i<arrayList_copy.size();i++){
+
+                //if (arrayList_copy[i])
+
+                // arraylist_search의 모든 데이터에 입력받은 단어(searchText)가 포함되어 있으면 true를 반환
+                if(arrayList_copy.get(i).getTitle().toLowerCase().contains(searchText)){
+                    arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                    //검색한 값만 잘 들어온다.
+                    Log.d("arrayList", String.valueOf(arrayList));
+                    Log.d("size", String.valueOf(arrayList_copy.size()));//253??
+
+                }
+            }//for
+        }//else
+        customAdapter.notifyDataSetChanged();
 
     }
 
