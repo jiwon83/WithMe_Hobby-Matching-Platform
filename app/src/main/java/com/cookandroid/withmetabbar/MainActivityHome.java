@@ -1,7 +1,5 @@
 package com.cookandroid.withmetabbar;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivityHome extends Fragment {
 
@@ -43,6 +40,7 @@ public class MainActivityHome extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Meet> arrayList;//? 검색을 보여줄 리스트 변수
     private ArrayList<Meet> arrayList_copy;
+    private ArrayList<Meet> arrayList_uniqe;
     //
     private List<Meet> list;
     private CustomAdapter customAdapter;
@@ -74,6 +72,7 @@ public class MainActivityHome extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();//Meet객체를 담을 어레이리스트 (어뎁터 쪽으로)
         arrayList_copy = new ArrayList<>();
+
 
         Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
@@ -231,20 +230,31 @@ public class MainActivityHome extends Fragment {
             // 리스트의 모든 데이터를 검색
             for (int i=0;i<arrayList_copy.size();i++){
 
-                //if (arrayList_copy[i])
-
                 // arraylist_search의 모든 데이터에 입력받은 단어(searchText)가 포함되어 있으면 true를 반환
                 if(arrayList_copy.get(i).getTitle().toLowerCase().contains(searchText)){
-                    arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
-                    //검색한 값만 잘 들어온다.
-                    Log.d("arrayList", String.valueOf(arrayList));
-                    Log.d("size", String.valueOf(arrayList_copy.size()));//253??
+                    if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
+                        arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                        //검색한 값만 잘 들어온다.
+                        Log.d("arrayList_new", String.valueOf(arrayList));
+                        Log.d("size", String.valueOf(arrayList_copy.size()));//253??
+                    }
+
 
                 }
             }//for
+            //
+
         }//else
+        //arrayList_uniqe = new ArrayList<>();
+        //arrayList_uniqe = new Set<arrayList>();
         customAdapter.notifyDataSetChanged();
 
+    }
+    public boolean UniqueCheckAndAdd(ArrayList<Meet> array, Meet meetPresent){
+        if (array.contains(meetPresent)){
+            return false;
+        }
+        return true;
     }
 
 
