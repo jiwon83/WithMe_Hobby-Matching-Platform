@@ -104,9 +104,11 @@ public class JoinStartFragment extends Fragment {
                                             //프래그먼트 종료
                                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                             fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
-                                            fragmentManager.popBackStack();
-                                            Intent intent = new Intent(getContext(), MainActivity.class);
-                                            startActivity(intent);
+                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();
+                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);
+//                                            fragmentManager.popBackStack();
+//                                            Intent intent = new Intent(getContext(), MainActivity.class);
+//                                            startActivity(intent);
                                         }
                                     });
                                 }else{

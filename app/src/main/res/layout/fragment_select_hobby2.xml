@@ -6,22 +6,57 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/fragSelectHobby"
-    tools:context=".FragmentSelectHobby2">
+    tools:context="certify.FragmentSelectHobby">
 
     <!-- TODO: Update blank fragment layout -->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/hb_cook" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_weight="9"
+            android:text="취미분야 선택"
+            android:textAlignment="center" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewOut"
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:progress="30" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewVertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/selectHobby2_btn_next"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numColumns="3"
-            />
+            android:textAlignment="center"
+            android:text="완료"/>
     </LinearLayout>
 
 

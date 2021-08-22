@@ -4,13 +4,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/btn_hbList_in"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_gravity="center"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/photo1"
+<!--    <ImageView-->
+<!--        android:id="@+id/btn_hbList_in"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="350dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:scaleType="fitXY"-->
+<!--        app:srcCompat="@drawable/photo1"-->
 
-        />
+<!--        />-->
+    <Button
+        android:id="@+id/btn_hbList_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="클래식"/>
 </LinearLayout>

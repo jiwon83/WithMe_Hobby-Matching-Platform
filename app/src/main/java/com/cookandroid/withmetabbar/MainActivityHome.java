@@ -238,12 +238,8 @@ public class MainActivityHome extends Fragment {
                         Log.d("arrayList_new", String.valueOf(arrayList));
                         Log.d("size", String.valueOf(arrayList_copy.size()));//253??
                     }
-
-
                 }
             }//for
-            //
-
         }//else
         //arrayList_uniqe = new ArrayList<>();
         //arrayList_uniqe = new Set<arrayList>();
