@@ -33,6 +33,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import static android.content.ContentValues.TAG;
 
@@ -143,8 +144,8 @@ public class JoinStartFragment extends Fragment {
                         +"&birth="+ strings[4];
                 osw.write(sendMsg);
                 osw.flush();
-                if(conn.getResponseCode() == conn.HTTP_OK) {
-                    InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");//UTF-8로 데이터 읽어옴
+                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);//UTF-8로 데이터 읽어옴
                     BufferedReader reader = new BufferedReader(tmp);
                     StringBuffer buffer = new StringBuffer();
                     while ((str = reader.readLine()) != null) {

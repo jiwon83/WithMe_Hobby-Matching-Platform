@@ -2,7 +2,7 @@ package com.cookandroid.withmetabbar;
 
 public class HobbyBig {
 
-    private String hobbyBigname;
+    private final String hobbyBigname;
 
     public HobbyBig(String hobbyBigname) {
         this.hobbyBigname = hobbyBigname;

@@ -47,7 +47,7 @@ public class MessageActivity extends AppCompatActivity {
     private String uid;
     private String chatRoomUid;
     private RecyclerView recyclerView;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
     private Member destinationUserModel;
 
     @Override

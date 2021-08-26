@@ -1,6 +1,8 @@
 package com.cookandroid.withmetabbar.navigation;
 
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
@@ -11,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -37,7 +41,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -51,11 +60,14 @@ public class FragmentPlus extends Fragment {
     private final int GET_GALLERY_IMAGE = 200;//?무슨의미
     private ImageView imageView, imageView7;
     private ImageButton imageButton;
-    private ToggleButton toggleButton, toggleButton1,toggleButton2,toggleButton3,toggleButton4;
+    //private ToggleButton toggleButton, toggleButton1,toggleButton2,toggleButton3,toggleButton4;
     private Button btnMeet;
     private MediaPlayer MP;
     private Uri imageUri;//모임이미지
     private String uid="";
+    TimePickerDialog mTimePicker;
+    private Date meetDate;
+    private int meetDateInt;//int형 데이터
 
 
 
@@ -74,6 +86,7 @@ public class FragmentPlus extends Fragment {
         EditText etAge=vGroup.findViewById(R.id.etMeetAge);
         EditText etNumMem=vGroup.findViewById(R.id.etNumMem);
         EditText etContent=vGroup.findViewById(R.id.etContent);
+        EditText et_date = vGroup.findViewById(R.id.Date);
 
 
         Intent intent = new Intent();
@@ -82,7 +95,98 @@ public class FragmentPlus extends Fragment {
         Bundle bundle = getArguments();
         uid=bundle.getString("uid");//null?
 
+        //날짜 선택
 
+        Calendar myCalendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+            private void updateLabel() {
+                String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
+
+                et_date.setText(sdf.format(myCalendar.getTime()));
+                DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");//필요x
+
+                //데이터 firebase저장위해 meetDate 변수에 대입
+                try {
+                    //meetDate=myCalendar.getTime(); //캘린더타입
+                    //meetDate.=myCalendar.get(Calendar.DAY_OF_MONTH);
+
+                    //meetDate.setYear(myCalendar.get(Calendar.YEAR));//년
+                    //meetDate.setMonth(myCalendar.get(Calendar.MONTH));//월
+                    //meetDate.setDate(myCalendar.get(Calendar.DAY_OF_MONTH));//일
+
+                    //meetDate=myCalendar.get(Calendar.YEAR);
+                    //meetDate=myCalendar.get(Calendar.DAY_OF_WEEK);
+
+
+
+                    Log.d("meetDate", String.valueOf(meetDate));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        et_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        //시간선택
+        final EditText et_time = vGroup.findViewById(R.id.Time);
+        et_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY); //선택한 시간(24시간제)
+                int minute = mcurrentTime.get(Calendar.MINUTE); //선택한 분
+                //TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        String state = "AM";
+                        myCalendar.set(Calendar.AM_PM, 0);//오전이면 0
+
+                        // 선택한 시간이 12를 넘을경우 "PM"으로 변경 및 -12시간하여 출력 (ex : PM 6시 30분)
+                        if (selectedHour > 12) {
+                            selectedHour -= 12;
+                            state = "PM";
+                            myCalendar.set(Calendar.AM_PM, 1);//오후면 1
+                        }
+                        // EditText에 출력할 형식 지정
+                        et_time.setText(state + " " + selectedHour + "시 " + selectedMinute + "분");
+                        myCalendar.set(Calendar.HOUR, selectedHour);
+                        myCalendar.set(Calendar.MINUTE, selectedMinute);
+
+                        meetDate=myCalendar.getTime();
+
+
+                    }
+                }, hour, minute, false); // true의 경우 24시간 형식의 TimePicker 출현
+                //데이터 firebase저장위해 meetDate 변수에 대입
+//                try {
+//                    //meetDate.setHours(mcurrentTime.get(Calendar.HOUR));
+//                    meetDate.setHours(hour);
+//                    meetDate.setHours(minute);
+//                    //meetDate.setMinutes(mcurrentTime.get(Calendar.MINUTE));
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+            }
+        });
 
 
 
@@ -115,6 +219,7 @@ public class FragmentPlus extends Fragment {
                 //UploadTask uploadTask = riversRef.putFile(file);//storage에 이미지 업로드
 
 
+
                 mDatabase = FirebaseDatabase.getInstance().getReference().child("meet").child(uid);
                 //meet라는 이름으로 uid밑에 저장
 
@@ -130,6 +235,7 @@ public class FragmentPlus extends Fragment {
                         meet.numMember = Integer.parseInt(etNumMem.getText().toString());
                         meet.content = etContent.getText().toString();
                         meet.imgUrl = file.toString();
+                        meet.meetDate =meetDate;
 
                         //member.mAge = Integer.parseInt(etAge.getText().toString());
 

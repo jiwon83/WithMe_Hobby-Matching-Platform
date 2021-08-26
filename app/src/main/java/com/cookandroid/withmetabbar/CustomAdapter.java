@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
-    private ArrayList<com.cookandroid.withmetabbar.model.Meet> arrayList;
-    private Context context;
+    private final ArrayList<com.cookandroid.withmetabbar.model.Meet> arrayList;
+    private final Context context;
 
     public CustomAdapter(ArrayList<Meet> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -44,11 +44,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getImgUrl())
                 .into(holder.iv_meet);
-        holder.tv_meetTitle.setText("모임명: "+String.valueOf(arrayList.get(position).getTitle()));
-        holder.tv_meetAge.setText("나이: "+String.valueOf(arrayList.get(position).getMeetAge()));
-        holder.tv_meetId.setText("모임아이디: "+String.valueOf(arrayList.get(position).getMeetId()));
-        holder.tv_numMember.setText("인원: "+String.valueOf(arrayList.get(position).getNumMember()));
-        holder.tv_content.setText("내용: "+String.valueOf(arrayList.get(position).getContent()));
+        holder.tv_meetTitle.setText("모임명: "+ arrayList.get(position).getTitle());
+        holder.tv_meetAge.setText("나이: "+ arrayList.get(position).getMeetAge());
+        holder.tv_meetId.setText("모임아이디: "+ arrayList.get(position).getMeetId());
+        holder.tv_numMember.setText("인원: "+ arrayList.get(position).getNumMember());
+        holder.tv_content.setText("내용: "+ arrayList.get(position).getContent());
 
         //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성
 

@@ -1,5 +1,6 @@
 package com.cookandroid.withmetabbar.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Meet {
@@ -7,7 +8,7 @@ public class Meet {
     public int meetId;
     public String imgUrl;
     public String title;
-    //public Date meetDate;
+    public Date meetDate;
     public int meetAge;
     public int numMember;
     //public String meetGen;
@@ -86,5 +87,13 @@ public class Meet {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getMeetDate() {
+        return meetDate;
+    }
+
+    public void setMeetDate(Date meetDate) {
+        this.meetDate = meetDate;
     }
 }

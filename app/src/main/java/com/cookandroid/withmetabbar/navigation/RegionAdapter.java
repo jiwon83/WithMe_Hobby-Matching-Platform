@@ -17,9 +17,9 @@ import java.util.List;
 
 public class RegionAdapter extends BaseAdapter {
 
-    private List<String> cities;
+    private final List<String> cities;
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     private int selectedPos = 0;
 

@@ -13,9 +13,9 @@ import java.util.List;
 
 public class DetailedRegionAdapter extends BaseAdapter {
 
-    private List<String> regions;
+    private final List<String> regions;
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     public DetailedRegionAdapter(Context context, List<String> regions){
         this.regions = regions;

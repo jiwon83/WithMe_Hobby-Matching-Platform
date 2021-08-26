@@ -48,10 +48,10 @@ public class GroupMessageActivity extends AppCompatActivity {
     Map<String, Member> users = new HashMap<>();
     String destinationRoom;
     String uid;
-    private List<String> chatmacro = new ArrayList<>();
+    private final List<String> chatmacro = new ArrayList<>();
     private ListView listView;
     private RecyclerView recyclerView;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
 
     List<ChatModel.Comment> comments = new ArrayList<>();
     @Override
@@ -89,7 +89,7 @@ public class GroupMessageActivity extends AppCompatActivity {
                     comments.clear();
                     ChatModel.Comment comment = new ChatModel.Comment();
                     comment.uid = uid;
-                    comment.message = chatmacro.get(position).toString();
+                    comment.message = chatmacro.get(position);
                     comment.timestamp = ServerValue.TIMESTAMP;
                     FirebaseDatabase.getInstance().getReference().child("chatrooms")
                             .child(destinationRoom).child("comments").push()
@@ -214,7 +214,7 @@ public class GroupMessageActivity extends AppCompatActivity {
         private int meetAge,meetNumMember;
         private String chatRoomUid;
         private RecyclerView recyclerView;
-        private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
+        private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
         private Member destinationUserModel;
 
         @Override

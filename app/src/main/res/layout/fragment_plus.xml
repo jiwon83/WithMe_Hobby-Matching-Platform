@@ -152,15 +152,34 @@
                     android:textSize="16dp" />
 
                 <EditText
-                    android:id="@+id/etDate"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/Date"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:focusable="false"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
                     android:inputType="textPersonName"
                     android:layout_marginRight="20dp"
-                    android:text="" />
+                    android:textSize="16dp"
+                    android:text="Date" />
+
+                <EditText
+                    android:id="@+id/Time"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:layout_marginRight="20dp"
+                    android:textSize="16dp"
+                    android:text="Time" />
 
             </LinearLayout>
 

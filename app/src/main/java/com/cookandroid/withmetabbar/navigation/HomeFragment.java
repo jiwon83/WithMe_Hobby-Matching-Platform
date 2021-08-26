@@ -38,7 +38,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private String uid="";
+    private final String uid="";
     private String[] values;
     private String[] images;
 
@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
 
     //연관검색어 textview에 띄울 내용
 
-    private List<String> items = Arrays.asList("부산", "부산바다", "부산어묵", "서울", "서울경복궁");
+    private final List<String> items = Arrays.asList("부산", "부산바다", "부산어묵", "서울", "서울경복궁");
     private SearchView searchBar;
     private TextView resultTextView;
 

@@ -39,7 +39,7 @@ import java.util.TreeMap;
 public class ChatFragment extends Fragment {
     //채팅방목록
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
 
     @Nullable
     @Override
@@ -55,10 +55,10 @@ public class ChatFragment extends Fragment {
 
     class ChatRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-        private List<ChatModel> chatModels = new ArrayList<>();
-        private List<String> keys = new ArrayList<>();
-        private String uid;
-        private ArrayList<String> destinationUsers = new ArrayList<>();
+        private final List<ChatModel> chatModels = new ArrayList<>();
+        private final List<String> keys = new ArrayList<>();
+        private final String uid;
+        private final ArrayList<String> destinationUsers = new ArrayList<>();
         public ChatRecyclerViewAdapter(){
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

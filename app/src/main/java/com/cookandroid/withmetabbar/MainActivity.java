@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity  {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()   {
 
             //로그인에서 넣어준 intent 받기
-            Intent intentMain = getIntent();
-            public String uid = intentMain.getStringExtra("uid");
-            Member member = new Member();
+            final Intent intentMain = getIntent();
+            public final String uid = intentMain.getStringExtra("uid");
+            final Member member = new Member();
 
 
 

@@ -17,9 +17,9 @@ import java.util.List;
 
 public class MacroAdapter extends BaseAdapter {
 
-    private List<String> macro;
+    private final List<String> macro;
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     private int selectedPos = 0;
 

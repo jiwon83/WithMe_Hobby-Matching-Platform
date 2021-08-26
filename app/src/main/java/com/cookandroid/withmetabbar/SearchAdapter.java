@@ -11,9 +11,9 @@ import java.util.List;
 
 public class SearchAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<String> list;
-    private LayoutInflater inflate;
+    private final Context context;
+    private final List<String> list;
+    private final LayoutInflater inflate;
     private ViewHolder viewHolder;
 
     public SearchAdapter(List<String> list, Context context){

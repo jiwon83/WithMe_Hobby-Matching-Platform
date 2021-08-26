@@ -247,10 +247,7 @@ public class MainActivityHome extends Fragment {
 
     }
     public boolean UniqueCheckAndAdd(ArrayList<Meet> array, Meet meetPresent){
-        if (array.contains(meetPresent)){
-            return false;
-        }
-        return true;
+        return !array.contains(meetPresent);
     }
 
 
