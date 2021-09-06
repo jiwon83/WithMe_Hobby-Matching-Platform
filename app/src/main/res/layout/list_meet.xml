@@ -32,10 +32,28 @@
 
             </TextView>
             <TextView
+                android:id="@+id/tv_meetDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간"
+                android:textColor="@color/black"
+                android:layout_margin="5dp">
+
+            </TextView>
+            <TextView
                 android:id="@+id/tv_meetAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="나이"
+                android:textColor="@color/black"
+                android:layout_margin="5dp">
+
+            </TextView>
+            <TextView
+                android:id="@+id/tv_meetGen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="성별"
                 android:textColor="@color/black"
                 android:layout_margin="5dp">
 

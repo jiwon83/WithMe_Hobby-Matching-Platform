@@ -59,18 +59,17 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="개인정보 취급방침"
-                android:layout_gravity="center"
-                android:gravity="center"
+                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
+                android:text="개인정보 취급방침"
                 android:textSize="15dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="25dp"
                 android:gravity="center"
-                android:layout_marginLeft="150dp"
                 android:backgroundTint="@color/gray"
                 android:text="약관보기" />
         </LinearLayout>
@@ -93,7 +92,7 @@
             <Button
                 android:id="@+id/button1"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:layout_marginRight="25dp"
                 android:gravity="center"
                 android:backgroundTint="@color/gray"
@@ -118,7 +117,7 @@
             <Button
                 android:id="@+id/button"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:gravity="center"
                 android:layout_marginRight="25dp"
                 android:backgroundTint="@color/gray"

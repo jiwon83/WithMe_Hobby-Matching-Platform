@@ -7,9 +7,9 @@
         android:title="@string/home"/>
     <item
         android:id="@+id/action_love"
-        android:icon="@drawable/menubar_bookmark"
+        android:icon="@drawable/menubar_like"
         android:enabled="true"
-        android:title="bookmark"/>
+        android:title="like"/>
     <item
         android:id="@+id/action_plus"
         android:icon="@drawable/menubar_plus"
@@ -17,9 +17,9 @@
         android:title="make"/>
     <item
         android:id="@+id/action_chatroom"
-        android:icon="@drawable/menubar_notification"
+        android:icon="@drawable/menubar_chatting"
         android:enabled="true"
-        android:title="alarm"/>
+        android:title="chatting"/>
     <item
         android:id="@+id/action_mypage"
         android:icon="@drawable/menubar_mypage"

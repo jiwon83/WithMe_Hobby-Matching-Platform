@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <TextView
         android:id="@+id/btn_hbList_in"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/yellow"
-        android:text="클래식"/>
+        android:text="클래식"
+        android:textAlignment="center"/>
 </LinearLayout>

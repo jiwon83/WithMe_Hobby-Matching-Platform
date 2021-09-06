@@ -74,7 +74,7 @@ public class MainActivityHome extends Fragment {
         arrayList_copy = new ArrayList<>();
 
 
-        Button btn_back= vGroup.findViewById(R.id.btn_back);
+        //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
 
 

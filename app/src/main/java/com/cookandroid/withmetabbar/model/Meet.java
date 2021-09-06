@@ -11,7 +11,7 @@ public class Meet {
     public Date meetDate;
     public int meetAge;
     public int numMember;
-    //public String meetGen;
+    public int meetGen;//남 1, 여 2, 무관 0
     public String content;
     //public String hash;
     //public String cate;
@@ -95,5 +95,13 @@ public class Meet {
 
     public void setMeetDate(Date meetDate) {
         this.meetDate = meetDate;
+    }
+
+    public int getMeetGen() {
+        return meetGen;
+    }
+
+    public void setMeetGen(int meetGen) {
+        this.meetGen = meetGen;
     }
 }

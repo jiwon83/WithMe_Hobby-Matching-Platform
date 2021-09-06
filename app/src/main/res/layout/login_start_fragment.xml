@@ -7,8 +7,6 @@
     tools:context=".MainActivity">
 
 
-
-
     <EditText
         android:id="@+id/etId"
         android:layout_width="200dp"
@@ -63,46 +61,59 @@
 
     <ImageView
         android:id="@+id/title"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/logow"
+        android:layout_height="@dimen/logow"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logow" />
+        app:srcCompat="@drawable/logo_x" />
 
     <ImageView
         android:id="@+id/naver"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginLeft="104dp"
-        android:layout_marginTop="496dp"
+        android:layout_width="@dimen/naver"
+        android:layout_height="@dimen/naver"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995"
         app:srcCompat="@drawable/naver" />
 
     <ImageView
         android:id="@+id/kakaotalk"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginLeft="132dp"
-        android:layout_marginTop="456dp"
+        android:layout_width="@dimen/kakao"
+        android:layout_height="@dimen/kakao"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995"
         app:srcCompat="@drawable/kakao" />
 
     <ImageView
         android:id="@+id/facebook"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="236dp"
-        android:layout_marginLeft="236dp"
-        android:layout_marginTop="496dp"
+        android:layout_width="@dimen/facebook"
+        android:layout_height="@dimen/facebook"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995"
         app:srcCompat="@drawable/facebook" />
 
 

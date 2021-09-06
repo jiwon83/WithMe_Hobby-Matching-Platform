@@ -36,7 +36,6 @@
                     android:layout_height="300dp"
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
-
                     app:srcCompat="@drawable/camera" />
             </LinearLayout>
 
@@ -260,7 +259,7 @@
                     android:textSize="16dp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox_f"
+                    android:id="@+id/check_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -268,7 +267,7 @@
                     android:text="여" />
 
                 <CheckBox
-                    android:id="@+id/checkBox2_m"
+                    android:id="@+id/check_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -276,7 +275,7 @@
                     android:text="남" />
 
                 <CheckBox
-                    android:id="@+id/checkBox3_both"
+                    android:id="@+id/checkNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -350,7 +349,7 @@
                 android:layout_height="wrap_content"
                 android:text="모임 생성"
                 android:background="@drawable/shape"
-                app:backgroundTint="@color/yellow"
+                app:backgroundTint="@color/Orange"
                 android:layout_marginTop="60dp"
                 android:layout_gravity="center"
                 android:textSize="14dp"

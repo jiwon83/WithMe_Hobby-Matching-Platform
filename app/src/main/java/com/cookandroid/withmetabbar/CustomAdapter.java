@@ -45,7 +45,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 .load(arrayList.get(position).getImgUrl())
                 .into(holder.iv_meet);
         holder.tv_meetTitle.setText("모임명: "+ arrayList.get(position).getTitle());
+        holder.tv_meetDate.setText("시간: "+ arrayList.get(position).getMeetDate());
         holder.tv_meetAge.setText("나이: "+ arrayList.get(position).getMeetAge());
+        //성별
+        if (arrayList.get(position).getMeetGen()==1){
+            //남(1) 이면,
+            holder.tv_meetGen.setText("성별: 남");
+
+        }else if (arrayList.get(position).getMeetGen()==2){
+            //여(2) 이면,
+            holder.tv_meetGen.setText("성별: 여");
+        }else{
+            //무관(0) 이면,
+            holder.tv_meetGen.setText("성별: 무관");
+        }
         holder.tv_meetId.setText("모임아이디: "+ arrayList.get(position).getMeetId());
         holder.tv_numMember.setText("인원: "+ arrayList.get(position).getNumMember());
         holder.tv_content.setText("내용: "+ arrayList.get(position).getContent());
@@ -75,16 +88,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_meet;
-        TextView tv_meetTitle,tv_meetAge, tv_meetId, tv_numMember, tv_content;
+        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_meetId, tv_numMember, tv_content, tv_meetGen;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             this.iv_meet=itemView.findViewById(R.id.iv_meet);
             this.tv_meetTitle=itemView.findViewById(R.id.tv_meetTitle);
+            this.tv_meetDate=itemView.findViewById(R.id.tv_meetDate);
             this.tv_meetAge=itemView.findViewById(R.id.tv_meetAge);
             this.tv_meetId=itemView.findViewById(R.id.tv_meetId);
             this.tv_numMember=itemView.findViewById(R.id.tv_numMember);
             this.tv_content=itemView.findViewById(R.id.tv_content);
+            this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);
+
+
         }
     }
 }

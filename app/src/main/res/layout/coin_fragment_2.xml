@@ -25,10 +25,10 @@
 
                 <ImageView
                     android:id="@+id/coin1"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/gift_x"
+                    android:layout_height="@dimen/gift_x"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="30dp"
                     app:srcCompat="@drawable/gift_x" />
 
 
@@ -59,10 +59,10 @@
 
                 <ImageView
                     android:id="@+id/coin2"
-                    android:layout_width="65dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_width="@dimen/film_x"
+                    android:layout_height="@dimen/film_x"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="30dp"
                     app:srcCompat="@drawable/film_x" />
 
                 <TextView
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="12dp"
                     android:textSize="15dp"
                     android:text="영상 시청하고 포인트 받기" />
 
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="38dp"
                     android:textSize="12dp"
                     android:backgroundTint="@color/Orange"
                     android:text="시청하기" />

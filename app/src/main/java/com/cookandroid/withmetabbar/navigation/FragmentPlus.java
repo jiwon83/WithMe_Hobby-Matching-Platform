@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -87,6 +88,9 @@ public class FragmentPlus extends Fragment {
         EditText etNumMem=vGroup.findViewById(R.id.etNumMem);
         EditText etContent=vGroup.findViewById(R.id.etContent);
         EditText et_date = vGroup.findViewById(R.id.Date);
+        CheckBox cb_male = vGroup.findViewById(R.id.check_male);
+        CheckBox cb_female = vGroup.findViewById(R.id.check_female);
+        CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
 
 
         Intent intent = new Intent();
@@ -173,16 +177,6 @@ public class FragmentPlus extends Fragment {
 
                     }
                 }, hour, minute, false); // true의 경우 24시간 형식의 TimePicker 출현
-                //데이터 firebase저장위해 meetDate 변수에 대입
-//                try {
-//                    //meetDate.setHours(mcurrentTime.get(Calendar.HOUR));
-//                    meetDate.setHours(hour);
-//                    meetDate.setHours(minute);
-//                    //meetDate.setMinutes(mcurrentTime.get(Calendar.MINUTE));
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
             }
@@ -218,10 +212,7 @@ public class FragmentPlus extends Fragment {
                 //StorageReference riversRef = storageRef.child("meetImage/"+filename);
                 //UploadTask uploadTask = riversRef.putFile(file);//storage에 이미지 업로드
 
-
-
-                mDatabase = FirebaseDatabase.getInstance().getReference().child("meet").child(uid);
-                //meet라는 이름으로 uid밑에 저장
+                
 
                 //이미지 strage에 저장
                 FirebaseStorage.getInstance().getReference().child("meetImages/"+imageUri.getLastPathSegment()).child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -236,6 +227,17 @@ public class FragmentPlus extends Fragment {
                         meet.content = etContent.getText().toString();
                         meet.imgUrl = file.toString();
                         meet.meetDate =meetDate;
+
+                        //성별체크
+                        if (cb_male.isChecked()){
+                            meet.meetGen =1; //남자는 1
+                        }else if (cb_female.isChecked()){
+                            meet.meetGen =2; //여자는 2
+                        }else if (cb_no.isChecked()){
+                            meet.meetGen =0; //무관은 0
+                        }else {
+                            Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
+                        }
 
                         //member.mAge = Integer.parseInt(etAge.getText().toString());
 

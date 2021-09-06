@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.cookandroid.withmetabbar.DaumWebViewActivity;
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.Member;
@@ -60,13 +62,18 @@ public class JoinStartFragment extends Fragment {
         EditText etPhoneNum = vGroup.findViewById(R.id.etPhoneNum);
         btn_join= vGroup.findViewById(R.id.button6);
         btn_live = vGroup.findViewById(R.id.btn_live);
+        CheckBox cb_male = vGroup.findViewById(R.id.check_male);
+        CheckBox cb_female = vGroup.findViewById(R.id.check_female);
+        CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
 
 
         btn_live.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LivePlaceFragment livePlaceFragment= new LivePlaceFragment();
-                ((MainActivity2)getActivity()).replaceFragment(livePlaceFragment);
+                DaumWebViewActivity daumWebViewActivity = new DaumWebViewActivity();
+                ((MainActivity2)getActivity()).replaceFragment(daumWebViewActivity);
+                //LivePlaceFragment livePlaceFragment= new LivePlaceFragment();
+                //((MainActivity2)getActivity()).replaceFragment(livePlaceFragment);
             }
         });
 
@@ -95,6 +102,16 @@ public class JoinStartFragment extends Fragment {
                                     member.mName = etName.getText().toString().trim();
                                     member.nick =etNick.getText().toString().trim();
                                     member.mAge = Integer.parseInt(etAge.getText().toString());
+                                    //성별체크
+                                    if (cb_male.isChecked()){
+                                        member.mGen =1; //남자는 1
+                                    }else if (cb_female.isChecked()){
+                                        member.mGen =2; //여자는 2
+                                    }else if (cb_no.isChecked()){
+                                        member.mGen =0; //무관은 0
+                                    }else {
+                                        Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
+                                    }
 
 
                                     //member.meetDate

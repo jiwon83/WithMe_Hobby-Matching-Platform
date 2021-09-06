@@ -10,17 +10,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imagemy"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/myph_x"
+            android:layout_height="@dimen/myph_x"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
-            app:srcCompat="@drawable/myph" />
+            app:srcCompat="@drawable/myph_x" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -122,10 +122,10 @@
 
         <ImageView
             android:id="@+id/pointim"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/point"
+            android:layout_height="@dimen/point"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             app:srcCompat="@drawable/point" />
 
         <TextView
@@ -360,7 +360,7 @@
             android:layout_width="25dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="110dp"
+            android:layout_marginLeft="108dp"
             android:background="@drawable/arrowbtn" />
 
     </LinearLayout>

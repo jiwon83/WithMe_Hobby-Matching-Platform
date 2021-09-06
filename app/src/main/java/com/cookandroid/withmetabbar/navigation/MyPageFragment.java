@@ -1,5 +1,7 @@
 package com.cookandroid.withmetabbar.navigation;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
 public class MyPageFragment extends Fragment {
@@ -33,6 +38,9 @@ public class MyPageFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private String uid="";
+    private final int GET_GALLERY_IMAGE = 200;//?무슨의미
+    private ImageView imageView, imageView7;
+    private Uri imageUri;//모임이미지
 
 
     //private FragmentPagerAdapter fragmentPagerAdapter;//코인충전어뎁터
@@ -47,6 +55,8 @@ public class MyPageFragment extends Fragment {
         TextView tvName= vGroup.findViewById(R.id.tv_mName);
         TextView tvNick= vGroup.findViewById(R.id.tv_nickname);
 
+        Intent intent = new Intent();
+
 
 
         //data 불러오기 내 uid에 해당하는 데이터 불러오기
@@ -59,7 +69,7 @@ public class MyPageFragment extends Fragment {
 
                 //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 Member member = dataSnapshot.getValue(Member.class);
-                Log.d("memberInput", String.valueOf(member.mName));
+                //Log.d("memberInput", String.valueOf(member.mName));
                 tvName.setText(member.mName);
                 tvNick.setText(member.nick);
 
@@ -112,8 +122,50 @@ public class MyPageFragment extends Fragment {
             }
         });
 
+        imageView = (ImageView)vGroup.findViewById(R.id.imagemy);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, GET_GALLERY_IMAGE);
+
+
+            }
+        });
+        //버튼 누르면 데이터에 저장
+
 
 
         return vGroup;
     }
+
+
+    //갤러리로 가는 법
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_GALLERY_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                imageView.setImageURI(data.getData());
+                imageUri = data.getData();
+                Log.d("갤러리에서 불러온 이미지 경로", String.valueOf(imageUri));
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(getContext(), "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
+        }
+    } //갤러리에서 사진 불러와서 넣기
+
+
+
+    protected void onMainActivity(int requestCode, int resultCode, Intent data) {
+        if(requestCode == GET_GALLERY_IMAGE&&resultCode == RESULT_OK&&data !=
+                null && data.getData()!=null){
+            Uri selectedImageUri = data.getData();
+            imageView.setImageURI(selectedImageUri);
+        }
+    }
+
 }

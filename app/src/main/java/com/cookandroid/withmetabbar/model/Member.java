@@ -8,6 +8,7 @@ public class Member {
     public String mName;
     public String nick;
     public int mAge;
+    public int mGen;
     public int mDegree;//매너온도
     public String profileImageUrl;
 
@@ -71,6 +72,14 @@ public class Member {
 
     public void setmAge(int mAge) {
         this.mAge = mAge;
+    }
+
+    public int getmGen() {
+        return mGen;
+    }
+
+    public void setmGen(int mGen) {
+        this.mGen = mGen;
     }
 
     public int getmDegree() {

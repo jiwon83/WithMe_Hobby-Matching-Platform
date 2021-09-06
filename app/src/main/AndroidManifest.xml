@@ -43,5 +43,6 @@
         <activity android:name=".chat.GroupMessageActivity$MessageActivity"/>
         <activity android:name=".chat.GroupMessageActivity"/>
         <activity android:name=".chat.MessageActivity"/>
+
     </application>
 </manifest>
