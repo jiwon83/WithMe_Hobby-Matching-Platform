@@ -1,5 +1,8 @@
 package com.cookandroid.withmetabbar.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Member {
 
     public String uid;
@@ -11,6 +14,9 @@ public class Member {
     public int mGen;
     public int mDegree;//매너온도
     public String profileImageUrl;
+
+    //2021.09.06
+    public Map<String, Hobby> mHobbyList = new HashMap<>(); // member의 관심 취미 리스트
 
     public Member(){
 
