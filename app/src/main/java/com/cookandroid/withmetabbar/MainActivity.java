@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity  {
                         transaction.replace(R.id.main_content, talkPlaceFragment).commitAllowingStateLoss();
                         break;
                     case R.id.action_plus:
+                        //transaction.add(R.id.main_content,fragmentPlus).addToBackStack(null).commit();
                         transaction.replace(R.id.main_content, fragmentPlus).commitAllowingStateLoss();
                         Bundle bundle = new Bundle();
                         bundle.putString("uid",uid);
@@ -175,15 +176,49 @@ public class MainActivity extends AppCompatActivity  {
         fragmentTransaction.replace(R.id.main_content, fragment).commit();
         
     }
+    public void removeFragment(Fragment fragment) {
+        //getSupportFragmentManager().beginTransaction().remove(R.id.main_content2, fragment).commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(fragment).commit();                                //로그아웃, 뒤로가기버튼 누를시
+    }
 
-    //로그아웃, 뒤로가기버튼 누를시
+    public void addFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.main_content, fragment).addToBackStack(null).commit();
+    }
+
+
     @Override
     public void onBackPressed() {
+
+//        if (mOnkeybackPressedListener != null){
+//            mOnkeybackPressedListener.onBackKey();
+//
+//        }else {
+//            if (getSupportFragmentManager().getBackStackEntryCount()==0){
+//                //종료
+//            }else {
+//                super.onBackPressed();
+//            }
+//        }
         Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, MainActivity2.class);
         startActivity(intent);
         //super.onBackPressed();
     }
+
+    //뒤로가기 버튼을 뺏어올 리스너 등록
+//    public interface onKeyBackPressedListener{
+//        void onBackKey();
+//
+//    }
+//    private onKeyBackPressedListener mOnkeybackPressedListener;
+//    public void setOnKeyBackPressedListener (onKeyBackPressedListener listener){
+//        mOnkeybackPressedListener = listener;
+//    }
+
 }
 
     /*

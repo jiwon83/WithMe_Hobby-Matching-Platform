@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/fragSelectHobby"
-    tools:context="certify.FragmentSelectHobby">
+    tools:context="certify.FragmentSelectHobby"
+    android:background="@color/white">
 
     <!-- TODO: Update blank fragment layout -->
 

@@ -31,6 +31,7 @@ import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.MainActivityHome;
 import android.Manifest;
 import com.cookandroid.withmetabbar.R;
+import com.cookandroid.withmetabbar.certify.FragmentSelectHobby2;
 import com.cookandroid.withmetabbar.certify.LivePlaceFragment;
 import com.cookandroid.withmetabbar.certify.MainActivity2;
 import com.cookandroid.withmetabbar.model.Meet;
@@ -87,6 +88,7 @@ public class FragmentPlus extends Fragment {
         EditText etAge=vGroup.findViewById(R.id.etMeetAge);
         EditText etNumMem=vGroup.findViewById(R.id.etNumMem);
         EditText etContent=vGroup.findViewById(R.id.etContent);
+        EditText etHobby=vGroup.findViewById(R.id.etHobby);
         EditText et_date = vGroup.findViewById(R.id.Date);
         CheckBox cb_male = vGroup.findViewById(R.id.check_male);
         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
@@ -138,6 +140,17 @@ public class FragmentPlus extends Fragment {
                 }
             }
         };
+
+        //취미선택
+        etHobby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentPlusSelectHobby fragmentPlusSelectHobby= new FragmentPlusSelectHobby();
+                ((MainActivity)getActivity()).addFragment(fragmentPlusSelectHobby);
+
+            }
+        });
 
         et_date.setOnClickListener(new View.OnClickListener() {
             @Override
