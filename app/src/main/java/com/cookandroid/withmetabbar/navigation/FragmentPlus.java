@@ -94,12 +94,20 @@ public class FragmentPlus extends Fragment {
         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
 
+        int count=0;
+
 
         Intent intent = new Intent();
 
 
         Bundle bundle = getArguments();
         uid=bundle.getString("uid");//null?
+
+        //선택한 취미값받기
+        while (bundle.getString("hobby"+count)!=null){
+            String str = bundle.getString("hobby"+count);
+            etHobby.append(","+str);
+        }
 
         //날짜 선택
 
