@@ -34,6 +34,7 @@ import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.certify.FragmentSelectHobby2;
 import com.cookandroid.withmetabbar.certify.LivePlaceFragment;
 import com.cookandroid.withmetabbar.certify.MainActivity2;
+import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -59,6 +61,8 @@ import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 @SuppressWarnings("deprecation")
 public class FragmentPlus extends Fragment {
+
+    String newKey;
 
     private DatabaseReference mDatabase;
     private final int GET_GALLERY_IMAGE = 200;//?무슨의미
@@ -84,6 +88,8 @@ public class FragmentPlus extends Fragment {
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getSupportActionBar().setIcon(R.drawable.ic_launcher);
         //setTitle("레이아웃 선택");
+
+
 
 
         btnMeet= vGroup.findViewById(R.id.btn_meet);//버튼
@@ -151,8 +157,6 @@ public class FragmentPlus extends Fragment {
 
                     //meetDate=myCalendar.get(Calendar.YEAR);
                     //meetDate=myCalendar.get(Calendar.DAY_OF_WEEK);
-
-
 
                     Log.d("meetDate", String.valueOf(meetDate));
                 } catch (Exception e) {
@@ -253,6 +257,7 @@ public class FragmentPlus extends Fragment {
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
                         Meet meet = new Meet();
+                        //meet.mid =
                         meet.uid =uid; //uid정보 추가
                         meet.title = etTitle.getText().toString();
                         meet.meetAge = Integer.parseInt(etAge.getText().toString());
@@ -260,6 +265,16 @@ public class FragmentPlus extends Fragment {
                         meet.content = etContent.getText().toString();
                         meet.imgUrl = file.toString();
                         meet.meetDate =meetDate;
+
+                        //Meet model의 필드를 private ArrayList<Hobby> hobbyCate 로 넣고 hobbyCate 에 값들을 집어 넣으려는 시도.
+                        //meet.hobbyCate = new ArrayList();
+//                        int totalHobbyCount2 = list.size();
+//                        for (int index =0; index<totalHobbyCount2; index++){
+//                            meet.hobbyCate.add(new Hobby(list.get(index)));
+//                            Log.d("hobbyCate", String.valueOf(meet.hobbyCate));
+//
+//                        }
+
 
                         //성별체크
                         if (cb_male.isChecked()){
@@ -272,12 +287,38 @@ public class FragmentPlus extends Fragment {
                             Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
                         }
 
-                        //member.mAge = Integer.parseInt(etAge.getText().toString());
-
                         //meet라는 데이터 넣기
-                        FirebaseDatabase.getInstance().getReference().child("meet").push().setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                        DatabaseReference databaseReference;
+
+                        databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();
+
+                        newKey= databaseReference.getKey();
+
+
+                        databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                //newKey= databaseReference.getKey();
+
+                                //데이터 저장을 위한 객체 참조
+                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                //DatabaseReference ref = database.getReference();
+                                //DatabaseReference usersRef = ref.child("meet");
+                                //String key =usersRef.getKey();
+                                //String key = mDatabase.child("meet").getKey();
+                                Log.d("key_value", newKey);//key 는 uid가 아니라 meet 인듯
+                                //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid
+                                DatabaseReference hopperRef = databaseReference.child(newKey); //  /meet/key
+                                DatabaseReference pushRef = hopperRef.child("hobby");
+
+
+                                //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update
+                                int totalHobbyCount2 = list.size();
+                                for (int index = 0; index < totalHobbyCount2; index++) {
+                                    pushRef.push().setValue(new Hobby(list.get(index)));
+                                }
+
 
                                 MainActivityHome mainActivityHome= new MainActivityHome();
                                 ((MainActivity)getActivity()).replaceFragment(mainActivityHome);
@@ -293,6 +334,7 @@ public class FragmentPlus extends Fragment {
                 });
                 //모임정보 업데이트
                 //mDatabase.child("users").child(userId).child("username").setValue(name);
+
             }
         });
 

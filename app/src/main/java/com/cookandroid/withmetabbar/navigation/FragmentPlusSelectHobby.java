@@ -411,15 +411,7 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
                     Log.d("tv",tv.getText().toString());
                     selectedItems();
 
-                    //데이터 저장을 위한 객체 참조
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference ref = database.getReference();
-                    DatabaseReference usersRef = ref.child("users");
 
-                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid
-                    DatabaseReference hopperRef = usersRef.child(uid); //  /users/uid
-                    DatabaseReference pushRef = hopperRef.child("hobby");
-                    pushRef.push().setValue(new Hobby(tv.getText().toString()));
 
                     if ( mSelectedItems.get(position, false) ){
 

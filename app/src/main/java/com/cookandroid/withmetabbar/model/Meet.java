@@ -1,9 +1,11 @@
 package com.cookandroid.withmetabbar.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Meet {
+    public String mid;
     public String uid;
     public int meetId;
     public String imgUrl;
@@ -14,7 +16,8 @@ public class Meet {
     public int meetGen;//남 1, 여 2, 무관 0
     public String content;
     //public String hash;
-    //public String cate;
+    //public ArrayList<Hobby> hobbyCate;
+    public ArrayList<String> hobbyCate;
 
 
     public Meet() {
@@ -30,6 +33,14 @@ public class Meet {
         this.numMember = numMember;
         //this.meetGen = meetGen;
         this.content = content;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
     }
 
     public String getUid() {
@@ -103,5 +114,14 @@ public class Meet {
 
     public void setMeetGen(int meetGen) {
         this.meetGen = meetGen;
+    }
+
+
+    public ArrayList<String> getHobbyCate() {
+        return hobbyCate;
+    }
+
+    public void setHobbyCate(ArrayList<String> hobbyCate) {
+        this.hobbyCate = hobbyCate;
     }
 }
