@@ -23,6 +23,7 @@ import com.cookandroid.withmetabbar.navigation.ChatFragment;
 import com.cookandroid.withmetabbar.navigation.CoinMainFragment;
 import com.cookandroid.withmetabbar.navigation.DetailViewFragment;
 import com.cookandroid.withmetabbar.navigation.FragmentPlus;
+import com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;
 import com.cookandroid.withmetabbar.navigation.HomeFragment;
 import com.cookandroid.withmetabbar.navigation.MyPageFragment;
 import com.cookandroid.withmetabbar.navigation.PlaceCheckFragment;
@@ -188,6 +189,18 @@ public class MainActivity extends AppCompatActivity  {
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.main_content, fragment).addToBackStack(null).commit();
     }
+
+    public void hideFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.hide(fragment).commit();
+    }
+    public void showFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.show(fragment).commit();
+    }
+
 
 
     @Override

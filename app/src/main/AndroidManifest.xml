@@ -27,15 +27,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".certify.MainActivity2">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".toolbar.MainActivity3"/>
@@ -43,6 +34,14 @@
         <activity android:name=".chat.GroupMessageActivity$MessageActivity"/>
         <activity android:name=".chat.GroupMessageActivity"/>
         <activity android:name=".chat.MessageActivity"/>
+        <activity android:name=".certify.MainActivity2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
     </application>
 </manifest>

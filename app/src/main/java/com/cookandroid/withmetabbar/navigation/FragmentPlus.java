@@ -38,6 +38,7 @@ import com.cookandroid.withmetabbar.model.Meet;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,6 +47,7 @@ import com.google.firebase.storage.UploadTask;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -70,6 +72,7 @@ public class FragmentPlus extends Fragment {
     TimePickerDialog mTimePicker;
     private Date meetDate;
     private int meetDateInt;//int형 데이터
+    ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열
 
 
 
@@ -94,20 +97,29 @@ public class FragmentPlus extends Fragment {
         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
 
-        int count=0;
-
 
         Intent intent = new Intent();
 
-
         Bundle bundle = getArguments();
-        uid=bundle.getString("uid");//null?
+        //uid=bundle.getString("uid");//null?
+        uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        //선택한 취미값받기
-        while (bundle.getString("hobby"+count)!=null){
-            String str = bundle.getString("hobby"+count);
-            etHobby.append(","+str);
+
+        if (bundle.getStringArrayList("hobby")!=null){
+            list = bundle.getStringArrayList("hobby");
+            Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
+            //받은 취미 목록을 차례로 tv에 입력
+            int totalHobbyCount = list.size();
+            for (int index =0; index<totalHobbyCount; index++){
+                etHobby.append(","+list.get(index));
+            }
+
+        }else {
+            etHobby.setText("클릭하세요.");
         }
+
+
+
 
         //날짜 선택
 
@@ -318,7 +330,6 @@ public class FragmentPlus extends Fragment {
             imageView.setImageURI(selectedImageUri);
         }
     }
-
 
     /*public class MyGalleryAdapter extends BaseAdapter {
 
