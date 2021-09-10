@@ -35,7 +35,7 @@ import java.util.Set;
 
 public class MainActivityHome extends Fragment {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView; //이거 새로 만들어 봄 정말
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Meet> arrayList;//? 검색을 보여줄 리스트 변수
