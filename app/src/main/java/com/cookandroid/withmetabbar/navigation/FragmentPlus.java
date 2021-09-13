@@ -265,6 +265,12 @@ public class FragmentPlus extends Fragment {
                         meet.content = etContent.getText().toString();
                         meet.imgUrl = file.toString();
                         meet.meetDate =meetDate;
+                        meet.hobbyCate = new ArrayList<>();
+
+                        int totalHobbyCount2 = list.size();
+                        for (int index = 0; index < totalHobbyCount2; index++) {
+                            meet.hobbyCate.add(list.get(index));
+                        }
 
                         //Meet model의 필드를 private ArrayList<Hobby> hobbyCate 로 넣고 hobbyCate 에 값들을 집어 넣으려는 시도.
                         //meet.hobbyCate = new ArrayList();
@@ -289,36 +295,30 @@ public class FragmentPlus extends Fragment {
 
                         //meet라는 데이터 넣기
 
-                        DatabaseReference databaseReference;
+                        DatabaseReference databaseReference,databaseReference2;
 
                         databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();
 
+                        //새로 추가한 것 hobby 저장을 위한 참조 데이타
                         newKey= databaseReference.getKey();
+                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child("meet").child(newKey).child("hobby");
+
 
 
                         databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                //newKey= databaseReference.getKey();
 
                                 //데이터 저장을 위한 객체 참조
                                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                //DatabaseReference ref = database.getReference();
-                                //DatabaseReference usersRef = ref.child("meet");
-                                //String key =usersRef.getKey();
-                                //String key = mDatabase.child("meet").getKey();
-                                Log.d("key_value", newKey);//key 는 uid가 아니라 meet 인듯
-                                //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid
-                                DatabaseReference hopperRef = databaseReference.child(newKey); //  /meet/key
-                                DatabaseReference pushRef = hopperRef.child("hobby");
 
+                                Log.d("key_value", newKey);//key 는 uid가 아니라 meet 인듯
 
                                 //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update
                                 int totalHobbyCount2 = list.size();
                                 for (int index = 0; index < totalHobbyCount2; index++) {
-                                    pushRef.push().setValue(new Hobby(list.get(index)));
+                                    databaseReference2.push().setValue(new Hobby(list.get(index)));
                                 }
-
 
                                 MainActivityHome mainActivityHome= new MainActivityHome();
                                 ((MainActivity)getActivity()).replaceFragment(mainActivityHome);

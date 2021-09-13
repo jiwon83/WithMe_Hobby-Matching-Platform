@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,20 +32,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class MainActivityHome extends Fragment {
 
-    private RecyclerView recyclerView; //이거 새로 만들어 봄 정말
+    private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Meet> arrayList;//? 검색을 보여줄 리스트 변수
-    private ArrayList<Meet> arrayList_copy;
-    private ArrayList<Meet> arrayList_uniqe;
-    //
-    private List<Meet> list;
+    private ArrayList<Meet> arrayList;//검색 후에도 recycler view에 올라갈 진짜 meet 데이터들
+    private ArrayList<Meet> arrayList_copy; //recycler view에 올라갈 전체 meet 데이터들
     private CustomAdapter customAdapter;
-    //
+
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
 
@@ -54,11 +51,11 @@ public class MainActivityHome extends Fragment {
     private SearchAdapter searchAdapter;
     private EditText editSearch;//검색어를 입력할 Input창
     private ListView listView;//검색을 보여줄 리스변수
-    private ArrayList<String> arrayList_search;
 
     //2021-08-16 검색기능 구현
-    private List<String> list_search_recycle; //meet의 제목만 따로 담을 리스트
-    private ArrayList<String> arrayList_search_recycle;
+    private List<String> list_search_recycle; //검색후에도 갱신될 검색창 데이터들
+    private ArrayList<String> arrayList_search_recycle; //모든 검색창 데이터들
+
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -74,6 +71,7 @@ public class MainActivityHome extends Fragment {
         arrayList_copy = new ArrayList<>();
 
 
+
         //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
 
@@ -87,13 +85,19 @@ public class MainActivityHome extends Fragment {
         //data
         database=FirebaseDatabase.getInstance();
         databaseReference=database.getReference("meet");//DB Table Connect
+
+
+
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
                 //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
+
                     Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
+
                     arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
                     Log.d("arrayList", String.valueOf(arrayList));
 
@@ -104,12 +108,14 @@ public class MainActivityHome extends Fragment {
                     // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
                     if (meet.title!=null){
                         list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
-                        //Log.d("list_search_recycle", String.valueOf(list_search_recycle));
+                        //취미목록 검색 리스트에 넣기 2021-09-13
+                        int totalHobbyCount2 = meet.hobbyCate.size();
+                        for (int index = 0; index < totalHobbyCount2; index++) {
+                            list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
+                        }
+
                     }
-
-
                 }
-
 
                 //2021-08-16 검색기능 구현
                 arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
@@ -122,6 +128,13 @@ public class MainActivityHome extends Fragment {
                 //test
                 for (int i=0;i<arrayList_copy.size();i++){
                     Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getTitle()));
+                    //Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getHobbyCateDetail()));
+
+//                    for (int b=0; b<arrayList_copy.get(i).getHobbyCate().size(); b++ ){
+//                        Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getHobbyCate().get(b)));
+//                    }
+
+
                 }
             }
 
@@ -239,6 +252,18 @@ public class MainActivityHome extends Fragment {
                         Log.d("size", String.valueOf(arrayList_copy.size()));//253??
                     }
                 }
+                // 취미목록으로 검색클릭하면 recyclerview에 반영
+                for (int j=0; j<arrayList_copy.get(i).getHobbyCate().size(); j++){
+                    if(arrayList_copy.get(i).getHobbyCate().get(j).toLowerCase().contains(searchText)){
+                        if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
+                            arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                            //검색한 값만 잘 들어온다.
+                            Log.d("arrayList_new", String.valueOf(arrayList));
+                            Log.d("size", String.valueOf(arrayList_copy.size()));//253??
+                        }
+                    }
+                }
+
             }//for
         }//else
         //arrayList_uniqe = new ArrayList<>();

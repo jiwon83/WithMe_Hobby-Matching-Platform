@@ -1,7 +1,6 @@
 package com.cookandroid.withmetabbar.model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Meet {
@@ -17,7 +16,7 @@ public class Meet {
     public String content;
     //public String hash;
     //public ArrayList<Hobby> hobbyCate;
-    public ArrayList<String> hobbyCate;
+    public ArrayList<String> hobbyCate = new ArrayList<>();
 
 
     public Meet() {
