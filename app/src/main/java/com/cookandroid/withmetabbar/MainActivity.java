@@ -162,16 +162,6 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
-
-
-
-
-
-
-
-
-
     public void replaceFragment(Fragment fragment){
 //        getSupportFragmentManager().beginTransaction().replace(R.id.main_content2, fragment).commit();
         FragmentManager fragmentManager = getSupportFragmentManager();
