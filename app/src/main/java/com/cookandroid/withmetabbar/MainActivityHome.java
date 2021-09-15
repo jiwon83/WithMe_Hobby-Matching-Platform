@@ -26,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -120,21 +121,13 @@ public class MainActivityHome extends Fragment {
                 //2021-08-16 검색기능 구현
                 arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
 
-
                 customAdapter= new CustomAdapter(arrayList,getContext());
                 recyclerView.setAdapter(customAdapter);
-                //adapter.notifyDataSetChanged();//리스트 저장 및 새로고침
+
 
                 //test
                 for (int i=0;i<arrayList_copy.size();i++){
                     Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getTitle()));
-                    //Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getHobbyCateDetail()));
-
-//                    for (int b=0; b<arrayList_copy.get(i).getHobbyCate().size(); b++ ){
-//                        Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getHobbyCate().get(b)));
-//                    }
-
-
                 }
             }
 

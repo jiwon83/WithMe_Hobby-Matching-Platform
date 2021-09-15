@@ -249,6 +249,8 @@ public class FragmentPlus extends Fragment {
                 //StorageReference riversRef = storageRef.child("meetImage/"+filename);
                 //UploadTask uploadTask = riversRef.putFile(file);//storage에 이미지 업로드
 
+
+
                 
 
                 //이미지 strage에 저장
@@ -272,15 +274,6 @@ public class FragmentPlus extends Fragment {
                             meet.hobbyCate.add(list.get(index));
                         }
 
-                        //Meet model의 필드를 private ArrayList<Hobby> hobbyCate 로 넣고 hobbyCate 에 값들을 집어 넣으려는 시도.
-                        //meet.hobbyCate = new ArrayList();
-//                        int totalHobbyCount2 = list.size();
-//                        for (int index =0; index<totalHobbyCount2; index++){
-//                            meet.hobbyCate.add(new Hobby(list.get(index)));
-//                            Log.d("hobbyCate", String.valueOf(meet.hobbyCate));
-//
-//                        }
-
 
                         //성별체크
                         if (cb_male.isChecked()){
@@ -298,10 +291,15 @@ public class FragmentPlus extends Fragment {
                         DatabaseReference databaseReference,databaseReference2;
 
                         databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();
+                        String key =databaseReference.getKey();//meet uid
+
+                        //2021-09-14 내가 만든 모임 구현
+                        //databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets"+uid+"/"+key).push();
+                        databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets").child(uid);//.child(key);
 
                         //새로 추가한 것 hobby 저장을 위한 참조 데이타
-                        newKey= databaseReference.getKey();
-                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child("meet").child(newKey).child("hobby");
+//                        newKey= databaseReference.getKey();
+//                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child("meet").child(newKey).child("hobby");
 
 
 
@@ -312,13 +310,18 @@ public class FragmentPlus extends Fragment {
                                 //데이터 저장을 위한 객체 참조
                                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                                Log.d("key_value", newKey);//key 는 uid가 아니라 meet 인듯
+//                                Log.d("key_value", newKey);//key 는 uid가 아니라 meet 인듯
 
                                 //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update
-                                int totalHobbyCount2 = list.size();
-                                for (int index = 0; index < totalHobbyCount2; index++) {
-                                    databaseReference2.push().setValue(new Hobby(list.get(index)));
-                                }
+//                                int totalHobbyCount2 = list.size();
+//                                for (int index = 0; index < totalHobbyCount2; index++) {
+//                                    databaseReference2.push().setValue(new Hobby(list.get(index)));
+//                                }
+
+                                databaseReference2.push().setValue(meet);
+
+
+
 
                                 MainActivityHome mainActivityHome= new MainActivityHome();
                                 ((MainActivity)getActivity()).replaceFragment(mainActivityHome);
@@ -332,9 +335,6 @@ public class FragmentPlus extends Fragment {
                         });
                     }
                 });
-                //모임정보 업데이트
-                //mDatabase.child("users").child(userId).child("username").setValue(name);
-
             }
         });
 

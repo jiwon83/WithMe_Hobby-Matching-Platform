@@ -22,6 +22,7 @@ import com.cookandroid.withmetabbar.navigation.AlarmFragment;
 import com.cookandroid.withmetabbar.navigation.ChatFragment;
 import com.cookandroid.withmetabbar.navigation.CoinMainFragment;
 import com.cookandroid.withmetabbar.navigation.DetailViewFragment;
+import com.cookandroid.withmetabbar.navigation.FragmentMyMeetHome;
 import com.cookandroid.withmetabbar.navigation.FragmentPlus;
 import com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;
 import com.cookandroid.withmetabbar.navigation.HomeFragment;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity  {
     CoinMainFragment coinMainFragment = new CoinMainFragment(); //코인 충전 프레그 먼트
     PlaceCheckFragment placeCheckFragment = new PlaceCheckFragment();//위치인증 프레그 먼트
     TalkPlaceFragment talkPlaceFragment = new TalkPlaceFragment();//톡방 프레그먼트 아직 xml없음
+    FragmentMyMeetHome fragmentMyMeetHome = new FragmentMyMeetHome(); //내 모임 보기 화면
 
     Toolbar tb;
 
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity  {
 
                         break;
                     case R.id.action_love:
-                        transaction.replace(R.id.main_content, talkPlaceFragment).commitAllowingStateLoss();
+                        transaction.replace(R.id.main_content, fragmentMyMeetHome).commitAllowingStateLoss();
                         break;
                     case R.id.action_plus:
                         //transaction.add(R.id.main_content,fragmentPlus).addToBackStack(null).commit();
