@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.Meet;
+import com.cookandroid.withmetabbar.model.Member;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
+
 public class MainActivityHome extends Fragment {
 
     private RecyclerView recyclerView;
@@ -44,7 +48,7 @@ public class MainActivityHome extends Fragment {
     private CustomAdapter customAdapter;
 
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,databaseReference2;
 
     private List<String> list_search; //자동완성 단어들을 담을 리스트
     private AutoCompleteTextView autoCompleteTextView; //검색어입력창
@@ -52,10 +56,14 @@ public class MainActivityHome extends Fragment {
     private SearchAdapter searchAdapter;
     private EditText editSearch;//검색어를 입력할 Input창
     private ListView listView;//검색을 보여줄 리스변수
+    private Button btn_inter;
 
     //2021-08-16 검색기능 구현
     private List<String> list_search_recycle; //검색후에도 갱신될 검색창 데이터들
     private ArrayList<String> arrayList_search_recycle; //모든 검색창 데이터들
+
+    //2021-09-15 취미목록으로 필터링 구현
+    private ArrayList<String> listUserHobby = new ArrayList<>();
 
 
     @Nullable
@@ -73,8 +81,10 @@ public class MainActivityHome extends Fragment {
 
 
 
+
         //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
+        btn_inter = vGroup.findViewById(R.id.btn_inter);
 
 
 
@@ -87,7 +97,10 @@ public class MainActivityHome extends Fragment {
         database=FirebaseDatabase.getInstance();
         databaseReference=database.getReference("meet");//DB Table Connect
 
-
+        //관심목록으로 필터링
+        databaseReference2 = FirebaseDatabase.getInstance().getReference();
+        Query recentPostsQuery = databaseReference2.child("meet")
+                .equalTo(100); //내 hobby목록이랑 같은 지
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -266,6 +279,42 @@ public class MainActivityHome extends Fragment {
     }
     public boolean UniqueCheckAndAdd(ArrayList<Meet> array, Meet meetPresent){
         return !array.contains(meetPresent);
+    }
+
+    //내 취미목록 불러오기
+    public void getUserHobby(){
+        //data 불러오기 내 uid에 해당하는 데이터 불러오기
+        String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+        database= FirebaseDatabase.getInstance();
+        databaseReference=database.getReference("users").child(uid);//DB Table Connect
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                Member member = dataSnapshot.getValue(Member.class);
+
+//                member. = new ArrayList<>();
+//                //Log.d("memberInput", String.valueOf(member.mName));
+//                int totalHobbyCount2 = list.size();
+//                for (int index = 0; index < totalHobbyCount2; index++) {
+//                    meet.hobbyCate.add(list.get(index));
+//                }
+//                listUserHobby
+//                tvName.setText(member.mName);
+//                tvNick.setText(member.nick);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //디비를 가져오는 도중 에러 발생 시
+                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+
+            }
+        });
     }
 
 

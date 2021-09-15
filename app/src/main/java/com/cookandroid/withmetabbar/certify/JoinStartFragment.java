@@ -21,6 +21,7 @@ import com.cookandroid.withmetabbar.DaumWebViewActivity;
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.Member;
+import com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -36,12 +37,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
 
 public class JoinStartFragment extends Fragment {
 
     Button btn_join,btn_live;
+    private String uid="";
+    ArrayList<String> list = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,27 @@ public class JoinStartFragment extends Fragment {
         CheckBox cb_male = vGroup.findViewById(R.id.check_male);
         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
+        EditText etHobby =vGroup.findViewById(R.id.etHobby);
+
+        Bundle bundle = getArguments();
+
+        try {
+            if (bundle.getStringArrayList("hobby")!=null){
+                list = bundle.getStringArrayList("hobby");
+                Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
+                //받은 취미 목록을 차례로 tv에 입력
+                int totalHobbyCount = list.size();
+                for (int index =0; index<totalHobbyCount; index++){
+                    etHobby.append(","+list.get(index));
+                }
+
+            }else {
+                etHobby.setText("클릭하세요.");
+            }
+        }catch (NullPointerException e){
+            Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
+        }
+
 
 
         btn_live.setOnClickListener(new View.OnClickListener() {
@@ -72,8 +97,17 @@ public class JoinStartFragment extends Fragment {
             public void onClick(View v) {
                 DaumWebViewActivity daumWebViewActivity = new DaumWebViewActivity();
                 ((MainActivity2)getActivity()).replaceFragment(daumWebViewActivity);
-                //LivePlaceFragment livePlaceFragment= new LivePlaceFragment();
-                //((MainActivity2)getActivity()).replaceFragment(livePlaceFragment);
+            }
+        });
+
+        //취미선택
+        etHobby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentSelectHobby2 fragmentSelectHobby2= new FragmentSelectHobby2();
+                ((MainActivity2)getActivity()).addFragment(fragmentSelectHobby2);
+
             }
         });
 
@@ -113,6 +147,11 @@ public class JoinStartFragment extends Fragment {
                                         Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
                                     }
 
+                                    int totalHobbyCount2 = list.size();
+                                    for (int index = 0; index < totalHobbyCount2; index++) {
+                                        member.hobbyCate.add(list.get(index));
+                                    }
+
 
                                     //member.meetDate
                                     FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -122,11 +161,11 @@ public class JoinStartFragment extends Fragment {
                                             //프래그먼트 종료
                                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                             fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
-                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();
-                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);
+//                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();
+//                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);
 //                                            fragmentManager.popBackStack();
-//                                            Intent intent = new Intent(getContext(), MainActivity.class);
-//                                            startActivity(intent);
+                                            Intent intent = new Intent(getContext(), MainActivity.class);
+                                            startActivity(intent);
                                         }
                                     });
                                 }else{

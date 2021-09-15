@@ -33,6 +33,11 @@ public class MainActivity2 extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_content2, fragment).commit();
     }
+    public void addFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.main_content2, fragment).addToBackStack(null).commit();
+    }
 } //new
 
 

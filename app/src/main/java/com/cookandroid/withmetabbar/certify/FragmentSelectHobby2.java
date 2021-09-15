@@ -29,6 +29,8 @@ import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.HobbyBig;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
+import com.cookandroid.withmetabbar.navigation.FragmentPlus;
+import com.cookandroid.withmetabbar.navigation.OnItemClick;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -42,27 +44,23 @@ import java.util.Map;
 import static android.graphics.Color.MAGENTA;
 import static android.graphics.Color.YELLOW;
 
-public class FragmentSelectHobby2 extends Fragment {
-
+public class FragmentSelectHobby2 extends Fragment implements OnItemClick {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    //ImageView iv;
+
     ImageButton imgBtn;
     TextView tv;//취미분야 선택
     ProgressBar progressBar;
     private String selectedHobbyBig;
     Button btnFinish; //메인화면으로 화면전환버튼
-    //GridView gridView;
-    //ImageView iv2;
-    //MyGridViewAdapter adapter;
+    ArrayList<String> list = new ArrayList<>(); //bundle 전달을 위해 선택한 취미값들을 받아서 저장할 배열
 
-    //중첩recyclerView 구현
+    //중첩 recyclerView에 넣을 데이터
     private final ArrayList<ArrayList<Hobby>> allHobbyList = new ArrayList();
-    private final ArrayList<HobbyBig> HobbyBigList2 = new ArrayList();//대분류 test
-
+    private final ArrayList<HobbyBig> HobbyBigList2 = new ArrayList();//대분류
 
 
     // TODO: Rename and change types of parameters
@@ -83,8 +81,8 @@ public class FragmentSelectHobby2 extends Fragment {
      * @return A new instance of fragment FragmentSelectHobby.
      */
     // TODO: Rename and change types and number of parameters
-    public static com.cookandroid.withmetabbar.certify.FragmentSelectHobby newInstance(String param1, String param2) {
-        com.cookandroid.withmetabbar.certify.FragmentSelectHobby fragment = new com.cookandroid.withmetabbar.certify.FragmentSelectHobby();
+    public static FragmentSelectHobby newInstance(String param1, String param2) {
+        FragmentSelectHobby fragment = new FragmentSelectHobby();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -98,10 +96,7 @@ public class FragmentSelectHobby2 extends Fragment {
         if (getArguments() != null) {
             selectedHobbyBig = getArguments().getString(ARG_PARAM1);
             //mParam2 = getArguments().getString(ARG_PARAM2);
-
-
         }
-
     }
 
     @Override
@@ -116,6 +111,8 @@ public class FragmentSelectHobby2 extends Fragment {
         btnFinish= vg.findViewById(R.id.selectHobby2_btn_next);
 
         tv.setText("취미 분야 선택 : "+selectedHobbyBig);
+
+
         //Log.d("selectedHobbyBig",selectedHobbyBig);
         //final GridView gridView= vg.findViewById(R.id.gridView);
         //ViewGroup vg2 =  (ViewGroup)inflater.inflate(R.layout.select_hobby_grid_in, container, false);
@@ -125,13 +122,8 @@ public class FragmentSelectHobby2 extends Fragment {
 //                R.drawable.hobby_music,R.drawable.hb_craft,R.drawable.hb_sport
 //
 //        };
-        String [] arrayHobby_music = {
-          "클래식","k-pop","뉴에이지","발라드","랩/힙합","게임","팬모임","여행","반려동물"
-        };
-        Varargs varargs = new Varargs();
-        varargs.makeArray("음악","공예","요리","문화","스포츠","게임","팬모임","여행","반려동물");
-        //str 안에 담겼다.
-        //tv.setText(varargs.test2);
+
+
 
         //바로 해보기
         ArrayList<ArrayList<String>> hbLists = new ArrayList<ArrayList<String>>();
@@ -163,65 +155,14 @@ public class FragmentSelectHobby2 extends Fragment {
 		//결과: [1, 2, 3]
          */
 
-
-        //MyAdapter2 myAdapter2= new MyAdapter2(getContext());
-        //gridView.setAdapter(myAdapter);
-
-        //adapter 생성
-
-        /*
-        for (int i=0;i<hbLists.size();i++){
-            for (int j=0;j<hbLists.get(i).size();j++){
-                hbLists.get(i).get(j);
-            }
-
-        }
-
-
-        MyAdapter2 adapter2= new MyAdapter2(
-                getContext(),//액티비티의상태
-                R.layout.select_hobby2_grid_in2,
-                arrayHobby_music);
-                //hbLists.get(0);
-
-        gridView.setAdapter(adapter2);
-
-
-        //gridview를 띄어주어야한다.
-        for (int i=0; i<arrayHobby_music.length; i++){
-            //해당 이미지배열의 값을 가져오고
-            adapter2.getItem(i);
-            //그리드뷰에 얹어줘야한다.
-            //adapter.getView(i,iv2,vg2);
-
-        }
-
-
-        gridView.setAdapter(adapter2);//adapter를 그리드뷰에 적용.
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //목록을 클릭하면 세부 선택화면으로 넘어가도록.
-            }
-        });
-
-         */
-
-        //여기부터 리사이클러뷰 예제
+        //리사이클러뷰
         this.initializeData();
         this.initializeData2();
-        //test
-//        ArrayList<HobbyBig> HobbyBigList3= new ArrayList();
-//        HobbyBigList3.add(new HobbyBig("음악"));
-//        HobbyBigList3.add(new HobbyBig("스포츠"));
-
-
 
         RecyclerView view = vg.findViewById(R.id.recyclerViewVertical);
 
-        VerticalAdapter verticalAdapter = new VerticalAdapter(getContext(), allHobbyList, HobbyBigList2);
-        //HorizontalAdapter adapter = new HorizontalAdapter(AllHobbyList.get(position));
-
+        com.cookandroid.withmetabbar.certify.VerticalAdapter verticalAdapter = new com.cookandroid.withmetabbar.certify.VerticalAdapter(getContext(), allHobbyList, HobbyBigList2,this);
+        //여기의 this는 이 클래스 자체를 의미한다. 아래의 OnItemClick 을 override한 onClick()메서드가 실행되어야 하기 때문이다.
         view.setHasFixedSize(true);
         view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         view.setAdapter(verticalAdapter);
@@ -231,8 +172,26 @@ public class FragmentSelectHobby2 extends Fragment {
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
+
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("hobby", list);
+                JoinStartFragment joinStartFragment = new JoinStartFragment();
+                joinStartFragment.setArguments(bundle);
+
+
+                //hide & show
+//                ((MainActivity)getActivity()).hideFragment(FragmentPlusSelectHobby.this);
+                //FragmentPlus fragmentPlus = new FragmentPlus();
+//                ((MainActivity)getActivity()).showFragment(fragmentPlus);
+
+                //remove
+                //((MainActivity)getActivity()).removeFragment(FragmentPlusSelectHobby.this);
+                //FragmentPlus fragmentPlus = new FragmentPlus();
+
+                //replace
+                ((MainActivity2)getActivity()).replaceFragment(joinStartFragment);
+
+
             }
         });
 
@@ -277,6 +236,14 @@ public class FragmentSelectHobby2 extends Fragment {
 
         return vg;
     }
+
+    @Override
+    public void onClick(String value) {
+        //value this data you receive when selectedItems() called
+        list.add(value);
+        Log.d("onClickSuccess?",value); //성공적으로 받아진다.
+    }
+
     //소분류 취미목록 데이터 입력
     public void initializeData()
     {
@@ -399,42 +366,39 @@ public class FragmentSelectHobby2 extends Fragment {
         HobbyBigList2.add(new HobbyBig( "반려동물"));
 
     }
-
-
-
-
 }
 
 //
-class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.HorizontalViewHolder> {
+class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder> {
 
+    private OnItemClick mCallback; //OnItemClick 인터페이스 객체
     private ArrayList<Hobby> dataList;
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);//클릭하면 색상변경//클릭 안하면 0 하면 1??
     private ArrayList<Hobby> selectedList= new ArrayList<>(); //선택한 취미 값
 
     public HorizontalAdapter(){}
 
-    public HorizontalAdapter(ArrayList<Hobby> data)
+    public HorizontalAdapter(ArrayList<Hobby> data, OnItemClick listener)
     {
         this.dataList = data;
+        this.mCallback = listener;
     }
 
-    public interface OnItemClickListener{
-        void onItemClick(View v, int position);
-    }//어텝터 내에서 커스텀 리스너 인터페이스 정의
+//    public interface OnItemClickListener{
+//        void onItemClick(View v, int position);
+//    }//어텝터 내에서 커스텀 리스너 인터페이스 정의
 
-    //리스너 객체 참조를 저장하는 변수
-//    private OnItemClickListener mListener = null;
-//    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
-//    public  void setOnItemClickListener(OnItemClickListener listener){
-//        this.mListener = listener;
-//    }
 
     public class HorizontalViewHolder extends RecyclerView.ViewHolder{
         protected TextView tv;
         private ArrayList<String> selectData = null ;
         private String selected="";
+        int count=1;
 
+        //받아올 값
+        public void selectedItems(){
+            mCallback.onClick(tv.getText().toString());//tv를 클릭하면?
+        }
 
         public HorizontalViewHolder(View view)
         {
@@ -448,15 +412,10 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
                 public void onClick(View v) {
                     int position = getAdapterPosition();
 
-                    //데이터 저장을 위한 객체 참조
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference ref = database.getReference();
-                    DatabaseReference usersRef = ref.child("users");
+                    Log.d("tv",tv.getText().toString());
+                    selectedItems();
 
-                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid
-                    DatabaseReference hopperRef = usersRef.child(uid); //  /users/uid
-                    DatabaseReference pushRef = hopperRef.child("hobby");
-                    pushRef.push().setValue(new Hobby(tv.getText().toString()));
+
 
                     if ( mSelectedItems.get(position, false) ){
 
@@ -477,7 +436,7 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
 
     @NonNull
     @Override
-    public HorizontalViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
+    public com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
     {
         View v = LayoutInflater
                 .from(viewGroup.getContext())
@@ -486,12 +445,12 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
 
 
 
-        return new HorizontalAdapter.HorizontalViewHolder(v);
+        return new com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder(v);
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(HorizontalViewHolder horizontalViewHolder, int position)
+    public void onBindViewHolder(com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder horizontalViewHolder, int position)
     {
 //        horizontalViewHolder
 //                .image
@@ -523,9 +482,10 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
 
 
 }
-class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.VerticalViewHolder>{
 
+class VerticalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder>{
 
+    private OnItemClick mCallback;
     private ArrayList<ArrayList<Hobby>> AllHobbyList;//전체 취미목록들을 2차원 배열에 넣어준다.
     private Context context;
     //test 취미목록 대분류 넣기
@@ -538,8 +498,9 @@ class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.VerticalViewH
     }
     //
 
-    public VerticalAdapter(Context context, ArrayList<ArrayList<Hobby>> data, ArrayList<HobbyBig> data2)
+    public VerticalAdapter(Context context, ArrayList<ArrayList<Hobby>> data, ArrayList<HobbyBig> data2,OnItemClick listener)
     {
+        this.mCallback =listener;
         this.context = context;
         this.AllHobbyList = data;
         this.DataListBig = data2;//대분류
@@ -559,17 +520,17 @@ class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.VerticalViewH
 
     @NonNull
     @Override
-    public VerticalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater
                 .from(viewGroup.getContext())
                 .inflate(R.layout.select_hobby2_grid_in, null);
-        return new VerticalAdapter.VerticalViewHolder(v);
+        return new com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder(v);
     }
     //수직 RecyclerView의 데이터 항목은 앞서 구현한 수평 RecyclerView가 배치된다고 하였습니다.
     // 그러기 위해 onBindViewHolder에서 HorizontalAdapter 객체를 생성
     @Override
-    public void onBindViewHolder(@NonNull VerticalViewHolder verticalViewHolder, int position) {
-        HorizontalAdapter adapter = new HorizontalAdapter(AllHobbyList.get(position));
+    public void onBindViewHolder(@NonNull com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder verticalViewHolder, int position) {
+        com.cookandroid.withmetabbar.certify.HorizontalAdapter adapter = new com.cookandroid.withmetabbar.certify.HorizontalAdapter(AllHobbyList.get(position),mCallback);
         //adapter.getSelected();
         //현재 위치의 arrayList를 AllHobbyList로 받아서 adapter생성.
 
