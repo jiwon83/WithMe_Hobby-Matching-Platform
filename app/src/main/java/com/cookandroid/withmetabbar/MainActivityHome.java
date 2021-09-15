@@ -56,7 +56,7 @@ public class MainActivityHome extends Fragment {
     private SearchAdapter searchAdapter;
     private EditText editSearch;//검색어를 입력할 Input창
     private ListView listView;//검색을 보여줄 리스변수
-    private Button btn_inter;
+    private Button btn_inter,btn_all;
 
     //2021-08-16 검색기능 구현
     private List<String> list_search_recycle; //검색후에도 갱신될 검색창 데이터들
@@ -64,7 +64,7 @@ public class MainActivityHome extends Fragment {
 
     //2021-09-15 취미목록으로 필터링 구현
     private ArrayList<String> listUserHobby = new ArrayList<>(); //user의 hobby list
-    private ArrayList<String> listMeetsHobby = new ArrayList<>(); //전체 meet의 hobby list
+
 
 
     @Nullable
@@ -86,6 +86,7 @@ public class MainActivityHome extends Fragment {
         //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
         btn_inter = vGroup.findViewById(R.id.btn_inter);
+        btn_all = vGroup.findViewById(R.id.btn_all);
 
         //취미목록으로 필터링 버튼
         btn_inter.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +97,20 @@ public class MainActivityHome extends Fragment {
 
             }
         });
+
+        //전체모임보기
+        btn_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //이건 화면전환tab bar로 구현해야할 것 같다.
+                //allInRecyclerView();
+//                arrayList.clear();
+//                arrayList = arrayList_copy;
+//                customAdapter.notifyDataSetChanged();
+
+            }
+        });
+
 
 
 
@@ -123,7 +138,6 @@ public class MainActivityHome extends Fragment {
 
                     Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
 
-                    listMeetsHobby = meet.getHobbyCate(); //listMeetsHobby에 전체 hobby값 넣기
 
                     arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
                     Log.d("arrayList", String.valueOf(arrayList));
@@ -367,6 +381,12 @@ public class MainActivityHome extends Fragment {
             }
         }
         customAdapter.notifyDataSetChanged();
+
+    }
+
+    private void allInRecyclerView(){
+
+
 
     }
 
