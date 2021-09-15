@@ -63,7 +63,8 @@ public class MainActivityHome extends Fragment {
     private ArrayList<String> arrayList_search_recycle; //모든 검색창 데이터들
 
     //2021-09-15 취미목록으로 필터링 구현
-    private ArrayList<String> listUserHobby = new ArrayList<>();
+    private ArrayList<String> listUserHobby = new ArrayList<>(); //user의 hobby list
+    private ArrayList<String> listMeetsHobby = new ArrayList<>(); //전체 meet의 hobby list
 
 
     @Nullable
@@ -85,6 +86,16 @@ public class MainActivityHome extends Fragment {
         //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
         btn_inter = vGroup.findViewById(R.id.btn_inter);
+
+        //취미목록으로 필터링 버튼
+        btn_inter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                filterHobbyCateInMeetToRecyclerView(); //유저의 취미값에 해당하는 모임 검색
+
+            }
+        });
 
 
 
@@ -111,6 +122,8 @@ public class MainActivityHome extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
 
                     Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
+
+                    listMeetsHobby = meet.getHobbyCate(); //listMeetsHobby에 전체 hobby값 넣기
 
                     arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
                     Log.d("arrayList", String.valueOf(arrayList));
@@ -291,10 +304,13 @@ public class MainActivityHome extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                //firebase에서 데이터 받아오기
                 Member member = dataSnapshot.getValue(Member.class);
 
-//                member. = new ArrayList<>();
+                listUserHobby = member.getHobbyCate(); //listUserHobby에 유저의 취미값 받아오기
+
+                Log.d("listUserHobby", String.valueOf(listUserHobby.get(0)));
+                Log.d("listUserHobbysize1", String.valueOf(listUserHobby.size()));
 //                //Log.d("memberInput", String.valueOf(member.mName));
 //                int totalHobbyCount2 = list.size();
 //                for (int index = 0; index < totalHobbyCount2; index++) {
@@ -315,6 +331,43 @@ public class MainActivityHome extends Fragment {
 
             }
         });
+
+
+    }
+    // 유저가 선택한 취미카테고리인 모임정보만 보여준다.
+    private void filterHobbyCateInMeetToRecyclerView() {
+
+        getUserHobby();//현재 유저의 취미값 업데이트
+
+        arrayList.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
+
+        for (int i=0;i<arrayList_copy.size();i++){// 전체 meet 데이터 중에서
+            //만약 listUserHobby의 값 중  listMeetsHobbyd의 값이 일치한다면
+            int totalUserHobby = listUserHobby.size(); //user취미 리스트의 크기
+            int totalHobbyCateSize = arrayList_copy.get(i).getHobbyCate().size(); //현재 meet데이터의 취미리스트 크기
+
+            Log.d("totalUserHobby", String.valueOf(totalUserHobby));
+            Log.d("totalHobbyCateSize", String.valueOf(totalHobbyCateSize));
+
+            for (int j=0; j< totalHobbyCateSize; j++){
+                for (int index =0; index<totalUserHobby; index++){
+                    // 그에 해당하는 meet의 데이터만
+                    if (listUserHobby.get(index).equals(arrayList_copy.get(i).getHobbyCate().get(j))  ){
+
+                        if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
+                            //arrayList에 업데이트
+                            arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                            //검색한 값만 잘 들어온다.
+                            //Log.d("arrayList_new", String.valueOf(arrayList));
+                            //Log.d("size", String.valueOf(arrayList_copy.size()));//253??
+                        }
+                        //Log.d("if조건2", arrayList_copy.get(i).getHobbyCate().get(j));
+                    }
+                }
+            }
+        }
+        customAdapter.notifyDataSetChanged();
+
     }
 
 

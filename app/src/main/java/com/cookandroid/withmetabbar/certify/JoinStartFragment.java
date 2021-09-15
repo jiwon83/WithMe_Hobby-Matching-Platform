@@ -44,7 +44,6 @@ import static android.content.ContentValues.TAG;
 public class JoinStartFragment extends Fragment {
 
     Button btn_join,btn_live;
-    private String uid="";
     ArrayList<String> list = new ArrayList<>();
 
     @Override
