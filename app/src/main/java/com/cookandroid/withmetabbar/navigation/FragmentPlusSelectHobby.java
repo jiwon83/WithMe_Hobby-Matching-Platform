@@ -3,6 +3,7 @@ package com.cookandroid.withmetabbar.navigation;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -35,11 +38,14 @@ import com.cookandroid.withmetabbar.model.HobbyBig;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.graphics.Color.GRAY;
 import static android.graphics.Color.MAGENTA;
+import static android.graphics.Color.WHITE;
 import static android.graphics.Color.YELLOW;
 
 public class FragmentPlusSelectHobby extends Fragment implements OnItemClick{
@@ -64,6 +70,7 @@ public class FragmentPlusSelectHobby extends Fragment implements OnItemClick{
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    int color; //색깔 넣기
 
 
     public FragmentPlusSelectHobby() {
@@ -416,7 +423,9 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
                     if ( mSelectedItems.get(position, false) ){
 
                         mSelectedItems.put(position, false);
-                        v.setBackgroundColor(MAGENTA);
+                        v.setBackgroundColor(GRAY);
+
+
 
                     } else {
                         mSelectedItems.put(position, true);
@@ -425,9 +434,12 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
                     Log.d("test", "position = " + position);
 
                 }
+
+
             });
 
         }
+
     }
 
     @NonNull
@@ -459,7 +471,7 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
         if ( mSelectedItems.get(position, false) ){
             horizontalViewHolder.itemView.setBackgroundColor(YELLOW);//선택했을 때
         } else {
-            horizontalViewHolder.itemView.setBackgroundColor(MAGENTA);//기본, 선택 안했을 때
+            horizontalViewHolder.itemView.setBackgroundColor(WHITE);//기본, 선택 안했을 때
         }
 
     }

@@ -5,9 +5,8 @@
 
     <TextView
         android:id="@+id/btn_hbList_in"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/yellow"
         android:text="클래식"
         android:textAlignment="center"/>
 </LinearLayout>

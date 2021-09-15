@@ -28,7 +28,6 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/toolbar_division"
-        android:background="@color/yellow"
         android:orientation="horizontal"
         android:layout_below="@+id/my_toolbar"
         android:layout_width="match_parent"
