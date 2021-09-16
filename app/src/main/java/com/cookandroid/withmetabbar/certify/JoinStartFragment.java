@@ -40,6 +40,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -47,6 +48,9 @@ import java.util.Locale;
 import static android.content.ContentValues.TAG;
 
 public class JoinStartFragment extends Fragment {
+
+    ArrayList<String> list = new ArrayList<>();
+
 
     Button btn_join,btn_live;
     private Date meetDate;
@@ -75,6 +79,26 @@ public class JoinStartFragment extends Fragment {
         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
         EditText et_Birth = vGroup.findViewById(R.id.etBirth);
         EditText etHobby =vGroup.findViewById(R.id.etHobby);
+
+        Bundle bundle = getArguments();
+
+        try {
+            if (bundle.getStringArrayList("hobby")!=null){
+                list = bundle.getStringArrayList("hobby");
+                Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
+                //받은 취미 목록을 차례로 tv에 입력
+                int totalHobbyCount = list.size();
+                for (int index =0; index<totalHobbyCount; index++){
+                    etHobby.append(","+list.get(index));
+                }
+
+            }else {
+                etHobby.setText("클릭하세요.");
+            }
+        }catch (NullPointerException e){
+            Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
+        }
+
 
 
         btn_live.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +205,11 @@ public class JoinStartFragment extends Fragment {
                                         Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
                                     }
 
+                                    int totalHobbyCount2 = list.size();
+                                    for (int index = 0; index < totalHobbyCount2; index++) {
+                                        member.hobbyCate.add(list.get(index));
+                                    }
+
 
 
 
@@ -189,14 +218,11 @@ public class JoinStartFragment extends Fragment {
 
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            //프래그먼트 종료
                                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                             fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
-                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();
-                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);
-//                                            fragmentManager.popBackStack();
-//                                            Intent intent = new Intent(getContext(), MainActivity.class);
-//                                            startActivity(intent);
+                                            Intent intent = new Intent(getContext(), MainActivity.class);
+                                            startActivity(intent);
+
                                         }
                                     });
                                 }else{
@@ -209,6 +235,7 @@ public class JoinStartFragment extends Fragment {
 
         return vGroup;
     }
+
 
     //이부분 데이터 TaskJOin 수정
     public class TaskJoin extends AsyncTask<String, Void, String> {
