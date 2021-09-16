@@ -1,0 +1,243 @@
+Index: app/src/main/res/layout/select_hobby2_grid_in.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"wrap_content\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:id=\"@+id/selectHobbyIn\" >\r\n\r\n    <TextView\r\n        android:id=\"@+id/tv_hobby\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"음악\"\r\n        android:textSize=\"20dp\"/>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"horizontal\">\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:id=\"@+id/recyclerViewVertical\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"match_parent\"/>\r\n\r\n        <!--        <GridView-->\r\n        <!--            android:layout_width=\"match_parent\"-->\r\n        <!--            android:layout_height=\"match_parent\" />-->\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:id=\"@+id/toolbar_division\"\r\n        android:background=\"@color/yellow\"\r\n        android:orientation=\"horizontal\"\r\n        android:layout_below=\"@+id/my_toolbar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\">\r\n    </LinearLayout>\r\n    <Space\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"2dp\"\r\n        />\r\n\r\n\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/select_hobby2_grid_in.xml	(revision c87eeb3b72e2759894c8edffc58966ac4b38c8e7)
++++ app/src/main/res/layout/select_hobby2_grid_in.xml	(date 1631762398960)
+@@ -28,7 +28,6 @@
+     </LinearLayout>
+     <LinearLayout
+         android:id="@+id/toolbar_division"
+-        android:background="@color/yellow"
+         android:orientation="horizontal"
+         android:layout_below="@+id/my_toolbar"
+         android:layout_width="match_parent"
+Index: app/src/main/java/com/cookandroid/withmetabbar/certify/JoinStartFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.certify;\r\n\r\nimport android.content.Intent;\r\nimport android.os.AsyncTask;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\n\r\nimport com.cookandroid.withmetabbar.DaumWebViewActivity;\r\nimport com.cookandroid.withmetabbar.MainActivity;\r\nimport com.cookandroid.withmetabbar.R;\r\nimport com.cookandroid.withmetabbar.model.Member;\r\nimport com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStreamReader;\r\nimport java.io.OutputStreamWriter;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.MalformedURLException;\r\nimport java.net.URL;\r\nimport java.nio.charset.StandardCharsets;\r\nimport java.util.ArrayList;\r\n\r\nimport static android.content.ContentValues.TAG;\r\n\r\npublic class JoinStartFragment extends Fragment {\r\n\r\n    Button btn_join,btn_live;\r\n    ArrayList<String> list = new ArrayList<>();\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n    }\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n\r\n        ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.join_start_fragment, container, false);\r\n        EditText etId = vGroup.findViewById(R.id.etId);\r\n        EditText etPw = vGroup.findViewById(R.id.etPw);\r\n        EditText etName = vGroup.findViewById(R.id.etName);\r\n        EditText etNick = vGroup.findViewById(R.id.etNick);\r\n        EditText etBirth = vGroup.findViewById(R.id.etBirth);\r\n        EditText etAge = vGroup.findViewById(R.id.etAge);\r\n        EditText etPhoneNum = vGroup.findViewById(R.id.etPhoneNum);\r\n        btn_join= vGroup.findViewById(R.id.button6);\r\n        btn_live = vGroup.findViewById(R.id.btn_live);\r\n        CheckBox cb_male = vGroup.findViewById(R.id.check_male);\r\n        CheckBox cb_female = vGroup.findViewById(R.id.check_female);\r\n        CheckBox cb_no = vGroup.findViewById(R.id.checkNo);\r\n        EditText etHobby =vGroup.findViewById(R.id.etHobby);\r\n\r\n        Bundle bundle = getArguments();\r\n\r\n        try {\r\n            if (bundle.getStringArrayList(\"hobby\")!=null){\r\n                list = bundle.getStringArrayList(\"hobby\");\r\n                Log.d(\"getBundleInPlus\", String.valueOf(bundle.getStringArrayList(\"hobby\")));\r\n                //받은 취미 목록을 차례로 tv에 입력\r\n                int totalHobbyCount = list.size();\r\n                for (int index =0; index<totalHobbyCount; index++){\r\n                    etHobby.append(\",\"+list.get(index));\r\n                }\r\n\r\n            }else {\r\n                etHobby.setText(\"클릭하세요.\");\r\n            }\r\n        }catch (NullPointerException e){\r\n            Toast.makeText(getContext(),\"null\",Toast.LENGTH_SHORT);\r\n        }\r\n\r\n\r\n\r\n        btn_live.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                DaumWebViewActivity daumWebViewActivity = new DaumWebViewActivity();\r\n                ((MainActivity2)getActivity()).replaceFragment(daumWebViewActivity);\r\n            }\r\n        });\r\n\r\n        //취미선택\r\n        etHobby.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                FragmentSelectHobby2 fragmentSelectHobby2= new FragmentSelectHobby2();\r\n                ((MainActivity2)getActivity()).addFragment(fragmentSelectHobby2);\r\n\r\n            }\r\n        });\r\n\r\n\r\n\r\n        btn_join.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                if (etId.getText().toString() == null || etName.getText().toString() == null || etPw.getText().toString() == null){\r\n\r\n                    Toast.makeText(getContext(),\"정보 입력을 완료하세요 :)\",Toast.LENGTH_SHORT).show();\r\n                    return;\r\n                }\r\n                FirebaseAuth.getInstance()\r\n                        .createUserWithEmailAndPassword(etId.getText().toString(),etPw.getText().toString())\r\n                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {\r\n\r\n                            @Override\r\n                            public void onComplete(@NonNull Task<AuthResult> task) {\r\n                                if (task.isSuccessful()){\r\n                                    final String uid = task.getResult().getUser().getUid();\r\n                                    Member member = new Member();\r\n                                    member.uid =FirebaseAuth.getInstance().getCurrentUser().getUid();\r\n                                    member.id = etId.getText().toString().trim();\r\n                                    member.pw = etPw.getText().toString().trim();\r\n                                    member.mName = etName.getText().toString().trim();\r\n                                    member.nick =etNick.getText().toString().trim();\r\n                                    member.mAge = Integer.parseInt(etAge.getText().toString());\r\n                                    //성별체크\r\n                                    if (cb_male.isChecked()){\r\n                                        member.mGen =1; //남자는 1\r\n                                    }else if (cb_female.isChecked()){\r\n                                        member.mGen =2; //여자는 2\r\n                                    }else if (cb_no.isChecked()){\r\n                                        member.mGen =0; //무관은 0\r\n                                    }else {\r\n                                        Toast.makeText(getContext(),\"성별을 체크하세요.\",Toast.LENGTH_SHORT);\r\n                                    }\r\n\r\n                                    int totalHobbyCount2 = list.size();\r\n                                    for (int index = 0; index < totalHobbyCount2; index++) {\r\n                                        member.hobbyCate.add(list.get(index));\r\n                                    }\r\n\r\n\r\n                                    //member.meetDate\r\n                                    FirebaseDatabase.getInstance().getReference().child(\"users\").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {\r\n\r\n                                        @Override\r\n                                        public void onSuccess(Void aVoid) {\r\n                                            //프래그먼트 종료\r\n                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();\r\n                                            fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();\r\n//                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();\r\n//                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);\r\n//                                            fragmentManager.popBackStack();\r\n                                            Intent intent = new Intent(getContext(), MainActivity.class);\r\n                                            startActivity(intent);\r\n                                        }\r\n                                    });\r\n                                }else{\r\n                                    Log.e(TAG, \"Error getting sign in methods for user\", task.getException());\r\n                                }\r\n                            }\r\n                        });\r\n            }\r\n        });\r\n\r\n        return vGroup;\r\n    }\r\n\r\n    //이부분 데이터 TaskJOin 수정\r\n    public class TaskJoin extends AsyncTask<String, Void, String> {\r\n        String sendMsg, receiveMsg;\r\n        String serverIp = \"http://13.125.233.177:8080/AppWithMe/member/insert.jsp\";\r\n\r\n        @Override\r\n        protected String doInBackground(String... strings) {//뒤에서 돌아가는 가장 중요한 메소드\r\n            try {\r\n                String str;\r\n                URL url = new URL(serverIp);\r\n                HttpURLConnection conn = (HttpURLConnection) url.openConnection();\r\n                conn.setRequestProperty(\"Content-Type\", \"application/x-www-form-urlencoded\");\r\n                conn.setRequestMethod(\"POST\");//POST 방식, GET방식으로 넘겨주면 한글처리부터 문제가 생기게 됨\r\n                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());\r\n                //sendMsg = \"memberId=\"+ strings[0]+\"&password=\"+ strings[1];\r\n\r\n                //sendMsg = \"meetId=\"+ strings[0]+\"&meetName=\"+ strings[1];\r\n                sendMsg = \"memberId=\"+ strings[0]+\"&password=\"+ strings[1]+\"&memberName=\"+ strings[2]+\"&phoneNum=\"+ strings[3]\r\n                        +\"&birth=\"+ strings[4];\r\n                osw.write(sendMsg);\r\n                osw.flush();\r\n                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {\r\n                    InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);//UTF-8로 데이터 읽어옴\r\n                    BufferedReader reader = new BufferedReader(tmp);\r\n                    StringBuffer buffer = new StringBuffer();\r\n                    while ((str = reader.readLine()) != null) {\r\n                        buffer.append(str);\r\n                    }\r\n                    receiveMsg = buffer.toString();\r\n                } else {\r\n                    Log.i(\"통신 결과\", conn.getResponseCode()+\"에러\");\r\n                }\r\n            } catch (MalformedURLException e) {\r\n                e.printStackTrace();\r\n            } catch (IOException e) {\r\n                e.printStackTrace();\r\n            }\r\n            return receiveMsg;//String 타입인데 안에 형식이 json임\r\n        }\r\n\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/certify/JoinStartFragment.java	(revision c87eeb3b72e2759894c8edffc58966ac4b38c8e7)
++++ app/src/main/java/com/cookandroid/withmetabbar/certify/JoinStartFragment.java	(date 1631762398976)
+@@ -1,5 +1,6 @@
+ package com.cookandroid.withmetabbar.certify;
+ 
++import android.app.DatePickerDialog;
+ import android.content.Intent;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
+@@ -9,6 +10,7 @@
+ import android.view.ViewGroup;
+ import android.widget.Button;
+ import android.widget.CheckBox;
++import android.widget.DatePicker;
+ import android.widget.EditText;
+ import android.widget.Toast;
+ 
+@@ -21,7 +23,6 @@
+ import com.cookandroid.withmetabbar.MainActivity;
+ import com.cookandroid.withmetabbar.R;
+ import com.cookandroid.withmetabbar.model.Member;
+-import com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;
+ import com.google.android.gms.tasks.OnCompleteListener;
+ import com.google.android.gms.tasks.OnSuccessListener;
+ import com.google.android.gms.tasks.Task;
+@@ -37,14 +38,18 @@
+ import java.net.MalformedURLException;
+ import java.net.URL;
+ import java.nio.charset.StandardCharsets;
+-import java.util.ArrayList;
++import java.text.DateFormat;
++import java.text.SimpleDateFormat;
++import java.util.Calendar;
++import java.util.Date;
++import java.util.Locale;
+ 
+ import static android.content.ContentValues.TAG;
+ 
+ public class JoinStartFragment extends Fragment {
+ 
+     Button btn_join,btn_live;
+-    ArrayList<String> list = new ArrayList<>();
++    private Date meetDate;
+ 
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+@@ -68,27 +73,7 @@
+         CheckBox cb_male = vGroup.findViewById(R.id.check_male);
+         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
+         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
+-        EditText etHobby =vGroup.findViewById(R.id.etHobby);
+-
+-        Bundle bundle = getArguments();
+-
+-        try {
+-            if (bundle.getStringArrayList("hobby")!=null){
+-                list = bundle.getStringArrayList("hobby");
+-                Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
+-                //받은 취미 목록을 차례로 tv에 입력
+-                int totalHobbyCount = list.size();
+-                for (int index =0; index<totalHobbyCount; index++){
+-                    etHobby.append(","+list.get(index));
+-                }
+-
+-            }else {
+-                etHobby.setText("클릭하세요.");
+-            }
+-        }catch (NullPointerException e){
+-            Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
+-        }
+-
++        EditText et_Birth = vGroup.findViewById(R.id.etBirth);
+ 
+ 
+         btn_live.setOnClickListener(new View.OnClickListener() {
+@@ -96,19 +81,62 @@
+             public void onClick(View v) {
+                 DaumWebViewActivity daumWebViewActivity = new DaumWebViewActivity();
+                 ((MainActivity2)getActivity()).replaceFragment(daumWebViewActivity);
++                //LivePlaceFragment livePlaceFragment= new LivePlaceFragment();
++                //((MainActivity2)getActivity()).replaceFragment(livePlaceFragment);
+             }
+         });
+ 
+-        //취미선택
+-        etHobby.setOnClickListener(new View.OnClickListener() {
++
++        //날짜 선택
++
++        Calendar myCalendar = Calendar.getInstance();
++        DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
++            @Override
++            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
++                myCalendar.set(Calendar.YEAR, year);
++                myCalendar.set(Calendar.MONTH, month);
++                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
++                updateLabel();
++                meetDate=myCalendar.getTime();
++//                meetDate.setYear( myCalendar.get(Calendar.YEAR));
++//                meetDate.setMonth( myCalendar.get(Calendar.MONTH));
++//                meetDate.setDate( myCalendar.get(Calendar.DAY_OF_MONTH) );
++            }
++
++            private void updateLabel() {
++                String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
++                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
++
++                et_Birth.setText(sdf.format(myCalendar.getTime()));
++                DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");//필요x
++
++                //데이터 firebase저장위해 meetDate 변수에 대입
++                try {
++                    //meetDate=myCalendar.getTime(); //캘린더타입
++                    //meetDate.=myCalendar.get(Calendar.DAY_OF_MONTH);
++
++                    //meetDate.setYear(myCalendar.get(Calendar.YEAR));//년
++                    //meetDate.setMonth(myCalendar.get(Calendar.MONTH));//월
++                    //meetDate.setDate(myCalendar.get(Calendar.DAY_OF_MONTH));//일
++
++                    //meetDate=myCalendar.get(Calendar.YEAR);
++                    //meetDate=myCalendar.get(Calendar.DAY_OF_WEEK);
++
++                    Log.d("meetDate", String.valueOf(meetDate));
++                } catch (Exception e) {
++                    e.printStackTrace();
++                }
++            }
++        };
++
++        //생년월일 선택
++        et_Birth.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+-
+-                FragmentSelectHobby2 fragmentSelectHobby2= new FragmentSelectHobby2();
+-                ((MainActivity2)getActivity()).addFragment(fragmentSelectHobby2);
+-
++                new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+             }
+         });
++
+ 
+ 
+ 
+@@ -135,6 +163,7 @@
+                                     member.mName = etName.getText().toString().trim();
+                                     member.nick =etNick.getText().toString().trim();
+                                     member.mAge = Integer.parseInt(etAge.getText().toString());
++                                    member.meetDate =meetDate;
+                                     //성별체크
+                                     if (cb_male.isChecked()){
+                                         member.mGen =1; //남자는 1
+@@ -146,11 +175,6 @@
+                                         Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
+                                     }
+ 
+-                                    int totalHobbyCount2 = list.size();
+-                                    for (int index = 0; index < totalHobbyCount2; index++) {
+-                                        member.hobbyCate.add(list.get(index));
+-                                    }
+-
+ 
+                                     //member.meetDate
+                                     FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
+@@ -160,11 +184,11 @@
+                                             //프래그먼트 종료
+                                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                             fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
+-//                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();
+-//                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);
++                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();
++                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);
+ //                                            fragmentManager.popBackStack();
+-                                            Intent intent = new Intent(getContext(), MainActivity.class);
+-                                            startActivity(intent);
++//                                            Intent intent = new Intent(getContext(), MainActivity.class);
++//                                            startActivity(intent);
+                                         }
+                                     });
+                                 }else{
+Index: app/src/main/res/layout/select_hobby_grid_in.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:id=\"@+id/selectHobbyIn\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/tv_select_hobbyBig\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"120dp\"\r\n        android:text=\"음악\"\r\n        android:textColor=\"@color/black\"\r\n        android:textAlignment=\"center\"\r\n        android:backgroundTint=\"@color/yellow\"\r\n        android:gravity=\"center_horizontal\" />\r\n\r\n<!--    <ImageView-->\r\n<!--        android:id=\"@+id/imageView_sel_hb\"-->\r\n<!--        android:layout_width=\"match_parent\"-->\r\n<!--        android:layout_height=\"match_parent\"-->\r\n<!--        android:src=\"@drawable/hobby_music\"/>-->\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/select_hobby_grid_in.xml	(revision c87eeb3b72e2759894c8edffc58966ac4b38c8e7)
++++ app/src/main/res/layout/select_hobby_grid_in.xml	(date 1631762656618)
+@@ -12,8 +12,7 @@
+         android:text="음악"
+         android:textColor="@color/black"
+         android:textAlignment="center"
+-        android:backgroundTint="@color/yellow"
+-        android:gravity="center_horizontal" />
++       android:gravity="center_horizontal" />
+ 
+ <!--    <ImageView-->
+ <!--        android:id="@+id/imageView_sel_hb"-->
+Index: app/src/main/res/layout/select_hobby2_grid_in2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/btn_hbList_in\"\r\n        android:layout_width=\"50dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:backgroundTint=\"@color/yellow\"\r\n        android:text=\"클래식\"\r\n        android:textAlignment=\"center\"/>\r\n</LinearLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/select_hobby2_grid_in2.xml	(revision c87eeb3b72e2759894c8edffc58966ac4b38c8e7)
++++ app/src/main/res/layout/select_hobby2_grid_in2.xml	(date 1631762399027)
+@@ -5,9 +5,8 @@
+ 
+     <TextView
+         android:id="@+id/btn_hbList_in"
+-        android:layout_width="50dp"
++        android:layout_width="60dp"
+         android:layout_height="wrap_content"
+-        android:backgroundTint="@color/yellow"
+         android:text="클래식"
+         android:textAlignment="center"/>
+ </LinearLayout>
