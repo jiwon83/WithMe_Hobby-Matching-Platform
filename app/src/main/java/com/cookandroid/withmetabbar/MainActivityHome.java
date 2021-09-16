@@ -267,7 +267,7 @@ public class MainActivityHome extends Fragment {
 
         //문자 입력이 없을때는 모든 데이터를 보여준다.
         if (searchText.length()==0){
-            arrayList.addAll(arrayList_copy);
+            //arrayList.addAll(arrayList_copy);
             Log.d("arrayList_copy_method", String.valueOf(arrayList));//값이 안나온다
 
         }

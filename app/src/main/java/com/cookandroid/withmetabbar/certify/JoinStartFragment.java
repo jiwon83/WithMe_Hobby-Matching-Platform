@@ -74,6 +74,7 @@ public class JoinStartFragment extends Fragment {
         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
         EditText et_Birth = vGroup.findViewById(R.id.etBirth);
+        EditText etHobby =vGroup.findViewById(R.id.etHobby);
 
 
         btn_live.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +132,17 @@ public class JoinStartFragment extends Fragment {
                 new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+        //취미선택
+        etHobby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FragmentSelectHobby2 fragmentSelectHobby2= new FragmentSelectHobby2();
+                ((MainActivity2)getActivity()).addFragment(fragmentSelectHobby2);
+
+            }
+        });
+
 
 
 
@@ -168,6 +180,8 @@ public class JoinStartFragment extends Fragment {
                                     }else {
                                         Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
                                     }
+
+
 
 
                                     //member.meetDate
