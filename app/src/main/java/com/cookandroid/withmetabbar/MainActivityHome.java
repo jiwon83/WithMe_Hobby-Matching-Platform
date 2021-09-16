@@ -193,8 +193,6 @@ public class MainActivityHome extends Fragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 //입력하기 전에 조치
-                listView.setVisibility(View.INVISIBLE);
-
             }
 
             @Override
@@ -210,11 +208,7 @@ public class MainActivityHome extends Fragment {
                 // input창에 문자를 입력할때마다 호출된다.
                 // search 메소드를 호출한다.
                 String searchText = editSearch.getText().toString();
-
                 searchInMeet(searchText);
-
-
-
 
                 //2021-08-16 검색기능 구현
                 //검색된 단어가 제목에 들어가는 게시물 띄어보이기(recycler view)
@@ -245,7 +239,7 @@ public class MainActivityHome extends Fragment {
 
          //문자 입력이 없을때는 모든 데이터를 보여준다.
         if (searchText.length()==0){
-            //list_search_recycle.addAll(arrayList_search_recycle);//list_search_recycler실제 검색이 끝난 후 리스트, arrayList_search_recycle: 모든 값이 들어있는 리스트
+            list_search_recycle.addAll(arrayList_search_recycle);//list_search_recycler실제 검색이 끝난 후 리스트, arrayList_search_recycle: 모든 값이 들어있는 리스트
 
         }
         //문자 입력 있을 때
