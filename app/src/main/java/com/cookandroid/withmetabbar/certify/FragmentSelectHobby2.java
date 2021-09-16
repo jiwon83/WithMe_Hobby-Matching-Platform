@@ -1,8 +1,10 @@
 package com.cookandroid.withmetabbar.certify;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +46,7 @@ import java.util.Map;
 
 import static android.graphics.Color.MAGENTA;
 import static android.graphics.Color.YELLOW;
+import static android.graphics.Color.red;
 
 public class FragmentSelectHobby2 extends Fragment implements OnItemClick {
 
@@ -376,6 +380,13 @@ class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabba
     private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);//클릭하면 색상변경//클릭 안하면 0 하면 1??
     private ArrayList<Hobby> selectedList= new ArrayList<>(); //선택한 취미 값
 
+
+
+
+
+
+
+
     public HorizontalAdapter(){}
 
     public HorizontalAdapter(ArrayList<Hobby> data, OnItemClick listener)
@@ -420,11 +431,11 @@ class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabba
                     if ( mSelectedItems.get(position, false) ){
 
                         mSelectedItems.put(position, false);
-                        v.setBackgroundColor(MAGENTA);
+                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));
 
                     } else {
                         mSelectedItems.put(position, true);
-                        v.setBackgroundColor(YELLOW);
+                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.Orange));
                     }
                     Log.d("test", "position = " + position);
 
@@ -461,12 +472,17 @@ class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabba
 
         //클릭하면 색상 변경
         if ( mSelectedItems.get(position, false) ){
-            horizontalViewHolder.itemView.setBackgroundColor(YELLOW);//선택했을 때
+            horizontalViewHolder.itemView.setBackgroundColor(ActivityContext().getResources().getColor(R.color.gray));//선택했을 때
         } else {
             horizontalViewHolder.itemView.setBackgroundColor(MAGENTA);//기본, 선택 안했을 때
         }
 
     }
+
+    private Context ActivityContext() {
+        return null;
+    }
+
 
     @Override
     public int getItemCount() {

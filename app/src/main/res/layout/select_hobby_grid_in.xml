@@ -12,7 +12,6 @@
         android:text="음악"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:backgroundTint="@color/yellow"
         android:gravity="center_horizontal" />
 
 <!--    <ImageView-->

@@ -175,6 +175,7 @@ public class FragmentPlus extends Fragment {
 
             }
         });
+        //날짜 클릭
 
         et_date.setOnClickListener(new View.OnClickListener() {
             @Override

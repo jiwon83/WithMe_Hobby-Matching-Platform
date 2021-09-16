@@ -1,5 +1,6 @@
 package com.cookandroid.withmetabbar.certify;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,7 +23,6 @@ import com.cookandroid.withmetabbar.DaumWebViewActivity;
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.Member;
-import com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -37,14 +38,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 
 public class JoinStartFragment extends Fragment {
 
     Button btn_join,btn_live;
-    ArrayList<String> list = new ArrayList<>();
+    private Date meetDate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,27 +73,7 @@ public class JoinStartFragment extends Fragment {
         CheckBox cb_male = vGroup.findViewById(R.id.check_male);
         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
-        EditText etHobby =vGroup.findViewById(R.id.etHobby);
-
-        Bundle bundle = getArguments();
-
-        try {
-            if (bundle.getStringArrayList("hobby")!=null){
-                list = bundle.getStringArrayList("hobby");
-                Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
-                //받은 취미 목록을 차례로 tv에 입력
-                int totalHobbyCount = list.size();
-                for (int index =0; index<totalHobbyCount; index++){
-                    etHobby.append(","+list.get(index));
-                }
-
-            }else {
-                etHobby.setText("클릭하세요.");
-            }
-        }catch (NullPointerException e){
-            Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
-        }
-
+        EditText et_Birth = vGroup.findViewById(R.id.etBirth);
 
 
         btn_live.setOnClickListener(new View.OnClickListener() {
@@ -96,19 +81,57 @@ public class JoinStartFragment extends Fragment {
             public void onClick(View v) {
                 DaumWebViewActivity daumWebViewActivity = new DaumWebViewActivity();
                 ((MainActivity2)getActivity()).replaceFragment(daumWebViewActivity);
+                //LivePlaceFragment livePlaceFragment= new LivePlaceFragment();
+                //((MainActivity2)getActivity()).replaceFragment(livePlaceFragment);
             }
         });
 
-        //취미선택
-        etHobby.setOnClickListener(new View.OnClickListener() {
+
+        //날짜 선택
+
+        Calendar myCalendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+            private void updateLabel() {
+                String myFormat = "yyyy/MM/dd";    // 출력형식   2018/11/28
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
+
+                et_Birth.setText(sdf.format(myCalendar.getTime()));
+                DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");//필요x
+
+                //데이터 firebase저장위해 meetDate 변수에 대입
+                try {
+                    //meetDate=myCalendar.getTime(); //캘린더타입
+                    //meetDate.=myCalendar.get(Calendar.DAY_OF_MONTH);
+
+                    //meetDate.setYear(myCalendar.get(Calendar.YEAR));//년
+                    //meetDate.setMonth(myCalendar.get(Calendar.MONTH));//월
+                    //meetDate.setDate(myCalendar.get(Calendar.DAY_OF_MONTH));//일
+
+                    //meetDate=myCalendar.get(Calendar.YEAR);
+                    //meetDate=myCalendar.get(Calendar.DAY_OF_WEEK);
+
+                    Log.d("meetDate", String.valueOf(meetDate));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        et_Birth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                FragmentSelectHobby2 fragmentSelectHobby2= new FragmentSelectHobby2();
-                ((MainActivity2)getActivity()).addFragment(fragmentSelectHobby2);
-
+                new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
 
 
 
@@ -146,11 +169,6 @@ public class JoinStartFragment extends Fragment {
                                         Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
                                     }
 
-                                    int totalHobbyCount2 = list.size();
-                                    for (int index = 0; index < totalHobbyCount2; index++) {
-                                        member.hobbyCate.add(list.get(index));
-                                    }
-
 
                                     //member.meetDate
                                     FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -160,11 +178,11 @@ public class JoinStartFragment extends Fragment {
                                             //프래그먼트 종료
                                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                             fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
-//                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();
-//                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);
+                                            FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();
+                                            ((MainActivity2)getActivity()).replaceFragment(fragmentSelectHobby);
 //                                            fragmentManager.popBackStack();
-                                            Intent intent = new Intent(getContext(), MainActivity.class);
-                                            startActivity(intent);
+//                                            Intent intent = new Intent(getContext(), MainActivity.class);
+//                                            startActivity(intent);
                                         }
                                     });
                                 }else{
