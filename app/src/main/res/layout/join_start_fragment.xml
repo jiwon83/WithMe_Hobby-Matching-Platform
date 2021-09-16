@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="vertical">
 
 
@@ -34,9 +35,9 @@
 
             <EditText
                 android:id="@+id/etId"
-                android:layout_width="210dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="35dp"
                 android:ems="10"
                 android:hint="아이디"
                 android:inputType="textPersonName"
@@ -61,9 +62,9 @@
 
             <EditText
                 android:id="@+id/etPw"
-                android:layout_width="210dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="35dp"
                 android:ems="10"
                 android:hint="비밀번호"
                 android:inputType="textPersonName"
@@ -83,12 +84,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etName"
-                android:layout_width="210dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:ems="10"
@@ -116,9 +117,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
         <EditText
@@ -133,30 +134,30 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etBirth"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:clickable="true"
-            android:editable="false"
-            android:focusable="false"
-            android:hint="생년월일"
-            android:inputType="textPersonName"
-            android:textSize="15dp" />
+            <EditText
+                android:id="@+id/etBirth"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:clickable="true"
+                android:editable="false"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="생년월일"
+                android:inputType="textPersonName"
+                android:textSize="15dp" />
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
         <EditText
@@ -174,13 +175,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etPhoneNum"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textSize="15dp"
@@ -190,30 +192,21 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:text="취미분야"
-                android:layout_marginLeft="20dp"
-                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/etHobby"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:ems="10"
-                android:gravity="center"
                 android:inputType="textPersonName"
-                android:layout_marginRight="20dp"
-                android:text="" />
+                android:textSize="15dp"
+                android:layout_marginLeft="20dp"
+                android:hint="취미분야" />
 
         </LinearLayout>
 
@@ -224,7 +217,7 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
+
             android:backgroundTint="@color/gray"
             android:textSize="16dp"
             android:gravity="center_vertical"
@@ -235,23 +228,13 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
             android:backgroundTint="@color/gray"
             android:textSize="16dp"
             android:gravity="center_vertical"
             android:hint="관심지역 선택"
             />
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
-            android:backgroundTint="@color/gray"
-            android:textSize="16dp"
-            android:gravity="center_vertical"
-            android:hint="관심지역 선택" />
+
     </LinearLayout>
 
         <Button

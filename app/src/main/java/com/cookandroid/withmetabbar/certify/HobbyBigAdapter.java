@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cookandroid.withmetabbar.R;
@@ -64,10 +65,10 @@ class HobbyBigAdapter extends RecyclerView.Adapter<HobbyBigAdapter.HobbyBigViewH
 
                     if ( mSelectedItems.get(position, false) ){
                         mSelectedItems.put(position, false);
-                        v.setBackgroundColor(GRAY);
+                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));
                     } else {
                         mSelectedItems.put(position, true);
-                        v.setBackgroundColor(YELLOW);
+                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.Orange));
                         selectedHobbyBig =textView.getText().toString();
                         Bundle bundle = new Bundle();
                         bundle.putString("selectedHobbyBig",selectedHobbyBig);
@@ -100,9 +101,9 @@ class HobbyBigAdapter extends RecyclerView.Adapter<HobbyBigAdapter.HobbyBigViewH
 
         //클릭하면 색상 변경
         if ( mSelectedItems.get(position, false) ){
-            hobbyBigViewHolder.itemView.setBackgroundColor(Color.MAGENTA);//선택했을 때
+            hobbyBigViewHolder.itemView.setBackgroundColor(YELLOW);//선택했을 때
         } else {
-            hobbyBigViewHolder.itemView.setBackgroundColor(YELLOW);//기본, 선택 안했을 때
+            hobbyBigViewHolder.itemView.setBackgroundColor(GRAY);//기본, 선택 안했을 때
         }
 
         //대분류 배열 처리- textView에 넣기

@@ -406,6 +406,7 @@ class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabba
         private String selected="";
         int count=1;
 
+
         //받아올 값
         public void selectedItems(){
             mCallback.onClick(tv.getText().toString());//tv를 클릭하면?
@@ -472,9 +473,9 @@ class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabba
 
         //클릭하면 색상 변경
         if ( mSelectedItems.get(position, false) ){
-            horizontalViewHolder.itemView.setBackgroundColor(ActivityContext().getResources().getColor(R.color.gray));//선택했을 때
+            horizontalViewHolder.itemView.setBackgroundColor(R.color.Orange);//선택했을 때
         } else {
-            horizontalViewHolder.itemView.setBackgroundColor(MAGENTA);//기본, 선택 안했을 때
+            horizontalViewHolder.itemView.setBackgroundColor(R.color.gray);//기본, 선택 안했을 때
         }
 
     }

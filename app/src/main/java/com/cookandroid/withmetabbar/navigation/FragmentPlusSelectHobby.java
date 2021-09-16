@@ -423,13 +423,13 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
                     if ( mSelectedItems.get(position, false) ){
 
                         mSelectedItems.put(position, false);
-                        v.setBackgroundColor(GRAY);
+                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));
 
 
 
                     } else {
                         mSelectedItems.put(position, true);
-                        v.setBackgroundColor(YELLOW);
+                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.Orange));
                     }
                     Log.d("test", "position = " + position);
 

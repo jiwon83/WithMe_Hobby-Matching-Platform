@@ -1,0 +1,330 @@
+Index: app/src/main/res/layout/select_hobby2_grid_in2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/btn_hbList_in\"\r\n        android:layout_width=\"60dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"클래식\"\r\n        android:textAlignment=\"center\"/>\r\n</LinearLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/select_hobby2_grid_in2.xml	(revision 8618c8b13abcc6c14249cbbe29f6cfcc7b1514a3)
++++ app/src/main/res/layout/select_hobby2_grid_in2.xml	(date 1631765794084)
+@@ -5,7 +5,7 @@
+ 
+     <TextView
+         android:id="@+id/btn_hbList_in"
+-        android:layout_width="60dp"
++        android:layout_width="80dp"
+         android:layout_height="wrap_content"
+         android:text="클래식"
+         android:textAlignment="center"/>
+Index: app/src/main/res/layout/join_start_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:gravity=\"center\"\r\n        android:layout_gravity=\"center\"\r\n        android:text=\"With Me 회원가입\"\r\n        android:textColor=\"@color/Orange\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:textSize=\"25dp\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_gravity=\"center\"\r\n        android:orientation=\"vertical\">\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:layout_gravity=\"center\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etId\"\r\n                android:layout_width=\"210dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"50dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"아이디\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/button1\"\r\n                android:layout_width=\"90dp\"\r\n                android:layout_height=\"40dp\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:text=\"중복확인\"\r\n                android:textSize=\"12dp\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etPw\"\r\n                android:layout_width=\"210dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"50dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"비밀번호\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/button2\"\r\n                android:layout_width=\"90dp\"\r\n                android:layout_height=\"40dp\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:text=\"중복확인\"\r\n                android:textSize=\"12dp\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"30dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etName\"\r\n                android:layout_width=\"210dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:ems=\"10\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\"\r\n                android:hint=\"이름\"\r\n                />\r\n\r\n            <CheckBox\r\n                android:id=\"@+id/check_male\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"남\" />\r\n            <CheckBox\r\n                android:id=\"@+id/check_female\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"여\" />\r\n            <CheckBox\r\n                android:id=\"@+id/checkNo\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"무관\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"30dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n        <EditText\r\n            android:id=\"@+id/etNick\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:ems=\"10\"\r\n            android:hint=\"닉네임\"\r\n            android:inputType=\"textPersonName\"\r\n            android:textSize=\"15dp\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"30dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n        <EditText\r\n            android:id=\"@+id/etBirth\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:ems=\"10\"\r\n            android:clickable=\"true\"\r\n            android:editable=\"false\"\r\n            android:focusable=\"false\"\r\n            android:hint=\"생년월일\"\r\n            android:inputType=\"textPersonName\"\r\n            android:textSize=\"15dp\" />\r\n        </LinearLayout>\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"30dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n        <EditText\r\n            android:id=\"@+id/etAge\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:ems=\"10\"\r\n            android:inputType=\"textPersonName\"\r\n            android:textSize=\"15dp\"\r\n            android:hint=\"나이\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etPhoneNum\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"50dp\"\r\n                android:ems=\"10\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\"\r\n                android:hint=\"휴대폰번호\" />\r\n\r\n\r\n        </LinearLayout>\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView3\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"bottom\"\r\n                android:layout_weight=\"1\"\r\n                android:text=\"취미분야\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:textSize=\"16dp\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etHobby\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\"\r\n                android:ems=\"10\"\r\n                android:gravity=\"center\"\r\n                android:inputType=\"textPersonName\"\r\n                android:layout_marginRight=\"20dp\"\r\n                android:text=\"\" />\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n        <Button\r\n            android:id=\"@+id/btn_live\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"50dp\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:textSize=\"16dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:hint=\"거주지역 선택\"\r\n            />\r\n        <Button\r\n            android:id=\"@+id/button4\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"50dp\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:textSize=\"16dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:hint=\"관심지역 선택\"\r\n            />\r\n\r\n        <Button\r\n            android:id=\"@+id/button5\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"50dp\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:textSize=\"16dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:hint=\"관심지역 선택\" />\r\n    </LinearLayout>\r\n\r\n        <Button\r\n            android:id=\"@+id/button6\"\r\n            android:layout_width=\"200dp\"\r\n            android:layout_height=\"45dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:layout_gravity=\"center\"\r\n            android:backgroundTint=\"@color/Orange\"\r\n            android:textSize=\"18dp\"\r\n            android:gravity=\"center\"\r\n            android:text=\"가입하기\"\r\n            />\r\n\r\n\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/join_start_fragment.xml	(revision 8618c8b13abcc6c14249cbbe29f6cfcc7b1514a3)
++++ app/src/main/res/layout/join_start_fragment.xml	(date 1631764989771)
+@@ -22,6 +22,7 @@
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
++        android:gravity="center"
+         android:orientation="vertical">
+ 
+ 
+@@ -34,9 +35,9 @@
+ 
+             <EditText
+                 android:id="@+id/etId"
+-                android:layout_width="210dp"
++                android:layout_width="230dp"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="50dp"
++                android:layout_marginLeft="35dp"
+                 android:ems="10"
+                 android:hint="아이디"
+                 android:inputType="textPersonName"
+@@ -61,9 +62,9 @@
+ 
+             <EditText
+                 android:id="@+id/etPw"
+-                android:layout_width="210dp"
++                android:layout_width="230dp"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="50dp"
++                android:layout_marginLeft="35dp"
+                 android:ems="10"
+                 android:hint="비밀번호"
+                 android:inputType="textPersonName"
+@@ -83,12 +84,12 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="30dp"
++            android:layout_marginLeft="10dp"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etName"
+-                android:layout_width="210dp"
++                android:layout_width="170dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="20dp"
+                 android:ems="10"
+@@ -116,9 +117,9 @@
+         </LinearLayout>
+ 
+         <LinearLayout
+-            android:layout_width="wrap_content"
++            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="30dp"
++            android:layout_marginLeft="10dp"
+             android:orientation="horizontal">
+ 
+         <EditText
+@@ -133,30 +134,30 @@
+         </LinearLayout>
+ 
+         <LinearLayout
+-            android:layout_width="wrap_content"
++            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="30dp"
++            android:layout_marginLeft="10dp"
+             android:orientation="horizontal">
+ 
+-        <EditText
+-            android:id="@+id/etBirth"
+-            android:layout_width="300dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="20dp"
+-            android:ems="10"
+-            android:clickable="true"
+-            android:editable="false"
+-            android:focusable="false"
+-            android:hint="생년월일"
+-            android:inputType="textPersonName"
+-            android:textSize="15dp" />
++            <EditText
++                android:id="@+id/etBirth"
++                android:layout_width="300dp"
++                android:layout_height="wrap_content"
++                android:layout_marginLeft="20dp"
++                android:clickable="true"
++                android:editable="false"
++                android:ems="10"
++                android:focusable="false"
++                android:hint="생년월일"
++                android:inputType="textPersonName"
++                android:textSize="15dp" />
+         </LinearLayout>
+ 
+ 
+         <LinearLayout
+-            android:layout_width="wrap_content"
++            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="30dp"
++            android:layout_marginLeft="10dp"
+             android:orientation="horizontal">
+ 
+         <EditText
+@@ -174,13 +175,14 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
++            android:layout_marginLeft="10dp"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etPhoneNum"
+                 android:layout_width="300dp"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="50dp"
++                android:layout_marginLeft="20dp"
+                 android:ems="10"
+                 android:inputType="textPersonName"
+                 android:textSize="15dp"
+@@ -190,30 +192,21 @@
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            android:orientation="horizontal">
+-
+-
+-            <TextView
+-                android:id="@+id/textView3"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:layout_gravity="bottom"
+-                android:layout_weight="1"
+-                android:text="취미분야"
+-                android:layout_marginLeft="20dp"
+-                android:textSize="16dp" />
++            android:layout_height="wrap_content"
++            android:layout_marginLeft="10dp"
++            android:orientation="horizontal">
++
++
+ 
+             <EditText
+                 android:id="@+id/etHobby"
+-                android:layout_width="wrap_content"
++                android:layout_width="300dp"
+                 android:layout_height="wrap_content"
+-                android:layout_weight="1"
+                 android:ems="10"
+-                android:gravity="center"
+                 android:inputType="textPersonName"
+-                android:layout_marginRight="20dp"
+-                android:text="" />
++                android:textSize="15dp"
++                android:layout_marginLeft="20dp"
++                android:hint="취미분야" />
+ 
+         </LinearLayout>
+ 
+@@ -224,7 +217,7 @@
+             android:layout_width="300dp"
+             android:layout_height="60dp"
+             android:layout_marginTop="10dp"
+-            android:layout_marginLeft="50dp"
++
+             android:backgroundTint="@color/gray"
+             android:textSize="16dp"
+             android:gravity="center_vertical"
+@@ -235,23 +228,13 @@
+             android:layout_width="300dp"
+             android:layout_height="60dp"
+             android:layout_marginTop="10dp"
+-            android:layout_marginLeft="50dp"
+             android:backgroundTint="@color/gray"
+             android:textSize="16dp"
+             android:gravity="center_vertical"
+             android:hint="관심지역 선택"
+             />
+ 
+-        <Button
+-            android:id="@+id/button5"
+-            android:layout_width="300dp"
+-            android:layout_height="60dp"
+-            android:layout_marginTop="10dp"
+-            android:layout_marginLeft="50dp"
+-            android:backgroundTint="@color/gray"
+-            android:textSize="16dp"
+-            android:gravity="center_vertical"
+-            android:hint="관심지역 선택" />
++
+     </LinearLayout>
+ 
+         <Button
+Index: app/src/main/res/values/themes.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources xmlns:tools=\"http://schemas.android.com/tools\">\r\n    <!-- Base application theme. -->\r\n    <style name=\"Theme.WithMeTabBar\" parent=\"Theme.AppCompat.Light.NoActionBar\">\r\n        <!-- Primary brand color. -->\r\n        <item name=\"colorPrimary\">@color/purple_500</item>\r\n        <item name=\"colorPrimaryVariant\">@color/purple_700</item>\r\n        <item name=\"colorOnPrimary\">@color/white</item>\r\n        <!-- Secondary brand color. -->\r\n        <item name=\"colorSecondary\">@color/teal_200</item>\r\n        <item name=\"colorSecondaryVariant\">@color/teal_700</item>\r\n        <item name=\"colorOnSecondary\">@color/black</item>\r\n        <!-- Status bar color. -->\r\n        <item name=\"android:statusBarColor\" tools:targetApi=\"l\">?attr/colorPrimaryVariant</item>\r\n        <!-- Customize your theme here. -->\r\n    </style>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/themes.xml	(revision 8618c8b13abcc6c14249cbbe29f6cfcc7b1514a3)
++++ app/src/main/res/values/themes.xml	(date 1631765794098)
+@@ -2,8 +2,8 @@
+     <!-- Base application theme. -->
+     <style name="Theme.WithMeTabBar" parent="Theme.AppCompat.Light.NoActionBar">
+         <!-- Primary brand color. -->
+-        <item name="colorPrimary">@color/purple_500</item>
+-        <item name="colorPrimaryVariant">@color/purple_700</item>
++        <item name="colorPrimary">@color/gray</item>
++        <item name="colorPrimaryVariant">@color/gray</item>
+         <item name="colorOnPrimary">@color/white</item>
+         <!-- Secondary brand color. -->
+         <item name="colorSecondary">@color/teal_200</item>
+Index: app/src/main/java/com/cookandroid/withmetabbar/certify/FragmentSelectHobby2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.certify;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.app.Activity;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.graphics.Color;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.util.SparseBooleanArray;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.RequiresApi;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.cookandroid.withmetabbar.MainActivity;\r\nimport com.cookandroid.withmetabbar.MainActivityHome;\r\nimport com.cookandroid.withmetabbar.R;\r\nimport com.cookandroid.withmetabbar.model.Hobby;\r\nimport com.cookandroid.withmetabbar.model.HobbyBig;\r\nimport com.cookandroid.withmetabbar.model.Meet;\r\nimport com.cookandroid.withmetabbar.model.Member;\r\nimport com.cookandroid.withmetabbar.navigation.FragmentPlus;\r\nimport com.cookandroid.withmetabbar.navigation.OnItemClick;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\nimport static android.graphics.Color.MAGENTA;\r\nimport static android.graphics.Color.YELLOW;\r\nimport static android.graphics.Color.red;\r\n\r\npublic class FragmentSelectHobby2 extends Fragment implements OnItemClick {\r\n\r\n    // TODO: Rename parameter arguments, choose names that match\r\n    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER\r\n    private static final String ARG_PARAM1 = \"param1\";\r\n    private static final String ARG_PARAM2 = \"param2\";\r\n\r\n    ImageButton imgBtn;\r\n    TextView tv;//취미분야 선택\r\n    ProgressBar progressBar;\r\n    private String selectedHobbyBig;\r\n    Button btnFinish; //메인화면으로 화면전환버튼\r\n    ArrayList<String> list = new ArrayList<>(); //bundle 전달을 위해 선택한 취미값들을 받아서 저장할 배열\r\n\r\n    //중첩 recyclerView에 넣을 데이터\r\n    private final ArrayList<ArrayList<Hobby>> allHobbyList = new ArrayList();\r\n    private final ArrayList<HobbyBig> HobbyBigList2 = new ArrayList();//대분류\r\n\r\n\r\n    // TODO: Rename and change types of parameters\r\n    private String mParam1;\r\n    private String mParam2;\r\n\r\n\r\n    public FragmentSelectHobby2() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n    /**\r\n     * Use this factory method to create a new instance of\r\n     * this fragment using the provided parameters.\r\n     *\r\n     * @param param1 Parameter 1.\r\n     * @param param2 Parameter 2.\r\n     * @return A new instance of fragment FragmentSelectHobby.\r\n     */\r\n    // TODO: Rename and change types and number of parameters\r\n    public static FragmentSelectHobby newInstance(String param1, String param2) {\r\n        FragmentSelectHobby fragment = new FragmentSelectHobby();\r\n        Bundle args = new Bundle();\r\n        args.putString(ARG_PARAM1, param1);\r\n        args.putString(ARG_PARAM2, param2);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (getArguments() != null) {\r\n            selectedHobbyBig = getArguments().getString(ARG_PARAM1);\r\n            //mParam2 = getArguments().getString(ARG_PARAM2);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        ViewGroup vg =  (ViewGroup)inflater.inflate(R.layout.fragment_select_hobby2, container, false);\r\n\r\n        //imgBtn = vg.findViewById(R.id.imageButton);\r\n        tv=vg.findViewById(R.id.textView);\r\n        progressBar=vg.findViewById(R.id.progressBar);\r\n        btnFinish= vg.findViewById(R.id.selectHobby2_btn_next);\r\n\r\n        tv.setText(\"취미 분야 선택 : \"+selectedHobbyBig);\r\n\r\n\r\n        //Log.d(\"selectedHobbyBig\",selectedHobbyBig);\r\n        //final GridView gridView= vg.findViewById(R.id.gridView);\r\n        //ViewGroup vg2 =  (ViewGroup)inflater.inflate(R.layout.select_hobby_grid_in, container, false);\r\n        //iv2= vg2.findViewById(R.id.imageView_sel_hb);\r\n\r\n//        int[] img ={\r\n//                R.drawable.hobby_music,R.drawable.hb_craft,R.drawable.hb_sport\r\n//\r\n//        };\r\n\r\n\r\n\r\n        //바로 해보기\r\n        ArrayList<ArrayList<String>> hbLists = new ArrayList<ArrayList<String>>();\r\n\r\n        ArrayList<String> hbList_music = new ArrayList<>();\r\n        hbList_music.add(\"음악\");\r\n        hbList_music.add(\"클래식\");\r\n        hbList_music.add(\"k-pop\");\r\n        hbList_music.add(\"뉴에이지\");\r\n        hbList_music.add(\"발라드\");\r\n        hbList_music.add(\"랩/힙합\");\r\n        hbList_music.add(\"인디음악\");\r\n        hbList_music.add(\"록/메탈\");\r\n        hbList_music.add(\"포크/블루스\");\r\n\r\n        //2차원배열에 답기\r\n        hbLists.add(hbList_music);\r\n\r\n        //tv.setText((CharSequence) hbLists.get(0).get(0));\r\n\r\n        //응용참고\r\n        /*\r\n        System.out.println(datas.size());\r\n        \t//결과: 3\r\n\t\tSystem.out.println(datas.toString());\r\n        \t//결과: [[1, 2, 3], [11, 22, 33], [111, 222, 333]]\r\n\r\n\t\tSystem.out.println(datas.get(0));\r\n\t\t//결과: [1, 2, 3]\r\n         */\r\n\r\n        //리사이클러뷰\r\n        this.initializeData();\r\n        this.initializeData2();\r\n\r\n        RecyclerView view = vg.findViewById(R.id.recyclerViewVertical);\r\n\r\n        com.cookandroid.withmetabbar.certify.VerticalAdapter verticalAdapter = new com.cookandroid.withmetabbar.certify.VerticalAdapter(getContext(), allHobbyList, HobbyBigList2,this);\r\n        //여기의 this는 이 클래스 자체를 의미한다. 아래의 OnItemClick 을 override한 onClick()메서드가 실행되어야 하기 때문이다.\r\n        view.setHasFixedSize(true);\r\n        view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));\r\n        view.setAdapter(verticalAdapter);\r\n\r\n\r\n        //화면전환\r\n        btnFinish.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                Bundle bundle = new Bundle();\r\n                bundle.putStringArrayList(\"hobby\", list);\r\n                JoinStartFragment joinStartFragment = new JoinStartFragment();\r\n                joinStartFragment.setArguments(bundle);\r\n\r\n\r\n                //hide & show\r\n//                ((MainActivity)getActivity()).hideFragment(FragmentPlusSelectHobby.this);\r\n                //FragmentPlus fragmentPlus = new FragmentPlus();\r\n//                ((MainActivity)getActivity()).showFragment(fragmentPlus);\r\n\r\n                //remove\r\n                //((MainActivity)getActivity()).removeFragment(FragmentPlusSelectHobby.this);\r\n                //FragmentPlus fragmentPlus = new FragmentPlus();\r\n\r\n                //replace\r\n                ((MainActivity2)getActivity()).replaceFragment(joinStartFragment);\r\n\r\n\r\n            }\r\n        });\r\n\r\n        //데이터 저장을 위한 객체 참조\r\n//        final FirebaseDatabase database = FirebaseDatabase.getInstance();\r\n//        DatabaseReference ref = database.getReference();\r\n//        DatabaseReference usersRef = ref.child(\"users\");\r\n//        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid\r\n//        DatabaseReference hopperRef = usersRef.child(uid); //  /users/uid\r\n\r\n        //push 데이터 저장\r\n//        DatabaseReference pushRef = hopperRef.child(\"hobby\");\r\n//        pushRef.push().setValue(new Hobby(\"탁구\"));\r\n//        pushRef.push().setValue(new Hobby(\"배구\"));\r\n\r\n        //update 데이터 저장\r\n//        Map<String, Object> hopperUpdates = new HashMap<>();\r\n//        hopperUpdates.put(\"hobby1\", \"베이킹\");\r\n//        hopperUpdates.put(\"hobby2\", new Hobby(\"공예\"));\r\n//        hopperUpdates.put(\"hobby2\", new Hobby(\"베이킹\"));\r\n        //hopperUpdates.put(\"hobby\", hobbyListTest);\r\n//        hopperRef.updateChildren(hopperUpdates); //데이터 업데이트\r\n\r\n\r\n\r\n//        Bundle data = getArguments();\r\n//        String data1 = data.getString(\"selectedList\");\r\n//        pushRef.push().setValue(new Hobby(data1));\r\n\r\n        //선택한 hobby값을 가져오기 위한, 커스텀 리스너 객체 생성 및 전달\r\n//        HorizontalAdapter horizontalAdapter= new HorizontalAdapter();\r\n//        horizontalAdapter.setOnItemClickListener(new HorizontalAdapter.OnItemClickListener() {\r\n//            @Override\r\n//            public void onItemClick(View v, int position) {\r\n//                //받아온 값을 데이터에 저장\r\n//                Bundle data = getArguments();\r\n//                String data1 = data.getString(\"selectedList\");\r\n//                pushRef.push().setValue(new Hobby(data1));\r\n//\r\n//            }\r\n//        });\r\n\r\n        return vg;\r\n    }\r\n\r\n    @Override\r\n    public void onClick(String value) {\r\n        //value this data you receive when selectedItems() called\r\n        list.add(value);\r\n        Log.d(\"onClickSuccess?\",value); //성공적으로 받아진다.\r\n    }\r\n\r\n    //소분류 취미목록 데이터 입력\r\n    public void initializeData()\r\n    {\r\n        ArrayList<Hobby> hobbyList1 = new ArrayList();\r\n\r\n        hobbyList1.add(new Hobby( \"클래식\"));\r\n        hobbyList1.add(new Hobby(\"K-pop\"));\r\n        hobbyList1.add(new Hobby(\"뉴에이지\"));\r\n        hobbyList1.add(new Hobby(\"발라드\"));\r\n        hobbyList1.add(new Hobby(\"랩/힙합\"));\r\n        hobbyList1.add(new Hobby(\"인디음악\"));\r\n        hobbyList1.add(new Hobby(\"록/메탈\"));\r\n        hobbyList1.add(new Hobby(\"포크.블루스\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList1);\r\n\r\n        ArrayList<Hobby> hobbyList2 = new ArrayList();\r\n\r\n        hobbyList2.add(new Hobby( \"야구\"));\r\n        hobbyList2.add(new Hobby( \"축구\"));\r\n        hobbyList2.add(new Hobby( \"농구\"));\r\n        hobbyList2.add(new Hobby( \"볼링\"));\r\n        hobbyList2.add(new Hobby( \"당구\"));\r\n        hobbyList2.add(new Hobby( \"수영\"));\r\n        hobbyList2.add(new Hobby( \"탁구\"));\r\n        hobbyList2.add(new Hobby( \"폴댄스\"));\r\n        hobbyList2.add(new Hobby( \"골프\"));\r\n        hobbyList2.add(new Hobby( \"배드민턴\"));\r\n        hobbyList2.add(new Hobby( \"클라이밍\"));\r\n\r\n        allHobbyList.add(hobbyList2);\r\n\r\n        ArrayList<Hobby> hobbyList3 = new ArrayList();\r\n\r\n        hobbyList3.add(new Hobby( \"캠핑\"));\r\n        hobbyList3.add(new Hobby( \"바다\"));\r\n        hobbyList3.add(new Hobby( \"국내\"));\r\n        hobbyList3.add(new Hobby( \"해외\"));\r\n        hobbyList3.add(new Hobby( \"당일치기\"));\r\n        hobbyList3.add(new Hobby( \"배낭여행\"));\r\n        hobbyList3.add(new Hobby( \"익스트림\"));\r\n        hobbyList3.add(new Hobby( \"기타\"));\r\n\r\n        allHobbyList.add(hobbyList3);\r\n        ArrayList<Hobby> hobbyList4 = new ArrayList();\r\n\r\n        hobbyList4.add(new Hobby( \"전시\"));\r\n        hobbyList4.add(new Hobby( \"뮤지컬\"));\r\n        hobbyList4.add(new Hobby( \"영화\"));\r\n        hobbyList4.add(new Hobby( \"해외\"));\r\n        hobbyList4.add(new Hobby( \"콘서트\"));\r\n        hobbyList4.add(new Hobby( \"연극\"));\r\n        hobbyList4.add(new Hobby( \"오페라\"));\r\n        hobbyList4.add(new Hobby( \"연주회\"));\r\n        hobbyList4.add(new Hobby( \"오케스트라\"));\r\n        hobbyList4.add(new Hobby( \"기타\"));\r\n\r\n        allHobbyList.add(hobbyList4);\r\n\r\n        ArrayList<Hobby> hobbyList5 = new ArrayList();\r\n\r\n        hobbyList5.add(new Hobby( \"리본공예\"));\r\n        hobbyList5.add(new Hobby( \"비즈공예\"));\r\n        hobbyList5.add(new Hobby( \"도자기공예\"));\r\n        hobbyList5.add(new Hobby( \"넵킨공예\"));\r\n        hobbyList5.add(new Hobby( \"포크아트\"));\r\n        hobbyList5.add(new Hobby( \"북아트\"));\r\n        hobbyList5.add(new Hobby( \"클레이아트\"));\r\n        hobbyList5.add(new Hobby( \"가죽공예\"));\r\n        hobbyList5.add(new Hobby( \"유리공예\"));\r\n        hobbyList5.add(new Hobby( \"플라워아트\"));\r\n\r\n        allHobbyList.add(hobbyList5);\r\n\r\n        ArrayList<Hobby> hobbyList6 = new ArrayList();\r\n\r\n        hobbyList6.add(new Hobby( \"양식\"));\r\n        hobbyList6.add(new Hobby( \"한식\"));\r\n        hobbyList6.add(new Hobby( \"일식\"));\r\n        hobbyList6.add(new Hobby( \"중식\"));\r\n        hobbyList6.add(new Hobby( \"베이킹\"));\r\n        hobbyList6.add(new Hobby( \"설탕공예\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList6);\r\n\r\n        ArrayList<Hobby> hobbyList7 = new ArrayList();\r\n\r\n        hobbyList6.add(new Hobby( \"강아지\"));\r\n        hobbyList6.add(new Hobby( \"고양이\"));\r\n        hobbyList6.add(new Hobby( \"조류\"));\r\n        hobbyList6.add(new Hobby( \"햄스터\"));\r\n        hobbyList6.add(new Hobby( \"파충류\"));\r\n        hobbyList6.add(new Hobby( \"곤충\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList7);\r\n    }\r\n\r\n    //대분류 취미목록 데이터 입력\r\n    public void initializeData2()\r\n    {\r\n//        ArrayList<HobbyBig> hobbyBigList = new ArrayList();\r\n//        hobbyBigList.add(new HobbyBig( \"음악\"));\r\n//        hobbyBigList.add(new HobbyBig(\"스포츠\"));\r\n//        hobbyBigList.add(new HobbyBig(\"여행\"));\r\n//        hobbyBigList.add(new HobbyBig(\"문화\"));\r\n//        hobbyBigList.add(new HobbyBig(\"공예\"));\r\n//        hobbyBigList.add(new HobbyBig(\"요리\"));\r\n//        hobbyBigList.add(new HobbyBig(\"게임\"));\r\n//        hobbyBigList.add(new HobbyBig(\"팬모임\"));\r\n\r\n        HobbyBigList2.add(new HobbyBig( \"음악\"));\r\n        HobbyBigList2.add(new HobbyBig( \"스포츠\"));\r\n        HobbyBigList2.add(new HobbyBig( \"여행\"));\r\n        HobbyBigList2.add(new HobbyBig( \"문화\"));\r\n        HobbyBigList2.add(new HobbyBig( \"공예\"));\r\n        HobbyBigList2.add(new HobbyBig( \"요리\"));\r\n        HobbyBigList2.add(new HobbyBig( \"반려동물\"));\r\n\r\n    }\r\n}\r\n\r\n//\r\nclass HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder> {\r\n\r\n    private OnItemClick mCallback; //OnItemClick 인터페이스 객체\r\n    private ArrayList<Hobby> dataList;\r\n    private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);//클릭하면 색상변경//클릭 안하면 0 하면 1??\r\n    private ArrayList<Hobby> selectedList= new ArrayList<>(); //선택한 취미 값\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    public HorizontalAdapter(){}\r\n\r\n    public HorizontalAdapter(ArrayList<Hobby> data, OnItemClick listener)\r\n    {\r\n        this.dataList = data;\r\n        this.mCallback = listener;\r\n    }\r\n\r\n//    public interface OnItemClickListener{\r\n//        void onItemClick(View v, int position);\r\n//    }//어텝터 내에서 커스텀 리스너 인터페이스 정의\r\n\r\n\r\n    public class HorizontalViewHolder extends RecyclerView.ViewHolder{\r\n        protected TextView tv;\r\n        private ArrayList<String> selectData = null ;\r\n        private String selected=\"\";\r\n        int count=1;\r\n\r\n        //받아올 값\r\n        public void selectedItems(){\r\n            mCallback.onClick(tv.getText().toString());//tv를 클릭하면?\r\n        }\r\n\r\n        public HorizontalViewHolder(View view)\r\n        {\r\n            super(view);\r\n            tv = view.findViewById(R.id.btn_hbList_in);\r\n            //클릭하면 색상변경\r\n            view.setOnClickListener(new View.OnClickListener() {\r\n                @RequiresApi(api = Build.VERSION_CODES.O)\r\n                @SuppressLint(\"ResourceAsColor\")\r\n                @Override\r\n                public void onClick(View v) {\r\n                    int position = getAdapterPosition();\r\n\r\n                    Log.d(\"tv\",tv.getText().toString());\r\n                    selectedItems();\r\n\r\n\r\n\r\n                    if ( mSelectedItems.get(position, false) ){\r\n\r\n                        mSelectedItems.put(position, false);\r\n                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));\r\n\r\n                    } else {\r\n                        mSelectedItems.put(position, true);\r\n                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.Orange));\r\n                    }\r\n                    Log.d(\"test\", \"position = \" + position);\r\n\r\n                }\r\n            });\r\n\r\n        }\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)\r\n    {\r\n        View v = LayoutInflater\r\n                .from(viewGroup.getContext())\r\n                .inflate(R.layout.select_hobby2_grid_in2, null);\r\n\r\n\r\n\r\n\r\n        return new com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder(v);\r\n    }\r\n\r\n    @SuppressLint(\"ResourceAsColor\")\r\n    @Override\r\n    public void onBindViewHolder(com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder horizontalViewHolder, int position)\r\n    {\r\n//        horizontalViewHolder\r\n//                .image\r\n//                .setImageResource(dataList.get(position).getResourceID());\r\n        horizontalViewHolder\r\n                .tv\r\n                .setText(dataList.get(position).getHobbyname());\r\n\r\n        //클릭하면 색상 변경\r\n        if ( mSelectedItems.get(position, false) ){\r\n            horizontalViewHolder.itemView.setBackgroundColor(ActivityContext().getResources().getColor(R.color.gray));//선택했을 때\r\n        } else {\r\n            horizontalViewHolder.itemView.setBackgroundColor(MAGENTA);//기본, 선택 안했을 때\r\n        }\r\n\r\n    }\r\n\r\n    private Context ActivityContext() {\r\n        return null;\r\n    }\r\n\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return dataList.size();\r\n    }\r\n\r\n    public ArrayList<Hobby> getSelected(){\r\n\r\n        return selectedList;\r\n    }\r\n\r\n\r\n\r\n\r\n}\r\n\r\nclass VerticalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder>{\r\n\r\n    private OnItemClick mCallback;\r\n    private ArrayList<ArrayList<Hobby>> AllHobbyList;//전체 취미목록들을 2차원 배열에 넣어준다.\r\n    private Context context;\r\n    //test 취미목록 대분류 넣기\r\n    private ArrayList<HobbyBig> DataListBig;\r\n\r\n    //test\r\n    public VerticalAdapter(ArrayList<HobbyBig> data)\r\n    {\r\n        this.DataListBig = data;\r\n    }\r\n    //\r\n\r\n    public VerticalAdapter(Context context, ArrayList<ArrayList<Hobby>> data, ArrayList<HobbyBig> data2,OnItemClick listener)\r\n    {\r\n        this.mCallback =listener;\r\n        this.context = context;\r\n        this.AllHobbyList = data;\r\n        this.DataListBig = data2;//대분류\r\n    }\r\n    //VerticalViewHolder 맨 처음 10개의 뷰객체를 기억하고 있을(홀딩) 객체\r\n    public class VerticalViewHolder extends RecyclerView.ViewHolder{\r\n        protected RecyclerView recyclerView;\r\n        protected TextView textView;\r\n\r\n        public VerticalViewHolder(View view)\r\n        {\r\n            super(view);\r\n            textView = view.findViewById(R.id.tv_hobby);\r\n            this.recyclerView = (RecyclerView)view.findViewById(R.id.recyclerViewVertical);\r\n        }\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {\r\n        View v = LayoutInflater\r\n                .from(viewGroup.getContext())\r\n                .inflate(R.layout.select_hobby2_grid_in, null);\r\n        return new com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder(v);\r\n    }\r\n    //수직 RecyclerView의 데이터 항목은 앞서 구현한 수평 RecyclerView가 배치된다고 하였습니다.\r\n    // 그러기 위해 onBindViewHolder에서 HorizontalAdapter 객체를 생성\r\n    @Override\r\n    public void onBindViewHolder(@NonNull com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder verticalViewHolder, int position) {\r\n        com.cookandroid.withmetabbar.certify.HorizontalAdapter adapter = new com.cookandroid.withmetabbar.certify.HorizontalAdapter(AllHobbyList.get(position),mCallback);\r\n        //adapter.getSelected();\r\n        //현재 위치의 arrayList를 AllHobbyList로 받아서 adapter생성.\r\n\r\n        //대분류 배열 처리- textView에 넣기\r\n        verticalViewHolder\r\n                .textView\r\n                .setText(DataListBig.get(position).getHobbyBigname());\r\n\r\n        verticalViewHolder.recyclerView.setHasFixedSize(true);\r\n        verticalViewHolder.recyclerView.setLayoutManager(new LinearLayoutManager(context\r\n                , LinearLayoutManager.HORIZONTAL\r\n                ,false));\r\n        verticalViewHolder.recyclerView.setAdapter(adapter);\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return AllHobbyList.size();\r\n    }\r\n}\r\n\r\n\r\n//Adapter\r\nclass MyAdapter2 extends BaseAdapter{\r\n    Context context;\r\n    int layout;\r\n    String[] btnNames;\r\n    LayoutInflater inflater;\r\n    public MyAdapter2(Context c) {context=c;}\r\n\r\n    public MyAdapter2(Context context, int layout, String[] strings){\r\n        this.context = context;\r\n        this.layout = layout;\r\n        this.btnNames = strings;\r\n        inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getCount() {\r\n        //이미지배열의 크기를 return\r\n        return btnNames.length;\r\n    }\r\n\r\n    @Override\r\n    public Object getItem(int position) {\r\n        return btnNames[position];\r\n    }\r\n\r\n    @Override\r\n    public long getItemId(int position) {\r\n        return position;\r\n    }\r\n\r\n    @Override\r\n    public View getView(int position, View convertView, ViewGroup parent) {\r\n        //view전환\r\n        Button btn=null;\r\n        if (null != convertView) {\r\n            btn = (Button)convertView;\r\n        }\r\n\r\n        else {\r\n            //------------------------------------------------------------\r\n            // 버튼을 생성하고 그것의 이름을 정합니다.\r\n            btn = new Button(context);\r\n            btn.setText(btnNames[position]);\r\n\r\n            //------------------------------------------------------------\r\n            // 버튼 클릭에 대한 처리는 추후 구현 예정입니다.\r\n        }\r\n\r\n        return btn;\r\n\r\n\r\n        //imageview.setImageResource(img[position]); //데이터 베이스 배울 때 수정\r\n\r\n\r\n        /*\r\n        if (convertView==null)\r\n            convertView = inflater.inflate(layout, null);\r\n        ImageView iv = convertView.findViewById(R.id.imageView_sel_hb);\r\n        iv.setImageResource(img[position]);\r\n        return convertView;\r\n\r\n         */\r\n    }\r\n}\r\n\r\nfinal class  Varargs{\r\n    //String test2=\"\";\r\n    List<String> str = new ArrayList<String>();\r\n    //1차원 배열 생성\r\n    public void makeArray(String... strigs){\r\n\r\n        for (String s:strigs){\r\n            str.add(s);\r\n            //test2= test2+s;\r\n\r\n        }\r\n\r\n    }\r\n    //2차원배열 생성\r\n    public void makeArray2nds(String... strigs){\r\n\r\n        List<String> str2nd = new ArrayList<String>();\r\n\r\n        for (String s:strigs){\r\n            str2nd.add(s);\r\n        }\r\n\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/certify/FragmentSelectHobby2.java	(revision 8618c8b13abcc6c14249cbbe29f6cfcc7b1514a3)
++++ app/src/main/java/com/cookandroid/withmetabbar/certify/FragmentSelectHobby2.java	(date 1631725497820)
+@@ -406,6 +406,7 @@
+         private String selected="";
+         int count=1;
+ 
++
+         //받아올 값
+         public void selectedItems(){
+             mCallback.onClick(tv.getText().toString());//tv를 클릭하면?
+@@ -472,9 +473,9 @@
+ 
+         //클릭하면 색상 변경
+         if ( mSelectedItems.get(position, false) ){
+-            horizontalViewHolder.itemView.setBackgroundColor(ActivityContext().getResources().getColor(R.color.gray));//선택했을 때
++            horizontalViewHolder.itemView.setBackgroundColor(R.color.Orange);//선택했을 때
+         } else {
+-            horizontalViewHolder.itemView.setBackgroundColor(MAGENTA);//기본, 선택 안했을 때
++            horizontalViewHolder.itemView.setBackgroundColor(R.color.gray);//기본, 선택 안했을 때
+         }
+ 
+     }
+Index: .idea/runConfigurations.xml
+===================================================================
+--- .idea/runConfigurations.xml	(revision 8618c8b13abcc6c14249cbbe29f6cfcc7b1514a3)
++++ .idea/runConfigurations.xml	(revision 8618c8b13abcc6c14249cbbe29f6cfcc7b1514a3)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/java/com/cookandroid/withmetabbar/certify/HobbyBigAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.certify;\r\n\r\nimport android.content.Context;\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.util.SparseBooleanArray;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.cookandroid.withmetabbar.R;\r\nimport com.cookandroid.withmetabbar.model.HobbyBig;\r\nimport com.google.firebase.database.collection.LLRBNode;\r\n\r\nimport java.util.ArrayList;\r\n\r\nimport static android.graphics.Color.GRAY;\r\nimport static android.graphics.Color.MAGENTA;\r\nimport static android.graphics.Color.YELLOW;\r\n\r\nclass HobbyBigAdapter extends RecyclerView.Adapter<HobbyBigAdapter.HobbyBigViewHolder>{\r\n\r\n\r\n    //private ArrayList<ArrayList<Hobby>> AllHobbyList;//전체 취미목록들을 2차원 배열에 넣어준다.\r\n    private Context context;\r\n    //test 취미목록 대분류 넣기\r\n    private final ArrayList<HobbyBig> DataListBig;\r\n    private String selectedHobbyBig;\r\n    private final SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);//클릭하면 색상변경\r\n\r\n    //test\r\n    public HobbyBigAdapter(ArrayList<HobbyBig> data)\r\n    {\r\n        this.DataListBig = data;\r\n    }\r\n\r\n    public HobbyBigAdapter(Context context, ArrayList<HobbyBig> data2)\r\n    {\r\n        this.context = context;\r\n        //this.AllHobbyList = data;\r\n        this.DataListBig = data2;//대분류\r\n    }\r\n    //VerticalViewHolder 맨 처음 10개의 뷰객체를 기억하고 있을(홀딩) 객체\r\n    public class HobbyBigViewHolder extends RecyclerView.ViewHolder{\r\n        protected RecyclerView recyclerView;\r\n        protected TextView textView;\r\n\r\n        public HobbyBigViewHolder(View view)\r\n        {\r\n            super(view);\r\n            textView = view.findViewById(R.id.tv_select_hobbyBig);\r\n            this.recyclerView = (RecyclerView)view.findViewById(R.id.recyclerViewHobbyBig);\r\n\r\n            //클릭하면 색상변경\r\n            view.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View v) {\r\n                    int position = getAdapterPosition();\r\n\r\n                    if ( mSelectedItems.get(position, false) ){\r\n                        mSelectedItems.put(position, false);\r\n                        v.setBackgroundColor(GRAY);\r\n                    } else {\r\n                        mSelectedItems.put(position, true);\r\n                        v.setBackgroundColor(YELLOW);\r\n                        selectedHobbyBig =textView.getText().toString();\r\n                        Bundle bundle = new Bundle();\r\n                        bundle.putString(\"selectedHobbyBig\",selectedHobbyBig);\r\n                        FragmentSelectHobby fragmentSelectHobby= new FragmentSelectHobby();\r\n                        fragmentSelectHobby.setArguments(bundle);\r\n                    }\r\n                    Log.d(\"test\", \"position = \" + position);\r\n\r\n\r\n\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public HobbyBigViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {\r\n        View v = LayoutInflater\r\n                .from(viewGroup.getContext())\r\n                .inflate(R.layout.select_hobby_grid_in, null);\r\n        return new HobbyBigViewHolder(v);\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull HobbyBigViewHolder hobbyBigViewHolder, int position) {\r\n        hobbyBigViewHolder\r\n                .textView\r\n                .setText(DataListBig.get(position).getHobbyBigname());\r\n\r\n        //클릭하면 색상 변경\r\n        if ( mSelectedItems.get(position, false) ){\r\n            hobbyBigViewHolder.itemView.setBackgroundColor(Color.MAGENTA);//선택했을 때\r\n        } else {\r\n            hobbyBigViewHolder.itemView.setBackgroundColor(YELLOW);//기본, 선택 안했을 때\r\n        }\r\n\r\n        //대분류 배열 처리- textView에 넣기\r\n//        hobbyBigViewHolder\r\n//                .textView\r\n//                .setText(DataListBig.get(position).getHobbyBigname());\r\n//\r\n//        hobbyBigViewHolder.recyclerView.setHasFixedSize(true);\r\n//        hobbyBigViewHolder.recyclerView.setLayoutManager(new GridLayoutManager(context,3));\r\n\r\n        //verticalViewHolder.recyclerView.setAdapter(adapter);\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return DataListBig.size();\r\n    }\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/certify/HobbyBigAdapter.java	(revision 8618c8b13abcc6c14249cbbe29f6cfcc7b1514a3)
++++ app/src/main/java/com/cookandroid/withmetabbar/certify/HobbyBigAdapter.java	(date 1631726012361)
+@@ -11,6 +11,7 @@
+ import android.widget.TextView;
+ 
+ import androidx.annotation.NonNull;
++import androidx.core.content.ContextCompat;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+ import com.cookandroid.withmetabbar.R;
+@@ -64,10 +65,10 @@
+ 
+                     if ( mSelectedItems.get(position, false) ){
+                         mSelectedItems.put(position, false);
+-                        v.setBackgroundColor(GRAY);
++                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));
+                     } else {
+                         mSelectedItems.put(position, true);
+-                        v.setBackgroundColor(YELLOW);
++                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.Orange));
+                         selectedHobbyBig =textView.getText().toString();
+                         Bundle bundle = new Bundle();
+                         bundle.putString("selectedHobbyBig",selectedHobbyBig);
+@@ -100,9 +101,9 @@
+ 
+         //클릭하면 색상 변경
+         if ( mSelectedItems.get(position, false) ){
+-            hobbyBigViewHolder.itemView.setBackgroundColor(Color.MAGENTA);//선택했을 때
++            hobbyBigViewHolder.itemView.setBackgroundColor(YELLOW);//선택했을 때
+         } else {
+-            hobbyBigViewHolder.itemView.setBackgroundColor(YELLOW);//기본, 선택 안했을 때
++            hobbyBigViewHolder.itemView.setBackgroundColor(GRAY);//기본, 선택 안했을 때
+         }
+ 
+         //대분류 배열 처리- textView에 넣기
