@@ -33,7 +33,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -64,6 +66,9 @@ public class MainActivityHome extends Fragment {
 
     //2021-09-15 취미목록으로 필터링 구현
     private ArrayList<String> listUserHobby = new ArrayList<>(); //user의 hobby list
+
+    //2021-09-16 날짜로 필터링 구현
+    private Date selectDate;
 
 
 
@@ -107,6 +112,9 @@ public class MainActivityHome extends Fragment {
 //                arrayList.clear();
 //                arrayList = arrayList_copy;
 //                customAdapter.notifyDataSetChanged();
+
+                //test date로 검색
+                filterDateInMeetToRecyclerView();
 
             }
         });
@@ -379,6 +387,49 @@ public class MainActivityHome extends Fragment {
                     }
                 }
             }
+        }
+        customAdapter.notifyDataSetChanged();
+
+    }
+    // 유저가 선택한 취미카테고리인 모임정보만 보여준다.
+    private void filterDateInMeetToRecyclerView() {
+
+        arrayList.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
+
+        //selectDate = new Date(121,8,13); // 선택한 데이터 값.
+        //샘플 데이터 ( 입력받은 날짜 넣기)
+        selectDate = new Date();
+        //selectDate.setYear(2021);
+        selectDate.setYear(121);
+        selectDate.setMonth(8);
+        selectDate.setDate(14);
+
+        //방법 2 날짜 일치 확인을 위한 데이터 포멧 설정
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        String dateFormatSelect =simpleDateFormat.format(selectDate);//선택한 날짜 String 형 변수
+
+        for (int i=0;i<arrayList_copy.size();i++){// 전체 meet 데이터 중에서
+
+            String dateFormatMeet = simpleDateFormat.format(arrayList_copy.get(i).getMeetDate());//Meet의 날짜 String 형 변수
+
+
+            //방법 1. getMeetDate와 getMeetMonth, getMeetYar 가 모두 일치한다면
+//            if (arrayList_copy.get(i).getMeetDate().getYear().equals(selectDate.getYear())&(arrayList_copy.get(i).getMeetDate().getMonth().equals(selectDate.getMonth())
+//            &(arrayList_copy.get(i).getMeetDate().getDate().equals(selectDate.getDate())){
+//
+//                arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+//            }
+
+            //방법 2. 데이터포멧으로 바꾼후 바꾼 값이 같다면( String 형의 비교)
+            if (dateFormatMeet.equals(dateFormatSelect)){
+
+                if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
+                    arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                }
+            }
+
         }
         customAdapter.notifyDataSetChanged();
 
