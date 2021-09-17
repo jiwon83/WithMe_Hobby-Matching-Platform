@@ -1,7 +1,5 @@
 package com.cookandroid.withmetabbar;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -19,13 +16,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cookandroid.withmetabbar.certify.LoginStartFragment;
 import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
@@ -39,13 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 
@@ -67,10 +56,7 @@ public class MainActivityHome extends Fragment {
     private SearchAdapter searchAdapter;
     private EditText editSearch;//검색어를 입력할 Input창
     private ListView listView;//검색을 보여줄 리스변수
-    private Button btn_inter,btn_all,btn_time;
-    private DatePickerDialog datePickerDialog; //캘린더
-
-
+    private Button btn_inter,btn_all;
 
     //2021-08-16 검색기능 구현
     private List<String> list_search_recycle; //검색후에도 갱신될 검색창 데이터들
@@ -78,11 +64,6 @@ public class MainActivityHome extends Fragment {
 
     //2021-09-15 취미목록으로 필터링 구현
     private ArrayList<String> listUserHobby = new ArrayList<>(); //user의 hobby list
-
-
-
-
-
 
 
 
@@ -102,14 +83,10 @@ public class MainActivityHome extends Fragment {
 
 
 
-
-
         //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
         btn_inter = vGroup.findViewById(R.id.btn_inter);
         btn_all = vGroup.findViewById(R.id.btn_all);
-
-        btn_time = vGroup.findViewById(R.id.btn_time);//날짜별 채팅방 보기 버튼
 
         //취미목록으로 필터링 버튼
         btn_inter.setOnClickListener(new View.OnClickListener() {
@@ -137,10 +114,7 @@ public class MainActivityHome extends Fragment {
 
 
 
-
-
-
-            //2021-08-16 검색기능 구현
+        //2021-08-16 검색기능 구현
         list_search_recycle= new ArrayList<String>();
         arrayList_search_recycle= new ArrayList<String>();//리스트의 모든 데이터를 arraylist_search에 복사
 
@@ -255,36 +229,8 @@ public class MainActivityHome extends Fragment {
 
             }
         });
-
-
-        Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, month);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-            }
-        };
-
-        btn_time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-
-
-
-
-                return vGroup;
+        return vGroup;
     }
-
-
-
-
 
     //검색기능메서드
     private void searchInMeet(String searchText) {

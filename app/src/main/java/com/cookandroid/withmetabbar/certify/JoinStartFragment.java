@@ -50,10 +50,11 @@ import static android.content.ContentValues.TAG;
 public class JoinStartFragment extends Fragment {
 
     ArrayList<String> list = new ArrayList<>();
+    private Date meetDate;
 
 
     Button btn_join,btn_live;
-    private Date meetDate;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,6 +123,8 @@ public class JoinStartFragment extends Fragment {
                 myCalendar.set(Calendar.MONTH, month);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
+
+                meetDate=myCalendar.getTime();
             }
 
             private void updateLabel() {
@@ -194,6 +197,7 @@ public class JoinStartFragment extends Fragment {
                                     member.mName = etName.getText().toString().trim();
                                     member.nick =etNick.getText().toString().trim();
                                     member.mAge = Integer.parseInt(etAge.getText().toString());
+                                    member.mBirth=meetDate;
                                     //성별체크
                                     if (cb_male.isChecked()){
                                         member.mGen =1; //남자는 1

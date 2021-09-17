@@ -16,7 +16,9 @@ import com.bumptech.glide.Glide;
 import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
 import com.cookandroid.withmetabbar.model.Meet;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
@@ -45,7 +47,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 .load(arrayList.get(position).getImgUrl())
                 .into(holder.iv_meet);
         holder.tv_meetTitle.setText("모임명: "+ arrayList.get(position).getTitle());
-        holder.tv_meetDate.setText("시간: "+ arrayList.get(position).getMeetDate());
+
+        String myFormat = "yyyy년 MM월 dd일 HH:mm";    // 출력형식   2018/11/28
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
+        holder.tv_meetDate.setText("날짜: "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
+        //holder.tv_meetDate.setText("시간: "+ arrayList.get(position).getMeetDate());
+
         holder.tv_meetAge.setText("나이: "+ arrayList.get(position).getMeetAge());
         //성별
         if (arrayList.get(position).getMeetGen()==1){
