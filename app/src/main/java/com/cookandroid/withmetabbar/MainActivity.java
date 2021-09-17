@@ -1,6 +1,7 @@
 package com.cookandroid.withmetabbar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +12,16 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.cookandroid.withmetabbar.certify.CertifyStartFragment;
+import com.cookandroid.withmetabbar.certify.JoinStartFragment;
 import com.cookandroid.withmetabbar.certify.MainActivity2;
 import com.cookandroid.withmetabbar.model.Member;
 import com.cookandroid.withmetabbar.navigation.AlarmFragment;
@@ -52,6 +58,8 @@ public class MainActivity extends AppCompatActivity  {
     FragmentMyMeetHome fragmentMyMeetHome = new FragmentMyMeetHome(); //내 모임 보기 화면
 
     Toolbar tb;
+
+
 
 
 

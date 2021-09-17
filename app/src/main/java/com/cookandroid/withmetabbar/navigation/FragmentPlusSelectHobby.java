@@ -469,9 +469,9 @@ class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Horizonta
 
         //클릭하면 색상 변경
         if ( mSelectedItems.get(position, false) ){
-            horizontalViewHolder.itemView.setBackgroundColor(YELLOW);//선택했을 때
+            horizontalViewHolder.itemView.setBackgroundColor(R.color.Orange);//선택했을 때
         } else {
-            horizontalViewHolder.itemView.setBackgroundColor(WHITE);//기본, 선택 안했을 때
+            horizontalViewHolder.itemView.setBackgroundColor(R.color.gray);//기본, 선택 안했을 때
         }
 
     }

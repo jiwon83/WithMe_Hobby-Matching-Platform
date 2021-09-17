@@ -10,4 +10,6 @@
         <item>잘부탁드려요.</item>
         <item>재밌었습니다.</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
