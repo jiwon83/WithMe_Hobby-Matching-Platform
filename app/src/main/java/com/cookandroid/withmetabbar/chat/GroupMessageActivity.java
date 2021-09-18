@@ -58,7 +58,7 @@ public class GroupMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_message);
-        ListView listView = (ListView)findViewById(R.id.groupmessageactivity_listview);
+        ListView listView = findViewById(R.id.groupmessageactivity_listview);
         chatmacro.addAll(Arrays.asList(getResources().getStringArray(R.array.macro)));
         destinationRoom = getIntent().getStringExtra("destinationRoom");
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -70,7 +70,7 @@ public class GroupMessageActivity extends AppCompatActivity {
                     users.put(item.getKey(),item.getValue(Member.class));
                 }
                 init();
-                recyclerView = (RecyclerView)findViewById(R.id.groupmessageactivity_recyclerview);
+                recyclerView = findViewById(R.id.groupmessageactivity_recyclerview);
                 recyclerView.setAdapter(new GroupMessageRecyclerviewAdapter());
                 recyclerView.setLayoutManager(new LinearLayoutManager(GroupMessageActivity.this));
             }
@@ -82,7 +82,7 @@ public class GroupMessageActivity extends AppCompatActivity {
         });
     }
     void init(){
-        ListView listView = (ListView) findViewById(R.id.groupmessageactivity_listview);
+        ListView listView = findViewById(R.id.groupmessageactivity_listview);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -186,16 +186,16 @@ public class GroupMessageActivity extends AppCompatActivity {
             public GroupMessageViewHolder(View view) {
                 super(view);
 
-                textView_message = (TextView)view.findViewById(R.id.messageItem_textView_message);
-                textView_name = (TextView)view.findViewById(R.id.messageItem_textView_name);
-                imageView_profile = (ImageView)view.findViewById(R.id.messageItem_imageView_profile);
-                linearLayout_destination = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_destination);
-                linearLayout_main = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_main);
-                textView_timestamp = (TextView)view.findViewById(R.id.messageItem_textView_timestamp);
+                textView_message = view.findViewById(R.id.messageItem_textView_message);
+                textView_name = view.findViewById(R.id.messageItem_textView_name);
+                imageView_profile = view.findViewById(R.id.messageItem_imageView_profile);
+                linearLayout_destination = view.findViewById(R.id.messageItem_linearlayout_destination);
+                linearLayout_main = view.findViewById(R.id.messageItem_linearlayout_main);
+                textView_timestamp = view.findViewById(R.id.messageItem_textView_timestamp);
             }
         }
         private void setListViews() {
-            ListView listView = (ListView)findViewById(R.id.groupmessageactivity_listview);
+            ListView listView = findViewById(R.id.groupmessageactivity_listview);
             MacroAdapter macroAdapter = new MacroAdapter(getBaseContext(), chatmacro);
             listView.setAdapter(macroAdapter);
             listView.setItemChecked(0, true);
@@ -227,10 +227,10 @@ public class GroupMessageActivity extends AppCompatActivity {
             meetAge=getIntent().getIntExtra("meetAge",1);
             meetNumMember=getIntent().getIntExtra("meetNumMember",1);
 
-            button = (Button) findViewById(R.id.messageActivity_button);
-            editText = (EditText) findViewById(R.id.messageActivity_editText);
+            button = findViewById(R.id.messageActivity_button);
+            editText = findViewById(R.id.messageActivity_editText);
 
-            recyclerView = (RecyclerView) findViewById(R.id.messageActivity_recyclerciew);
+            recyclerView = findViewById(R.id.messageActivity_recyclerciew);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -424,12 +424,12 @@ public class GroupMessageActivity extends AppCompatActivity {
 
                 public MessageViewHolder(View view) {
                     super(view);
-                    textView_message = (TextView)view.findViewById(R.id.messageItem_textView_message);
-                    textView_name = (TextView)view.findViewById(R.id.messageItem_textView_name);
-                    imageView_profile = (ImageView)view.findViewById(R.id.messageItem_imageView_profile);
-                    linearLayout_destination = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_destination);
-                    linearLayout_main = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_main);
-                    textView_timestamp = (TextView)view.findViewById(R.id.messageItem_textView_timestamp);
+                    textView_message = view.findViewById(R.id.messageItem_textView_message);
+                    textView_name = view.findViewById(R.id.messageItem_textView_name);
+                    imageView_profile = view.findViewById(R.id.messageItem_imageView_profile);
+                    linearLayout_destination = view.findViewById(R.id.messageItem_linearlayout_destination);
+                    linearLayout_main = view.findViewById(R.id.messageItem_linearlayout_main);
+                    textView_timestamp = view.findViewById(R.id.messageItem_textView_timestamp);
                 }
             }
         }

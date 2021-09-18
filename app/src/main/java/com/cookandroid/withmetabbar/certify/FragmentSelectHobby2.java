@@ -377,8 +377,8 @@ class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabba
 
     private OnItemClick mCallback; //OnItemClick 인터페이스 객체
     private ArrayList<Hobby> dataList;
-    private SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);//클릭하면 색상변경//클릭 안하면 0 하면 1??
-    private ArrayList<Hobby> selectedList= new ArrayList<>(); //선택한 취미 값
+    private final SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);//클릭하면 색상변경//클릭 안하면 0 하면 1??
+    private final ArrayList<Hobby> selectedList= new ArrayList<>(); //선택한 취미 값
 
 
 
@@ -402,8 +402,8 @@ class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabba
 
     public class HorizontalViewHolder extends RecyclerView.ViewHolder{
         protected TextView tv;
-        private ArrayList<String> selectData = null ;
-        private String selected="";
+        private final ArrayList<String> selectData = null ;
+        private final String selected="";
         int count=1;
 
 
@@ -506,7 +506,7 @@ class VerticalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabbar.
     private ArrayList<ArrayList<Hobby>> AllHobbyList;//전체 취미목록들을 2차원 배열에 넣어준다.
     private Context context;
     //test 취미목록 대분류 넣기
-    private ArrayList<HobbyBig> DataListBig;
+    private final ArrayList<HobbyBig> DataListBig;
 
     //test
     public VerticalAdapter(ArrayList<HobbyBig> data)
@@ -531,7 +531,7 @@ class VerticalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabbar.
         {
             super(view);
             textView = view.findViewById(R.id.tv_hobby);
-            this.recyclerView = (RecyclerView)view.findViewById(R.id.recyclerViewVertical);
+            this.recyclerView = view.findViewById(R.id.recyclerViewVertical);
         }
     }
 

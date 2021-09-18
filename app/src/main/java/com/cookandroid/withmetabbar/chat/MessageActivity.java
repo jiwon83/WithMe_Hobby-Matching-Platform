@@ -56,10 +56,10 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         destinationUid = getIntent().getStringExtra("destinationUid");
-        button = (Button) findViewById(R.id.messageActivity_button);
-        editText = (EditText) findViewById(R.id.messageActivity_editText);
+        button = findViewById(R.id.messageActivity_button);
+        editText = findViewById(R.id.messageActivity_editText);
 
-        recyclerView = (RecyclerView) findViewById(R.id.messageActivity_recyclerciew);
+        recyclerView = findViewById(R.id.messageActivity_recyclerciew);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -242,12 +242,12 @@ public class MessageActivity extends AppCompatActivity {
 
             public MessageViewHolder(View view) {
                 super(view);
-                textView_message = (TextView)view.findViewById(R.id.messageItem_textView_message);
-                textView_name = (TextView)view.findViewById(R.id.messageItem_textView_name);
-                imageView_profile = (ImageView)view.findViewById(R.id.messageItem_imageView_profile);
-                linearLayout_destination = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_destination);
-                linearLayout_main = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_main);
-                textView_timestamp = (TextView)view.findViewById(R.id.messageItem_textView_timestamp);
+                textView_message = view.findViewById(R.id.messageItem_textView_message);
+                textView_name = view.findViewById(R.id.messageItem_textView_name);
+                imageView_profile = view.findViewById(R.id.messageItem_imageView_profile);
+                linearLayout_destination = view.findViewById(R.id.messageItem_linearlayout_destination);
+                linearLayout_main = view.findViewById(R.id.messageItem_linearlayout_main);
+                textView_timestamp = view.findViewById(R.id.messageItem_textView_timestamp);
             }
         }
     }

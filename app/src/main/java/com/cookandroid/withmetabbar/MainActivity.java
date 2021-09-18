@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
         //toolbar선언
-        Toolbar tb = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar tb = findViewById(R.id.my_toolbar);
         setSupportActionBar(tb);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼 생성
 

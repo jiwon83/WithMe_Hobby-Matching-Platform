@@ -122,7 +122,7 @@ public class MyPageFragment extends Fragment {
             }
         });
 
-        imageView = (ImageView)vGroup.findViewById(R.id.imagemy);
+        imageView = vGroup.findViewById(R.id.imagemy);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

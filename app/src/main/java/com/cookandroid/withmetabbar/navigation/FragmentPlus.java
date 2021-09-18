@@ -223,7 +223,7 @@ public class FragmentPlus extends Fragment {
 
 
 
-        imageView = (ImageView)vGroup.findViewById(R.id.imageView7);
+        imageView = vGroup.findViewById(R.id.imageView7);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

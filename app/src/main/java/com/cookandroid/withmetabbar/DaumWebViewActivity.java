@@ -31,8 +31,8 @@ public class DaumWebViewActivity extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.activity_daum_web_view, container, false);
 
-        daum_result = (TextView) vGroup.findViewById(R.id.daum_result);
-        daum_webView = (WebView) vGroup.findViewById(R.id.daum_webview);
+        daum_result = vGroup.findViewById(R.id.daum_result);
+        daum_webView = vGroup.findViewById(R.id.daum_webview);
 
 
         // WebView 초기화

@@ -55,7 +55,7 @@ class HobbyBigAdapter extends RecyclerView.Adapter<HobbyBigAdapter.HobbyBigViewH
         {
             super(view);
             textView = view.findViewById(R.id.tv_select_hobbyBig);
-            this.recyclerView = (RecyclerView)view.findViewById(R.id.recyclerViewHobbyBig);
+            this.recyclerView = view.findViewById(R.id.recyclerViewHobbyBig);
 
             //클릭하면 색상변경
             view.setOnClickListener(new View.OnClickListener() {

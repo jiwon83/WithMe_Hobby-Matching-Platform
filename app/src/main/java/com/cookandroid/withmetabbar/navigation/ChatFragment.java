@@ -46,7 +46,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_chat,container,false);
 
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.chatfragment_recyclerview);
+        RecyclerView recyclerView = view.findViewById(R.id.chatfragment_recyclerview);
         recyclerView.setAdapter(new ChatRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
 
@@ -161,10 +161,10 @@ public class ChatFragment extends Fragment {
             public CustomViewHolder(View view) {
                 super(view);
 
-                imageView = (ImageView)view.findViewById(R.id.chatitem_imageview);
-                textView_title = (TextView)view.findViewById(R.id.chatitem_textview_title);
-                textView_last_message = (TextView)view.findViewById(R.id.chatitem_textview_lastmessage);
-                textView_timestamp = (TextView)view.findViewById(R.id.chatitem_textview_timestamp);
+                imageView = view.findViewById(R.id.chatitem_imageview);
+                textView_title = view.findViewById(R.id.chatitem_textview_title);
+                textView_last_message = view.findViewById(R.id.chatitem_textview_lastmessage);
+                textView_timestamp = view.findViewById(R.id.chatitem_textview_timestamp);
             }
         }
     }
