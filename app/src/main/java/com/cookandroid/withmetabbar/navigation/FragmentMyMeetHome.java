@@ -159,8 +159,8 @@ public class FragmentMyMeetHome extends Fragment {
 
 
         //검색기능
-        editSearch=(EditText)vGroup.findViewById(R.id.editSearch);
-        listView=(ListView)vGroup.findViewById(R.id.listView);
+        editSearch= vGroup.findViewById(R.id.editSearch);
+        listView= vGroup.findViewById(R.id.listView);
 
 
         //arrayList_search.addAll(list_search); 궅이 필요 x 제거해도 된다.
