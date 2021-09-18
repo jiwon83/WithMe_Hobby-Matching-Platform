@@ -63,7 +63,6 @@ public class MainActivityHome extends Fragment {
     private ListView listView;//검색을 보여줄 리스변수
     private Button btn_inter,btn_all,btn_time;//캘린더
     private DatePickerDialog datePickerDialog;
-    private Date meetDate;
 
     //2021-08-16 검색기능 구현
     private List<String> list_search_recycle; //검색후에도 갱신될 검색창 데이터들
@@ -108,13 +107,14 @@ public class MainActivityHome extends Fragment {
                 myCalendar.set(Calendar.MONTH, month);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                meetDate = myCalendar.getTime();
+                selectDate = myCalendar.getTime();
+                filterDateInMeetToRecyclerView();
             }
         };
 
 
 
-
+        //달력클릭하면 날짜 검색
         btn_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +138,7 @@ public class MainActivityHome extends Fragment {
         btn_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filterDateInMeetToRecyclerView();
+
             }
         });
 
@@ -442,11 +442,11 @@ public class MainActivityHome extends Fragment {
 
         //selectDate = new Date(121,8,13); // 선택한 데이터 값.
         //샘플 데이터 ( 입력받은 날짜 넣기)
-        selectDate = new Date();
-        //selectDate.setYear(2021);
-        selectDate.setDate(14);
-        selectDate.setMonth(8);
-        selectDate.setYear(121);
+//        selectDate = new Date();
+//        //selectDate.setYear(2021);
+//        selectDate.setDate(14);
+//        selectDate.setMonth(8);
+//        selectDate.setYear(121);
 
 
         //방법 2 날짜 일치 확인을 위한 데이터 포멧 설정
