@@ -2,10 +2,13 @@ package com.cookandroid.withmetabbar.certify;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.certify.LoginStartFragment;
@@ -23,6 +26,18 @@ public class MainActivity2 extends AppCompatActivity {
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();//3
         transaction.replace(R.id.main_content2, loginStartFragment).commitAllowingStateLoss();//실제 프래그 먼트 전환하는 코드
+
+//        //만약 address값이 있다면 joinstratfragment로 전환
+//        try {
+//            Intent intent  = new Intent();
+//            if (intent.getExtras().getString("address") !=null){
+//                transaction.replace(R.id.main_content2, joinstartfragment).commitAllowingStateLoss();
+//
+//            }
+//        }catch (NullPointerException e){
+//
+//        }
+
     }
 
 

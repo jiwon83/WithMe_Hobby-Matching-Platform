@@ -35,9 +35,13 @@ public class DaumWebViewActivity extends Fragment {
         daum_webView = vGroup.findViewById(R.id.daum_webview);
 
 
+
         // WebView 초기화
         init_webView();
 
+
+//        AndroidBridge androidBridge = new AndroidBridge();
+//        androidBridge.setAddress();
 
         // 핸들러를 통한 JavaScript 이벤트 반응
         handler = new Handler();

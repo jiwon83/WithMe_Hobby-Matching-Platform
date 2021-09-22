@@ -21,7 +21,10 @@ import androidx.fragment.app.FragmentManager;
 
 import com.cookandroid.withmetabbar.DaumWebViewActivity;
 import com.cookandroid.withmetabbar.MainActivity;
+import com.cookandroid.withmetabbar.MainActivityWebView;
 import com.cookandroid.withmetabbar.R;
+import com.cookandroid.withmetabbar.WebViewActivity;
+import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
 import com.cookandroid.withmetabbar.model.Member;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,13 +47,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import android.content.Intent;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
+
 
 public class JoinStartFragment extends Fragment {
 
     ArrayList<String> list = new ArrayList<>();
     private Date meetDate;
+    private static final int MAIN_ACTIVITY_WEBVIEW = 10000;
 
 
     Button btn_join,btn_live;
@@ -60,6 +72,33 @@ public class JoinStartFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        switch(requestCode){
+
+            case MAIN_ACTIVITY_WEBVIEW:
+
+                if(resultCode == RESULT_OK){
+
+                    String data = intent.getExtras().getString("address");
+                    if (data != null){
+                        btn_live.setText(data);
+                        //address =data;
+
+
+                    }
+
+
+                }
+                break;
+
+        }
+
+    }
+
 
     @Nullable
     @Override
@@ -83,6 +122,9 @@ public class JoinStartFragment extends Fragment {
 
         Bundle bundle = getArguments();
 
+
+
+        //취미목록 setText
         try {
             if (bundle.getStringArrayList("hobby")!=null){
                 list = bundle.getStringArrayList("hobby");
@@ -100,17 +142,32 @@ public class JoinStartFragment extends Fragment {
             Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
         }
 
+        //주소 setText
+        try {
+            if (bundle.getString("address") !=null){
+                btn_live.setText(bundle.getString("address"));
+                Log.d("address",bundle.getString("address"));
+
+            }
+
+        }catch (Exception e){
+            Toast.makeText(getContext(),"address error",Toast.LENGTH_SHORT);
+        }
+
 
 
         btn_live.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DaumWebViewActivity daumWebViewActivity = new DaumWebViewActivity();
-                ((MainActivity2)getActivity()).replaceFragment(daumWebViewActivity);
-                //LivePlaceFragment livePlaceFragment= new LivePlaceFragment();
-                //((MainActivity2)getActivity()).replaceFragment(livePlaceFragment);
+
+                Intent i = new Intent(getContext(), MainActivityWebView.class);
+                startActivityForResult(i, MAIN_ACTIVITY_WEBVIEW);//requestcode 2000 전송
+
+
             }
         });
+
+
 
 
         //날짜 선택
@@ -282,6 +339,27 @@ public class JoinStartFragment extends Fragment {
         }
 
     }
+    //2021-09-19 주소검색
+//    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+//
+//        super.onActivityResult(requestCode, resultCode, intent);
+//
+//        switch(requestCode){
+//
+//            case SEARCH_ADDRESS_ACTIVITY:
+//
+//                if(resultCode == RESULT_OK){
+//
+//                    String data = intent.getExtras().getString("data");
+//                    if (data != null)
+//                        et_address.setText(data);
+//
+//                }
+//                break;
+//
+//        }
+//
+//    }
 
 
 }

@@ -106,6 +106,9 @@ public class FragmentPlus extends Fragment {
 
         Intent intent = new Intent();
 
+//        Intent intent2 = Intent.getIntent();
+//        intent2.getExtras(getActivity().getClass())
+
         Bundle bundle = getArguments();
         //uid=bundle.getString("uid");//null?
         uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
