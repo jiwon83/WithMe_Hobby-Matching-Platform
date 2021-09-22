@@ -17,7 +17,9 @@ public class Member {
     public int mDegree;//매너온도
     public String profileImageUrl;
     public ArrayList<String> hobbyCate = new ArrayList<>();
+    public String mPlace; //거주지역
     public Date mBirth;
+
 
     //2021.09.06
     public Map<String, Hobby> mHobbyList = new HashMap<>(); // member의 관심 취미 리스트
@@ -114,6 +116,14 @@ public class Member {
 
     public void setHobbyCate(ArrayList<String> hobbyCate) {
         this.hobbyCate = hobbyCate;
+    }
+
+    public String getmPlace() {
+        return mPlace;
+    }
+
+    public void setmPlace(String mPlace) {
+        this.mPlace = mPlace;
     }
 
     public Date getmBirth() {

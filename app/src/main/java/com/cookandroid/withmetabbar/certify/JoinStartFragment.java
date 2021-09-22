@@ -155,7 +155,7 @@ public class JoinStartFragment extends Fragment {
         }
 
 
-
+        //거주지역선택
         btn_live.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,6 +254,7 @@ public class JoinStartFragment extends Fragment {
                                     member.mName = etName.getText().toString().trim();
                                     member.nick =etNick.getText().toString().trim();
                                     member.mAge = Integer.parseInt(etAge.getText().toString());
+                                    member.mPlace = btn_live.getText().toString();
                                     member.mBirth=meetDate;
                                     //성별체크
                                     if (cb_male.isChecked()){

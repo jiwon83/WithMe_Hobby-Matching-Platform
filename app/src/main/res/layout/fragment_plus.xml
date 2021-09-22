@@ -339,7 +339,8 @@
                     android:gravity="center"
                     android:inputType="textPersonName"
                     android:layout_marginRight="20dp"
-                    android:text="" />
+                    android:text=""
+                    android:hint="클릭하세요."/>
 
             </LinearLayout>
 

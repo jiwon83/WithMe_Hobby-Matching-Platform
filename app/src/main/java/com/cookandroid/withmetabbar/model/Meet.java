@@ -13,6 +13,7 @@ public class Meet {
     public int meetAge;
     public int numMember;
     public int meetGen;//남 1, 여 2, 무관 0
+    public String place; //장소
     public String content;
     //public String hash;
     //public ArrayList<Hobby> hobbyCate;
@@ -115,6 +116,13 @@ public class Meet {
         this.meetGen = meetGen;
     }
 
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
 
     public ArrayList<String> getHobbyCate() {
         return hobbyCate;

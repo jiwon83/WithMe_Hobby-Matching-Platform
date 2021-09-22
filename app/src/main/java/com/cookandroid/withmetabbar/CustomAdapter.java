@@ -68,6 +68,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         }
         holder.tv_meetId.setText("모임아이디: "+ arrayList.get(position).getMeetId());
         holder.tv_numMember.setText("인원: "+ arrayList.get(position).getNumMember());
+        holder.tv_place.setText("위치: "+ arrayList.get(position).getPlace());
         holder.tv_content.setText("내용: "+ arrayList.get(position).getContent());
 
         //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성
@@ -95,7 +96,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_meet;
-        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_meetId, tv_numMember, tv_content, tv_meetGen;
+        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_meetId, tv_numMember, tv_content, tv_meetGen, tv_place;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,7 +108,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.tv_numMember=itemView.findViewById(R.id.tv_numMember);
             this.tv_content=itemView.findViewById(R.id.tv_content);
             this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);
-
+            this.tv_place=itemView.findViewById(R.id.tv_place);
 
         }
     }

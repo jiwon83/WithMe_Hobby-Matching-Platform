@@ -30,6 +30,8 @@ import androidx.fragment.app.FragmentManager;
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.MainActivityHome;
 import android.Manifest;
+
+import com.cookandroid.withmetabbar.MainActivityWebView;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.certify.FragmentSelectHobby2;
 import com.cookandroid.withmetabbar.certify.LivePlaceFragment;
@@ -77,6 +79,8 @@ public class FragmentPlus extends Fragment {
     private Date meetDate;
     private int meetDateInt;//int형 데이터
     ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열
+    private EditText et_locate;
+    private static final int MAIN_ACTIVITY_WEBVIEW = 20000; //웹뷰 액티비티 호출을 위한 코드
 
 
 
@@ -99,9 +103,11 @@ public class FragmentPlus extends Fragment {
         EditText etContent=vGroup.findViewById(R.id.etContent);
         EditText etHobby=vGroup.findViewById(R.id.etHobby);
         EditText et_date = vGroup.findViewById(R.id.Date);
+        et_locate =vGroup.findViewById(R.id.etLocate);
         CheckBox cb_male = vGroup.findViewById(R.id.check_male);
         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
+
 
 
         Intent intent = new Intent();
@@ -238,6 +244,16 @@ public class FragmentPlus extends Fragment {
 
             }
         });
+
+        //장소 검색하면 MainActivityWebView로 이동.
+        et_locate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), MainActivityWebView.class);
+                startActivityForResult(i, MAIN_ACTIVITY_WEBVIEW);//requestcode 2000 전송
+            }
+        });
+
         //버튼 누르면 데이터에 저장
         btnMeet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,6 +288,7 @@ public class FragmentPlus extends Fragment {
                         meet.imgUrl = file.toString();
                         meet.meetDate =meetDate;
                         meet.hobbyCate = new ArrayList<>();
+                        meet.place = et_locate.getText().toString();
 
                         int totalHobbyCount2 = list.size();
                         for (int index = 0; index < totalHobbyCount2; index++) {
@@ -364,6 +381,25 @@ public class FragmentPlus extends Fragment {
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getContext(), "사진 선택 취소", Toast.LENGTH_LONG).show();
             }
+        }
+        switch(requestCode){
+
+            case MAIN_ACTIVITY_WEBVIEW:
+
+                if(resultCode == RESULT_OK){
+
+                    String address = data.getExtras().getString("address");
+                    if (data != null){
+                        et_locate.setText(address);
+                        //address =data;
+
+
+                    }
+
+
+                }
+                break;
+
         }
     } //갤러리에서 사진 불러와서 넣기
 
