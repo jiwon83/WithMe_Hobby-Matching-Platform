@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
+import com.cookandroid.withmetabbar.chat.MessageActivity;
 import com.cookandroid.withmetabbar.model.ChatModel;
 import com.cookandroid.withmetabbar.model.Member;
 import com.google.firebase.auth.FirebaseAuth;
@@ -138,7 +139,7 @@ public class ChatFragment extends Fragment {
                         intent = new Intent(view.getContext(), GroupMessageActivity.class);
                         intent.putExtra("destinationRoom",keys.get(position));
                     }else {
-                        intent = new Intent(view.getContext(), GroupMessageActivity.MessageActivity.class);
+                        intent = new Intent(view.getContext(), MessageActivity.class);
                         intent.putExtra("destinationUid", destinationUsers.get(position));
                     }
                     ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);

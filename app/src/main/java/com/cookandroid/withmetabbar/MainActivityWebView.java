@@ -2,18 +2,11 @@ package com.cookandroid.withmetabbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.cookandroid.withmetabbar.certify.JoinStartFragment;
-import com.cookandroid.withmetabbar.certify.MainActivity2;
-import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
-
-import static android.app.Activity.RESULT_OK;
 
 public class MainActivityWebView extends AppCompatActivity {
 

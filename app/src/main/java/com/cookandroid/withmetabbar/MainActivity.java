@@ -41,6 +41,8 @@ import com.cookandroid.withmetabbar.toolbar.MainActivity4;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  {
+
+    private long lastTimeBackPressed; //액비티비종료구현
     //주석으로 test
 
     UserFragment userFragment= new UserFragment();
@@ -173,13 +175,6 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
-
-
-
-
-
-
     public void replaceFragment(Fragment fragment){
 //        getSupportFragmentManager().beginTransaction().replace(R.id.main_content2, fragment).commit();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -216,77 +211,25 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public void onBackPressed() {
 
-//        if (mOnkeybackPressedListener != null){
-//            mOnkeybackPressedListener.onBackKey();
-//
-//        }else {
-//            if (getSupportFragmentManager().getBackStackEntryCount()==0){
-//                //종료
-//            }else {
-//                super.onBackPressed();
-//            }
-//        }
-        Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-        startActivity(intent);
+        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
+
+            moveTaskToBack(true);						// 태스크를 백그라운드로 이동
+            finishAndRemoveTask();						// 액티비티 종료 + 태스크 리스트에서 지우기
+            android.os.Process.killProcess(android.os.Process.myPid());	// 앱 프로세스 종료
+            //finish();
+
+            return;
+        }
+        lastTimeBackPressed = System.currentTimeMillis();
+        Toast.makeText(this,"'뒤로' 버튼을 한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+
+
+//        Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+//        startActivity(intent);
         //super.onBackPressed();
     }
 
-    //뒤로가기 버튼을 뺏어올 리스너 등록
-//    public interface onKeyBackPressedListener{
-//        void onBackKey();
-//
-//    }
-//    private onKeyBackPressedListener mOnkeybackPressedListener;
-//    public void setOnKeyBackPressedListener (onKeyBackPressedListener listener){
-//        mOnkeybackPressedListener = listener;
-//    }
+
 
 }
-
-    /*
-
-    implements BottomNavigationView.OnNavigationItemSelectedListener
-
-
-    public void replaceFragment(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, fragment).commit();
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.action_home:
-                //DetailViewFragment detailViewFragment = null;
-                detailViewFragment = new DetailViewFragment();
-                this.replaceFragment(detailViewFragment);
-                //getSupportFragmentManager().beginTransaction().replace(R.id.main_content, detailViewFragment).commit();
-                return true;
-            case R.id.action_love:
-                //GridFragment gridFragment = null;
-                gridFragment = new GridFragment();
-                this.replaceFragment(gridFragment);
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_content, gridFragment).commit();
-                return true;
-
-            case R.id.action_plus:
-
-                return true;
-
-            case R.id.action_chatroom:
-                //AlarmFragment alarmFragment = null;
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_content, alarmFragment).commit();
-                return true;
-
-            case R.id.action_mypage:
-                //UserFragment userFragment = null;
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_content, userFragment).commit();
-                return true;
-            //break;
-        }
-
-        return false;
-    }
-
- */

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
+import com.cookandroid.withmetabbar.chat.MessageActivity;
 import com.cookandroid.withmetabbar.model.Meet;
 
 import java.text.SimpleDateFormat;
@@ -76,13 +77,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), GroupMessageActivity.MessageActivity.class);
+                Intent intent = new Intent(view.getContext(), MessageActivity.class);
                 intent.putExtra("destinationUid",arrayList.get(position).uid);
                 intent.putExtra("meetTitle",arrayList.get(position).title);//모임명
                 intent.putExtra("meetAge",arrayList.get(position).meetAge);//나이
                 intent.putExtra("meetNumMember",arrayList.get(position).numMember);//인원
                 ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(),R.anim.fromright,R.anim.toleft);
                 view.getContext().startActivity(intent,activityOptions.toBundle());
+
+//                Intent intent = null;
+//                if(chatModels.get(position).users.size() > 2){
+//                    intent = new Intent(view.getContext(), GroupMessageActivity.class);
+//                    intent.putExtra("destinationRoom",keys.get(position));
+//                }else {
+//                    intent = new Intent(view.getContext(), MessageActivity.class);
+//                    intent.putExtra("destinationUid", destinationUsers.get(position));
+//                }
+//                ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
+//                view.getContext().startActivity(intent, activityOptions.toBundle());
             }
         });
 
