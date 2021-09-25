@@ -1,5 +1,6 @@
 package com.cookandroid.withmetabbar.certify;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,13 +23,19 @@ import androidx.fragment.app.FragmentManager;
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.MainActivityWebView;
 import com.cookandroid.withmetabbar.R;
+import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,6 +61,7 @@ public class JoinStartFragment extends Fragment {
     ArrayList<String> list = new ArrayList<>();
     private Date meetDate;
     private static final int MAIN_ACTIVITY_WEBVIEW = 10000;
+    private AlertDialog dialog;
 
 
     Button btn_join,btn_live;
@@ -110,8 +118,83 @@ public class JoinStartFragment extends Fragment {
         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
         EditText et_Birth = vGroup.findViewById(R.id.etBirth);
         EditText etHobby =vGroup.findViewById(R.id.etHobby);
+        Button check_overlap= vGroup.findViewById(R.id.button_check);
 
         Bundle bundle = getArguments();
+
+        //id 중복확인
+        check_overlap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                        //ArrayList<Member> arrayList = new ArrayList<>();
+
+                        ArrayList<String> stringArrayList = new ArrayList<>();
+
+                        for (DataSnapshot dataSnapshott : snapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
+
+                            Member member = dataSnapshott.getValue(Member.class);
+
+                            stringArrayList.add(member.id);
+
+                            Log.d("stringArrayList", String.valueOf(stringArrayList));
+
+                            //arrayList.add(member); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
+
+
+
+                            //arrayList_copy.addAll(arrayList);//arrayList_copy에 복사
+
+                            //단어 검색
+                            //2021-08-16 검색기능 구현
+                            // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
+//                            if (meet.title!=null){
+//                                list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
+//                                //취미목록 검색 리스트에 넣기 2021-09-13
+//                                int totalHobbyCount2 = meet.hobbyCate.size();
+//                                for (int index = 0; index < totalHobbyCount2; index++) {
+//                                    list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
+//                                }
+//
+//                            }
+                        }
+                        for (int i=0; i<stringArrayList.size(); i++){
+
+                            if (etId.getText().toString().equals(stringArrayList.get(i))){
+
+                                Log.d("stringArrayList.get(i)",stringArrayList.get(i));
+                                Log.d("etId.getText().toString()",etId.getText().toString());
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                dialog = builder.setMessage("이미 존재하는 email입니다.")
+                                        .setNegativeButton("OK", null)
+                                        .create();
+                                dialog.show();
+                                return;
+                                //Toast.makeText(getContext(),"이미 존재하는 email입니다.",Toast.LENGTH_SHORT).show();//토스메세지 출력
+                                //etId.setText("");
+
+                            }
+                        }
+//                        String value = snapshot.getValue(String.class);
+//                        if(value!=null){
+//                            Toast.makeText(getContext(),"이미 존재하는 email입니다.",Toast.LENGTH_SHORT).show();//토스메세지 출력
+//                            etId.setText("");
+//                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+        });
 
 
 
@@ -246,7 +329,14 @@ public class JoinStartFragment extends Fragment {
                                             member.pw = etPw.getText().toString().trim();
                                             member.mName = etName.getText().toString().trim();
                                             member.nick =etNick.getText().toString().trim();
-                                            member.mAge = Integer.parseInt(etAge.getText().toString());
+                                            try {
+                                                if (Integer.parseInt(etAge.getText().toString())!=0){
+                                                    member.mAge = Integer.parseInt(etAge.getText().toString());
+                                                }
+
+                                            }catch (Exception e){
+
+                                            }
                                             member.mPlace = btn_live.getText().toString();
                                             member.mBirth=meetDate;
                                             //성별체크
@@ -263,6 +353,17 @@ public class JoinStartFragment extends Fragment {
                                             int totalHobbyCount2 = list.size();
                                             for (int index = 0; index < totalHobbyCount2; index++) {
                                                 member.hobbyCate.add(list.get(index));
+                                            }
+
+
+                                            //빈곳이 없는지 체크
+                                            if(member.id.equals("")||member.pw.equals("")||member.mName.equals("")||member.nick.equals("")||member.mAge==0||member.mPlace.equals("")){
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                dialog = builder.setMessage("Empty text exist")
+                                                        .setNegativeButton("OK", null)
+                                                        .create();
+                                                dialog.show();
+                                                return;
                                             }
 
 

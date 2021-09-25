@@ -44,7 +44,7 @@
                 android:textSize="15dp" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/button_check"
                 android:layout_width="90dp"
                 android:layout_height="40dp"
                 android:backgroundTint="@color/Orange"
