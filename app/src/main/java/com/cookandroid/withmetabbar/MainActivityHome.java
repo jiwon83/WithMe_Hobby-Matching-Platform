@@ -328,18 +328,9 @@ public class MainActivityHome extends Fragment {
             // 리스트의 모든 데이터를 검색
             for (int i=0;i<arrayList_copy.size();i++){
 
-                // arraylist_search의 모든 데이터에 입력받은 단어(searchText)가 포함되어 있으면 true를 반환
-                if(arrayList_copy.get(i).getTitle().toLowerCase().contains(searchText)){
-                    if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
-                        arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
-                        //검색한 값만 잘 들어온다.
-                        Log.d("arrayList_new", String.valueOf(arrayList));
-                        Log.d("size", String.valueOf(arrayList_copy.size()));//253??
-                    }
-                }
-                // 취미목록으로 검색클릭하면 recyclerview에 반영
-                for (int j=0; j<arrayList_copy.get(i).getHobbyCate().size(); j++){
-                    if(arrayList_copy.get(i).getHobbyCate().get(j).toLowerCase().contains(searchText)){
+                try {
+                    // arraylist_search의 모든 데이터에 입력받은 단어(searchText)가 포함되어 있으면 true를 반환
+                    if(arrayList_copy.get(i).getTitle().toLowerCase().contains(searchText)){
                         if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
                             arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
                             //검색한 값만 잘 들어온다.
@@ -347,7 +338,26 @@ public class MainActivityHome extends Fragment {
                             Log.d("size", String.valueOf(arrayList_copy.size()));//253??
                         }
                     }
+                }catch (NullPointerException exception){
+
                 }
+                try {
+                    // 취미목록으로 검색클릭하면 recyclerview에 반영
+                    for (int j=0; j<arrayList_copy.get(i).getHobbyCate().size(); j++){
+                        if(arrayList_copy.get(i).getHobbyCate().get(j).toLowerCase().contains(searchText)){
+                            if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
+                                arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                                //검색한 값만 잘 들어온다.
+                                Log.d("arrayList_new", String.valueOf(arrayList));
+                                Log.d("size", String.valueOf(arrayList_copy.size()));//253??
+                            }
+                        }
+                    }
+                }catch (NullPointerException exception){
+
+                }
+
+
 
             }//for
         }//else

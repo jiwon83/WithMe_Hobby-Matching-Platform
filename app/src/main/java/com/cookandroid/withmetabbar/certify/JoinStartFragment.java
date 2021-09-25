@@ -246,12 +246,7 @@ public class JoinStartFragment extends Fragment {
                                             member.pw = etPw.getText().toString().trim();
                                             member.mName = etName.getText().toString().trim();
                                             member.nick =etNick.getText().toString().trim();
-                                            try {
-                                                member.mAge = Integer.parseInt(etAge.getText().toString());
-
-                                            }catch (Exception e){
-                                                Toast.makeText(getContext(),"숫자를 입력하세요.",Toast.LENGTH_SHORT);
-                                            }
+                                            member.mAge = Integer.parseInt(etAge.getText().toString());
                                             member.mPlace = btn_live.getText().toString();
                                             member.mBirth=meetDate;
                                             //성별체크
