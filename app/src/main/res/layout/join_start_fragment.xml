@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:text="With Me 회원가입"
         android:textColor="@color/Orange"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:textSize="60px" />
 
     <LinearLayout
@@ -24,6 +24,33 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imagejoin"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="@dimen/myph_x"
+                android:layout_height="@dimen/myph_x"
+                android:src="@drawable/myph_x"/>
+
+
+
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:layout_weight="4"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
 
 
         <LinearLayout
@@ -35,9 +62,9 @@
 
             <EditText
                 android:id="@+id/etId"
-                android:layout_width="230dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:hint="아이디"
                 android:inputType="textPersonName"
@@ -45,10 +72,12 @@
 
             <Button
                 android:id="@+id/button_check"
-                android:layout_width="90dp"
-                android:layout_height="40dp"
-                android:backgroundTint="@color/Orange"
-                android:text="중복확인"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:backgroundTint="@color/yellow"
+                android:background="@color/yellow"
+                android:layout_marginLeft="5dp"
+                android:text="확인"
                 android:textSize="35px" />
 
 
@@ -62,9 +91,9 @@
 
             <EditText
                 android:id="@+id/etPw"
-                android:layout_width="230dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:hint="비밀번호"
                 android:inputType="textPersonName"
@@ -76,18 +105,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etName"
-                android:layout_width="170dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:hint="이름"
                 android:inputType="textPersonName"
                 android:textSize="40px" />
+
+        </LinearLayout>
+
             <RadioGroup
                 android:id="@+id/gender"
                 android:layout_width="match_parent"
@@ -98,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
              android:buttonTint="@color/yellow"
+                android:textSize="40px"
                 android:text="남" />
 
             <RadioButton
@@ -105,6 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/yellow"
+                android:textSize="40px"
                 android:text="여" />
 
             <RadioButton
@@ -112,8 +145,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/yellow"
+                android:textSize="40px"
                 android:text="무관" />
         </RadioGroup>
+
+        </LinearLayout>
+        </LinearLayout>
 
         </LinearLayout>
 
@@ -255,21 +292,31 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+    android:gravity="center"
+android:orientation="horizontal">
+
+
 
     <Button
             android:id="@+id/button6"
             android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
+            android:layout_height="40dp"
+          android:layout_gravity="center"
             android:backgroundTint="@color/Orange"
-            android:textSize="45px"
+            android:textSize="40px"
             android:gravity="center"
             android:text="가입하기"
             />
 
-
-
+</LinearLayout>
 
 </LinearLayout>
+
+
+
+

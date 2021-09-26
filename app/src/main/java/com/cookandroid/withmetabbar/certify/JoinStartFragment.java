@@ -3,6 +3,8 @@ package com.cookandroid.withmetabbar.certify;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.RadioGroup;
@@ -36,6 +39,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -56,6 +60,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
@@ -66,6 +71,11 @@ public class JoinStartFragment extends Fragment {
     private Date meetDate;
     private static final int MAIN_ACTIVITY_WEBVIEW = 10000;
     private AlertDialog dialog;
+    private final int GET_GALLERY_IMAGE = 200;//?무슨의미
+    private ImageView imageView, imageView7;
+    private Uri imageUri;//모임이미지
+    private MediaPlayer MP;
+
 
 
     Button btn_join,btn_live,btn_hobbys;
@@ -76,19 +86,29 @@ public class JoinStartFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+    //갤러리로 가는 법
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_GALLERY_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                imageView.setImageURI(data.getData());
+                imageUri = data.getData();
+                Log.d("갤러리에서 불러온 이미지 경로", String.valueOf(imageUri));
 
-        super.onActivityResult(requestCode, resultCode, intent);
-
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(getContext(), "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
+        }
         switch(requestCode){
 
             case MAIN_ACTIVITY_WEBVIEW:
 
                 if(resultCode == RESULT_OK){
 
-                    String data = intent.getExtras().getString("address");
+                    String address = data.getExtras().getString("address");
                     if (data != null){
-                        btn_live.setText(data);
+                        btn_live.setText(address);
                         //address =data;
 
 
@@ -99,8 +119,29 @@ public class JoinStartFragment extends Fragment {
                 break;
 
         }
+    } //갤러리에서 사진 불러와서 넣기
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    protected void onMainActivity(int requestCode, int resultCode, Intent data) {
+        if(requestCode == GET_GALLERY_IMAGE&&resultCode == RESULT_OK&&data !=
+                null && data.getData()!=null){
+            Uri selectedImageUri = data.getData();
+            imageView.setImageURI(selectedImageUri);
+        }
     }
+
 
 
     @Nullable
@@ -124,6 +165,8 @@ public class JoinStartFragment extends Fragment {
         EditText et_Birth = vGroup.findViewById(R.id.etBirth);
         Button check_overlap= vGroup.findViewById(R.id.button_check);
         RadioGroup gender = vGroup.findViewById(R.id.gender);
+
+        Intent intent = new Intent();
 
         //라디오 그룹 설정
 
@@ -203,6 +246,7 @@ public class JoinStartFragment extends Fragment {
 
             }
         });
+
 
 
 
@@ -411,6 +455,20 @@ public class JoinStartFragment extends Fragment {
             }//onclidk
         });
 
+
+        imageView = vGroup.findViewById(R.id.imagejoin);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, GET_GALLERY_IMAGE);
+
+
+            }
+        });
+
         return vGroup;
     }
 
@@ -477,6 +535,10 @@ public class JoinStartFragment extends Fragment {
 //        }
 //
 //    }
+
+
+
+
 
 
 }
