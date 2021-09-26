@@ -1,8 +1,9 @@
-package com.cookandroid.withmetabbar.navigation;
+package com.cookandroid.withmetabbar.chat;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
-import com.cookandroid.withmetabbar.chat.MessageActivity;
 import com.cookandroid.withmetabbar.model.ChatModel;
+import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,27 +40,33 @@ import java.util.TreeMap;
 
 public class ChatFragment extends Fragment {
     //채팅방목록
+    private ArrayList<String> destinationUsers = new ArrayList<>();
 
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_chat,container,false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.chatfragment_recyclerview);
+        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.chatfragment_recyclerview);
         recyclerView.setAdapter(new ChatRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+
+
 
         return view;
     }
 
     class ChatRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-        private final List<ChatModel> chatModels = new ArrayList<>();
-        private final List<String> keys = new ArrayList<>();
-        private final String uid;
-        private final ArrayList<String> destinationUsers = new ArrayList<>();
+        private List<ChatModel> chatModels = new ArrayList<>();
+        private List<String> keys = new ArrayList<>();
+        private String uid;
+        //private ArrayList<String> destinationUsers = new ArrayList<>();
+
+        private  List<String> meetUid = new ArrayList<>();//meetUid array
+
         public ChatRecyclerViewAdapter(){
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -95,30 +102,43 @@ public class ChatFragment extends Fragment {
             CustomViewHolder customViewHolder = (CustomViewHolder) holder;
             String destinationUid = null;
 
+            //채팅방에 있는 상대방 user set
             for (String user : chatModels.get(position).users.keySet()) {
                 if (!user.equals(uid)) {
                     destinationUid = user;
                     destinationUsers.add(destinationUid);
                 }
             }
-            FirebaseDatabase.getInstance().getReference().child("users").child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    Member member = snapshot.getValue(Member.class);
-                    Glide.with(customViewHolder.itemView.getContext())
-                            .load(member.profileImageUrl)
+            Log.d("destinationUsers", String.valueOf(destinationUsers));
+
+
+
+
+            Glide.with(customViewHolder.itemView.getContext())
+                            .load(chatModels.get(position).getMeetInfo().get("imgUrl"))
                             .apply(new RequestOptions().circleCrop())
                             .into(customViewHolder.imageView);
 
-                    customViewHolder.textView_title.setText(member.mName);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+                    customViewHolder.textView_title.setText(chatModels.get(position).meetInfo.get("title"));
+//            FirebaseDatabase.getInstance().getReference().child("users").child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                    Meet meet = snapshot.getValue(Meet.class);
+//                    Glide.with(customViewHolder.itemView.getContext())
+//                            .load(meet.)
+//                            .apply(new RequestOptions().circleCrop())
+//                            .into(customViewHolder.imageView);
+//
+//                    customViewHolder.textView_title.setText(meet.title);
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
             //메세지를 내림차순 정렬 후 마지막 메세지의 키 값을 가져온 후 출력
             Map<String, ChatModel.Comment> commentMap = new TreeMap<>(Collections.reverseOrder());
             commentMap.putAll(chatModels.get(position).comments);
@@ -135,11 +155,12 @@ public class ChatFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent = null;
-                    if(chatModels.get(position).users.size() > 2){
+                    if(chatModels.get(position).users.size() > 0){
                         intent = new Intent(view.getContext(), GroupMessageActivity.class);
                         intent.putExtra("destinationRoom",keys.get(position));
                     }else {
-                        intent = new Intent(view.getContext(), MessageActivity.class);
+                        //사실상 의미가 없음. 1:1 채팅기
+                        intent = new Intent(view.getContext(), GroupMessageActivity.class);
                         intent.putExtra("destinationUid", destinationUsers.get(position));
                     }
                     ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
@@ -162,12 +183,11 @@ public class ChatFragment extends Fragment {
             public CustomViewHolder(View view) {
                 super(view);
 
-                imageView = view.findViewById(R.id.chatitem_imageview);
-                textView_title = view.findViewById(R.id.chatitem_textview_title);
-                textView_last_message = view.findViewById(R.id.chatitem_textview_lastmessage);
-                textView_timestamp = view.findViewById(R.id.chatitem_textview_timestamp);
+                imageView = (ImageView)view.findViewById(R.id.chatitem_imageview);
+                textView_title = (TextView)view.findViewById(R.id.chatitem_textview_title);
+                textView_last_message = (TextView)view.findViewById(R.id.chatitem_textview_lastmessage);
+                textView_timestamp = (TextView)view.findViewById(R.id.chatitem_textview_timestamp);
             }
         }
     }
-
 }

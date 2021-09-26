@@ -1,18 +1,21 @@
 package com.cookandroid.withmetabbar.chat;
 
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,10 +24,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.ChatModel;
+import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,40 +42,60 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
 public class GroupMessageActivity extends AppCompatActivity {
     //그룹채팅
+
+    //Map<String, UserModel> users = new HashMap<>();
     Map<String, Member> users = new HashMap<>();
     String destinationRoom;
     String uid;
-    private final List<String> chatmacro = new ArrayList<>();
+    private List<String> chatmacro = new ArrayList<>();
     private ListView listView;
     private RecyclerView recyclerView;
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
+    private String destinationUid ;
 
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
     List<ChatModel.Comment> comments = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ChatModel chatModel = new ChatModel();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_message);
-        ListView listView = findViewById(R.id.groupmessageactivity_listview);
+        ListView listView = (ListView)findViewById(R.id.groupmessageactivity_listview);
         chatmacro.addAll(Arrays.asList(getResources().getStringArray(R.array.macro)));
         destinationRoom = getIntent().getStringExtra("destinationRoom");
+        destinationUid = getIntent().getStringExtra("destinationUid");
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //editText = (EditText)findViewById(R.id.groupmessageactivity_edittext);
+
+        //채팅방안에있는 user  받아오고
+        //그 유저의 데이터 검색
+
+
         FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot item: snapshot.getChildren()){
                     users.put(item.getKey(),item.getValue(Member.class));
+                    Log.d("users", String.valueOf(users));
+                    Log.d("item.getKey()",item.getKey());
+
+
                 }
+
                 init();
-                recyclerView = findViewById(R.id.groupmessageactivity_recyclerview);
+                recyclerView = (RecyclerView)findViewById(R.id.groupmessageactivity_recyclerview);
                 recyclerView.setAdapter(new GroupMessageRecyclerviewAdapter());
                 recyclerView.setLayoutManager(new LinearLayoutManager(GroupMessageActivity.this));
+
+
+
             }
 
             @Override
@@ -77,22 +103,23 @@ public class GroupMessageActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
     void init(){
-        ListView listView = findViewById(R.id.groupmessageactivity_listview);
+        ListView listView = (ListView) findViewById(R.id.groupmessageactivity_listview);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 comments.clear();
                 ChatModel.Comment comment = new ChatModel.Comment();
                 comment.uid = uid;
-                comment.message = chatmacro.get(position);
-                comment.timestamp = ServerValue.TIMESTAMP;
-                FirebaseDatabase.getInstance().getReference().child("chatrooms")
-                        .child(destinationRoom).child("comments").push()
-                        .setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                comment.message = chatmacro.get(position).toString();
+                comment.timestamp = ServerValue.TIMESTAMP; // 파이어베이스에서 제공하는 서버시간
+                FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        //sendGcm();
                         //editText.setText("");
                     }
                 });
@@ -101,19 +128,20 @@ public class GroupMessageActivity extends AppCompatActivity {
         });
 
     }
+
     class GroupMessageRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        public GroupMessageRecyclerviewAdapter(){
+        public GroupMessageRecyclerviewAdapter() {
             getMessageList();
         }
-        void getMessageList(){
 
+        void getMessageList() {
             FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("comments").addValueEventListener(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     comments.clear();
 
-                    for (DataSnapshot item : snapshot.getChildren()){
+                    for (DataSnapshot item : snapshot.getChildren()) {
                         comments.add(item.getValue(ChatModel.Comment.class));
                     }
                     notifyDataSetChanged(); // 리스트 갱신
@@ -135,6 +163,8 @@ public class GroupMessageActivity extends AppCompatActivity {
             return new GroupMessageViewHolder(view);
         }
 
+
+
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             GroupMessageViewHolder messageViewHolder = ((GroupMessageViewHolder)holder);
@@ -148,11 +178,16 @@ public class GroupMessageActivity extends AppCompatActivity {
                 messageViewHolder.linearLayout_main.setGravity(Gravity.RIGHT);
                 // 상대방이 보낸 메세지
             }else{
-                Glide.with(holder.itemView.getContext())
-                        .load(users.get(comments.get(position).uid).profileImageUrl)
-                        .apply(new RequestOptions().circleCrop())
-                        .into(messageViewHolder.imageView_profile);
+
+
+//                Glide.with(holder.itemView.getContext())
+//                        .load(users.get(comments.get(position).uid).profileImageUrl)
+//                        .apply(new RequestOptions().circleCrop())
+//                        .into(messageViewHolder.imageView_profile);
                 messageViewHolder.textView_name.setText(users.get(comments.get(position).uid).mName);
+                Log.d("usersRecyclerView", String.valueOf( comments.get(position).uid ));
+                Log.d("usersRecyclerView", String.valueOf( users.get(comments.get(position).uid) ));
+
                 messageViewHolder.linearLayout_destination.setVisibility(View.VISIBLE);
                 messageViewHolder.textView_message.setBackgroundResource(R.drawable.leftbubble);
                 messageViewHolder.textView_message.setText(comments.get(position).message);
@@ -183,16 +218,16 @@ public class GroupMessageActivity extends AppCompatActivity {
             public GroupMessageViewHolder(View view) {
                 super(view);
 
-                textView_message = view.findViewById(R.id.messageItem_textView_message);
-                textView_name = view.findViewById(R.id.messageItem_textView_name);
-                imageView_profile = view.findViewById(R.id.messageItem_imageView_profile);
-                linearLayout_destination = view.findViewById(R.id.messageItem_linearlayout_destination);
-                linearLayout_main = view.findViewById(R.id.messageItem_linearlayout_main);
-                textView_timestamp = view.findViewById(R.id.messageItem_textView_timestamp);
+                textView_message = (TextView)view.findViewById(R.id.messageItem_textView_message);
+                textView_name = (TextView)view.findViewById(R.id.messageItem_textView_name);
+                imageView_profile = (ImageView)view.findViewById(R.id.messageItem_imageView_profile);
+                linearLayout_destination = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_destination);
+                linearLayout_main = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_main);
+                textView_timestamp = (TextView)view.findViewById(R.id.messageItem_textView_timestamp);
             }
         }
         private void setListViews() {
-            ListView listView = findViewById(R.id.groupmessageactivity_listview);
+            ListView listView = (ListView)findViewById(R.id.groupmessageactivity_listview);
             MacroAdapter macroAdapter = new MacroAdapter(getBaseContext(), chatmacro);
             listView.setAdapter(macroAdapter);
             listView.setItemChecked(0, true);
@@ -200,7 +235,4 @@ public class GroupMessageActivity extends AppCompatActivity {
 
         }
     }
-
-
 }
-
