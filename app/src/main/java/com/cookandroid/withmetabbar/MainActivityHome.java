@@ -96,7 +96,6 @@ public class MainActivityHome extends Fragment {
         //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
         btn_inter = vGroup.findViewById(R.id.btn_inter);
-        btn_all =vGroup.findViewById(R.id.btn_all);
         btn_time = vGroup.findViewById(R.id.btn_time);
 
         Calendar myCalendar = Calendar.getInstance();
@@ -135,12 +134,12 @@ public class MainActivityHome extends Fragment {
             }
         });
 
-        btn_all.setOnClickListener(new View.OnClickListener() {
+        /*btn_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
 
         //전체모임보기
 //        btn_all.setOnClickListener(new View.OnClickListener() {

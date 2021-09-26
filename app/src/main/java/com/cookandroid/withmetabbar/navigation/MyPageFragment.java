@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment;
 import com.cookandroid.withmetabbar.CustomAdapter;
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.R;
+import com.cookandroid.withmetabbar.certify.JoinStartFragment;
+import com.cookandroid.withmetabbar.certify.MainActivity2;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,7 +46,7 @@ public class MyPageFragment extends Fragment {
 
 
     //private FragmentPagerAdapter fragmentPagerAdapter;//코인충전어뎁터
-    Button btn_charge, btn_ondo;
+    Button btn_charge, btn_ondo, btn_mygroup;
     ImageButton btn_block, btn_friends_invite;
 
     @Nullable
@@ -135,6 +137,13 @@ public class MyPageFragment extends Fragment {
             }
         });
         //버튼 누르면 데이터에 저장
+
+
+        //내가 만든 모임 화면으로 전환
+        //ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.mypage_fragment, container, false);
+
+
+
 
 
 

@@ -216,16 +216,16 @@
             android:id="@+id/intromodi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="개인정보"
+            android:text="내 모임"
             android:textSize="40px"
             android:layout_marginTop="13dp"
             android:textColor="@color/black"/>
         <Space
-            android:layout_width="260dp"
+            android:layout_width="270dp"
             android:layout_height="35dp"/>
 
         <ImageButton
-            android:id="@+id/btn_change"
+            android:id="@+id/btn_mygroup"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
@@ -253,7 +253,7 @@
             android:id="@+id/check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="본인인증"
+            android:text="개인정보"
             android:textSize="40px"
             android:layout_marginTop="13dp"
             android:textColor="@color/black"/>
@@ -416,7 +416,7 @@
             android:textSize="9dp" />
 
         <Space
-            android:layout_width="142dp"
+            android:layout_width="140dp"
             android:layout_height="35dp"/>
 
         <ImageButton
