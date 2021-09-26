@@ -97,18 +97,21 @@
                 android:id="@+id/check_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+             android:buttonTint="@color/yellow"
                 android:text="남" />
 
             <RadioButton
                 android:id="@+id/check_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/yellow"
                 android:text="여" />
 
             <RadioButton
                 android:id="@+id/checkNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/yellow"
                 android:text="무관" />
         </RadioGroup>
 
