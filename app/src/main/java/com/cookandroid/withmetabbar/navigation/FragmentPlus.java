@@ -167,22 +167,7 @@ public class FragmentPlus extends Fragment {
                 et_date.setText(sdf.format(myCalendar.getTime()));
                 DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");//필요x
 
-                //데이터 firebase저장위해 meetDate 변수에 대입
-                try {
-                    //meetDate=myCalendar.getTime(); //캘린더타입
-                    //meetDate.=myCalendar.get(Calendar.DAY_OF_MONTH);
 
-                    //meetDate.setYear(myCalendar.get(Calendar.YEAR));//년
-                    //meetDate.setMonth(myCalendar.get(Calendar.MONTH));//월
-                    //meetDate.setDate(myCalendar.get(Calendar.DAY_OF_MONTH));//일
-
-                    //meetDate=myCalendar.get(Calendar.YEAR);
-                    //meetDate=myCalendar.get(Calendar.DAY_OF_WEEK);
-
-                    Log.d("meetDate", String.valueOf(meetDate));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         };
 
@@ -291,7 +276,7 @@ public class FragmentPlus extends Fragment {
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
                         Meet meet = new Meet();
-                        //meet.mid =
+
                         meet.uid =uid; //uid정보 추가
                         meet.title = etTitle.getText().toString();
                         meet.meetAge = Integer.parseInt(etAge.getText().toString());
@@ -301,6 +286,7 @@ public class FragmentPlus extends Fragment {
                         meet.meetDate =meetDate;
                         meet.hobbyCate = new ArrayList<>();
                         meet.place = et_locate.getText().toString();
+
 
                         int totalHobbyCount2 = list.size();
                         for (int index = 0; index < totalHobbyCount2; index++) {
@@ -365,6 +351,10 @@ public class FragmentPlus extends Fragment {
                                 chatModel.meetInfo.put("meetUid",pushkey);
                                 chatModel.meetInfo.put("title", meet.title);
                                 chatModel.meetInfo.put("imgUrl", meet.imgUrl);
+                                chatModel.meetInfo.put("meetGen", String.valueOf(meet.meetGen));
+                                chatModel.meetInfo.put("meetAge", String.valueOf(meet.meetAge));
+                                chatModel.meetInfo.put("numMember", String.valueOf(meet.numMember));
+
 
                                 chatModel.users.put(uid, true);
 

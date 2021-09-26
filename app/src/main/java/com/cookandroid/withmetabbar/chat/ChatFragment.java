@@ -61,7 +61,7 @@ public class ChatFragment extends Fragment {
     class ChatRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         private List<ChatModel> chatModels = new ArrayList<>();
-        private List<String> keys = new ArrayList<>();
+        private List<String> keys = new ArrayList<>(); //chatroom의 key값을 담을 배열
         private String uid;
         //private ArrayList<String> destinationUsers = new ArrayList<>();
 
@@ -76,7 +76,7 @@ public class ChatFragment extends Fragment {
                     chatModels.clear();
                     for(DataSnapshot item : snapshot.getChildren()) {
                         chatModels.add(item.getValue(ChatModel.class));
-                        keys.add(item.getKey());
+                        keys.add(item.getKey());//chatroom 의 key 값 넣기
                     }
                     notifyDataSetChanged();
                 }

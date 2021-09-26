@@ -8,6 +8,7 @@ public class MeetInfo {
     //public Date meetDate;
     public int meetAge;
     public int numMember;
+    public int meetGen;
 
 
 
@@ -52,5 +53,13 @@ public class MeetInfo {
 
     public void setNumMember(int numMember) {
         this.numMember = numMember;
+    }
+
+    public int getMeetGen() {
+        return meetGen;
+    }
+
+    public void setMeetGen(int meetGen) {
+        this.meetGen = meetGen;
     }
 }

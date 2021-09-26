@@ -106,6 +106,7 @@ public class GroupMessageActivity extends AppCompatActivity {
 
 
     }
+    //메세지 입력
     void init(){
         ListView listView = (ListView) findViewById(R.id.groupmessageactivity_listview);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,6 +135,7 @@ public class GroupMessageActivity extends AppCompatActivity {
             getMessageList();
         }
 
+        //메세지 데이터 받아오기
         void getMessageList() {
             FirebaseDatabase.getInstance().getReference().child("chatrooms").child(destinationRoom).child("comments").addValueEventListener(new ValueEventListener() {
 

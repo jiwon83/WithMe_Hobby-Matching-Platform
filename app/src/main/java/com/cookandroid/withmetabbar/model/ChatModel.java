@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ChatModel {
 
+    public int userCount;
     public Map<String,Boolean> users = new HashMap<>(); // 채팅방 유저들
     public Map<String,String> meetInfo = new HashMap<>(); // 모임방 정보들
     public Map<String,Comment> comments = new HashMap<>(); // 채팅방 내용들

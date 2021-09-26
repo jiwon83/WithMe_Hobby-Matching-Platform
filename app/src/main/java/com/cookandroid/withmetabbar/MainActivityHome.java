@@ -1,6 +1,7 @@
 package com.cookandroid.withmetabbar;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -64,6 +65,7 @@ public class MainActivityHome extends Fragment {
     private Button btn_inter,btn_all,btn_time;//캘린더
     private DatePickerDialog datePickerDialog;
 
+
     //2021-08-16 검색기능 구현
     private List<String> list_search_recycle; //검색후에도 갱신될 검색창 데이터들
     private ArrayList<String> arrayList_search_recycle; //모든 검색창 데이터들
@@ -88,6 +90,8 @@ public class MainActivityHome extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();//Meet객체를 담을 어레이리스트 (어뎁터 쪽으로)
         arrayList_copy = new ArrayList<>();
+
+
 
 
 

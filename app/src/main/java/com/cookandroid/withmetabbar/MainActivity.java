@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ import com.cookandroid.withmetabbar.toolbar.MainActivity4;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  {
+
+    public static Context toast_context; //adapter에서 토스트 매시지를 띄우기 위한 변수
 
     private long lastTimeBackPressed; //액비티비종료구현
     //주석으로 test
@@ -60,6 +63,10 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //adpater 에서 토스트메시지
+        toast_context=this;
+
         setContentView(R.layout.activity_main);
         FragmentTransaction transaction = fragmentManager.beginTransaction();//트랜잭션 생성
         //FragmentTransaction.add(R.id.main_content, MyPageFragment.newInstance()).commit();//new
