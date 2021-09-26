@@ -38,8 +38,10 @@ import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.certify.FragmentSelectHobby2;
 import com.cookandroid.withmetabbar.certify.LivePlaceFragment;
 import com.cookandroid.withmetabbar.certify.MainActivity2;
+import com.cookandroid.withmetabbar.model.ChatModel;
 import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.Meet;
+import com.cookandroid.withmetabbar.model.MeetInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -55,6 +57,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -83,6 +87,11 @@ public class FragmentPlus extends Fragment {
     ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열
     private EditText et_locate;
     private static final int MAIN_ACTIVITY_WEBVIEW = 20000; //웹뷰 액티비티 호출을 위한 코드
+    //채팅방
+    private String meetUid;
+    private String destinationUid;
+    private String pushkey;
+
 
 
 
@@ -341,7 +350,29 @@ public class FragmentPlus extends Fragment {
 //                                    databaseReference2.push().setValue(new Hobby(list.get(index)));
 //                                }
 
-                                databaseReference2.push().setValue(meet);
+                                databaseReference2.push().setValue(meet);//user-meet 데이터 생성
+
+                                //chatrooms데이터 생성
+                                pushkey = key;
+                                String key = pushkey;
+                                ChatModel chatModel = new ChatModel();
+
+                                MeetInfo meetInfo = new MeetInfo();
+                                meetInfo.imgUrl=file.toString();
+                                meetInfo.title = meet.title;
+
+
+                                chatModel.meetInfo.put("meetUid",pushkey);
+                                chatModel.meetInfo.put("title", meet.title);
+                                chatModel.meetInfo.put("imgUrl", meet.imgUrl);
+
+                                chatModel.users.put(uid, true);
+
+
+                                Map<String,Object> map = new HashMap<>();
+                                map.put("mid", key);
+                                FirebaseDatabase.getInstance().getReference().child("meet").child(pushkey).updateChildren(map);//채틸방 경
+                                FirebaseDatabase.getInstance().getReference().child("chatrooms").child(pushkey).setValue(chatModel);
 
 
 

@@ -14,17 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
-import com.cookandroid.withmetabbar.chat.MessageActivity;
+import com.cookandroid.withmetabbar.model.ChatModel;
 import com.cookandroid.withmetabbar.model.Meet;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
     private final ArrayList<com.cookandroid.withmetabbar.model.Meet> arrayList;
     private final Context context;
+
+    String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();//채팅방 구현
 
     public CustomAdapter(ArrayList<Meet> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -51,7 +58,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         String myFormat = "yyyy년 MM월 dd일 HH:mm";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
-        holder.tv_meetDate.setText("날짜: "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
+        try{
+            holder.tv_meetDate.setText("날짜: "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
+        }catch (Exception e){
+
+        }
+
         //holder.tv_meetDate.setText("시간: "+ arrayList.get(position).getMeetDate());
 
         holder.tv_meetAge.setText("나이: "+ arrayList.get(position).getMeetAge());
@@ -77,13 +89,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MessageActivity.class);
-                intent.putExtra("destinationUid",arrayList.get(position).uid);
-                intent.putExtra("meetTitle",arrayList.get(position).title);//모임명
-                intent.putExtra("meetAge",arrayList.get(position).meetAge);//나이
-                intent.putExtra("meetNumMember",arrayList.get(position).numMember);//인원
+                Map<String,Object> map = new HashMap<>();
+                map.put(myUid,true);
+
+                Intent intent = new Intent (view.getContext(), GroupMessageActivity.class);
+                FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid)
+                        .child("users").updateChildren(map);
+                //destinationUsers = map.get();
+                intent.putExtra("destinationRoom",arrayList.get(position).mid);
+
                 ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(),R.anim.fromright,R.anim.toleft);
                 view.getContext().startActivity(intent,activityOptions.toBundle());
+
+
+                //다이아로그 띄우고
+                //채팅방으로 입장
+//                Intent intent = new Intent(view.getContext(), MessageActivity.class);
+//                intent.putExtra("destinationUid",arrayList.get(position).uid);
+//                intent.putExtra("meetTitle",arrayList.get(position).title);//모임명
+//                intent.putExtra("meetAge",arrayList.get(position).meetAge);//나이
+//                intent.putExtra("meetNumMember",arrayList.get(position).numMember);//인원
+//                ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(),R.anim.fromright,R.anim.toleft);
+//                view.getContext().startActivity(intent,activityOptions.toBundle());
 
 //                Intent intent = null;
 //                if(chatModels.get(position).users.size() > 2){

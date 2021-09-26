@@ -47,7 +47,7 @@ public class MessageActivity extends AppCompatActivity {
     private String uid;
     private String chatRoomUid;
     private RecyclerView recyclerView;
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH:mm");
     private Member destinationUserModel;
 
     @Override
@@ -56,10 +56,10 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         destinationUid = getIntent().getStringExtra("destinationUid");
-        button = findViewById(R.id.messageActivity_button);
-        editText = findViewById(R.id.messageActivity_editText);
+        button = (Button) findViewById(R.id.messageActivity_button);
+        editText = (EditText) findViewById(R.id.messageActivity_editText);
 
-        recyclerView = findViewById(R.id.messageActivity_recyclerciew);
+        recyclerView = (RecyclerView) findViewById(R.id.messageActivity_recyclerciew);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,20 +67,11 @@ public class MessageActivity extends AppCompatActivity {
                 chatModel.users.put(uid, true);
                 chatModel.users.put(destinationUid, true);
 
-                if (chatRoomUid == null) {
-                    button.setEnabled(false);
-                    FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            checkChatRoom();
-                        }
-                    });
-                } else {
                     ChatModel.Comment comment = new ChatModel.Comment();
                     comment.uid = uid;
                     comment.message = editText.getText().toString();
                     comment.timestamp = ServerValue.TIMESTAMP; // 파이어베이스에서 제공하는 서버시간
-                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("chatroom").child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             //sendGcm();
@@ -89,7 +80,7 @@ public class MessageActivity extends AppCompatActivity {
                     });
 
                 }
-            }
+
         });
         checkChatRoom();
     }
@@ -123,17 +114,17 @@ public class MessageActivity extends AppCompatActivity {
     }*/
 
     void checkChatRoom() { // 방의 중복 체크
-        FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/" + uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("meetinfo/" + true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()) {
                     ChatModel chatModel = item.getValue(ChatModel.class);
-                    if (chatModel.users.containsKey(destinationUid) && chatModel.users.size() == 2){
+                    //if (chatModel.users.containsKey(destinationUid) && chatModel.users.size() == 2){
                         chatRoomUid = item.getKey();
                         button.setEnabled(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
                         recyclerView.setAdapter(new RecyclerViewAdapter());
-                    }
+                    //}
                 }
             }
 
@@ -166,7 +157,7 @@ public class MessageActivity extends AppCompatActivity {
         }
         void getMessageList(){
 
-            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("chatroom").child("comments").addValueEventListener(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -242,12 +233,12 @@ public class MessageActivity extends AppCompatActivity {
 
             public MessageViewHolder(View view) {
                 super(view);
-                textView_message = view.findViewById(R.id.messageItem_textView_message);
-                textView_name = view.findViewById(R.id.messageItem_textView_name);
-                imageView_profile = view.findViewById(R.id.messageItem_imageView_profile);
-                linearLayout_destination = view.findViewById(R.id.messageItem_linearlayout_destination);
-                linearLayout_main = view.findViewById(R.id.messageItem_linearlayout_main);
-                textView_timestamp = view.findViewById(R.id.messageItem_textView_timestamp);
+                textView_message = (TextView)view.findViewById(R.id.messageItem_textView_message);
+                textView_name = (TextView)view.findViewById(R.id.messageItem_textView_name);
+                imageView_profile = (ImageView)view.findViewById(R.id.messageItem_imageView_profile);
+                linearLayout_destination = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_destination);
+                linearLayout_main = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_main);
+                textView_timestamp = (TextView)view.findViewById(R.id.messageItem_textView_timestamp);
             }
         }
     }

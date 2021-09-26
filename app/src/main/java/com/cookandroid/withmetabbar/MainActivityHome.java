@@ -384,8 +384,8 @@ public class MainActivityHome extends Fragment {
 
                 listUserHobby = member.getHobbyCate(); //listUserHobby에 유저의 취미값 받아오기
 
-                Log.d("listUserHobby", String.valueOf(listUserHobby.get(0)));
-                Log.d("listUserHobbysize1", String.valueOf(listUserHobby.size()));
+                //Log.d("listUserHobby", String.valueOf(listUserHobby.get(0)));
+                //Log.d("listUserHobbysize1", String.valueOf(listUserHobby.size()));
 //                //Log.d("memberInput", String.valueOf(member.mName));
 //                int totalHobbyCount2 = list.size();
 //                for (int index = 0; index < totalHobbyCount2; index++) {

@@ -15,6 +15,7 @@ public class Meet {
     public int meetGen;//남 1, 여 2, 무관 0
     public String place; //장소
     public String content;
+
     //public String hash;
     //public ArrayList<Hobby> hobbyCate;
     public ArrayList<String> hobbyCate = new ArrayList<>();
