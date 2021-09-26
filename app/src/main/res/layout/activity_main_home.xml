@@ -65,7 +65,7 @@
                     android:background="@color/Orange"
                     android:backgroundTint="@color/Orange"
                     android:layout_marginTop="5dp"
-                    android:textSize="13dp"
+                    android:textSize="35px"
                     android:text="관심취미"/>
 
 
@@ -78,7 +78,7 @@
                     android:background="@color/Orange"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:textSize="13dp"
+                    android:textSize="35px"
                     android:text="모두보기"/>
 
                 <Button

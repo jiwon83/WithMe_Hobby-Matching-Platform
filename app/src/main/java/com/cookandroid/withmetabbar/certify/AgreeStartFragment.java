@@ -29,8 +29,8 @@ public class AgreeStartFragment extends Fragment {
         btn_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CertifyStartFragment certifyStartFragment= new CertifyStartFragment();
-                ((MainActivity2)getActivity()).replaceFragment(certifyStartFragment);
+                JoinStartFragment joinStartFragment= new JoinStartFragment();
+                ((MainActivity2)getActivity()).replaceFragment(joinStartFragment);
             }
         });
 

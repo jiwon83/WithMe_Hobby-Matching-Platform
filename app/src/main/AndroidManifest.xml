@@ -31,7 +31,7 @@
         </activity>
         <activity android:name=".toolbar.MainActivity3"/>
         <activity android:name=".toolbar.MainActivity4"/>
-        <activity android:name=".chat.GroupMessageActivity$MessageActivity"/>
+
         <activity android:name=".chat.MessageActivity"/>
         <activity android:name=".certify.MainActivity2">
             <intent-filter>

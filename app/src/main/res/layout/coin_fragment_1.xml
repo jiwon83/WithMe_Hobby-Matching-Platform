@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
                     android:layout_marginLeft="10dp"
-                    android:textSize="16dp"
+                    android:textSize="45px"
                     android:textColor="@color/black"
                     android:text="1000P" />
 
@@ -47,6 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
                     android:layout_marginLeft="10dp"
+                    android:textSize="40px"
                     android:text="1,000원" />
 
                 <Button
@@ -55,7 +56,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginTop="35dp"
-                    android:textSize="12dp"
+                    android:textSize="35px"
                     android:backgroundTint="@color/Orange"
                     android:text="충전하기" />
             </LinearLayout>
@@ -79,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
                     android:layout_marginLeft="10dp"
-                    android:textSize="16dp"
+                    android:textSize="45px"
                     android:textColor="@color/black"
                     android:text="3900P" />
 
@@ -89,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
                     android:layout_marginLeft="10dp"
+                    android:textSize="40px"
                     android:text="3,900원" />
 
                 <Button
@@ -97,7 +99,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginTop="35dp"
-                    android:textSize="12dp"
+                    android:textSize="35px"
                     android:backgroundTint="@color/Orange"
                     android:text="충전하기" />
             </LinearLayout>
@@ -122,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="10dp"
-                    android:textSize="16dp"
+                    android:textSize="45px"
                     android:textColor="@color/black"
                     android:text="5900P" />
 
@@ -132,6 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="10dp"
+                    android:textSize="40px"
                     android:text="5,900원" />
 
                 <Button
@@ -140,7 +143,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginTop="25dp"
-                    android:textSize="12dp"
+                    android:textSize="35px"
                     android:backgroundTint="@color/Orange"
                     android:text="충전하기" />
             </LinearLayout>
@@ -164,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="10dp"
-                    android:textSize="16dp"
+                    android:textSize="45px"
                     android:textColor="@color/black"
                     android:text="11000P" />
 
@@ -174,6 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="10dp"
+                    android:textSize="40px"
                     android:text="11,000원" />
 
                 <Button
@@ -182,7 +186,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="45dp"
                     android:layout_marginTop="25dp"
-                    android:textSize="12dp"
+                    android:textSize="35px"
                     android:backgroundTint="@color/Orange"
                     android:text="충전하기" />
             </LinearLayout>
@@ -207,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="5dp"
-                    android:textSize="16dp"
+                    android:textSize="45px"
                     android:textColor="@color/black"
                     android:text="35000P" />
 
@@ -217,6 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="10dp"
+                    android:textSize="40px"
                     android:text="35,000원" />
 
                 <Button
@@ -225,7 +230,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="45dp"
                     android:layout_marginTop="25dp"
-                    android:textSize="12dp"
+                    android:textSize="35px"
                     android:backgroundTint="@color/Orange"
                     android:text="충전하기" />
             </LinearLayout>
@@ -247,11 +252,11 @@
                     android:id="@+id/textCoin6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
                     android:layout_marginLeft="5dp"
-                    android:textSize="16dp"
+                    android:layout_marginTop="25dp"
+                    android:text="59000P"
                     android:textColor="@color/black"
-                    android:text="59000P" />
+                    android:textSize="45px" />
 
                 <TextView
                     android:id="@+id/textWon6"
@@ -259,6 +264,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="10dp"
+                    android:textSize="40px"
                     android:text="57,000원" />
 
                 <Button
@@ -267,7 +273,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="45dp"
                     android:layout_marginTop="25dp"
-                    android:textSize="12dp"
+                    android:textSize="35px"
                     android:backgroundTint="@color/Orange"
                     android:text="충전하기" />
             </LinearLayout>

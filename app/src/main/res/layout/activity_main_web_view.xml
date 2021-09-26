@@ -12,14 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_address"
-        android:hint="hint_address">
+        android:textSize="60px"
+        android:hint="주소검색">
 
     </EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_address_detail"
-        android:hint="hint_address_detail">
+        android:textSize="60px"
+        android:hint="상세주소 입력">
 
     </EditText>
 
@@ -27,6 +29,8 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:backgroundTint="@color/Orange"
         android:text="확인">
 
     </Button>

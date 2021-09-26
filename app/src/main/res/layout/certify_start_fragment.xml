@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:layout_marginBottom="20dp"
-        android:textSize="20dp"
+        android:textSize="60px"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/Orange"
         android:text="전화번호 인증" />
 
     <LinearLayout
@@ -32,6 +32,7 @@
             android:ems="11"
             android:inputType="textPersonName"
             android:layout_marginLeft="20dp"
+            android:textSize="40px"
             android:hint="전화번호 입력"/>
 
         <Button
@@ -42,6 +43,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/Orange"
+            android:textSize="40px"
             android:text="인증" />
 
     </LinearLayout>
@@ -54,6 +56,7 @@
         android:inputType="textPersonName"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+        android:textSize="40px"
         android:hint="인증번호 입력"
         />
 
@@ -63,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="18dp"
+        android:textSize="40px"
         android:backgroundTint="@color/Orange"
         android:text="확인" />
 

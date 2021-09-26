@@ -16,7 +16,7 @@
         android:text="With Me 회원가입"
         android:textColor="@color/Orange"
         android:layout_marginTop="40dp"
-        android:textSize="25dp" />
+        android:textSize="60px" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,8 +29,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <EditText
@@ -41,7 +41,7 @@
                 android:ems="10"
                 android:hint="아이디"
                 android:inputType="textPersonName"
-                android:textSize="15dp" />
+                android:textSize="40px" />
 
             <Button
                 android:id="@+id/button_check"
@@ -49,7 +49,7 @@
                 android:layout_height="40dp"
                 android:backgroundTint="@color/Orange"
                 android:text="중복확인"
-                android:textSize="12dp" />
+                android:textSize="35px" />
 
 
         </LinearLayout>
@@ -66,11 +66,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
                 android:ems="10"
-                android:hint="비밀번호(6자리 이상)"
+                android:hint="비밀번호"
                 android:inputType="textPersonName"
-                android:textSize="15dp" />
-
-
+                android:textSize="40px" />
 
 
         </LinearLayout>
@@ -87,28 +85,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:textSize="15dp"
                 android:hint="이름"
-                />
-
-            <CheckBox
+                android:inputType="textPersonName"
+                android:textSize="40px" />
+            <RadioGroup
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <RadioButton
                 android:id="@+id/check_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="남" />
-            <CheckBox
+
+            <RadioButton
                 android:id="@+id/check_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="여" />
-            <CheckBox
+
+            <RadioButton
                 android:id="@+id/checkNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="무관" />
+        </RadioGroup>
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,15 +122,15 @@
             android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etNick"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:hint="닉네임"
-            android:inputType="textPersonName"
-            android:textSize="15dp" />
+            <EditText
+                android:id="@+id/etNick"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:ems="10"
+                android:hint="닉네임"
+                android:inputType="textPersonName"
+                android:textSize="40px" />
         </LinearLayout>
 
         <LinearLayout
@@ -154,15 +160,15 @@
             android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etAge"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="15dp"
-            android:hint="나이" />
+            <EditText
+                android:id="@+id/etAge"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:ems="10"
+                android:hint="나이"
+                android:inputType="textPersonName"
+                android:textSize="40px" />
 
         </LinearLayout>
 
@@ -178,12 +184,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:textSize="15dp"
-                android:hint="휴대폰번호" />
+                android:hint="휴대폰번호"
+                android:inputType="phone"
+                android:maxLength="13"
+                android:textSize="40px" />
 
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_hobbys"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/gray"
+                android:gravity="center_vertical"
+                android:hint="취미 선택"
+                android:textSize="40px" />
+
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,54 +219,49 @@
             android:orientation="horizontal">
 
 
-
-            <EditText
-                android:id="@+id/etHobby"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textSize="15dp"
-                android:layout_marginLeft="20dp"
-                android:hint="취미분야" />
-
-        </LinearLayout>
-
-
-
         <Button
             android:id="@+id/btn_live"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
-
             android:backgroundTint="@color/gray"
-            android:textSize="16dp"
             android:gravity="center_vertical"
             android:hint="거주지역 선택"
-            />
+            android:layout_marginLeft="20dp"
+            android:textSize="40px" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
         <Button
             android:id="@+id/button4"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/gray"
-            android:textSize="16dp"
             android:gravity="center_vertical"
             android:hint="관심지역 선택"
-            />
+            android:layout_marginLeft="20dp"
+            android:textSize="40px" />
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
-        <Button
+    <Button
             android:id="@+id/button6"
             android:layout_width="200dp"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/Orange"
-            android:textSize="18dp"
+            android:textSize="45px"
             android:gravity="center"
             android:text="가입하기"
             />

@@ -21,7 +21,7 @@
             android:text="친구를 With Me 해보세요"
             android:textColor="@color/Orange"
             android:layout_marginTop="40dp"
-            android:textSize="20dp" />
+            android:textSize="50px" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16dp"
+                android:textSize="40px"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:text="산기대엄홍길" />
@@ -50,7 +50,7 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginLeft="50dp"
                 android:backgroundTint="@color/Orange"
-                android:textSize="14dp"
+                android:textSize="35px"
                 android:text="초대" />
         </LinearLayout>
 
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16dp"
+                android:textSize="40px"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:text="아이디" />
@@ -81,7 +81,7 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginLeft="50dp"
                 android:backgroundTint="@color/Orange"
-                android:textSize="14dp"
+                android:textSize="35px"
                 android:text="초대" />
         </LinearLayout>
         <LinearLayout
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16dp"
+                android:textSize="40px"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:text="아이디" />
@@ -111,7 +111,7 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginLeft="50dp"
                 android:backgroundTint="@color/Orange"
-                android:textSize="14dp"
+                android:textSize="35px"
                 android:text="초대" />
         </LinearLayout>
 
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16dp"
+                android:textSize="40px"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:text="아이디" />
@@ -142,7 +142,7 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginLeft="50dp"
                 android:backgroundTint="@color/Orange"
-                android:textSize="14dp"
+                android:textSize="35px"
                 android:text="초대" />
         </LinearLayout>
 
@@ -161,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="16dp"
+                android:textSize="40px"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:text="아이디" />
@@ -173,7 +173,7 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginLeft="50dp"
                 android:backgroundTint="@color/Orange"
-                android:textSize="14dp"
+                android:textSize="35px"
                 android:text="초대" />
         </LinearLayout>
     </LinearLayout>

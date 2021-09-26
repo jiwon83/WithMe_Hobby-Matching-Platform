@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginLeft="10dp"
-                    android:textSize="15dp"
+                    android:textSize="40px"
                     android:text="미션 참여하고 포인트 받기" />
 
                 <Button
@@ -47,7 +47,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="40dp"
-                    android:textSize="12dp"
+                    android:textSize="35px"
                     android:backgroundTint="@color/Orange"
                     android:text="미션참여" />
             </LinearLayout>
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginLeft="12dp"
-                    android:textSize="15dp"
+                    android:textSize="40px"
                     android:text="영상 시청하고 포인트 받기" />
 
                 <Button
@@ -80,7 +80,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="38dp"
-                    android:textSize="12dp"
+                    android:textSize="35px"
                     android:backgroundTint="@color/Orange"
                     android:text="시청하기" />
             </LinearLayout>

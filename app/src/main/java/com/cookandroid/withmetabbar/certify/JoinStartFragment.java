@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
+import android.widget.RadioGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,7 +68,7 @@ public class JoinStartFragment extends Fragment {
     private AlertDialog dialog;
 
 
-    Button btn_join,btn_live;
+    Button btn_join,btn_live,btn_hobbys;
 
 
     @Override
@@ -113,14 +117,18 @@ public class JoinStartFragment extends Fragment {
         EditText etPhoneNum = vGroup.findViewById(R.id.etPhoneNum);
         btn_join= vGroup.findViewById(R.id.button6);
         btn_live = vGroup.findViewById(R.id.btn_live);
-        CheckBox cb_male = vGroup.findViewById(R.id.check_male);
-        CheckBox cb_female = vGroup.findViewById(R.id.check_female);
-        CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
+        btn_hobbys = vGroup.findViewById(R.id.btn_hobbys);
+        RadioButton cb_male = vGroup.findViewById(R.id.check_male);
+        RadioButton  cb_female = vGroup.findViewById(R.id.check_female);
+        RadioButton cb_no = vGroup.findViewById(R.id.checkNo);
         EditText et_Birth = vGroup.findViewById(R.id.etBirth);
-        EditText etHobby =vGroup.findViewById(R.id.etHobby);
         Button check_overlap= vGroup.findViewById(R.id.button_check);
+        RadioGroup gender = vGroup.findViewById(R.id.gender);
+
+        //라디오 그룹 설정
 
         Bundle bundle = getArguments();
+        etPhoneNum.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         //id 중복확인
         check_overlap.setOnClickListener(new View.OnClickListener() {
@@ -198,6 +206,9 @@ public class JoinStartFragment extends Fragment {
 
 
 
+
+
+
         //취미목록 setText
         try {
             if (bundle.getStringArrayList("hobby")!=null){
@@ -206,11 +217,11 @@ public class JoinStartFragment extends Fragment {
                 //받은 취미 목록을 차례로 tv에 입력
                 int totalHobbyCount = list.size();
                 for (int index =0; index<totalHobbyCount; index++){
-                    etHobby.append(","+list.get(index));
+                    btn_hobbys.append(","+list.get(index));
                 }
 
             }else {
-                etHobby.setText("클릭하세요.");
+                btn_hobbys.setText("클릭하세요.");
             }
         }catch (NullPointerException e){
             Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
@@ -240,6 +251,8 @@ public class JoinStartFragment extends Fragment {
 
             }
         });
+
+
 
 
 
@@ -291,7 +304,7 @@ public class JoinStartFragment extends Fragment {
             }
         });
         //취미선택
-        etHobby.setOnClickListener(new View.OnClickListener() {
+        btn_hobbys.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -339,6 +352,7 @@ public class JoinStartFragment extends Fragment {
                                             }
                                             member.mPlace = btn_live.getText().toString();
                                             member.mBirth=meetDate;
+
                                             //성별체크
                                             if (cb_male.isChecked()){
                                                 member.mGen =1; //남자는 1
@@ -350,6 +364,8 @@ public class JoinStartFragment extends Fragment {
                                                 Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
                                             }
 
+
+                                            //
                                             int totalHobbyCount2 = list.size();
                                             for (int index = 0; index < totalHobbyCount2; index++) {
                                                 member.hobbyCate.add(list.get(index));

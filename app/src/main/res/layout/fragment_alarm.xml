@@ -29,7 +29,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
-            android:textSize="13dp"
+            android:textSize="30px"
             android:text="산기대엄홍길님이 등산가자구 모임에 초대하셨습니다." />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
-            android:textSize="10dp"
+            android:textSize="30px"
             android:text="15분전" />
 
     </LinearLayout>
@@ -81,8 +81,8 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
-            android:textSize="10dp"
-            android:text="35분전" />
+            android:text="35분전"
+            android:textSize="30px" />
     </LinearLayout>
 
 

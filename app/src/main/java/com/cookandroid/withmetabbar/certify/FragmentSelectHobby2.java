@@ -114,7 +114,7 @@ public class FragmentSelectHobby2 extends Fragment implements OnItemClick {
         progressBar=vg.findViewById(R.id.progressBar);
         btnFinish= vg.findViewById(R.id.selectHobby2_btn_next);
 
-        tv.setText("취미 분야 선택 : "+selectedHobbyBig);
+        tv.setText("취미 분야 선택");
 
 
         //Log.d("selectedHobbyBig",selectedHobbyBig);
@@ -289,10 +289,11 @@ public class FragmentSelectHobby2 extends Fragment implements OnItemClick {
         hobbyList3.add(new Hobby( "해외"));
         hobbyList3.add(new Hobby( "당일치기"));
         hobbyList3.add(new Hobby( "배낭여행"));
-        hobbyList3.add(new Hobby( "익스트림"));
+        hobbyList3.add(new Hobby( "차박"));
         hobbyList3.add(new Hobby( "기타"));
 
         allHobbyList.add(hobbyList3);
+
         ArrayList<Hobby> hobbyList4 = new ArrayList();
 
         hobbyList4.add(new Hobby( "전시"));
@@ -337,15 +338,54 @@ public class FragmentSelectHobby2 extends Fragment implements OnItemClick {
 
         ArrayList<Hobby> hobbyList7 = new ArrayList();
 
-        hobbyList6.add(new Hobby( "강아지"));
-        hobbyList6.add(new Hobby( "고양이"));
-        hobbyList6.add(new Hobby( "조류"));
-        hobbyList6.add(new Hobby( "햄스터"));
-        hobbyList6.add(new Hobby( "파충류"));
-        hobbyList6.add(new Hobby( "곤충"));
+        hobbyList7.add(new Hobby( "강아지"));
+        hobbyList7.add(new Hobby( "고양이"));
+        hobbyList7.add(new Hobby( "조류"));
+        hobbyList7.add(new Hobby( "햄스터"));
+        hobbyList7.add(new Hobby( "파충류"));
+        hobbyList7.add(new Hobby( "곤충"));
 
 
         allHobbyList.add(hobbyList7);
+
+        ArrayList<Hobby> hobbyList8 = new ArrayList();
+
+        hobbyList8.add(new Hobby( "서핑"));
+        hobbyList8.add(new Hobby( "패들보드"));
+        hobbyList8.add(new Hobby( "카약"));
+        hobbyList8.add(new Hobby( "번지점프"));
+        hobbyList8.add(new Hobby( "패러글라이딩"));
+        hobbyList8.add(new Hobby( "스카이다이빙"));
+        hobbyList8.add(new Hobby( "스킨스쿠버"));
+
+
+        allHobbyList.add(hobbyList8);
+
+        ArrayList<Hobby> hobbyList9 = new ArrayList();
+
+        hobbyList9.add(new Hobby( "피아노"));
+        hobbyList9.add(new Hobby( "기타"));
+        hobbyList9.add(new Hobby( "드럼"));
+        hobbyList9.add(new Hobby( "베이스"));
+        hobbyList9.add(new Hobby( "바이올린"));
+        hobbyList9.add(new Hobby( "첼로"));
+        hobbyList9.add(new Hobby( "작곡"));
+
+
+        allHobbyList.add(hobbyList9);
+
+        ArrayList<Hobby> hobbyList10 = new ArrayList();
+
+        hobbyList10.add(new Hobby( "중국어"));
+        hobbyList10.add(new Hobby( "일본어"));
+        hobbyList10.add(new Hobby( "불어"));
+        hobbyList10.add(new Hobby( "스페인어"));
+        hobbyList10.add(new Hobby( "토플"));
+        hobbyList10.add(new Hobby( "토익"));
+        hobbyList10.add(new Hobby( "코딩"));
+
+
+        allHobbyList.add(hobbyList10);
     }
 
     //대분류 취미목록 데이터 입력
@@ -368,6 +408,9 @@ public class FragmentSelectHobby2 extends Fragment implements OnItemClick {
         HobbyBigList2.add(new HobbyBig( "공예"));
         HobbyBigList2.add(new HobbyBig( "요리"));
         HobbyBigList2.add(new HobbyBig( "반려동물"));
+        HobbyBigList2.add(new HobbyBig( "익스트림"));
+        HobbyBigList2.add(new HobbyBig( "악기연주"));
+        HobbyBigList2.add(new HobbyBig( "공부"));
 
     }
 }
@@ -424,13 +467,13 @@ class HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabba
                 public void onClick(View v) {
                     int position = getAdapterPosition();
 
+
                     Log.d("tv",tv.getText().toString());
                     selectedItems();
 
 
 
                     if ( mSelectedItems.get(position, false) ){
-
                         mSelectedItems.put(position, false);
                         v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));
 

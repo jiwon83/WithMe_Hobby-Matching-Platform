@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="45px"
             android:text="모임명:" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="16dp"
+            android:textSize="45px"
             android:text="등산가보자구" />
     </LinearLayout>
 
@@ -55,7 +55,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="40px"
             android:text="마운틴뷰" />
 
 
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="330dp"
-            android:textSize="15dp"
+            android:textSize="40px"
             android:text="36.5" />
     </LinearLayout>
 
@@ -106,7 +106,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="40px"
             android:text="등산조아" />
 
 
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="330dp"
             android:textSize="15dp"
-            android:text="36.5" />
+            android:text="40px" />
 
     </LinearLayout>
 
@@ -145,7 +145,7 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/Orange"
         android:layout_marginTop="20dp"
-        android:textSize="18dp"
+        android:textSize="45px"
         android:text="확인" />
 
 

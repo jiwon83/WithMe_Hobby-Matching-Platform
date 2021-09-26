@@ -58,11 +58,11 @@
                         android:layout_weight="1"
                         android:text="방 제목"
                         android:layout_marginLeft="20dp"
-                        android:textSize="16dp" />
+                        android:textSize="40px" />
 
                     <EditText
                         android:id="@+id/etTitle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
@@ -90,11 +90,11 @@
                     android:layout_weight="1"
                     android:text="해시태그"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16dp" />
+                    android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etHash"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -119,17 +119,19 @@
                     android:layout_weight="1"
                     android:text="취미분야"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16dp" />
+                    android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etHobby"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
                     android:inputType="textPersonName"
                     android:layout_marginRight="20dp"
+                    android:textSize="40px"
+                    android:hint="클릭하세요"
                     android:text="" />
 
             </LinearLayout>
@@ -148,7 +150,7 @@
                     android:layout_weight="1"
                     android:text="날짜/시간"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16dp" />
+                    android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/Date"
@@ -162,7 +164,7 @@
                     android:gravity="center"
                     android:inputType="textPersonName"
                     android:layout_marginRight="20dp"
-                    android:textSize="16dp"
+                    android:textSize="40px"
                     android:text="Date" />
 
                 <EditText
@@ -177,7 +179,7 @@
                     android:gravity="center"
                     android:inputType="textPersonName"
                     android:layout_marginRight="20dp"
-                    android:textSize="16dp"
+                    android:textSize="40px"
                     android:text="Time" />
 
             </LinearLayout>
@@ -196,11 +198,11 @@
                     android:layout_weight="1"
                     android:text="나이"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16dp" />
+                    android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etMeetAge"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -226,17 +228,18 @@
                     android:layout_weight="1"
                     android:text="모집인원"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16dp" />
+                    android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etNumMem"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:layout_marginRight="20dp"
+                    android:maxLength="2"
                     android:text="" />
 
             </LinearLayout>
@@ -253,12 +256,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:text="성별"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16dp" />
+                    android:textSize="40px" />
 
-                <CheckBox
+                <RadioGroup
+                    android:id="@+id/gender_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:orientation="horizontal">
+
+                <RadioButton
                     android:id="@+id/check_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -266,21 +275,23 @@
                     android:buttonTint="@color/yellow"
                     android:text="여" />
 
-                <CheckBox
+                <RadioButton
                     android:id="@+id/check_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:buttonTint="@color/yellow"
+                    android:layout_weight="1"
                     android:text="남" />
 
-                <CheckBox
+                <RadioButton
                     android:id="@+id/checkNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:buttonTint="@color/yellow"
+                    android:layout_weight="1"
                     android:text="상관없음" />
+
+                </RadioGroup>
 
 
             </LinearLayout>
@@ -299,11 +310,11 @@
                     android:layout_weight="1"
                     android:text="설명"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16dp" />
+                    android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etContent"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -328,11 +339,11 @@
                     android:layout_weight="1"
                     android:text="장소"
                     android:layout_marginLeft="20dp"
-                    android:textSize="16dp" />
+                    android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etLocate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -340,7 +351,8 @@
                     android:inputType="textPersonName"
                     android:layout_marginRight="20dp"
                     android:text=""
-                    android:hint="클릭하세요."/>
+                    android:textSize="40px"
+                    android:hint="클릭하세요"/>
 
             </LinearLayout>
 
@@ -353,7 +365,7 @@
                 app:backgroundTint="@color/Orange"
                 android:layout_marginTop="60dp"
                 android:layout_gravity="center"
-                android:textSize="14dp"
+                android:textSize="45px"
                 />
 
 

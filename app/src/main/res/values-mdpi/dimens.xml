@@ -13,6 +13,6 @@
     <dimen name="peo_x">40dp</dimen>
     <dimen name="search">25dp</dimen>
     <dimen name="myph">50dp</dimen>
-    <dimen name="myph_x">80dp</dimen>
+    <dimen name="myph_x">100dp</dimen>
     <dimen name="point">30dp</dimen>
 </resources>

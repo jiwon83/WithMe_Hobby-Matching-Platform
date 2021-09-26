@@ -18,6 +18,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -104,9 +106,10 @@ public class FragmentPlus extends Fragment {
         EditText etHobby=vGroup.findViewById(R.id.etHobby);
         EditText et_date = vGroup.findViewById(R.id.Date);
         et_locate =vGroup.findViewById(R.id.etLocate);
-        CheckBox cb_male = vGroup.findViewById(R.id.check_male);
-        CheckBox cb_female = vGroup.findViewById(R.id.check_female);
-        CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
+        RadioButton cb_male = vGroup.findViewById(R.id.check_male);
+        RadioButton cb_female = vGroup.findViewById(R.id.check_female);
+        RadioButton cb_no = vGroup.findViewById(R.id.checkNo);
+        RadioGroup gender_plus = vGroup.findViewById(R.id.gender_plus);
 
 
 
@@ -294,7 +297,6 @@ public class FragmentPlus extends Fragment {
                         for (int index = 0; index < totalHobbyCount2; index++) {
                             meet.hobbyCate.add(list.get(index));
                         }
-
 
                         //성별체크
                         if (cb_male.isChecked()){
