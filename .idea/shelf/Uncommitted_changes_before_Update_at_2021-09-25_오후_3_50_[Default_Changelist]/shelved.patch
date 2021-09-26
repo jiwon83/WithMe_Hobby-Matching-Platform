@@ -1,0 +1,1736 @@
+Index: app/src/main/res/layout/fragment_select_hobby2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:id=\"@+id/fragSelectHobby\"\r\n    tools:context=\"certify.FragmentSelectHobby\"\r\n    android:background=\"@color/white\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"40dp\"\r\n            android:gravity=\"center\"\r\n            android:layout_weight=\"9\"\r\n            android:text=\"취미분야 선택\"\r\n            android:textSize=\"16dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textAlignment=\"center\" />\r\n    </LinearLayout>\r\n\r\n\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_marginTop=\"60dp\">\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n\r\n\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:id=\"@+id/recyclerViewVertical\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\" />\r\n\r\n        <Button\r\n            android:id=\"@+id/selectHobby2_btn_next\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:textAlignment=\"center\"\r\n            android:backgroundTint=\"@color/Orange\"\r\n            android:text=\"완료\"/>\r\n\r\n    </LinearLayout>\r\n    </ScrollView>\r\n\r\n\r\n    <!--    <GridView-->\r\n    <!--        android:id=\"@+id/gridView\"-->\r\n    <!--        android:layout_width=\"match_parent\"-->\r\n    <!--        android:layout_height=\"match_parent\" />-->\r\n\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_select_hobby2.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/fragment_select_hobby2.xml	(date 1632545185776)
+@@ -11,6 +11,7 @@
+ 
+     <!-- TODO: Update blank fragment layout -->
+ 
++
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+@@ -21,23 +22,18 @@
+             android:id="@+id/textView"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+-            android:gravity="center"
+             android:layout_weight="9"
++            android:gravity="center"
+             android:text="취미분야 선택"
+-            android:textSize="16dp"
+-            android:textColor="@color/black"
+-            android:textAlignment="center" />
++            android:textAlignment="center"
++            android:textColor="@color/Orange"
++            android:textSize="60px" />
+     </LinearLayout>
+ 
+-
+-
+-    <ScrollView
+-        android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:layout_marginTop="60dp">
+     <LinearLayout
+         android:layout_width="match_parent"
+-        android:layout_height="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="40dp"
+         android:orientation="vertical">
+ 
+ 
+@@ -46,17 +42,22 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content" />
+ 
++
+         <Button
+             android:id="@+id/selectHobby2_btn_next"
+-            android:layout_gravity="center"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:textAlignment="center"
++            android:layout_gravity="center"
+             android:backgroundTint="@color/Orange"
+-            android:text="완료"/>
+-
++            android:text="완료"
++            android:layout_marginTop="20dp"
++            android:textAlignment="center" />
+     </LinearLayout>
+-    </ScrollView>
++
++
++
++
++
+ 
+ 
+     <!--    <GridView-->
+@@ -65,4 +66,7 @@
+     <!--        android:layout_height="match_parent" />-->
+ 
+ 
+-</FrameLayout>
+\ No newline at end of file
++
++
++</FrameLayout>
++
+Index: app/src/main/java/com/cookandroid/withmetabbar/certify/FragmentSelectHobby2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.certify;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.app.Activity;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.graphics.Color;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.util.SparseBooleanArray;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.RequiresApi;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.cookandroid.withmetabbar.MainActivity;\r\nimport com.cookandroid.withmetabbar.MainActivityHome;\r\nimport com.cookandroid.withmetabbar.R;\r\nimport com.cookandroid.withmetabbar.model.Hobby;\r\nimport com.cookandroid.withmetabbar.model.HobbyBig;\r\nimport com.cookandroid.withmetabbar.model.Meet;\r\nimport com.cookandroid.withmetabbar.model.Member;\r\nimport com.cookandroid.withmetabbar.navigation.FragmentPlus;\r\nimport com.cookandroid.withmetabbar.navigation.OnItemClick;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\nimport static android.graphics.Color.MAGENTA;\r\nimport static android.graphics.Color.YELLOW;\r\nimport static android.graphics.Color.red;\r\n\r\npublic class FragmentSelectHobby2 extends Fragment implements OnItemClick {\r\n\r\n    // TODO: Rename parameter arguments, choose names that match\r\n    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER\r\n    private static final String ARG_PARAM1 = \"param1\";\r\n    private static final String ARG_PARAM2 = \"param2\";\r\n\r\n    ImageButton imgBtn;\r\n    TextView tv;//취미분야 선택\r\n    ProgressBar progressBar;\r\n    private String selectedHobbyBig;\r\n    Button btnFinish; //메인화면으로 화면전환버튼\r\n    ArrayList<String> list = new ArrayList<>(); //bundle 전달을 위해 선택한 취미값들을 받아서 저장할 배열\r\n\r\n    //중첩 recyclerView에 넣을 데이터\r\n    private final ArrayList<ArrayList<Hobby>> allHobbyList = new ArrayList();\r\n    private final ArrayList<HobbyBig> HobbyBigList2 = new ArrayList();//대분류\r\n\r\n\r\n    // TODO: Rename and change types of parameters\r\n    private String mParam1;\r\n    private String mParam2;\r\n\r\n\r\n    public FragmentSelectHobby2() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n    /**\r\n     * Use this factory method to create a new instance of\r\n     * this fragment using the provided parameters.\r\n     *\r\n     * @param param1 Parameter 1.\r\n     * @param param2 Parameter 2.\r\n     * @return A new instance of fragment FragmentSelectHobby.\r\n     */\r\n    // TODO: Rename and change types and number of parameters\r\n    public static FragmentSelectHobby newInstance(String param1, String param2) {\r\n        FragmentSelectHobby fragment = new FragmentSelectHobby();\r\n        Bundle args = new Bundle();\r\n        args.putString(ARG_PARAM1, param1);\r\n        args.putString(ARG_PARAM2, param2);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (getArguments() != null) {\r\n            selectedHobbyBig = getArguments().getString(ARG_PARAM1);\r\n            //mParam2 = getArguments().getString(ARG_PARAM2);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        ViewGroup vg =  (ViewGroup)inflater.inflate(R.layout.fragment_select_hobby2, container, false);\r\n\r\n        //imgBtn = vg.findViewById(R.id.imageButton);\r\n        tv=vg.findViewById(R.id.textView);\r\n        progressBar=vg.findViewById(R.id.progressBar);\r\n        btnFinish= vg.findViewById(R.id.selectHobby2_btn_next);\r\n\r\n        tv.setText(\"취미 분야 선택 : \"+selectedHobbyBig);\r\n\r\n\r\n        //Log.d(\"selectedHobbyBig\",selectedHobbyBig);\r\n        //final GridView gridView= vg.findViewById(R.id.gridView);\r\n        //ViewGroup vg2 =  (ViewGroup)inflater.inflate(R.layout.select_hobby_grid_in, container, false);\r\n        //iv2= vg2.findViewById(R.id.imageView_sel_hb);\r\n\r\n//        int[] img ={\r\n//                R.drawable.hobby_music,R.drawable.hb_craft,R.drawable.hb_sport\r\n//\r\n//        };\r\n\r\n\r\n\r\n        //바로 해보기\r\n        ArrayList<ArrayList<String>> hbLists = new ArrayList<ArrayList<String>>();\r\n\r\n        ArrayList<String> hbList_music = new ArrayList<>();\r\n        hbList_music.add(\"음악\");\r\n        hbList_music.add(\"클래식\");\r\n        hbList_music.add(\"k-pop\");\r\n        hbList_music.add(\"뉴에이지\");\r\n        hbList_music.add(\"발라드\");\r\n        hbList_music.add(\"랩/힙합\");\r\n        hbList_music.add(\"인디음악\");\r\n        hbList_music.add(\"록/메탈\");\r\n        hbList_music.add(\"포크/블루스\");\r\n\r\n        //2차원배열에 답기\r\n        hbLists.add(hbList_music);\r\n\r\n        //tv.setText((CharSequence) hbLists.get(0).get(0));\r\n\r\n        //응용참고\r\n        /*\r\n        System.out.println(datas.size());\r\n        \t//결과: 3\r\n\t\tSystem.out.println(datas.toString());\r\n        \t//결과: [[1, 2, 3], [11, 22, 33], [111, 222, 333]]\r\n\r\n\t\tSystem.out.println(datas.get(0));\r\n\t\t//결과: [1, 2, 3]\r\n         */\r\n\r\n        //리사이클러뷰\r\n        this.initializeData();\r\n        this.initializeData2();\r\n\r\n        RecyclerView view = vg.findViewById(R.id.recyclerViewVertical);\r\n\r\n        com.cookandroid.withmetabbar.certify.VerticalAdapter verticalAdapter = new com.cookandroid.withmetabbar.certify.VerticalAdapter(getContext(), allHobbyList, HobbyBigList2,this);\r\n        //여기의 this는 이 클래스 자체를 의미한다. 아래의 OnItemClick 을 override한 onClick()메서드가 실행되어야 하기 때문이다.\r\n        view.setHasFixedSize(true);\r\n        view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));\r\n        view.setAdapter(verticalAdapter);\r\n\r\n\r\n        //화면전환\r\n        btnFinish.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                Bundle bundle = new Bundle();\r\n                bundle.putStringArrayList(\"hobby\", list);\r\n                JoinStartFragment joinStartFragment = new JoinStartFragment();\r\n                joinStartFragment.setArguments(bundle);\r\n\r\n\r\n                //hide & show\r\n//                ((MainActivity)getActivity()).hideFragment(FragmentPlusSelectHobby.this);\r\n                //FragmentPlus fragmentPlus = new FragmentPlus();\r\n//                ((MainActivity)getActivity()).showFragment(fragmentPlus);\r\n\r\n                //remove\r\n                //((MainActivity)getActivity()).removeFragment(FragmentPlusSelectHobby.this);\r\n                //FragmentPlus fragmentPlus = new FragmentPlus();\r\n\r\n                //replace\r\n                ((MainActivity2)getActivity()).replaceFragment(joinStartFragment);\r\n\r\n\r\n            }\r\n        });\r\n\r\n        //데이터 저장을 위한 객체 참조\r\n//        final FirebaseDatabase database = FirebaseDatabase.getInstance();\r\n//        DatabaseReference ref = database.getReference();\r\n//        DatabaseReference usersRef = ref.child(\"users\");\r\n//        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid\r\n//        DatabaseReference hopperRef = usersRef.child(uid); //  /users/uid\r\n\r\n        //push 데이터 저장\r\n//        DatabaseReference pushRef = hopperRef.child(\"hobby\");\r\n//        pushRef.push().setValue(new Hobby(\"탁구\"));\r\n//        pushRef.push().setValue(new Hobby(\"배구\"));\r\n\r\n        //update 데이터 저장\r\n//        Map<String, Object> hopperUpdates = new HashMap<>();\r\n//        hopperUpdates.put(\"hobby1\", \"베이킹\");\r\n//        hopperUpdates.put(\"hobby2\", new Hobby(\"공예\"));\r\n//        hopperUpdates.put(\"hobby2\", new Hobby(\"베이킹\"));\r\n        //hopperUpdates.put(\"hobby\", hobbyListTest);\r\n//        hopperRef.updateChildren(hopperUpdates); //데이터 업데이트\r\n\r\n\r\n\r\n//        Bundle data = getArguments();\r\n//        String data1 = data.getString(\"selectedList\");\r\n//        pushRef.push().setValue(new Hobby(data1));\r\n\r\n        //선택한 hobby값을 가져오기 위한, 커스텀 리스너 객체 생성 및 전달\r\n//        HorizontalAdapter horizontalAdapter= new HorizontalAdapter();\r\n//        horizontalAdapter.setOnItemClickListener(new HorizontalAdapter.OnItemClickListener() {\r\n//            @Override\r\n//            public void onItemClick(View v, int position) {\r\n//                //받아온 값을 데이터에 저장\r\n//                Bundle data = getArguments();\r\n//                String data1 = data.getString(\"selectedList\");\r\n//                pushRef.push().setValue(new Hobby(data1));\r\n//\r\n//            }\r\n//        });\r\n\r\n        return vg;\r\n    }\r\n\r\n    @Override\r\n    public void onClick(String value) {\r\n        //value this data you receive when selectedItems() called\r\n        list.add(value);\r\n        Log.d(\"onClickSuccess?\",value); //성공적으로 받아진다.\r\n    }\r\n\r\n    //소분류 취미목록 데이터 입력\r\n    public void initializeData()\r\n    {\r\n        ArrayList<Hobby> hobbyList1 = new ArrayList();\r\n\r\n        hobbyList1.add(new Hobby( \"클래식\"));\r\n        hobbyList1.add(new Hobby(\"K-pop\"));\r\n        hobbyList1.add(new Hobby(\"뉴에이지\"));\r\n        hobbyList1.add(new Hobby(\"발라드\"));\r\n        hobbyList1.add(new Hobby(\"랩/힙합\"));\r\n        hobbyList1.add(new Hobby(\"인디음악\"));\r\n        hobbyList1.add(new Hobby(\"록/메탈\"));\r\n        hobbyList1.add(new Hobby(\"포크.블루스\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList1);\r\n\r\n        ArrayList<Hobby> hobbyList2 = new ArrayList();\r\n\r\n        hobbyList2.add(new Hobby( \"야구\"));\r\n        hobbyList2.add(new Hobby( \"축구\"));\r\n        hobbyList2.add(new Hobby( \"농구\"));\r\n        hobbyList2.add(new Hobby( \"볼링\"));\r\n        hobbyList2.add(new Hobby( \"당구\"));\r\n        hobbyList2.add(new Hobby( \"수영\"));\r\n        hobbyList2.add(new Hobby( \"탁구\"));\r\n        hobbyList2.add(new Hobby( \"폴댄스\"));\r\n        hobbyList2.add(new Hobby( \"골프\"));\r\n        hobbyList2.add(new Hobby( \"배드민턴\"));\r\n        hobbyList2.add(new Hobby( \"클라이밍\"));\r\n\r\n        allHobbyList.add(hobbyList2);\r\n\r\n        ArrayList<Hobby> hobbyList3 = new ArrayList();\r\n\r\n        hobbyList3.add(new Hobby( \"캠핑\"));\r\n        hobbyList3.add(new Hobby( \"바다\"));\r\n        hobbyList3.add(new Hobby( \"국내\"));\r\n        hobbyList3.add(new Hobby( \"해외\"));\r\n        hobbyList3.add(new Hobby( \"당일치기\"));\r\n        hobbyList3.add(new Hobby( \"배낭여행\"));\r\n        hobbyList3.add(new Hobby( \"익스트림\"));\r\n        hobbyList3.add(new Hobby( \"기타\"));\r\n\r\n        allHobbyList.add(hobbyList3);\r\n        ArrayList<Hobby> hobbyList4 = new ArrayList();\r\n\r\n        hobbyList4.add(new Hobby( \"전시\"));\r\n        hobbyList4.add(new Hobby( \"뮤지컬\"));\r\n        hobbyList4.add(new Hobby( \"영화\"));\r\n        hobbyList4.add(new Hobby( \"해외\"));\r\n        hobbyList4.add(new Hobby( \"콘서트\"));\r\n        hobbyList4.add(new Hobby( \"연극\"));\r\n        hobbyList4.add(new Hobby( \"오페라\"));\r\n        hobbyList4.add(new Hobby( \"연주회\"));\r\n        hobbyList4.add(new Hobby( \"오케스트라\"));\r\n        hobbyList4.add(new Hobby( \"기타\"));\r\n\r\n        allHobbyList.add(hobbyList4);\r\n\r\n        ArrayList<Hobby> hobbyList5 = new ArrayList();\r\n\r\n        hobbyList5.add(new Hobby( \"리본공예\"));\r\n        hobbyList5.add(new Hobby( \"비즈공예\"));\r\n        hobbyList5.add(new Hobby( \"도자기공예\"));\r\n        hobbyList5.add(new Hobby( \"넵킨공예\"));\r\n        hobbyList5.add(new Hobby( \"포크아트\"));\r\n        hobbyList5.add(new Hobby( \"북아트\"));\r\n        hobbyList5.add(new Hobby( \"클레이아트\"));\r\n        hobbyList5.add(new Hobby( \"가죽공예\"));\r\n        hobbyList5.add(new Hobby( \"유리공예\"));\r\n        hobbyList5.add(new Hobby( \"플라워아트\"));\r\n\r\n        allHobbyList.add(hobbyList5);\r\n\r\n        ArrayList<Hobby> hobbyList6 = new ArrayList();\r\n\r\n        hobbyList6.add(new Hobby( \"양식\"));\r\n        hobbyList6.add(new Hobby( \"한식\"));\r\n        hobbyList6.add(new Hobby( \"일식\"));\r\n        hobbyList6.add(new Hobby( \"중식\"));\r\n        hobbyList6.add(new Hobby( \"베이킹\"));\r\n        hobbyList6.add(new Hobby( \"설탕공예\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList6);\r\n\r\n        ArrayList<Hobby> hobbyList7 = new ArrayList();\r\n\r\n        hobbyList6.add(new Hobby( \"강아지\"));\r\n        hobbyList6.add(new Hobby( \"고양이\"));\r\n        hobbyList6.add(new Hobby( \"조류\"));\r\n        hobbyList6.add(new Hobby( \"햄스터\"));\r\n        hobbyList6.add(new Hobby( \"파충류\"));\r\n        hobbyList6.add(new Hobby( \"곤충\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList7);\r\n    }\r\n\r\n    //대분류 취미목록 데이터 입력\r\n    public void initializeData2()\r\n    {\r\n//        ArrayList<HobbyBig> hobbyBigList = new ArrayList();\r\n//        hobbyBigList.add(new HobbyBig( \"음악\"));\r\n//        hobbyBigList.add(new HobbyBig(\"스포츠\"));\r\n//        hobbyBigList.add(new HobbyBig(\"여행\"));\r\n//        hobbyBigList.add(new HobbyBig(\"문화\"));\r\n//        hobbyBigList.add(new HobbyBig(\"공예\"));\r\n//        hobbyBigList.add(new HobbyBig(\"요리\"));\r\n//        hobbyBigList.add(new HobbyBig(\"게임\"));\r\n//        hobbyBigList.add(new HobbyBig(\"팬모임\"));\r\n\r\n        HobbyBigList2.add(new HobbyBig( \"음악\"));\r\n        HobbyBigList2.add(new HobbyBig( \"스포츠\"));\r\n        HobbyBigList2.add(new HobbyBig( \"여행\"));\r\n        HobbyBigList2.add(new HobbyBig( \"문화\"));\r\n        HobbyBigList2.add(new HobbyBig( \"공예\"));\r\n        HobbyBigList2.add(new HobbyBig( \"요리\"));\r\n        HobbyBigList2.add(new HobbyBig( \"반려동물\"));\r\n\r\n    }\r\n}\r\n\r\n//\r\nclass HorizontalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder> {\r\n\r\n    private OnItemClick mCallback; //OnItemClick 인터페이스 객체\r\n    private ArrayList<Hobby> dataList;\r\n    private final SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);//클릭하면 색상변경//클릭 안하면 0 하면 1??\r\n    private final ArrayList<Hobby> selectedList= new ArrayList<>(); //선택한 취미 값\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    public HorizontalAdapter(){}\r\n\r\n    public HorizontalAdapter(ArrayList<Hobby> data, OnItemClick listener)\r\n    {\r\n        this.dataList = data;\r\n        this.mCallback = listener;\r\n    }\r\n\r\n//    public interface OnItemClickListener{\r\n//        void onItemClick(View v, int position);\r\n//    }//어텝터 내에서 커스텀 리스너 인터페이스 정의\r\n\r\n\r\n    public class HorizontalViewHolder extends RecyclerView.ViewHolder{\r\n        protected TextView tv;\r\n        private final ArrayList<String> selectData = null ;\r\n        private final String selected=\"\";\r\n        int count=1;\r\n\r\n\r\n        //받아올 값\r\n        public void selectedItems(){\r\n            mCallback.onClick(tv.getText().toString());//tv를 클릭하면?\r\n        }\r\n\r\n        public HorizontalViewHolder(View view)\r\n        {\r\n            super(view);\r\n            tv = view.findViewById(R.id.btn_hbList_in);\r\n            //클릭하면 색상변경\r\n            view.setOnClickListener(new View.OnClickListener() {\r\n                @RequiresApi(api = Build.VERSION_CODES.O)\r\n                @SuppressLint(\"ResourceAsColor\")\r\n                @Override\r\n                public void onClick(View v) {\r\n                    int position = getAdapterPosition();\r\n\r\n                    Log.d(\"tv\",tv.getText().toString());\r\n                    selectedItems();\r\n\r\n\r\n\r\n                    if ( mSelectedItems.get(position, false) ){\r\n\r\n                        mSelectedItems.put(position, false);\r\n                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));\r\n\r\n                    } else {\r\n                        mSelectedItems.put(position, true);\r\n                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.Orange));\r\n                    }\r\n                    Log.d(\"test\", \"position = \" + position);\r\n\r\n                }\r\n            });\r\n\r\n        }\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)\r\n    {\r\n        View v = LayoutInflater\r\n                .from(viewGroup.getContext())\r\n                .inflate(R.layout.select_hobby2_grid_in2, null);\r\n\r\n\r\n\r\n\r\n        return new com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder(v);\r\n    }\r\n\r\n    @SuppressLint(\"ResourceAsColor\")\r\n    @Override\r\n    public void onBindViewHolder(com.cookandroid.withmetabbar.certify.HorizontalAdapter.HorizontalViewHolder horizontalViewHolder, int position)\r\n    {\r\n//        horizontalViewHolder\r\n//                .image\r\n//                .setImageResource(dataList.get(position).getResourceID());\r\n        horizontalViewHolder\r\n                .tv\r\n                .setText(dataList.get(position).getHobbyname());\r\n\r\n        //클릭하면 색상 변경\r\n        if ( mSelectedItems.get(position, false) ){\r\n            horizontalViewHolder.itemView.setBackgroundColor(R.color.Orange);//선택했을 때\r\n        } else {\r\n            horizontalViewHolder.itemView.setBackgroundColor(R.color.gray);//기본, 선택 안했을 때\r\n        }\r\n\r\n    }\r\n\r\n    private Context ActivityContext() {\r\n        return null;\r\n    }\r\n\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return dataList.size();\r\n    }\r\n\r\n    public ArrayList<Hobby> getSelected(){\r\n\r\n        return selectedList;\r\n    }\r\n\r\n\r\n\r\n\r\n}\r\n\r\nclass VerticalAdapter extends RecyclerView.Adapter<com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder>{\r\n\r\n    private OnItemClick mCallback;\r\n    private ArrayList<ArrayList<Hobby>> AllHobbyList;//전체 취미목록들을 2차원 배열에 넣어준다.\r\n    private Context context;\r\n    //test 취미목록 대분류 넣기\r\n    private final ArrayList<HobbyBig> DataListBig;\r\n\r\n    //test\r\n    public VerticalAdapter(ArrayList<HobbyBig> data)\r\n    {\r\n        this.DataListBig = data;\r\n    }\r\n    //\r\n\r\n    public VerticalAdapter(Context context, ArrayList<ArrayList<Hobby>> data, ArrayList<HobbyBig> data2,OnItemClick listener)\r\n    {\r\n        this.mCallback =listener;\r\n        this.context = context;\r\n        this.AllHobbyList = data;\r\n        this.DataListBig = data2;//대분류\r\n    }\r\n    //VerticalViewHolder 맨 처음 10개의 뷰객체를 기억하고 있을(홀딩) 객체\r\n    public class VerticalViewHolder extends RecyclerView.ViewHolder{\r\n        protected RecyclerView recyclerView;\r\n        protected TextView textView;\r\n\r\n        public VerticalViewHolder(View view)\r\n        {\r\n            super(view);\r\n            textView = view.findViewById(R.id.tv_hobby);\r\n            this.recyclerView = view.findViewById(R.id.recyclerViewVertical);\r\n        }\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {\r\n        View v = LayoutInflater\r\n                .from(viewGroup.getContext())\r\n                .inflate(R.layout.select_hobby2_grid_in, null);\r\n        return new com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder(v);\r\n    }\r\n    //수직 RecyclerView의 데이터 항목은 앞서 구현한 수평 RecyclerView가 배치된다고 하였습니다.\r\n    // 그러기 위해 onBindViewHolder에서 HorizontalAdapter 객체를 생성\r\n    @Override\r\n    public void onBindViewHolder(@NonNull com.cookandroid.withmetabbar.certify.VerticalAdapter.VerticalViewHolder verticalViewHolder, int position) {\r\n        com.cookandroid.withmetabbar.certify.HorizontalAdapter adapter = new com.cookandroid.withmetabbar.certify.HorizontalAdapter(AllHobbyList.get(position),mCallback);\r\n        //adapter.getSelected();\r\n        //현재 위치의 arrayList를 AllHobbyList로 받아서 adapter생성.\r\n\r\n        //대분류 배열 처리- textView에 넣기\r\n        verticalViewHolder\r\n                .textView\r\n                .setText(DataListBig.get(position).getHobbyBigname());\r\n\r\n        verticalViewHolder.recyclerView.setHasFixedSize(true);\r\n        verticalViewHolder.recyclerView.setLayoutManager(new LinearLayoutManager(context\r\n                , LinearLayoutManager.HORIZONTAL\r\n                ,false));\r\n        verticalViewHolder.recyclerView.setAdapter(adapter);\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return AllHobbyList.size();\r\n    }\r\n}\r\n\r\n\r\n//Adapter\r\nclass MyAdapter2 extends BaseAdapter{\r\n    Context context;\r\n    int layout;\r\n    String[] btnNames;\r\n    LayoutInflater inflater;\r\n    public MyAdapter2(Context c) {context=c;}\r\n\r\n    public MyAdapter2(Context context, int layout, String[] strings){\r\n        this.context = context;\r\n        this.layout = layout;\r\n        this.btnNames = strings;\r\n        inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getCount() {\r\n        //이미지배열의 크기를 return\r\n        return btnNames.length;\r\n    }\r\n\r\n    @Override\r\n    public Object getItem(int position) {\r\n        return btnNames[position];\r\n    }\r\n\r\n    @Override\r\n    public long getItemId(int position) {\r\n        return position;\r\n    }\r\n\r\n    @Override\r\n    public View getView(int position, View convertView, ViewGroup parent) {\r\n        //view전환\r\n        Button btn=null;\r\n        if (null != convertView) {\r\n            btn = (Button)convertView;\r\n        }\r\n\r\n        else {\r\n            //------------------------------------------------------------\r\n            // 버튼을 생성하고 그것의 이름을 정합니다.\r\n            btn = new Button(context);\r\n            btn.setText(btnNames[position]);\r\n\r\n            //------------------------------------------------------------\r\n            // 버튼 클릭에 대한 처리는 추후 구현 예정입니다.\r\n        }\r\n\r\n        return btn;\r\n\r\n\r\n        //imageview.setImageResource(img[position]); //데이터 베이스 배울 때 수정\r\n\r\n\r\n        /*\r\n        if (convertView==null)\r\n            convertView = inflater.inflate(layout, null);\r\n        ImageView iv = convertView.findViewById(R.id.imageView_sel_hb);\r\n        iv.setImageResource(img[position]);\r\n        return convertView;\r\n\r\n         */\r\n    }\r\n}\r\n\r\nfinal class  Varargs{\r\n    //String test2=\"\";\r\n    List<String> str = new ArrayList<String>();\r\n    //1차원 배열 생성\r\n    public void makeArray(String... strigs){\r\n\r\n        for (String s:strigs){\r\n            str.add(s);\r\n            //test2= test2+s;\r\n\r\n        }\r\n\r\n    }\r\n    //2차원배열 생성\r\n    public void makeArray2nds(String... strigs){\r\n\r\n        List<String> str2nd = new ArrayList<String>();\r\n\r\n        for (String s:strigs){\r\n            str2nd.add(s);\r\n        }\r\n\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/certify/FragmentSelectHobby2.java	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/java/com/cookandroid/withmetabbar/certify/FragmentSelectHobby2.java	(date 1632547555727)
+@@ -114,7 +114,7 @@
+         progressBar=vg.findViewById(R.id.progressBar);
+         btnFinish= vg.findViewById(R.id.selectHobby2_btn_next);
+ 
+-        tv.setText("취미 분야 선택 : "+selectedHobbyBig);
++        tv.setText("취미 분야 선택");
+ 
+ 
+         //Log.d("selectedHobbyBig",selectedHobbyBig);
+@@ -289,10 +289,11 @@
+         hobbyList3.add(new Hobby( "해외"));
+         hobbyList3.add(new Hobby( "당일치기"));
+         hobbyList3.add(new Hobby( "배낭여행"));
+-        hobbyList3.add(new Hobby( "익스트림"));
++        hobbyList3.add(new Hobby( "차박"));
+         hobbyList3.add(new Hobby( "기타"));
+ 
+         allHobbyList.add(hobbyList3);
++
+         ArrayList<Hobby> hobbyList4 = new ArrayList();
+ 
+         hobbyList4.add(new Hobby( "전시"));
+@@ -337,15 +338,54 @@
+ 
+         ArrayList<Hobby> hobbyList7 = new ArrayList();
+ 
+-        hobbyList6.add(new Hobby( "강아지"));
+-        hobbyList6.add(new Hobby( "고양이"));
+-        hobbyList6.add(new Hobby( "조류"));
+-        hobbyList6.add(new Hobby( "햄스터"));
+-        hobbyList6.add(new Hobby( "파충류"));
+-        hobbyList6.add(new Hobby( "곤충"));
++        hobbyList7.add(new Hobby( "강아지"));
++        hobbyList7.add(new Hobby( "고양이"));
++        hobbyList7.add(new Hobby( "조류"));
++        hobbyList7.add(new Hobby( "햄스터"));
++        hobbyList7.add(new Hobby( "파충류"));
++        hobbyList7.add(new Hobby( "곤충"));
+ 
+ 
+         allHobbyList.add(hobbyList7);
++
++        ArrayList<Hobby> hobbyList8 = new ArrayList();
++
++        hobbyList8.add(new Hobby( "서핑"));
++        hobbyList8.add(new Hobby( "패들보드"));
++        hobbyList8.add(new Hobby( "카약"));
++        hobbyList8.add(new Hobby( "번지점프"));
++        hobbyList8.add(new Hobby( "패러글라이딩"));
++        hobbyList8.add(new Hobby( "스카이다이빙"));
++        hobbyList8.add(new Hobby( "스킨스쿠버"));
++
++
++        allHobbyList.add(hobbyList8);
++
++        ArrayList<Hobby> hobbyList9 = new ArrayList();
++
++        hobbyList9.add(new Hobby( "피아노"));
++        hobbyList9.add(new Hobby( "기타"));
++        hobbyList9.add(new Hobby( "드럼"));
++        hobbyList9.add(new Hobby( "베이스"));
++        hobbyList9.add(new Hobby( "바이올린"));
++        hobbyList9.add(new Hobby( "첼로"));
++        hobbyList9.add(new Hobby( "작곡"));
++
++
++        allHobbyList.add(hobbyList9);
++
++        ArrayList<Hobby> hobbyList10 = new ArrayList();
++
++        hobbyList10.add(new Hobby( "중국어"));
++        hobbyList10.add(new Hobby( "일본어"));
++        hobbyList10.add(new Hobby( "불어"));
++        hobbyList10.add(new Hobby( "스페인어"));
++        hobbyList10.add(new Hobby( "토플"));
++        hobbyList10.add(new Hobby( "토익"));
++        hobbyList10.add(new Hobby( "코딩"));
++
++
++        allHobbyList.add(hobbyList10);
+     }
+ 
+     //대분류 취미목록 데이터 입력
+@@ -368,6 +408,9 @@
+         HobbyBigList2.add(new HobbyBig( "공예"));
+         HobbyBigList2.add(new HobbyBig( "요리"));
+         HobbyBigList2.add(new HobbyBig( "반려동물"));
++        HobbyBigList2.add(new HobbyBig( "익스트림"));
++        HobbyBigList2.add(new HobbyBig( "악기연주"));
++        HobbyBigList2.add(new HobbyBig( "공부"));
+ 
+     }
+ }
+@@ -424,13 +467,13 @@
+                 public void onClick(View v) {
+                     int position = getAdapterPosition();
+ 
++
+                     Log.d("tv",tv.getText().toString());
+                     selectedItems();
+ 
+ 
+ 
+                     if ( mSelectedItems.get(position, false) ){
+-
+                         mSelectedItems.put(position, false);
+                         v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));
+ 
+Index: app/src/main/java/com/cookandroid/withmetabbar/certify/JoinStartFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.certify;\r\n\r\nimport android.app.DatePickerDialog;\r\nimport android.content.Intent;\r\nimport android.os.AsyncTask;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.DatePicker;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\n\r\nimport com.cookandroid.withmetabbar.MainActivity;\r\nimport com.cookandroid.withmetabbar.MainActivityWebView;\r\nimport com.cookandroid.withmetabbar.R;\r\nimport com.cookandroid.withmetabbar.model.Member;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStreamReader;\r\nimport java.io.OutputStreamWriter;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.MalformedURLException;\r\nimport java.net.URL;\r\nimport java.nio.charset.StandardCharsets;\r\nimport java.text.DateFormat;\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.Calendar;\r\nimport java.util.Date;\r\nimport java.util.Locale;\r\n\r\nimport static android.app.Activity.RESULT_OK;\r\nimport static android.content.ContentValues.TAG;\r\n\r\n\r\npublic class JoinStartFragment extends Fragment {\r\n\r\n    ArrayList<String> list = new ArrayList<>();\r\n    private Date meetDate;\r\n    private static final int MAIN_ACTIVITY_WEBVIEW = 10000;\r\n\r\n\r\n    Button btn_join,btn_live;\r\n\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n    }\r\n\r\n    public void onActivityResult(int requestCode, int resultCode, Intent intent){\r\n\r\n        super.onActivityResult(requestCode, resultCode, intent);\r\n\r\n        switch(requestCode){\r\n\r\n            case MAIN_ACTIVITY_WEBVIEW:\r\n\r\n                if(resultCode == RESULT_OK){\r\n\r\n                    String data = intent.getExtras().getString(\"address\");\r\n                    if (data != null){\r\n                        btn_live.setText(data);\r\n                        //address =data;\r\n\r\n\r\n                    }\r\n\r\n\r\n                }\r\n                break;\r\n\r\n        }\r\n\r\n    }\r\n\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n\r\n        ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.join_start_fragment, container, false);\r\n        EditText etId = vGroup.findViewById(R.id.etId);\r\n        EditText etPw = vGroup.findViewById(R.id.etPw);\r\n        EditText etName = vGroup.findViewById(R.id.etName);\r\n        EditText etNick = vGroup.findViewById(R.id.etNick);\r\n        EditText etBirth = vGroup.findViewById(R.id.etBirth);\r\n        EditText etAge = vGroup.findViewById(R.id.etAge);\r\n        EditText etPhoneNum = vGroup.findViewById(R.id.etPhoneNum);\r\n        btn_join= vGroup.findViewById(R.id.button6);\r\n        btn_live = vGroup.findViewById(R.id.btn_live);\r\n        CheckBox cb_male = vGroup.findViewById(R.id.check_male);\r\n        CheckBox cb_female = vGroup.findViewById(R.id.check_female);\r\n        CheckBox cb_no = vGroup.findViewById(R.id.checkNo);\r\n        EditText et_Birth = vGroup.findViewById(R.id.etBirth);\r\n        EditText etHobby =vGroup.findViewById(R.id.etHobby);\r\n\r\n        Bundle bundle = getArguments();\r\n\r\n\r\n\r\n        //취미목록 setText\r\n        try {\r\n            if (bundle.getStringArrayList(\"hobby\")!=null){\r\n                list = bundle.getStringArrayList(\"hobby\");\r\n                Log.d(\"getBundleInPlus\", String.valueOf(bundle.getStringArrayList(\"hobby\")));\r\n                //받은 취미 목록을 차례로 tv에 입력\r\n                int totalHobbyCount = list.size();\r\n                for (int index =0; index<totalHobbyCount; index++){\r\n                    etHobby.append(\",\"+list.get(index));\r\n                }\r\n\r\n            }else {\r\n                etHobby.setText(\"클릭하세요.\");\r\n            }\r\n        }catch (NullPointerException e){\r\n            Toast.makeText(getContext(),\"null\",Toast.LENGTH_SHORT);\r\n        }\r\n\r\n        //주소 setText\r\n        try {\r\n            if (bundle.getString(\"address\") !=null){\r\n                btn_live.setText(bundle.getString(\"address\"));\r\n                Log.d(\"address\",bundle.getString(\"address\"));\r\n\r\n            }\r\n\r\n        }catch (Exception e){\r\n            Toast.makeText(getContext(),\"address error\",Toast.LENGTH_SHORT);\r\n        }\r\n\r\n\r\n        //거주지역선택\r\n        btn_live.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                Intent i = new Intent(getContext(), MainActivityWebView.class);\r\n                startActivityForResult(i, MAIN_ACTIVITY_WEBVIEW);//requestcode 2000 전송\r\n\r\n\r\n            }\r\n        });\r\n\r\n\r\n\r\n\r\n        //날짜 선택\r\n\r\n        Calendar myCalendar = Calendar.getInstance();\r\n        DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {\r\n            @Override\r\n            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {\r\n                myCalendar.set(Calendar.YEAR, year);\r\n                myCalendar.set(Calendar.MONTH, month);\r\n                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);\r\n                updateLabel();\r\n\r\n                meetDate=myCalendar.getTime();\r\n            }\r\n\r\n            private void updateLabel() {\r\n                String myFormat = \"yyyy/MM/dd\";    // 출력형식   2018/11/28\r\n                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.\r\n\r\n                et_Birth.setText(sdf.format(myCalendar.getTime()));\r\n                DateFormat sdFormat = new SimpleDateFormat(\"yyyy-MM-dd\");//필요x\r\n\r\n                //데이터 firebase저장위해 meetDate 변수에 대입\r\n                try {\r\n                    //meetDate=myCalendar.getTime(); //캘린더타입\r\n                    //meetDate.=myCalendar.get(Calendar.DAY_OF_MONTH);\r\n\r\n                    //meetDate.setYear(myCalendar.get(Calendar.YEAR));//년\r\n                    //meetDate.setMonth(myCalendar.get(Calendar.MONTH));//월\r\n                    //meetDate.setDate(myCalendar.get(Calendar.DAY_OF_MONTH));//일\r\n\r\n                    //meetDate=myCalendar.get(Calendar.YEAR);\r\n                    //meetDate=myCalendar.get(Calendar.DAY_OF_WEEK);\r\n\r\n                    Log.d(\"meetDate\", String.valueOf(meetDate));\r\n                } catch (Exception e) {\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n        };\r\n\r\n        et_Birth.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();\r\n            }\r\n        });\r\n        //취미선택\r\n        etHobby.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                FragmentSelectHobby2 fragmentSelectHobby2= new FragmentSelectHobby2();\r\n                ((MainActivity2)getActivity()).addFragment(fragmentSelectHobby2);\r\n\r\n            }\r\n        });\r\n\r\n\r\n\r\n\r\n        btn_join.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                if (etId.getText().toString() == null || etName.getText().toString() == null || etPw.getText().toString() == null\r\n                        || etNick.getText().toString() == null || etAge.getText().toString() == null\r\n                        || btn_live.getText().toString() == null|| meetDate == null || list== null){\r\n                    Toast.makeText(getContext(),\"정보 입력을 완료하세요 :)\",Toast.LENGTH_SHORT).show();\r\n\r\n\r\n                }else{\r\n                    try {\r\n                        FirebaseAuth.getInstance()\r\n                                .createUserWithEmailAndPassword(etId.getText().toString(),etPw.getText().toString())\r\n                                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {\r\n\r\n                                    @Override\r\n                                    public void onComplete(@NonNull Task<AuthResult> task) {\r\n                                        if (task.isSuccessful()){\r\n                                            final String uid = task.getResult().getUser().getUid();\r\n                                            Member member = new Member();\r\n                                            member.uid =FirebaseAuth.getInstance().getCurrentUser().getUid();\r\n                                            member.id = etId.getText().toString().trim();\r\n                                            member.pw = etPw.getText().toString().trim();\r\n                                            member.mName = etName.getText().toString().trim();\r\n                                            member.nick =etNick.getText().toString().trim();\r\n                                            try {\r\n                                                member.mAge = Integer.parseInt(etAge.getText().toString());\r\n\r\n                                            }catch (Exception e){\r\n                                                Toast.makeText(getContext(),\"숫자를 입력하세요.\",Toast.LENGTH_SHORT);\r\n                                            }\r\n                                            member.mPlace = btn_live.getText().toString();\r\n                                            member.mBirth=meetDate;\r\n                                            //성별체크\r\n                                            if (cb_male.isChecked()){\r\n                                                member.mGen =1; //남자는 1\r\n                                            }else if (cb_female.isChecked()){\r\n                                                member.mGen =2; //여자는 2\r\n                                            }else if (cb_no.isChecked()){\r\n                                                member.mGen =0; //무관은 0\r\n                                            }else {\r\n                                                Toast.makeText(getContext(),\"성별을 체크하세요.\",Toast.LENGTH_SHORT);\r\n                                            }\r\n\r\n                                            int totalHobbyCount2 = list.size();\r\n                                            for (int index = 0; index < totalHobbyCount2; index++) {\r\n                                                member.hobbyCate.add(list.get(index));\r\n                                            }\r\n\r\n\r\n                                            //member.meetDate\r\n                                            FirebaseDatabase.getInstance().getReference().child(\"users\").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {\r\n\r\n                                                @Override\r\n                                                public void onSuccess(Void aVoid) {\r\n                                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();\r\n                                                    fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();\r\n                                                    Intent intent = new Intent(getContext(), MainActivity.class);\r\n                                                    startActivity(intent);\r\n\r\n                                                }\r\n                                            });\r\n                                        }else{\r\n                                            Log.e(TAG, \"Error getting sign in methods for user\", task.getException());\r\n                                        }\r\n                                    }\r\n                                });\r\n\r\n                        return;\r\n                    }catch (Exception e){\r\n                        Toast.makeText(getContext(),\"모든 정보를 입력하세요.\",Toast.LENGTH_SHORT);\r\n                    }\r\n\r\n                }\r\n\r\n            }//onclidk\r\n        });\r\n\r\n        return vGroup;\r\n    }\r\n\r\n\r\n    //이부분 데이터 TaskJOin 수정\r\n    public class TaskJoin extends AsyncTask<String, Void, String> {\r\n        String sendMsg, receiveMsg;\r\n        String serverIp = \"http://13.125.233.177:8080/AppWithMe/member/insert.jsp\";\r\n\r\n        @Override\r\n        protected String doInBackground(String... strings) {//뒤에서 돌아가는 가장 중요한 메소드\r\n            try {\r\n                String str;\r\n                URL url = new URL(serverIp);\r\n                HttpURLConnection conn = (HttpURLConnection) url.openConnection();\r\n                conn.setRequestProperty(\"Content-Type\", \"application/x-www-form-urlencoded\");\r\n                conn.setRequestMethod(\"POST\");//POST 방식, GET방식으로 넘겨주면 한글처리부터 문제가 생기게 됨\r\n                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());\r\n                //sendMsg = \"memberId=\"+ strings[0]+\"&password=\"+ strings[1];\r\n\r\n                //sendMsg = \"meetId=\"+ strings[0]+\"&meetName=\"+ strings[1];\r\n                sendMsg = \"memberId=\"+ strings[0]+\"&password=\"+ strings[1]+\"&memberName=\"+ strings[2]+\"&phoneNum=\"+ strings[3]\r\n                        +\"&birth=\"+ strings[4];\r\n                osw.write(sendMsg);\r\n                osw.flush();\r\n                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {\r\n                    InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);//UTF-8로 데이터 읽어옴\r\n                    BufferedReader reader = new BufferedReader(tmp);\r\n                    StringBuffer buffer = new StringBuffer();\r\n                    while ((str = reader.readLine()) != null) {\r\n                        buffer.append(str);\r\n                    }\r\n                    receiveMsg = buffer.toString();\r\n                } else {\r\n                    Log.i(\"통신 결과\", conn.getResponseCode()+\"에러\");\r\n                }\r\n            } catch (MalformedURLException e) {\r\n                e.printStackTrace();\r\n            } catch (IOException e) {\r\n                e.printStackTrace();\r\n            }\r\n            return receiveMsg;//String 타입인데 안에 형식이 json임\r\n        }\r\n\r\n    }\r\n    //2021-09-19 주소검색\r\n//    public void onActivityResult(int requestCode, int resultCode, Intent intent){\r\n//\r\n//        super.onActivityResult(requestCode, resultCode, intent);\r\n//\r\n//        switch(requestCode){\r\n//\r\n//            case SEARCH_ADDRESS_ACTIVITY:\r\n//\r\n//                if(resultCode == RESULT_OK){\r\n//\r\n//                    String data = intent.getExtras().getString(\"data\");\r\n//                    if (data != null)\r\n//                        et_address.setText(data);\r\n//\r\n//                }\r\n//                break;\r\n//\r\n//        }\r\n//\r\n//    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/certify/JoinStartFragment.java	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/java/com/cookandroid/withmetabbar/certify/JoinStartFragment.java	(date 1632551436208)
+@@ -4,6 +4,7 @@
+ import android.content.Intent;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
++import android.telephony.PhoneNumberFormattingTextWatcher;
+ import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+@@ -56,7 +57,7 @@
+     private static final int MAIN_ACTIVITY_WEBVIEW = 10000;
+ 
+ 
+-    Button btn_join,btn_live;
++    Button btn_join,btn_live,btn_hobbys;
+ 
+ 
+     @Override
+@@ -105,13 +106,14 @@
+         EditText etPhoneNum = vGroup.findViewById(R.id.etPhoneNum);
+         btn_join= vGroup.findViewById(R.id.button6);
+         btn_live = vGroup.findViewById(R.id.btn_live);
++        btn_hobbys = vGroup.findViewById(R.id.btn_hobbys);
+         CheckBox cb_male = vGroup.findViewById(R.id.check_male);
+         CheckBox cb_female = vGroup.findViewById(R.id.check_female);
+         CheckBox cb_no = vGroup.findViewById(R.id.checkNo);
+         EditText et_Birth = vGroup.findViewById(R.id.etBirth);
+-        EditText etHobby =vGroup.findViewById(R.id.etHobby);
+ 
+         Bundle bundle = getArguments();
++        etPhoneNum.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+ 
+ 
+ 
+@@ -123,11 +125,11 @@
+                 //받은 취미 목록을 차례로 tv에 입력
+                 int totalHobbyCount = list.size();
+                 for (int index =0; index<totalHobbyCount; index++){
+-                    etHobby.append(","+list.get(index));
++                    btn_hobbys.append(","+list.get(index));
+                 }
+ 
+             }else {
+-                etHobby.setText("클릭하세요.");
++                btn_hobbys.setText("클릭하세요.");
+             }
+         }catch (NullPointerException e){
+             Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
+@@ -208,7 +210,7 @@
+             }
+         });
+         //취미선택
+-        etHobby.setOnClickListener(new View.OnClickListener() {
++        btn_hobbys.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+ 
+Index: app/src/main/res/values-mdpi/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <dimen name=\"naver\">60dp</dimen>\r\n    <dimen name=\"kakao\">60dp</dimen>\r\n    <dimen name=\"facebook\">60dp</dimen>\r\n    <dimen name=\"logow\">200dp</dimen>\r\n    <dimen name=\"alarm_x\">60dp</dimen>\r\n    <dimen name=\"coin\">50dp</dimen>\r\n    <dimen name=\"coin2\">50dp</dimen>\r\n    <dimen name=\"coin3\">50dp</dimen>\r\n    <dimen name=\"gift_x\">50dp</dimen>\r\n    <dimen name=\"film_x\">50dp</dimen>\r\n    <dimen name=\"peo_x\">40dp</dimen>\r\n    <dimen name=\"search\">25dp</dimen>\r\n    <dimen name=\"myph\">50dp</dimen>\r\n    <dimen name=\"myph_x\">80dp</dimen>\r\n    <dimen name=\"point\">30dp</dimen>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-mdpi/dimens.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/values-mdpi/dimens.xml	(date 1632543195942)
+@@ -13,6 +13,6 @@
+     <dimen name="peo_x">40dp</dimen>
+     <dimen name="search">25dp</dimen>
+     <dimen name="myph">50dp</dimen>
+-    <dimen name="myph_x">80dp</dimen>
++    <dimen name="myph_x">100dp</dimen>
+     <dimen name="point">30dp</dimen>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/layout/join_start_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:gravity=\"center\"\r\n        android:layout_gravity=\"center\"\r\n        android:text=\"With Me 회원가입\"\r\n        android:textColor=\"@color/Orange\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:textSize=\"25dp\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_gravity=\"center\"\r\n        android:gravity=\"center\"\r\n        android:orientation=\"vertical\">\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:layout_gravity=\"center\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etId\"\r\n                android:layout_width=\"230dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"35dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"아이디\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/button1\"\r\n                android:layout_width=\"90dp\"\r\n                android:layout_height=\"40dp\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:text=\"중복확인\"\r\n                android:textSize=\"12dp\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etPw\"\r\n                android:layout_width=\"230dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"35dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"비밀번호(6자리 이상)\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\" />\r\n\r\n\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etName\"\r\n                android:layout_width=\"170dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:ems=\"10\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\"\r\n                android:hint=\"이름\"\r\n                />\r\n\r\n            <CheckBox\r\n                android:id=\"@+id/check_male\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"남\" />\r\n            <CheckBox\r\n                android:id=\"@+id/check_female\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"여\" />\r\n            <CheckBox\r\n                android:id=\"@+id/checkNo\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"무관\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n        <EditText\r\n            android:id=\"@+id/etNick\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:ems=\"10\"\r\n            android:hint=\"닉네임\"\r\n            android:inputType=\"textPersonName\"\r\n            android:textSize=\"15dp\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etBirth\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:clickable=\"true\"\r\n                android:editable=\"false\"\r\n                android:ems=\"10\"\r\n                android:focusable=\"false\"\r\n                android:hint=\"생년월일\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\" />\r\n        </LinearLayout>\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n        <EditText\r\n            android:id=\"@+id/etAge\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:ems=\"10\"\r\n            android:inputType=\"textPersonName\"\r\n            android:textSize=\"15dp\"\r\n            android:hint=\"나이\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etPhoneNum\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:ems=\"10\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\"\r\n                android:hint=\"휴대폰번호\" />\r\n\r\n\r\n        </LinearLayout>\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n\r\n            <EditText\r\n                android:id=\"@+id/etHobby\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:ems=\"10\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:hint=\"취미분야\" />\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n        <Button\r\n            android:id=\"@+id/btn_live\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:textSize=\"16dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:hint=\"거주지역 선택\"\r\n            />\r\n        <Button\r\n            android:id=\"@+id/button4\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:textSize=\"16dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:hint=\"관심지역 선택\"\r\n            />\r\n\r\n\r\n    </LinearLayout>\r\n\r\n        <Button\r\n            android:id=\"@+id/button6\"\r\n            android:layout_width=\"200dp\"\r\n            android:layout_height=\"45dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:layout_gravity=\"center\"\r\n            android:backgroundTint=\"@color/Orange\"\r\n            android:textSize=\"18dp\"\r\n            android:gravity=\"center\"\r\n            android:text=\"가입하기\"\r\n            />\r\n\r\n\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/join_start_fragment.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/join_start_fragment.xml	(date 1632551782585)
+@@ -16,7 +16,7 @@
+         android:text="With Me 회원가입"
+         android:textColor="@color/Orange"
+         android:layout_marginTop="40dp"
+-        android:textSize="25dp" />
++        android:textSize="60px" />
+ 
+     <LinearLayout
+         android:layout_width="match_parent"
+@@ -29,8 +29,8 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginTop="20dp"
+             android:layout_gravity="center"
++            android:layout_marginTop="20dp"
+             android:orientation="horizontal">
+ 
+             <EditText
+@@ -41,7 +41,7 @@
+                 android:ems="10"
+                 android:hint="아이디"
+                 android:inputType="textPersonName"
+-                android:textSize="15dp" />
++                android:textSize="40px" />
+ 
+             <Button
+                 android:id="@+id/button1"
+@@ -49,7 +49,7 @@
+                 android:layout_height="40dp"
+                 android:backgroundTint="@color/Orange"
+                 android:text="중복확인"
+-                android:textSize="12dp" />
++                android:textSize="35px" />
+ 
+ 
+         </LinearLayout>
+@@ -66,11 +66,9 @@
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="35dp"
+                 android:ems="10"
+-                android:hint="비밀번호(6자리 이상)"
++                android:hint="비밀번호"
+                 android:inputType="textPersonName"
+-                android:textSize="15dp" />
+-
+-
++                android:textSize="40px" />
+ 
+ 
+         </LinearLayout>
+@@ -87,21 +85,22 @@
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="20dp"
+                 android:ems="10"
+-                android:inputType="textPersonName"
+-                android:textSize="15dp"
+                 android:hint="이름"
+-                />
++                android:inputType="textPersonName"
++                android:textSize="40px" />
+ 
+             <CheckBox
+                 android:id="@+id/check_male"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="남" />
++
+             <CheckBox
+                 android:id="@+id/check_female"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="여" />
++
+             <CheckBox
+                 android:id="@+id/checkNo"
+                 android:layout_width="wrap_content"
+@@ -116,15 +115,15 @@
+             android:layout_marginLeft="10dp"
+             android:orientation="horizontal">
+ 
+-        <EditText
+-            android:id="@+id/etNick"
+-            android:layout_width="300dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="20dp"
+-            android:ems="10"
+-            android:hint="닉네임"
+-            android:inputType="textPersonName"
+-            android:textSize="15dp" />
++            <EditText
++                android:id="@+id/etNick"
++                android:layout_width="300dp"
++                android:layout_height="wrap_content"
++                android:layout_marginLeft="20dp"
++                android:ems="10"
++                android:hint="닉네임"
++                android:inputType="textPersonName"
++                android:textSize="40px" />
+         </LinearLayout>
+ 
+         <LinearLayout
+@@ -154,15 +153,15 @@
+             android:layout_marginLeft="10dp"
+             android:orientation="horizontal">
+ 
+-        <EditText
+-            android:id="@+id/etAge"
+-            android:layout_width="300dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="20dp"
+-            android:ems="10"
+-            android:inputType="textPersonName"
+-            android:textSize="15dp"
+-            android:hint="나이" />
++            <EditText
++                android:id="@+id/etAge"
++                android:layout_width="300dp"
++                android:layout_height="wrap_content"
++                android:layout_marginLeft="20dp"
++                android:ems="10"
++                android:hint="나이"
++                android:inputType="textPersonName"
++                android:textSize="40px" />
+ 
+         </LinearLayout>
+ 
+@@ -178,32 +177,39 @@
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="20dp"
+                 android:ems="10"
+-                android:inputType="textPersonName"
+-                android:textSize="15dp"
+-                android:hint="휴대폰번호" />
++                android:hint="휴대폰번호"
++                android:inputType="phone"
++                android:maxLength="13"
++                android:textSize="40px" />
+ 
+ 
+         </LinearLayout>
++
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:orientation="horizontal">
+ 
+-
+-
+-            <EditText
+-                android:id="@+id/etHobby"
++            <Button
++                android:id="@+id/btn_hobbys"
+                 android:layout_width="300dp"
+-                android:layout_height="wrap_content"
+-                android:ems="10"
+-                android:inputType="textPersonName"
+-                android:textSize="15dp"
++                android:layout_height="60dp"
+                 android:layout_marginLeft="20dp"
+-                android:hint="취미분야" />
++                android:layout_marginTop="10dp"
++                android:backgroundTint="@color/gray"
++                android:gravity="center_vertical"
++                android:hint="취미 선택"
++                android:textSize="40px" />
++
+ 
+         </LinearLayout>
+ 
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginLeft="10dp"
++            android:orientation="horizontal">
+ 
+ 
+         <Button
+@@ -211,34 +217,44 @@
+             android:layout_width="300dp"
+             android:layout_height="60dp"
+             android:layout_marginTop="10dp"
+-
+             android:backgroundTint="@color/gray"
+-            android:textSize="16dp"
+             android:gravity="center_vertical"
+             android:hint="거주지역 선택"
+-            />
++            android:layout_marginLeft="20dp"
++            android:textSize="40px" />
++
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginLeft="10dp"
++            android:orientation="horizontal">
++
+         <Button
+             android:id="@+id/button4"
+             android:layout_width="300dp"
+             android:layout_height="60dp"
+             android:layout_marginTop="10dp"
+             android:backgroundTint="@color/gray"
+-            android:textSize="16dp"
+             android:gravity="center_vertical"
+             android:hint="관심지역 선택"
+-            />
++            android:layout_marginLeft="20dp"
++            android:textSize="40px" />
++
++        </LinearLayout>
+ 
+ 
+     </LinearLayout>
+ 
+-        <Button
++    <Button
+             android:id="@+id/button6"
+             android:layout_width="200dp"
+             android:layout_height="45dp"
+             android:layout_marginTop="20dp"
+             android:layout_gravity="center"
+             android:backgroundTint="@color/Orange"
+-            android:textSize="18dp"
++            android:textSize="45px"
+             android:gravity="center"
+             android:text="가입하기"
+             />
+Index: app/src/main/res/layout/select_hobby2_grid_in2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/btn_hbList_in\"\r\n        android:layout_width=\"80dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"클래식\"\r\n        android:textAlignment=\"center\"/>\r\n</LinearLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/select_hobby2_grid_in2.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/select_hobby2_grid_in2.xml	(date 1632545257602)
+@@ -5,8 +5,10 @@
+ 
+     <TextView
+         android:id="@+id/btn_hbList_in"
+-        android:layout_width="80dp"
++        android:layout_width="90dp"
+         android:layout_height="wrap_content"
+         android:text="클래식"
++        android:textSize="50px"
++        android:backgroundTint="@color/yellow"
+         android:textAlignment="center"/>
+ </LinearLayout>
+Index: .idea/runConfigurations.xml
+===================================================================
+--- .idea/runConfigurations.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ .idea/runConfigurations.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/res/layout/coin_fragment_2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"wrap_content\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"horizontal\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:gravity=\"center\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <FrameLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"match_parent\"\r\n            android:layout_gravity=\"center\"\r\n            >\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/coin1\"\r\n                    android:layout_width=\"@dimen/gift_x\"\r\n                    android:layout_height=\"@dimen/gift_x\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"30dp\"\r\n                    app:srcCompat=\"@drawable/gift_x\" />\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textWon1\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"40dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:textSize=\"15dp\"\r\n                    android:text=\"미션 참여하고 포인트 받기\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"30dp\"\r\n                    android:layout_marginTop=\"40dp\"\r\n                    android:textSize=\"12dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"미션참여\" />\r\n            </LinearLayout>\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"70dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/coin2\"\r\n                    android:layout_width=\"@dimen/film_x\"\r\n                    android:layout_height=\"@dimen/film_x\"\r\n                    android:layout_marginLeft=\"18dp\"\r\n                    android:layout_marginTop=\"30dp\"\r\n                    app:srcCompat=\"@drawable/film_x\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textWon2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"40dp\"\r\n                    android:layout_marginLeft=\"12dp\"\r\n                    android:textSize=\"15dp\"\r\n                    android:text=\"영상 시청하고 포인트 받기\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button1\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"30dp\"\r\n                    android:layout_marginTop=\"38dp\"\r\n                    android:textSize=\"12dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"시청하기\" />\r\n            </LinearLayout>\r\n\r\n\r\n\r\n\r\n\r\n\r\n        </FrameLayout>\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/coin_fragment_2.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/coin_fragment_2.xml	(date 1632543195842)
+@@ -38,7 +38,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="40dp"
+                     android:layout_marginLeft="10dp"
+-                    android:textSize="15dp"
++                    android:textSize="40px"
+                     android:text="미션 참여하고 포인트 받기" />
+ 
+                 <Button
+@@ -47,7 +47,7 @@
+                     android:layout_height="40dp"
+                     android:layout_marginLeft="30dp"
+                     android:layout_marginTop="40dp"
+-                    android:textSize="12dp"
++                    android:textSize="35px"
+                     android:backgroundTint="@color/Orange"
+                     android:text="미션참여" />
+             </LinearLayout>
+@@ -71,7 +71,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="40dp"
+                     android:layout_marginLeft="12dp"
+-                    android:textSize="15dp"
++                    android:textSize="40px"
+                     android:text="영상 시청하고 포인트 받기" />
+ 
+                 <Button
+@@ -80,7 +80,7 @@
+                     android:layout_height="40dp"
+                     android:layout_marginLeft="30dp"
+                     android:layout_marginTop="38dp"
+-                    android:textSize="12dp"
++                    android:textSize="35px"
+                     android:backgroundTint="@color/Orange"
+                     android:text="시청하기" />
+             </LinearLayout>
+Index: app/src/main/res/values-xxhdpi/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <dimen name=\"naver\">60dp</dimen>\r\n    <dimen name=\"kakao\">60dp</dimen>\r\n    <dimen name=\"facebook\">60dp</dimen>\r\n    <dimen name=\"logow\">200dp</dimen>\r\n    <dimen name=\"alarm_x\">60dp</dimen>\r\n    <dimen name=\"coin\">50dp</dimen>\r\n    <dimen name=\"coin2\">50dp</dimen>\r\n    <dimen name=\"coin3\">50dp</dimen>\r\n    <dimen name=\"gift_x\">50dp</dimen>\r\n    <dimen name=\"film_x\">50dp</dimen>\r\n    <dimen name=\"peo_x\">40dp</dimen>\r\n    <dimen name=\"search\">25dp</dimen>\r\n    <dimen name=\"myph\">50dp</dimen>\r\n    <dimen name=\"myph_x\">80dp</dimen>\r\n    <dimen name=\"point\">30dp</dimen>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-xxhdpi/dimens.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/values-xxhdpi/dimens.xml	(date 1632543195859)
+@@ -13,7 +13,7 @@
+     <dimen name="peo_x">40dp</dimen>
+     <dimen name="search">25dp</dimen>
+     <dimen name="myph">50dp</dimen>
+-    <dimen name="myph_x">80dp</dimen>
++    <dimen name="myph_x">100dp</dimen>
+     <dimen name="point">30dp</dimen>
+ 
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_alarm.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\">\r\n\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/myph1\"\r\n            android:layout_width=\"50dp\"\r\n            android:layout_height=\"50dp\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_marginTop=\"15dp\"\r\n            app:srcCompat=\"@drawable/myph\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/alarm1\"\r\n            android:layout_width=\"200dp\"\r\n            android:layout_height=\"50dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"13dp\"\r\n            android:text=\"산기대엄홍길님이 등산가자구 모임에 초대하셨습니다.\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/alarm2\"\r\n            android:layout_width=\"50dp\"\r\n            android:layout_height=\"40dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:textSize=\"10dp\"\r\n            android:text=\"15분전\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/gray\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/myph2\"\r\n            android:layout_width=\"50dp\"\r\n            android:layout_height=\"50dp\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_marginTop=\"15dp\"\r\n            app:srcCompat=\"@drawable/myph\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/alarm3\"\r\n            android:layout_width=\"200dp\"\r\n            android:layout_height=\"50dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"13dp\"\r\n            android:text=\"축구가 좋아 모임이 확정되었습니다\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/alarm4\"\r\n            android:layout_width=\"50dp\"\r\n            android:layout_height=\"40dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:textSize=\"10dp\"\r\n            android:text=\"35분전\" />\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_alarm.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/fragment_alarm.xml	(date 1632543195876)
+@@ -29,7 +29,7 @@
+             android:layout_marginTop="20dp"
+             android:layout_marginLeft="10dp"
+             android:textColor="@color/black"
+-            android:textSize="13dp"
++            android:textSize="30px"
+             android:text="산기대엄홍길님이 등산가자구 모임에 초대하셨습니다." />
+ 
+         <TextView
+@@ -37,7 +37,7 @@
+             android:layout_width="50dp"
+             android:layout_height="40dp"
+             android:layout_marginTop="20dp"
+-            android:textSize="10dp"
++            android:textSize="30px"
+             android:text="15분전" />
+ 
+     </LinearLayout>
+@@ -81,8 +81,8 @@
+             android:layout_width="50dp"
+             android:layout_height="40dp"
+             android:layout_marginTop="20dp"
+-            android:textSize="10dp"
+-            android:text="35분전" />
++            android:text="35분전"
++            android:textSize="30px" />
+     </LinearLayout>
+ 
+ 
+Index: app/src/main/java/com/cookandroid/withmetabbar/certify/AgreeStartFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.certify;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.cookandroid.withmetabbar.R;\r\n\r\npublic class AgreeStartFragment extends Fragment {\r\n\r\n    Button btn_yes;\r\n\r\n\r\n\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n\r\n\r\n        ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.agree_start_fragment, container, false);\r\n\r\n        btn_yes= vGroup.findViewById(R.id.btn_yes);\r\n        btn_yes.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                CertifyStartFragment certifyStartFragment= new CertifyStartFragment();\r\n                ((MainActivity2)getActivity()).replaceFragment(certifyStartFragment);\r\n            }\r\n        });\r\n\r\n        return vGroup;\r\n    }\r\n\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/certify/AgreeStartFragment.java	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/java/com/cookandroid/withmetabbar/certify/AgreeStartFragment.java	(date 1632544940808)
+@@ -29,8 +29,8 @@
+         btn_yes.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+-                CertifyStartFragment certifyStartFragment= new CertifyStartFragment();
+-                ((MainActivity2)getActivity()).replaceFragment(certifyStartFragment);
++                JoinStartFragment joinStartFragment= new JoinStartFragment();
++                ((MainActivity2)getActivity()).replaceFragment(joinStartFragment);
+             }
+         });
+ 
+Index: app/src/main/res/layout/certify_start_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"200dp\"\r\n        android:layout_marginBottom=\"20dp\"\r\n        android:textSize=\"20dp\"\r\n        android:gravity=\"center\"\r\n        android:textColor=\"@color/black\"\r\n        android:text=\"전화번호 인증\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:gravity=\"center\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <EditText\r\n            android:id=\"@+id/editText2\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"1\"\r\n            android:ems=\"11\"\r\n            android:inputType=\"textPersonName\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:hint=\"전화번호 입력\"/>\r\n\r\n        <Button\r\n            android:id=\"@+id/button\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"1\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_marginRight=\"20dp\"\r\n            android:backgroundTint=\"@color/Orange\"\r\n            android:text=\"인증\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <EditText\r\n        android:id=\"@+id/editTextTextPersonName4\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textPersonName\"\r\n        android:layout_marginRight=\"20dp\"\r\n        android:layout_marginLeft=\"20dp\"\r\n        android:hint=\"인증번호 입력\"\r\n        />\r\n\r\n    <Button\r\n        android:id=\"@+id/btn_check\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginLeft=\"20dp\"\r\n        android:layout_marginRight=\"20dp\"\r\n        android:textSize=\"18dp\"\r\n        android:backgroundTint=\"@color/Orange\"\r\n        android:text=\"확인\" />\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/certify_start_fragment.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/certify_start_fragment.xml	(date 1632543195895)
+@@ -13,9 +13,9 @@
+         android:layout_height="wrap_content"
+         android:layout_marginTop="200dp"
+         android:layout_marginBottom="20dp"
+-        android:textSize="20dp"
++        android:textSize="60px"
+         android:gravity="center"
+-        android:textColor="@color/black"
++        android:textColor="@color/Orange"
+         android:text="전화번호 인증" />
+ 
+     <LinearLayout
+@@ -32,6 +32,7 @@
+             android:ems="11"
+             android:inputType="textPersonName"
+             android:layout_marginLeft="20dp"
++            android:textSize="40px"
+             android:hint="전화번호 입력"/>
+ 
+         <Button
+@@ -42,6 +43,7 @@
+             android:layout_marginLeft="20dp"
+             android:layout_marginRight="20dp"
+             android:backgroundTint="@color/Orange"
++            android:textSize="40px"
+             android:text="인증" />
+ 
+     </LinearLayout>
+@@ -54,6 +56,7 @@
+         android:inputType="textPersonName"
+         android:layout_marginRight="20dp"
+         android:layout_marginLeft="20dp"
++        android:textSize="40px"
+         android:hint="인증번호 입력"
+         />
+ 
+@@ -63,7 +66,7 @@
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="20dp"
+         android:layout_marginRight="20dp"
+-        android:textSize="18dp"
++        android:textSize="40px"
+         android:backgroundTint="@color/Orange"
+         android:text="확인" />
+ 
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'com.google.gms.google-services'\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.2\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.cookandroid.withmetabbar\"\r\n        minSdkVersion 24\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'com.google.android.gms:play-services-auth:11.2.0'\r\n\r\n    implementation 'com.google.firebase:firebase-auth:20.0.1'\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-storage:20.0.0'\r\n    implementation 'com.google.firebase:firebase-database:20.0.0'\r\n    implementation 'com.google.firebase:firebase-config:21.0.0'\r\n    implementation 'com.github.bumptech.glide:glide:4.9.0'\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n    implementation 'com.firebaseui:firebase-ui-storage:7.2.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'\r\n    testImplementation 'junit:junit:4.+'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/build.gradle	(date 1632543195909)
+@@ -36,6 +36,7 @@
+ }
+ 
+ dependencies {
++    implementation 'de.hdodenhof:circleimageview:2.2.0' //CircleImageView 원형 이미지
+ 
+     implementation 'com.google.android.gms:play-services-auth:11.2.0'
+ 
+Index: app/src/main/res/values-hdpi/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <dimen name=\"naver\">60dp</dimen>\r\n    <dimen name=\"kakao\">60dp</dimen>\r\n    <dimen name=\"facebook\">60dp</dimen>\r\n    <dimen name=\"logow\">200dp</dimen>\r\n    <dimen name=\"alarm_x\">60dp</dimen>\r\n    <dimen name=\"coin\">50dp</dimen>\r\n    <dimen name=\"coin2\">50dp</dimen>\r\n    <dimen name=\"coin3\">50dp</dimen>\r\n    <dimen name=\"gift_x\">50dp</dimen>\r\n    <dimen name=\"film_x\">50dp</dimen>\r\n    <dimen name=\"peo_x\">40dp</dimen>\r\n    <dimen name=\"search\">25dp</dimen>\r\n    <dimen name=\"myph\">50dp</dimen>\r\n    <dimen name=\"myph_x\">80dp</dimen>\r\n    <dimen name=\"point\">30dp</dimen>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-hdpi/dimens.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/values-hdpi/dimens.xml	(date 1632543195925)
+@@ -13,7 +13,7 @@
+     <dimen name="peo_x">40dp</dimen>
+     <dimen name="search">25dp</dimen>
+     <dimen name="myph">50dp</dimen>
+-    <dimen name="myph_x">80dp</dimen>
++    <dimen name="myph_x">100dp</dimen>
+     <dimen name="point">30dp</dimen>
+ 
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_plus.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"fill_parent\"\r\n    android:layout_height=\"fill_parent\"\r\n    android:orientation=\"vertical\" >\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <Gallery\r\n                android:id=\"@+id/gallery1\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:spacing=\"5dp\">\r\n\r\n            </Gallery>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"300dp\"\r\n                android:layout_gravity=\"center\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/imageView7\"\r\n                    android:layout_width=\"300dp\"\r\n                    android:layout_height=\"300dp\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:scaleType=\"fitXY\"\r\n                    app:srcCompat=\"@drawable/camera\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:orientation=\"horizontal\">\r\n\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/textView1\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"bottom\"\r\n                        android:layout_weight=\"1\"\r\n                        android:text=\"방 제목\"\r\n                        android:layout_marginLeft=\"20dp\"\r\n                        android:textSize=\"16dp\" />\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/etTitle\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_weight=\"1\"\r\n                        android:ems=\"10\"\r\n                        android:gravity=\"center\"\r\n                        android:inputType=\"textPersonName\"\r\n                        android:layout_marginRight=\"20dp\"\r\n                        android:text=\"\" />\r\n\r\n                </LinearLayout>\r\n            </LinearLayout>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"해시태그\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:textSize=\"16dp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etHash\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView3\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"취미분야\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:textSize=\"16dp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etHobby\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView4\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"날짜/시간\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:textSize=\"16dp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/Date\"\r\n                    android:layout_width=\"50dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:clickable=\"true\"\r\n                    android:editable=\"false\"\r\n                    android:focusable=\"false\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:textSize=\"16dp\"\r\n                    android:text=\"Date\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/Time\"\r\n                    android:layout_width=\"50dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:clickable=\"true\"\r\n                    android:editable=\"false\"\r\n                    android:focusable=\"false\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:textSize=\"16dp\"\r\n                    android:text=\"Time\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView5\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"나이\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:textSize=\"16dp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etMeetAge\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:maxLines=\"3\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView6\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"모집인원\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:textSize=\"16dp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etNumMem\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"15dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView7\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"성별\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:textSize=\"16dp\" />\r\n\r\n                <CheckBox\r\n                    android:id=\"@+id/check_female\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:buttonTint=\"@color/yellow\"\r\n                    android:text=\"여\" />\r\n\r\n                <CheckBox\r\n                    android:id=\"@+id/check_male\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:buttonTint=\"@color/yellow\"\r\n                    android:text=\"남\" />\r\n\r\n                <CheckBox\r\n                    android:id=\"@+id/checkNo\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:buttonTint=\"@color/yellow\"\r\n                    android:text=\"상관없음\" />\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView8\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"설명\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:textSize=\"16dp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etContent\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView9\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"장소\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:textSize=\"16dp\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etLocate\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:text=\"\"\r\n                    android:hint=\"클릭하세요.\"/>\r\n\r\n            </LinearLayout>\r\n\r\n            <Button\r\n                android:id=\"@+id/btn_meet\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"모임 생성\"\r\n                android:background=\"@drawable/shape\"\r\n                app:backgroundTint=\"@color/Orange\"\r\n                android:layout_marginTop=\"60dp\"\r\n                android:layout_gravity=\"center\"\r\n                android:textSize=\"14dp\"\r\n                />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n    </ScrollView>\r\n\r\n\r\n</LinearLayout>\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_plus.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/fragment_plus.xml	(date 1632543220945)
+@@ -58,7 +58,7 @@
+                         android:layout_weight="1"
+                         android:text="방 제목"
+                         android:layout_marginLeft="20dp"
+-                        android:textSize="16dp" />
++                        android:textSize="40px" />
+ 
+                     <EditText
+                         android:id="@+id/etTitle"
+@@ -90,7 +90,7 @@
+                     android:layout_weight="1"
+                     android:text="해시태그"
+                     android:layout_marginLeft="20dp"
+-                    android:textSize="16dp" />
++                    android:textSize="40px" />
+ 
+                 <EditText
+                     android:id="@+id/etHash"
+@@ -119,7 +119,7 @@
+                     android:layout_weight="1"
+                     android:text="취미분야"
+                     android:layout_marginLeft="20dp"
+-                    android:textSize="16dp" />
++                    android:textSize="40px" />
+ 
+                 <EditText
+                     android:id="@+id/etHobby"
+@@ -148,7 +148,7 @@
+                     android:layout_weight="1"
+                     android:text="날짜/시간"
+                     android:layout_marginLeft="20dp"
+-                    android:textSize="16dp" />
++                    android:textSize="40px" />
+ 
+                 <EditText
+                     android:id="@+id/Date"
+@@ -162,7 +162,7 @@
+                     android:gravity="center"
+                     android:inputType="textPersonName"
+                     android:layout_marginRight="20dp"
+-                    android:textSize="16dp"
++                    android:textSize="40px"
+                     android:text="Date" />
+ 
+                 <EditText
+@@ -177,7 +177,7 @@
+                     android:gravity="center"
+                     android:inputType="textPersonName"
+                     android:layout_marginRight="20dp"
+-                    android:textSize="16dp"
++                    android:textSize="40px"
+                     android:text="Time" />
+ 
+             </LinearLayout>
+@@ -196,7 +196,7 @@
+                     android:layout_weight="1"
+                     android:text="나이"
+                     android:layout_marginLeft="20dp"
+-                    android:textSize="16dp" />
++                    android:textSize="40px" />
+ 
+                 <EditText
+                     android:id="@+id/etMeetAge"
+@@ -226,7 +226,7 @@
+                     android:layout_weight="1"
+                     android:text="모집인원"
+                     android:layout_marginLeft="20dp"
+-                    android:textSize="16dp" />
++                    android:textSize="40px" />
+ 
+                 <EditText
+                     android:id="@+id/etNumMem"
+@@ -256,7 +256,7 @@
+                     android:layout_weight="1"
+                     android:text="성별"
+                     android:layout_marginLeft="20dp"
+-                    android:textSize="16dp" />
++                    android:textSize="40px" />
+ 
+                 <CheckBox
+                     android:id="@+id/check_female"
+@@ -299,7 +299,7 @@
+                     android:layout_weight="1"
+                     android:text="설명"
+                     android:layout_marginLeft="20dp"
+-                    android:textSize="16dp" />
++                    android:textSize="40px" />
+ 
+                 <EditText
+                     android:id="@+id/etContent"
+@@ -328,7 +328,7 @@
+                     android:layout_weight="1"
+                     android:text="장소"
+                     android:layout_marginLeft="20dp"
+-                    android:textSize="16dp" />
++                    android:textSize="40px" />
+ 
+                 <EditText
+                     android:id="@+id/etLocate"
+@@ -353,7 +353,7 @@
+                 app:backgroundTint="@color/Orange"
+                 android:layout_marginTop="60dp"
+                 android:layout_gravity="center"
+-                android:textSize="14dp"
++                android:textSize="45px"
+                 />
+ 
+ 
+Index: app/src/main/res/layout/mypage_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\">\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"150dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/imagemy\"\r\n            android:layout_width=\"@dimen/myph_x\"\r\n            android:layout_height=\"@dimen/myph_x\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:layout_marginTop=\"8dp\"\r\n            app:srcCompat=\"@drawable/myph_x\" />\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:layout_marginLeft=\"5dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_tName\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:text=\"이름:\"\r\n                    android:textSize=\"15dp\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_mName\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:layout_marginLeft=\"5dp\"\r\n                    android:hint=\"이름\"\r\n                    android:textSize=\"15dp\" />\r\n\r\n            </LinearLayout>\r\n\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_tnickname\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:text=\"닉네임:\"\r\n                    android:textSize=\"15dp\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_nickname\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:layout_marginLeft=\"5dp\"\r\n                    android:hint=\"닉네임\"\r\n                    android:textSize=\"15dp\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tintro\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:text=\"소개:\"\r\n                    android:textSize=\"15dp\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/intro\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:layout_marginLeft=\"5dp\"\r\n                    android:hint=\"소개\"\r\n                    android:textSize=\"15dp\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/manner\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"매너온도\"\r\n                    android:layout_marginBottom=\"8dp\"\r\n                    android:textSize=\"15dp\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_ondo\"\r\n                    android:layout_width=\"50dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"140dp\"\r\n                    android:backgroundTint=\"@color/yellow\"\r\n                    android:text=\"확인\" />\r\n            </LinearLayout>\r\n\r\n        </LinearLayout>\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/pointim\"\r\n            android:layout_width=\"@dimen/point\"\r\n            android:layout_height=\"@dimen/point\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_marginTop=\"15dp\"\r\n            app:srcCompat=\"@drawable/point\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/textpoint\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"포인트\"\r\n            android:textSize=\"16dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:textColor=\"@color/black\"/>\r\n\r\n\r\n        <Button\r\n            android:id=\"@+id/charge\"\r\n            android:layout_width=\"50dp\"\r\n            android:layout_height=\"40dp\"\r\n            android:layout_marginLeft=\"185dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:backgroundTint=\"@color/yellow\"\r\n            android:text=\"충전\" />\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/intromodi\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"개인정보 수정\"\r\n            android:textSize=\"16dp\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:layout_marginLeft=\"25dp\"\r\n            android:textColor=\"@color/black\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_change\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"195dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/check\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"본인인증\"\r\n            android:textSize=\"16dp\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:layout_marginLeft=\"25dp\"\r\n            android:textColor=\"@color/black\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_certify\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"230dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/flist\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"친구목록\"\r\n            android:textSize=\"16dp\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:layout_marginLeft=\"25dp\"\r\n            android:textColor=\"@color/black\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_friends_list\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"230dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/block\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"지인차단\"\r\n            android:textSize=\"16dp\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:layout_marginLeft=\"25dp\"\r\n            android:textColor=\"@color/black\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_block\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"230dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/finvite\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"친구초대\"\r\n            android:textSize=\"16dp\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:layout_marginLeft=\"25dp\"\r\n            android:textColor=\"@color/black\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_friends_invite\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_marginLeft=\"230dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/center\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"고객센터\"\r\n            android:textSize=\"16dp\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:layout_marginLeft=\"25dp\"\r\n            android:textColor=\"@color/black\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView7\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"8dp\"\r\n            android:layout_marginTop=\"12dp\"\r\n            android:textSize=\"9dp\"\r\n            android:text=\"평일 오전 9시 ~ 오후 6시 운영\" />\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_center\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"108dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/mypage_fragment.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/mypage_fragment.xml	(date 1632543220986)
+@@ -2,30 +2,33 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
++    android:layout_width="wrap_content"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
++    android:layout_gravity="center"
+     tools:context=".MainActivity">
+ 
+ 
+     <LinearLayout
+-        android:layout_width="match_parent"
++        android:layout_width="wrap_content"
+         android:layout_height="150dp"
+         android:layout_marginTop="10dp"
+         android:orientation="horizontal">
+ 
+-        <ImageView
++        <de.hdodenhof.circleimageview.CircleImageView
+             android:id="@+id/imagemy"
++            android:layout_gravity="center_vertical"
++            android:layout_marginLeft="20dp"
+             android:layout_width="@dimen/myph_x"
+             android:layout_height="@dimen/myph_x"
+-            android:layout_marginLeft="10dp"
+-            android:layout_marginTop="8dp"
+-            app:srcCompat="@drawable/myph_x" />
++            android:src="@drawable/myph_x"/>
++
++
+ 
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+-            android:layout_marginLeft="5dp"
++            android:layout_marginLeft="30dp"
+             android:orientation="vertical">
+ 
+             <LinearLayout
+@@ -40,7 +43,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="8dp"
+                     android:text="이름:"
+-                    android:textSize="15dp" />
++                    android:textSize="40px" />
+ 
+                 <TextView
+                     android:id="@+id/tv_mName"
+@@ -49,7 +52,7 @@
+                     android:layout_marginTop="8dp"
+                     android:layout_marginLeft="5dp"
+                     android:hint="이름"
+-                    android:textSize="15dp" />
++                    android:textSize="40px" />
+ 
+             </LinearLayout>
+ 
+@@ -67,7 +70,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="8dp"
+                     android:text="닉네임:"
+-                    android:textSize="15dp" />
++                    android:textSize="40px" />
+ 
+                 <TextView
+                     android:id="@+id/tv_nickname"
+@@ -76,7 +79,7 @@
+                     android:layout_marginTop="8dp"
+                     android:layout_marginLeft="5dp"
+                     android:hint="닉네임"
+-                    android:textSize="15dp" />
++                    android:textSize="40px" />
+ 
+             </LinearLayout>
+ 
+@@ -92,7 +95,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="8dp"
+                     android:text="소개:"
+-                    android:textSize="15dp" />
++                    android:textSize="40px" />
+ 
+                 <TextView
+                     android:id="@+id/intro"
+@@ -101,11 +104,11 @@
+                     android:layout_marginTop="8dp"
+                     android:layout_marginLeft="5dp"
+                     android:hint="소개"
+-                    android:textSize="15dp" />
++                    android:textSize="40px" />
+             </LinearLayout>
+ 
+             <LinearLayout
+-                android:layout_width="match_parent"
++                android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                 android:orientation="horizontal">
+@@ -116,21 +119,33 @@
+                     android:layout_height="wrap_content"
+                     android:text="매너온도"
+                     android:layout_marginBottom="8dp"
+-                    android:textSize="15dp" />
++                    android:textSize="40px" />
++
++                <Space
++                    android:layout_width="85dp"
++                    android:layout_height="35dp" />
+ 
+                 <Button
+                     android:id="@+id/btn_ondo"
+                     android:layout_width="50dp"
+                     android:layout_height="40dp"
+-                    android:layout_marginLeft="140dp"
+                     android:backgroundTint="@color/yellow"
++                    android:textSize="30px"
+                     android:text="확인" />
++
+             </LinearLayout>
+ 
+         </LinearLayout>
+ 
+     </LinearLayout>
+ 
++    <LinearLayout
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_gravity="center"
++        android:gravity="center"
++        android:orientation="vertical">
++
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+@@ -143,7 +158,7 @@
+     </LinearLayout>
+ 
+     <LinearLayout
+-        android:layout_width="match_parent"
++        android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+ 
+@@ -151,7 +166,6 @@
+             android:id="@+id/pointim"
+             android:layout_width="@dimen/point"
+             android:layout_height="@dimen/point"
+-            android:layout_marginLeft="20dp"
+             android:layout_marginTop="15dp"
+             app:srcCompat="@drawable/point" />
+ 
+@@ -160,20 +174,26 @@
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="포인트"
+-            android:textSize="16dp"
++            android:textSize="40px"
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="10dp"
+             android:textColor="@color/black"/>
++        <Space
++            android:layout_width="210dp"
++            android:layout_height="45dp"/>
++
++
+ 
+ 
+         <Button
+             android:id="@+id/charge"
+             android:layout_width="50dp"
+             android:layout_height="40dp"
+-            android:layout_marginLeft="185dp"
+             android:layout_marginTop="10dp"
+             android:backgroundTint="@color/yellow"
++            android:textSize="30px"
+             android:text="충전" />
++
+     </LinearLayout>
+ 
+     <LinearLayout
+@@ -188,7 +208,7 @@
+     </LinearLayout>
+ 
+     <LinearLayout
+-        android:layout_width="match_parent"
++        android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+ 
+@@ -196,20 +216,22 @@
+             android:id="@+id/intromodi"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:text="개인정보 수정"
+-            android:textSize="16dp"
++            android:text="개인정보"
++            android:textSize="40px"
+             android:layout_marginTop="13dp"
+-            android:layout_marginLeft="25dp"
+             android:textColor="@color/black"/>
++        <Space
++            android:layout_width="260dp"
++            android:layout_height="35dp"/>
+ 
+         <ImageButton
+             android:id="@+id/btn_change"
+             android:layout_width="25dp"
+-            android:layout_height="30dp"
++            android:layout_height="25dp"
+             android:layout_marginTop="10dp"
+-            android:layout_marginLeft="195dp"
+             android:background="@drawable/arrowbtn" />
+ 
++
+     </LinearLayout>
+ 
+     <LinearLayout
+@@ -223,7 +245,7 @@
+ 
+     </LinearLayout>
+     <LinearLayout
+-        android:layout_width="match_parent"
++        android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+ 
+@@ -232,19 +254,22 @@
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="본인인증"
+-            android:textSize="16dp"
++            android:textSize="40px"
+             android:layout_marginTop="13dp"
+-            android:layout_marginLeft="25dp"
+             android:textColor="@color/black"/>
+ 
++        <Space
++            android:layout_width="260dp"
++            android:layout_height="35dp"/>
++
+         <ImageButton
+             android:id="@+id/btn_certify"
+             android:layout_width="25dp"
+-            android:layout_height="30dp"
++            android:layout_height="25dp"
+             android:layout_marginTop="10dp"
+-            android:layout_marginLeft="230dp"
+             android:background="@drawable/arrowbtn" />
+ 
++
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+@@ -257,7 +282,7 @@
+ 
+     </LinearLayout>
+     <LinearLayout
+-        android:layout_width="match_parent"
++        android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+ 
+@@ -266,19 +291,21 @@
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="친구목록"
+-            android:textSize="16dp"
++            android:textSize="40px"
+             android:layout_marginTop="13dp"
+-            android:layout_marginLeft="25dp"
+             android:textColor="@color/black"/>
++        <Space
++            android:layout_width="260dp"
++            android:layout_height="35dp"/>
+ 
+         <ImageButton
+             android:id="@+id/btn_friends_list"
+             android:layout_width="25dp"
+-            android:layout_height="30dp"
++            android:layout_height="25dp"
+             android:layout_marginTop="10dp"
+-            android:layout_marginLeft="230dp"
+             android:background="@drawable/arrowbtn" />
+ 
++
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+@@ -291,7 +318,7 @@
+ 
+     </LinearLayout>
+     <LinearLayout
+-        android:layout_width="match_parent"
++        android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+ 
+@@ -300,19 +327,21 @@
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="지인차단"
+-            android:textSize="16dp"
++            android:textSize="40px"
+             android:layout_marginTop="13dp"
+-            android:layout_marginLeft="25dp"
+             android:textColor="@color/black"/>
++        <Space
++            android:layout_width="260dp"
++            android:layout_height="35dp"/>
+ 
+         <ImageButton
+             android:id="@+id/btn_block"
+             android:layout_width="25dp"
+-            android:layout_height="30dp"
++            android:layout_height="25dp"
+             android:layout_marginTop="10dp"
+-            android:layout_marginLeft="230dp"
+             android:background="@drawable/arrowbtn" />
+ 
++
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+@@ -325,7 +354,7 @@
+ 
+     </LinearLayout>
+     <LinearLayout
+-        android:layout_width="match_parent"
++        android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+ 
+@@ -334,19 +363,23 @@
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="친구초대"
+-            android:textSize="16dp"
++            android:textSize="40px"
+             android:layout_marginTop="13dp"
+-            android:layout_marginLeft="25dp"
++
+             android:textColor="@color/black"/>
++        <Space
++            android:layout_width="260dp"
++            android:layout_height="35dp"/>
+ 
+         <ImageButton
+             android:id="@+id/btn_friends_invite"
+             android:layout_width="25dp"
+-            android:layout_height="30dp"
+-            android:layout_marginLeft="230dp"
++            android:layout_height="25dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/arrowbtn" />
+ 
++
++
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+@@ -358,8 +391,9 @@
+         android:orientation="horizontal">
+ 
+     </LinearLayout>
++
+     <LinearLayout
+-        android:layout_width="match_parent"
++        android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+ 
+@@ -367,29 +401,37 @@
+             android:id="@+id/center"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:text="고객센터"
+-            android:textSize="16dp"
+             android:layout_marginTop="13dp"
+-            android:layout_marginLeft="25dp"
+-            android:textColor="@color/black"/>
++            android:text="고객센터"
++            android:textColor="@color/black"
++            android:textSize="40px" />
+ 
+         <TextView
+             android:id="@+id/textView7"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="8dp"
+             android:layout_marginTop="12dp"
+-            android:textSize="9dp"
+-            android:text="평일 오전 9시 ~ 오후 6시 운영" />
++            android:layout_marginLeft="5dp"
++            android:text="평일 오전 9시 ~ 오후 6시 운영"
++            android:textSize="9dp" />
++
++        <Space
++            android:layout_width="142dp"
++            android:layout_height="35dp"/>
+ 
+         <ImageButton
+             android:id="@+id/btn_center"
+             android:layout_width="25dp"
+-            android:layout_height="30dp"
++            android:layout_height="25dp"
+             android:layout_marginTop="10dp"
+-            android:layout_marginLeft="108dp"
+             android:background="@drawable/arrowbtn" />
+ 
++
++
++
++    </LinearLayout>
++
++
+     </LinearLayout>
+ 
+ 
+Index: app/src/main/res/values-xhdpi/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <dimen name=\"naver\">60dp</dimen>\r\n    <dimen name=\"kakao\">60dp</dimen>\r\n    <dimen name=\"facebook\">60dp</dimen>\r\n    <dimen name=\"logow\">200dp</dimen>\r\n    <dimen name=\"alarm_x\">60dp</dimen>\r\n    <dimen name=\"coin\">50dp</dimen>\r\n    <dimen name=\"coin2\">50dp</dimen>\r\n    <dimen name=\"coin3\">50dp</dimen>\r\n    <dimen name=\"gift_x\">50dp</dimen>\r\n    <dimen name=\"film_x\">50dp</dimen>\r\n    <dimen name=\"peo_x\">40dp</dimen>\r\n    <dimen name=\"search\">25dp</dimen>\r\n    <dimen name=\"myph\">50dp</dimen>\r\n    <dimen name=\"myph_x\">80dp</dimen>\r\n    <dimen name=\"point\">30dp</dimen>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-xhdpi/dimens.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/values-xhdpi/dimens.xml	(date 1632543221004)
+@@ -13,7 +13,7 @@
+     <dimen name="peo_x">40dp</dimen>
+     <dimen name="search">25dp</dimen>
+     <dimen name="myph">50dp</dimen>
+-    <dimen name="myph_x">80dp</dimen>
++    <dimen name="myph_x">100dp</dimen>
+     <dimen name="point">30dp</dimen>
+ 
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/linearLayout\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginTop=\"3dp\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:orientation=\"vertical\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@drawable/search_et_in\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <EditText\r\n                    android:id=\"@+id/editSearch\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_weight=\"8\"\r\n                    android:background=\"@null\"\r\n                    android:hint=\"검색어를 입력하세요.\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_search\"\r\n                    android:layout_width=\"@dimen/search\"\r\n                    android:layout_height=\"@dimen/search\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:background=\"@drawable/search\"\r\n                    />\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n              android:layout_gravity=\"center_horizontal\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_inter\"\r\n                    android:layout_width=\"80dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:background=\"@color/Orange\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:layout_marginTop=\"5dp\"\r\n                    android:textSize=\"13dp\"\r\n                    android:text=\"관심취미\"/>\r\n\r\n\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_all\"\r\n                    android:layout_width=\"80dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:background=\"@color/Orange\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:layout_marginTop=\"5dp\"\r\n                    android:textSize=\"13dp\"\r\n                    android:text=\"모두보기\"/>\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_time\"\r\n                    android:layout_width=\"40dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:background=\"@drawable/calendar\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:layout_marginTop=\"5dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n\r\n                    android:text=\"\"/>\r\n\r\n            </LinearLayout>\r\n\r\n            <ListView\r\n                android:id=\"@+id/listView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:divider=\"#999999\"\r\n                android:dividerHeight=\"1dp\"\r\n                android:visibility=\"gone\"\r\n                >\r\n            </ListView>\r\n\r\n            <androidx.recyclerview.widget.RecyclerView\r\n                android:id=\"@+id/recyclerView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"/>\r\n\r\n        </LinearLayout>\r\n    </LinearLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main_home.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/activity_main_home.xml	(date 1632543221022)
+@@ -65,7 +65,7 @@
+                     android:background="@color/Orange"
+                     android:backgroundTint="@color/Orange"
+                     android:layout_marginTop="5dp"
+-                    android:textSize="13dp"
++                    android:textSize="35px"
+                     android:text="관심취미"/>
+ 
+ 
+@@ -78,7 +78,7 @@
+                     android:background="@color/Orange"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginTop="5dp"
+-                    android:textSize="13dp"
++                    android:textSize="35px"
+                     android:text="모두보기"/>
+ 
+                 <Button
+Index: app/src/main/res/values-xxxhdpi/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <dimen name=\"naver\">60dp</dimen>\r\n    <dimen name=\"kakao\">60dp</dimen>\r\n    <dimen name=\"facebook\">60dp</dimen>\r\n    <dimen name=\"logow\">200dp</dimen>\r\n    <dimen name=\"alarm_x\">60dp</dimen>\r\n    <dimen name=\"coin\">50dp</dimen>\r\n    <dimen name=\"coin2\">50dp</dimen>\r\n    <dimen name=\"coin3\">50dp</dimen>\r\n    <dimen name=\"gift_x\">50dp</dimen>\r\n    <dimen name=\"film_x\">50dp</dimen>\r\n    <dimen name=\"peo_x\">40dp</dimen>\r\n    <dimen name=\"search\">25dp</dimen>\r\n    <dimen name=\"myph\">50dp</dimen>\r\n    <dimen name=\"myph_x\">80dp</dimen>\r\n    <dimen name=\"point\">30dp</dimen>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-xxxhdpi/dimens.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/values-xxxhdpi/dimens.xml	(date 1632543221041)
+@@ -13,7 +13,7 @@
+     <dimen name="peo_x">40dp</dimen>
+     <dimen name="search">25dp</dimen>
+     <dimen name="myph">50dp</dimen>
+-    <dimen name="myph_x">80dp</dimen>
++    <dimen name="myph_x">100dp</dimen>
+     <dimen name="point">30dp</dimen>
+ 
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/layout/coin_fragment_1.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"wrap_content\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"horizontal\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:gravity=\"center\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <FrameLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:layout_gravity=\"center\"\r\n            >\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/coin1\"\r\n                    android:layout_width=\"@dimen/coin\"\r\n                    android:layout_height=\"@dimen/coin\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    app:srcCompat=\"@drawable/coin\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textCoin1\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"35dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:textSize=\"16dp\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:text=\"1000P\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textWon1\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"35dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:text=\"1,000원\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"60dp\"\r\n                    android:layout_marginTop=\"35dp\"\r\n                    android:textSize=\"12dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"충전하기\" />\r\n            </LinearLayout>\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"70dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/coin2\"\r\n                    android:layout_width=\"@dimen/coin\"\r\n                    android:layout_height=\"@dimen/coin\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    app:srcCompat=\"@drawable/coin\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textCoin2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"35dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:textSize=\"16dp\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:text=\"3900P\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textWon2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"35dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:text=\"3,900원\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button1\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"60dp\"\r\n                    android:layout_marginTop=\"35dp\"\r\n                    android:textSize=\"12dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"충전하기\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"145dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/imageCoin3\"\r\n                    android:layout_width=\"@dimen/coin2\"\r\n                    android:layout_height=\"@dimen/coin2\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"10dp\"\r\n                    app:srcCompat=\"@drawable/coin2\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textCoin3\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:textSize=\"16dp\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:text=\"5900P\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textWon3\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:text=\"5,900원\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button4\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"60dp\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:textSize=\"12dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"충전하기\" />\r\n            </LinearLayout>\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"220dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/coin4\"\r\n                    android:layout_width=\"@dimen/coin2\"\r\n                    android:layout_height=\"@dimen/coin2\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_marginTop=\"10dp\"\r\n                    app:srcCompat=\"@drawable/coin2\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textCoin4\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:textSize=\"16dp\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:text=\"11000P\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textWon4\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:text=\"11,000원\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button5\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"45dp\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:textSize=\"12dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"충전하기\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"300dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/coin5\"\r\n                    android:layout_width=\"60dp\"\r\n                    android:layout_height=\"60dp\"\r\n                    android:layout_marginLeft=\"15dp\"\r\n                    android:layout_marginTop=\"10dp\"\r\n                    app:srcCompat=\"@drawable/coin3\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textCoin5\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginLeft=\"5dp\"\r\n                    android:textSize=\"16dp\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:text=\"35000P\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textWon5\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:text=\"35,000원\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button6\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"45dp\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:textSize=\"12dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"충전하기\" />\r\n            </LinearLayout>\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"380dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/coin6\"\r\n                    android:layout_width=\"60dp\"\r\n                    android:layout_height=\"60dp\"\r\n                    android:layout_marginLeft=\"15dp\"\r\n                    android:layout_marginTop=\"10dp\"\r\n                    app:srcCompat=\"@drawable/coin3\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textCoin6\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginLeft=\"5dp\"\r\n                    android:textSize=\"16dp\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:text=\"59000P\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textWon6\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:layout_marginLeft=\"10dp\"\r\n                    android:text=\"57,000원\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button7\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_marginLeft=\"45dp\"\r\n                    android:layout_marginTop=\"25dp\"\r\n                    android:textSize=\"12dp\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"충전하기\" />\r\n            </LinearLayout>\r\n        </FrameLayout>\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/coin_fragment_1.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/coin_fragment_1.xml	(date 1632543221061)
+@@ -37,7 +37,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="35dp"
+                     android:layout_marginLeft="10dp"
+-                    android:textSize="16dp"
++                    android:textSize="45px"
+                     android:textColor="@color/black"
+                     android:text="1000P" />
+ 
+@@ -47,6 +47,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="35dp"
+                     android:layout_marginLeft="10dp"
++                    android:textSize="40px"
+                     android:text="1,000원" />
+ 
+                 <Button
+@@ -55,7 +56,7 @@
+                     android:layout_height="40dp"
+                     android:layout_marginLeft="60dp"
+                     android:layout_marginTop="35dp"
+-                    android:textSize="12dp"
++                    android:textSize="35px"
+                     android:backgroundTint="@color/Orange"
+                     android:text="충전하기" />
+             </LinearLayout>
+@@ -79,7 +80,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="35dp"
+                     android:layout_marginLeft="10dp"
+-                    android:textSize="16dp"
++                    android:textSize="45px"
+                     android:textColor="@color/black"
+                     android:text="3900P" />
+ 
+@@ -89,6 +90,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="35dp"
+                     android:layout_marginLeft="10dp"
++                    android:textSize="40px"
+                     android:text="3,900원" />
+ 
+                 <Button
+@@ -97,7 +99,7 @@
+                     android:layout_height="40dp"
+                     android:layout_marginLeft="60dp"
+                     android:layout_marginTop="35dp"
+-                    android:textSize="12dp"
++                    android:textSize="35px"
+                     android:backgroundTint="@color/Orange"
+                     android:text="충전하기" />
+             </LinearLayout>
+@@ -122,7 +124,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="25dp"
+                     android:layout_marginLeft="10dp"
+-                    android:textSize="16dp"
++                    android:textSize="45px"
+                     android:textColor="@color/black"
+                     android:text="5900P" />
+ 
+@@ -132,6 +134,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="25dp"
+                     android:layout_marginLeft="10dp"
++                    android:textSize="40px"
+                     android:text="5,900원" />
+ 
+                 <Button
+@@ -140,7 +143,7 @@
+                     android:layout_height="40dp"
+                     android:layout_marginLeft="60dp"
+                     android:layout_marginTop="25dp"
+-                    android:textSize="12dp"
++                    android:textSize="35px"
+                     android:backgroundTint="@color/Orange"
+                     android:text="충전하기" />
+             </LinearLayout>
+@@ -164,7 +167,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="25dp"
+                     android:layout_marginLeft="10dp"
+-                    android:textSize="16dp"
++                    android:textSize="45px"
+                     android:textColor="@color/black"
+                     android:text="11000P" />
+ 
+@@ -174,6 +177,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="25dp"
+                     android:layout_marginLeft="10dp"
++                    android:textSize="40px"
+                     android:text="11,000원" />
+ 
+                 <Button
+@@ -182,7 +186,7 @@
+                     android:layout_height="40dp"
+                     android:layout_marginLeft="45dp"
+                     android:layout_marginTop="25dp"
+-                    android:textSize="12dp"
++                    android:textSize="35px"
+                     android:backgroundTint="@color/Orange"
+                     android:text="충전하기" />
+             </LinearLayout>
+@@ -207,7 +211,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="25dp"
+                     android:layout_marginLeft="5dp"
+-                    android:textSize="16dp"
++                    android:textSize="45px"
+                     android:textColor="@color/black"
+                     android:text="35000P" />
+ 
+@@ -217,6 +221,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="25dp"
+                     android:layout_marginLeft="10dp"
++                    android:textSize="40px"
+                     android:text="35,000원" />
+ 
+                 <Button
+@@ -225,7 +230,7 @@
+                     android:layout_height="40dp"
+                     android:layout_marginLeft="45dp"
+                     android:layout_marginTop="25dp"
+-                    android:textSize="12dp"
++                    android:textSize="35px"
+                     android:backgroundTint="@color/Orange"
+                     android:text="충전하기" />
+             </LinearLayout>
+@@ -247,11 +252,11 @@
+                     android:id="@+id/textCoin6"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+-                    android:layout_marginTop="25dp"
+                     android:layout_marginLeft="5dp"
+-                    android:textSize="16dp"
++                    android:layout_marginTop="25dp"
++                    android:text="59000P"
+                     android:textColor="@color/black"
+-                    android:text="59000P" />
++                    android:textSize="45px" />
+ 
+                 <TextView
+                     android:id="@+id/textWon6"
+@@ -259,6 +264,7 @@
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="25dp"
+                     android:layout_marginLeft="10dp"
++                    android:textSize="40px"
+                     android:text="57,000원" />
+ 
+                 <Button
+@@ -267,7 +273,7 @@
+                     android:layout_height="40dp"
+                     android:layout_marginLeft="45dp"
+                     android:layout_marginTop="25dp"
+-                    android:textSize="12dp"
++                    android:textSize="35px"
+                     android:backgroundTint="@color/Orange"
+                     android:text="충전하기" />
+             </LinearLayout>
+Index: app/src/main/res/layout/fragment_ondo.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:gravity=\"center\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:background=\"@drawable/shape\"\r\n        android:backgroundTint=\"@color/yellow\"\r\n        android:layout_gravity=\"center\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"15dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"16dp\"\r\n            android:text=\"모임명:\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView2\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:textSize=\"16dp\"\r\n            android:text=\"등산가보자구\" />\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"60dp\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:layout_marginLeft=\"20dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/image1\"\r\n            android:layout_width=\"@dimen/myph\"\r\n            android:layout_height=\"@dimen/myph\"\r\n            app:srcCompat=\"@drawable/myph\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/text1\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"15dp\"\r\n            android:text=\"마운틴뷰\" />\r\n\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"45dp\"\r\n        android:layout_marginTop=\"2dp\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <SeekBar\r\n            android:progress=\"5\"\r\n            android:max=\"10\"\r\n            android:thumb=\"@drawable/seekbar_seekbar1_thumb\"\r\n            android:progressDrawable=\"@drawable/seekbar_seekbar1\"\r\n            android:layout_marginTop=\"2dp\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_width=\"350dp\"\r\n            android:layout_height=\"wrap_content\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/text2\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"330dp\"\r\n            android:textSize=\"15dp\"\r\n            android:text=\"36.5\" />\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"60dp\"\r\n        android:layout_marginTop=\"12dp\"\r\n        android:layout_marginLeft=\"20dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/image2\"\r\n            android:layout_width=\"@dimen/myph\"\r\n            android:layout_height=\"@dimen/myph\"\r\n            app:srcCompat=\"@drawable/myph\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/text3\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"15dp\"\r\n            android:text=\"등산조아\" />\r\n\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"45dp\"\r\n        android:layout_marginTop=\"2dp\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <SeekBar\r\n            android:progress=\"5\"\r\n            android:max=\"10\"\r\n            android:thumb=\"@drawable/seekbar_seekbar1_thumb\"\r\n            android:progressDrawable=\"@drawable/seekbar_seekbar1\"\r\n            android:layout_marginTop=\"2dp\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_width=\"350dp\"\r\n            android:layout_height=\"wrap_content\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/text4\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"330dp\"\r\n            android:textSize=\"15dp\"\r\n            android:text=\"36.5\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/btn_ondo_check\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_gravity=\"center\"\r\n        android:backgroundTint=\"@color/Orange\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:textSize=\"18dp\"\r\n        android:text=\"확인\" />\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_ondo.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/fragment_ondo.xml	(date 1632543221082)
+@@ -23,7 +23,7 @@
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="15dp"
+             android:textColor="@color/black"
+-            android:textSize="16dp"
++            android:textSize="45px"
+             android:text="모임명:" />
+ 
+         <TextView
+@@ -31,7 +31,7 @@
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+-            android:textSize="16dp"
++            android:textSize="45px"
+             android:text="등산가보자구" />
+     </LinearLayout>
+ 
+@@ -55,7 +55,7 @@
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="10dp"
+             android:textColor="@color/black"
+-            android:textSize="15dp"
++            android:textSize="40px"
+             android:text="마운틴뷰" />
+ 
+ 
+@@ -82,7 +82,7 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="330dp"
+-            android:textSize="15dp"
++            android:textSize="40px"
+             android:text="36.5" />
+     </LinearLayout>
+ 
+@@ -106,7 +106,7 @@
+             android:layout_marginTop="10dp"
+             android:layout_marginLeft="10dp"
+             android:textColor="@color/black"
+-            android:textSize="15dp"
++            android:textSize="40px"
+             android:text="등산조아" />
+ 
+ 
+@@ -134,7 +134,7 @@
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="330dp"
+             android:textSize="15dp"
+-            android:text="36.5" />
++            android:text="40px" />
+ 
+     </LinearLayout>
+ 
+@@ -145,7 +145,7 @@
+         android:layout_gravity="center"
+         android:backgroundTint="@color/Orange"
+         android:layout_marginTop="20dp"
+-        android:textSize="18dp"
++        android:textSize="45px"
+         android:text="확인" />
+ 
+ 
+Index: app/src/main/res/layout/fragment_friends_invite.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\">\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_gravity=\"center\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"center\"\r\n            android:layout_gravity=\"center\"\r\n            android:text=\"친구를 With Me 해보세요\"\r\n            android:textColor=\"@color/Orange\"\r\n            android:layout_marginTop=\"40dp\"\r\n            android:textSize=\"20dp\" />\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"40dp\"\r\n            android:gravity=\"center\"\r\n            android:layout_marginTop=\"50dp\"\r\n            android:background=\"@drawable/shape\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/friend1\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\"\r\n                android:textSize=\"16dp\"\r\n                android:gravity=\"center\"\r\n                android:textColor=\"@color/black\"\r\n                android:text=\"산기대엄홍길\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/btn1\"\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginRight=\"40dp\"\r\n                android:layout_marginLeft=\"50dp\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:textSize=\"14dp\"\r\n                android:text=\"초대\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"40dp\"\r\n            android:gravity=\"center\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/shape\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/friend2\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\"\r\n                android:textSize=\"16dp\"\r\n                android:gravity=\"center\"\r\n                android:textColor=\"@color/black\"\r\n                android:text=\"아이디\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/btn2\"\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginRight=\"40dp\"\r\n                android:layout_marginLeft=\"50dp\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:textSize=\"14dp\"\r\n                android:text=\"초대\" />\r\n        </LinearLayout>\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"40dp\"\r\n            android:gravity=\"center\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/shape\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/friend3\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\"\r\n                android:textSize=\"16dp\"\r\n                android:gravity=\"center\"\r\n                android:textColor=\"@color/black\"\r\n                android:text=\"아이디\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/btn3\"\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginRight=\"40dp\"\r\n                android:layout_marginLeft=\"50dp\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:textSize=\"14dp\"\r\n                android:text=\"초대\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"40dp\"\r\n            android:gravity=\"center\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/shape\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/friend4\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\"\r\n                android:textSize=\"16dp\"\r\n                android:gravity=\"center\"\r\n                android:textColor=\"@color/black\"\r\n                android:text=\"아이디\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/btn4\"\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginRight=\"40dp\"\r\n                android:layout_marginLeft=\"50dp\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:textSize=\"14dp\"\r\n                android:text=\"초대\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"40dp\"\r\n            android:gravity=\"center\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/shape\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/friend5\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\"\r\n                android:textSize=\"16dp\"\r\n                android:gravity=\"center\"\r\n                android:textColor=\"@color/black\"\r\n                android:text=\"아이디\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/btn5\"\r\n                android:layout_width=\"60dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginRight=\"40dp\"\r\n                android:layout_marginLeft=\"50dp\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:textSize=\"14dp\"\r\n                android:text=\"초대\" />\r\n        </LinearLayout>\r\n    </LinearLayout>\r\n\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_friends_invite.xml	(revision e48b93fe38f824eda8d69cdd390d3f550ddff0b2)
++++ app/src/main/res/layout/fragment_friends_invite.xml	(date 1632543221101)
+@@ -21,7 +21,7 @@
+             android:text="친구를 With Me 해보세요"
+             android:textColor="@color/Orange"
+             android:layout_marginTop="40dp"
+-            android:textSize="20dp" />
++            android:textSize="50px" />
+ 
+         <LinearLayout
+             android:layout_width="match_parent"
+@@ -38,7 +38,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+-                android:textSize="16dp"
++                android:textSize="40px"
+                 android:gravity="center"
+                 android:textColor="@color/black"
+                 android:text="산기대엄홍길" />
+@@ -50,7 +50,7 @@
+                 android:layout_marginRight="40dp"
+                 android:layout_marginLeft="50dp"
+                 android:backgroundTint="@color/Orange"
+-                android:textSize="14dp"
++                android:textSize="35px"
+                 android:text="초대" />
+         </LinearLayout>
+ 
+@@ -69,7 +69,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+-                android:textSize="16dp"
++                android:textSize="40px"
+                 android:gravity="center"
+                 android:textColor="@color/black"
+                 android:text="아이디" />
+@@ -81,7 +81,7 @@
+                 android:layout_marginRight="40dp"
+                 android:layout_marginLeft="50dp"
+                 android:backgroundTint="@color/Orange"
+-                android:textSize="14dp"
++                android:textSize="35px"
+                 android:text="초대" />
+         </LinearLayout>
+         <LinearLayout
+@@ -99,7 +99,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+-                android:textSize="16dp"
++                android:textSize="40px"
+                 android:gravity="center"
+                 android:textColor="@color/black"
+                 android:text="아이디" />
+@@ -111,7 +111,7 @@
+                 android:layout_marginRight="40dp"
+                 android:layout_marginLeft="50dp"
+                 android:backgroundTint="@color/Orange"
+-                android:textSize="14dp"
++                android:textSize="35px"
+                 android:text="초대" />
+         </LinearLayout>
+ 
+@@ -130,7 +130,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+-                android:textSize="16dp"
++                android:textSize="40px"
+                 android:gravity="center"
+                 android:textColor="@color/black"
+                 android:text="아이디" />
+@@ -142,7 +142,7 @@
+                 android:layout_marginRight="40dp"
+                 android:layout_marginLeft="50dp"
+                 android:backgroundTint="@color/Orange"
+-                android:textSize="14dp"
++                android:textSize="35px"
+                 android:text="초대" />
+         </LinearLayout>
+ 
+@@ -161,7 +161,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+-                android:textSize="16dp"
++                android:textSize="40px"
+                 android:gravity="center"
+                 android:textColor="@color/black"
+                 android:text="아이디" />
+@@ -173,7 +173,7 @@
+                 android:layout_marginRight="40dp"
+                 android:layout_marginLeft="50dp"
+                 android:backgroundTint="@color/Orange"
+-                android:textSize="14dp"
++                android:textSize="35px"
+                 android:text="초대" />
+         </LinearLayout>
+     </LinearLayout>
