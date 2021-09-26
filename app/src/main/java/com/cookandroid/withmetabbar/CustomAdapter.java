@@ -128,6 +128,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                     ChatModel chatModel = new ChatModel();
                                     userCount = chatModel.userCount;//userCount에 대입.
 
+
+
                                     boolean agePass = memberObj.mAge>arrayList.get(position).getMeetAge();
                                     boolean genPass = memberObj.mGen>=arrayList.get(position).getMeetGen() || (arrayList.get(position).getMeetGen()==0) ;
                                     boolean numMemberPass =( userCount < arrayList.get(position).getNumMember() );
