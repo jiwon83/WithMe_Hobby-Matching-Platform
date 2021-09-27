@@ -119,14 +119,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                             memberObj.mAge =member.mAge;
 
 
+                            List<String> keysChatroomUsers = new ArrayList<>();//chatrooms - uid -users 의 uid 값들을 답을 리스트
                             //구조변경
                             //채팅방에서 userCount 받아오기 chatrooms - chatroom uid(=meet uid)
-                            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid).addListenerForSingleValueEvent(new ValueEventListener() {
+                            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-                                    ChatModel chatModel = new ChatModel();
-                                    userCount = chatModel.userCount;//userCount에 대입.
+
+                                    for (DataSnapshot item : snapshot.getChildren()){
+                                        keysChatroomUsers.add(item.getKey());
+                                    }
+                                    userCount = keysChatroomUsers.size(); //chatroom에 있는 user의 수
+//                                    ChatModel chatModel = new ChatModel();
+//                                    userCount = chatModel.userCount;//userCount에 대입.
 
 
 
@@ -162,13 +168,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                         }else {
 
                                             //조건 불만족시 처리
-                                            if ((memberObj.mAge==arrayList.get(position).getMeetAge())==false){
+                                            if (agePass==false){
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                                                 dialog = builder.setMessage("모임 연령을 확인하세요. 모임연령: "+arrayList.get(position).getMeetAge())
                                                         .setNegativeButton("OK", null)
                                                         .create();
                                                 dialog.show();
-                                            }else if ((memberObj.mGen==(arrayList.get(position).getMeetGen())) ==false ){
+                                            }else if (genPass ==false ){
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                                                 dialog = builder.setMessage("모임 성별을 확인하세요.")
                                                         .setNegativeButton("OK", null)
