@@ -32,6 +32,7 @@ import com.cookandroid.withmetabbar.MainActivityWebView;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
+import com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -75,6 +76,7 @@ public class JoinStartFragment extends Fragment {
     private ImageView imageView, imageView7;
     private Uri imageUri;//모임이미지
     private MediaPlayer MP;
+    private static final int SELECT_HOBBY = 30000;
 
 
 
@@ -109,6 +111,34 @@ public class JoinStartFragment extends Fragment {
                     String address = data.getExtras().getString("address");
                     if (data != null){
                         btn_live.setText(address);
+                        //address =data;
+
+
+                    }
+
+
+                }
+                break;
+
+        }
+        switch(requestCode){
+
+            case SELECT_HOBBY:
+
+                if(resultCode == RESULT_OK){
+
+
+
+                    list = data.getExtras().getStringArrayList("hobby");
+                    if (data != null){
+                        //list = bundle.getStringArrayList("hobby");
+                        //Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
+                        //받은 취미 목록을 차례로 tv에 입력
+                        int totalHobbyCount = list.size();
+                        for (int index =0; index<totalHobbyCount; index++){
+                            btn_hobbys.append(","+list.get(index));
+                        }
+
                         //address =data;
 
 
@@ -254,34 +284,34 @@ public class JoinStartFragment extends Fragment {
 
 
         //취미목록 setText
-        try {
-            if (bundle.getStringArrayList("hobby")!=null){
-                list = bundle.getStringArrayList("hobby");
-                Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
-                //받은 취미 목록을 차례로 tv에 입력
-                int totalHobbyCount = list.size();
-                for (int index =0; index<totalHobbyCount; index++){
-                    btn_hobbys.append(","+list.get(index));
-                }
-
-            }else {
-                btn_hobbys.setText("클릭하세요.");
-            }
-        }catch (NullPointerException e){
-            Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
-        }
-
-        //주소 setText
-        try {
-            if (bundle.getString("address") !=null){
-                btn_live.setText(bundle.getString("address"));
-                Log.d("address",bundle.getString("address"));
-
-            }
-
-        }catch (Exception e){
-            Toast.makeText(getContext(),"address error",Toast.LENGTH_SHORT);
-        }
+//        try {
+//            if (bundle.getStringArrayList("hobby")!=null){
+//                list = bundle.getStringArrayList("hobby");
+//                Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
+//                //받은 취미 목록을 차례로 tv에 입력
+//                int totalHobbyCount = list.size();
+//                for (int index =0; index<totalHobbyCount; index++){
+//                    btn_hobbys.append(","+list.get(index));
+//                }
+//
+//            }else {
+//                btn_hobbys.setText("클릭하세요.");
+//            }
+//        }catch (NullPointerException e){
+//            Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
+//        }
+//
+//        //주소 setText
+//        try {
+//            if (bundle.getString("address") !=null){
+//                btn_live.setText(bundle.getString("address"));
+//                Log.d("address",bundle.getString("address"));
+//
+//            }
+//
+//        }catch (Exception e){
+//            Toast.makeText(getContext(),"address error",Toast.LENGTH_SHORT);
+//        }
 
 
         //거주지역선택
@@ -352,8 +382,11 @@ public class JoinStartFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                FragmentSelectHobby2 fragmentSelectHobby2= new FragmentSelectHobby2();
-                ((MainActivity2)getActivity()).addFragment(fragmentSelectHobby2);
+                Intent i = new Intent(getContext(), FragmentPlusSelectHobby.class);
+                startActivityForResult(i, SELECT_HOBBY);//
+
+//                FragmentSelectHobby2 fragmentSelectHobby2= new FragmentSelectHobby2();
+//                ((MainActivity2)getActivity()).addFragment(fragmentSelectHobby2);
 
             }
         });

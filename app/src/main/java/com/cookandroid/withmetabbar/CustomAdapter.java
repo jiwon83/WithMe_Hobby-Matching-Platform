@@ -40,7 +40,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private final ArrayList<com.cookandroid.withmetabbar.model.Meet> arrayList;
     private AlertDialog dialog;
     private final Context context;
-    private int userCount=0;
+    private int userCount=1;
     private Member memberObj = new Member(); //맴버객체 생성
 
     String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();//채팅방 구현
@@ -131,9 +131,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                         keysChatroomUsers.add(item.getKey());
                                     }
                                     userCount = keysChatroomUsers.size(); //chatroom에 있는 user의 수
-//                                    ChatModel chatModel = new ChatModel();
-//                                    userCount = chatModel.userCount;//userCount에 대입.
-
 
 
                                     boolean agePass = memberObj.mAge>arrayList.get(position).getMeetAge();

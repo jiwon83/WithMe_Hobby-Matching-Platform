@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -48,7 +49,7 @@ import static android.graphics.Color.MAGENTA;
 import static android.graphics.Color.WHITE;
 import static android.graphics.Color.YELLOW;
 
-public class FragmentPlusSelectHobby extends Fragment implements OnItemClick{
+public class FragmentPlusSelectHobby extends AppCompatActivity implements OnItemClick{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -98,30 +99,16 @@ public class FragmentPlusSelectHobby extends Fragment implements OnItemClick{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            selectedHobbyBig = getArguments().getString(ARG_PARAM1);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        setContentView(R.layout.fragment_select_hobby2);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        ViewGroup vg =  (ViewGroup)inflater.inflate(R.layout.fragment_select_hobby2, container, false);
+        tv=findViewById(R.id.textView);
+        progressBar=findViewById(R.id.progressBar);
+        btnFinish= findViewById(R.id.selectHobby2_btn_next);
 
-        //imgBtn = vg.findViewById(R.id.imageButton);
-        tv=vg.findViewById(R.id.textView);
-        progressBar=vg.findViewById(R.id.progressBar);
-        btnFinish= vg.findViewById(R.id.selectHobby2_btn_next);
-
-        tv.setText("취미 분야 선택 : "+selectedHobbyBig);
+        tv.setText("취미 분야 선택 ");
 
 
-        //Log.d("selectedHobbyBig",selectedHobbyBig);
-        //final GridView gridView= vg.findViewById(R.id.gridView);
-        //ViewGroup vg2 =  (ViewGroup)inflater.inflate(R.layout.select_hobby_grid_in, container, false);
-        //iv2= vg2.findViewById(R.id.imageView_sel_hb);
+
 
 //        int[] img ={
 //                R.drawable.hobby_music,R.drawable.hb_craft,R.drawable.hb_sport
@@ -164,12 +151,12 @@ public class FragmentPlusSelectHobby extends Fragment implements OnItemClick{
         this.initializeData();
         this.initializeData2();
 
-        RecyclerView view = vg.findViewById(R.id.recyclerViewVertical);
+        RecyclerView view = findViewById(R.id.recyclerViewVertical);
 
-        VerticalAdapter verticalAdapter = new VerticalAdapter(getContext(), allHobbyList, HobbyBigList2,this);
+        VerticalAdapter verticalAdapter = new VerticalAdapter(getApplicationContext(), allHobbyList, HobbyBigList2,this);
         //여기의 this는 이 클래스 자체를 의미한다. 아래의 OnItemClick 을 override한 onClick()메서드가 실행되어야 하기 때문이다.
         view.setHasFixedSize(true);
-        view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        view.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         view.setAdapter(verticalAdapter);
 
 
@@ -179,9 +166,19 @@ public class FragmentPlusSelectHobby extends Fragment implements OnItemClick{
             public void onClick(View v) {
 
                 Bundle bundle = new Bundle();
+                Intent intent = new Intent();//startActivity()를 할것이 아니므로 그냥 빈 인텐트로 만듦
                 bundle.putStringArrayList("hobby", list);
-                FragmentPlus fragmentPlus = new FragmentPlus();
-                fragmentPlus.setArguments(bundle);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+                finish();
+//                FragmentPlus fragmentPlus = new FragmentPlus();
+//                fragmentPlus.setArguments(bundle);
+
+
+                //취미 result api 구현
+//                Bundle result = new Bundle();
+//                result.putStringArrayList("bundleKey", list);
+//                getParentFragmentManager().setFragmentResult("requestKey",result);//fragmentPlus의 fragmentManager에 전달
 
 
                 //hide & show
@@ -194,53 +191,154 @@ public class FragmentPlusSelectHobby extends Fragment implements OnItemClick{
                 //FragmentPlus fragmentPlus = new FragmentPlus();
 
                 //replace
-                ((MainActivity)getActivity()).replaceFragment(fragmentPlus);
+                //((MainActivity)getActivity()).replaceFragment(fragmentPlus);
 
 
             }
         });
 
-        //데이터 저장을 위한 객체 참조
-//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference ref = database.getReference();
-//        DatabaseReference usersRef = ref.child("users");
-//        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid
-//        DatabaseReference hopperRef = usersRef.child(uid); //  /users/uid
 
-        //push 데이터 저장
-//        DatabaseReference pushRef = hopperRef.child("hobby");
-//        pushRef.push().setValue(new Hobby("탁구"));
-//        pushRef.push().setValue(new Hobby("배구"));
+    }
 
-        //update 데이터 저장
-//        Map<String, Object> hopperUpdates = new HashMap<>();
-//        hopperUpdates.put("hobby1", "베이킹");
-//        hopperUpdates.put("hobby2", new Hobby("공예"));
-//        hopperUpdates.put("hobby2", new Hobby("베이킹"));
-        //hopperUpdates.put("hobby", hobbyListTest);
-//        hopperRef.updateChildren(hopperUpdates); //데이터 업데이트
-
-
-
-//        Bundle data = getArguments();
-//        String data1 = data.getString("selectedList");
-//        pushRef.push().setValue(new Hobby(data1));
-
-        //선택한 hobby값을 가져오기 위한, 커스텀 리스너 객체 생성 및 전달
-//        HorizontalAdapter horizontalAdapter= new HorizontalAdapter();
-//        horizontalAdapter.setOnItemClickListener(new HorizontalAdapter.OnItemClickListener() {
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        ViewGroup vg =  (ViewGroup)inflater.inflate(R.layout.fragment_select_hobby2, container, false);
+//
+//        //imgBtn = vg.findViewById(R.id.imageButton);
+//        tv=vg.findViewById(R.id.textView);
+//        progressBar=vg.findViewById(R.id.progressBar);
+//        btnFinish= vg.findViewById(R.id.selectHobby2_btn_next);
+//
+//        tv.setText("취미 분야 선택 ");
+//
+//
+//
+//
+////        int[] img ={
+////                R.drawable.hobby_music,R.drawable.hb_craft,R.drawable.hb_sport
+////
+////        };
+//
+//
+//
+//        //바로 해보기
+//        ArrayList<ArrayList<String>> hbLists = new ArrayList<ArrayList<String>>();
+//
+//        ArrayList<String> hbList_music = new ArrayList<>();
+//        hbList_music.add("음악");
+//        hbList_music.add("클래식");
+//        hbList_music.add("k-pop");
+//        hbList_music.add("뉴에이지");
+//        hbList_music.add("발라드");
+//        hbList_music.add("랩/힙합");
+//        hbList_music.add("인디음악");
+//        hbList_music.add("록/메탈");
+//        hbList_music.add("포크/블루스");
+//
+//        //2차원배열에 답기
+//        hbLists.add(hbList_music);
+//
+//        //tv.setText((CharSequence) hbLists.get(0).get(0));
+//
+//        //응용참고
+//        /*
+//        System.out.println(datas.size());
+//        	//결과: 3
+//		System.out.println(datas.toString());
+//        	//결과: [[1, 2, 3], [11, 22, 33], [111, 222, 333]]
+//
+//		System.out.println(datas.get(0));
+//		//결과: [1, 2, 3]
+//         */
+//
+//        //리사이클러뷰
+//        this.initializeData();
+//        this.initializeData2();
+//
+//        RecyclerView view = vg.findViewById(R.id.recyclerViewVertical);
+//
+//        VerticalAdapter verticalAdapter = new VerticalAdapter(getApplicationContext(), allHobbyList, HobbyBigList2,this);
+//        //여기의 this는 이 클래스 자체를 의미한다. 아래의 OnItemClick 을 override한 onClick()메서드가 실행되어야 하기 때문이다.
+//        view.setHasFixedSize(true);
+//        view.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+//        view.setAdapter(verticalAdapter);
+//
+//
+//        //화면전환
+//        btnFinish.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onItemClick(View v, int position) {
-//                //받아온 값을 데이터에 저장
-//                Bundle data = getArguments();
-//                String data1 = data.getString("selectedList");
-//                pushRef.push().setValue(new Hobby(data1));
+//            public void onClick(View v) {
+//
+//                Bundle bundle = new Bundle();
+//                bundle.putStringArrayList("hobby", list);
+//                FragmentPlus fragmentPlus = new FragmentPlus();
+//                fragmentPlus.setArguments(bundle);
+//
+//                //취미 result api 구현
+////                Bundle result = new Bundle();
+////                result.putStringArrayList("bundleKey", list);
+////                getParentFragmentManager().setFragmentResult("requestKey",result);//fragmentPlus의 fragmentManager에 전달
+//
+//
+//                //hide & show
+////                ((MainActivity)getActivity()).hideFragment(FragmentPlusSelectHobby.this);
+//                //FragmentPlus fragmentPlus = new FragmentPlus();
+////                ((MainActivity)getActivity()).showFragment(fragmentPlus);
+//
+//                //remove
+//                //((MainActivity)getActivity()).removeFragment(FragmentPlusSelectHobby.this);
+//                //FragmentPlus fragmentPlus = new FragmentPlus();
+//
+//                //replace
+//                ((MainActivity)getActivity()).replaceFragment(fragmentPlus);
+//
 //
 //            }
 //        });
-
-        return vg;
-    }
+//
+//        //데이터 저장을 위한 객체 참조
+////        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+////        DatabaseReference ref = database.getReference();
+////        DatabaseReference usersRef = ref.child("users");
+////        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid
+////        DatabaseReference hopperRef = usersRef.child(uid); //  /users/uid
+//
+//        //push 데이터 저장
+////        DatabaseReference pushRef = hopperRef.child("hobby");
+////        pushRef.push().setValue(new Hobby("탁구"));
+////        pushRef.push().setValue(new Hobby("배구"));
+//
+//        //update 데이터 저장
+////        Map<String, Object> hopperUpdates = new HashMap<>();
+////        hopperUpdates.put("hobby1", "베이킹");
+////        hopperUpdates.put("hobby2", new Hobby("공예"));
+////        hopperUpdates.put("hobby2", new Hobby("베이킹"));
+//        //hopperUpdates.put("hobby", hobbyListTest);
+////        hopperRef.updateChildren(hopperUpdates); //데이터 업데이트
+//
+//
+//
+////        Bundle data = getArguments();
+////        String data1 = data.getString("selectedList");
+////        pushRef.push().setValue(new Hobby(data1));
+//
+//        //선택한 hobby값을 가져오기 위한, 커스텀 리스너 객체 생성 및 전달
+////        HorizontalAdapter horizontalAdapter= new HorizontalAdapter();
+////        horizontalAdapter.setOnItemClickListener(new HorizontalAdapter.OnItemClickListener() {
+////            @Override
+////            public void onItemClick(View v, int position) {
+////                //받아온 값을 데이터에 저장
+////                Bundle data = getArguments();
+////                String data1 = data.getString("selectedList");
+////                pushRef.push().setValue(new Hobby(data1));
+////
+////            }
+////        });
+//
+//        return vg;
+//    }
 
     @Override
     public void onClick(String value) {

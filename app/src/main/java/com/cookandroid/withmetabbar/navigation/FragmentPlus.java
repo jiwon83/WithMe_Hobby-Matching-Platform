@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,24 +22,19 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.MainActivityHome;
-import android.Manifest;
 
 import com.cookandroid.withmetabbar.MainActivityWebView;
 import com.cookandroid.withmetabbar.R;
-import com.cookandroid.withmetabbar.certify.FragmentSelectHobby2;
-import com.cookandroid.withmetabbar.certify.LivePlaceFragment;
-import com.cookandroid.withmetabbar.certify.MainActivity2;
 import com.cookandroid.withmetabbar.model.ChatModel;
-import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.MeetInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,20 +46,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
-import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 
 @SuppressWarnings("deprecation")
@@ -87,13 +81,55 @@ public class FragmentPlus extends Fragment {
     ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열
     private EditText et_locate;
     private static final int MAIN_ACTIVITY_WEBVIEW = 20000; //웹뷰 액티비티 호출을 위한 코드
+    private static final int SELECT_HOBBY = 30000; //웹뷰 액티비티 호출을 위한 코드
     //채팅방
     private String meetUid;
     private String destinationUid;
     private String pushkey;
+    private EditText etHobby;
+    String hobbyes="";
+    StringBuffer stringBuffer = new StringBuffer();
+
+    //취미목록 2021-09-27
+    @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
 
 
+        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull @NotNull String requestKey, @NonNull @NotNull Bundle bundle) {
+                // We use a String here, but any type that can be put in a Bundle is supported
+                // String resultHobby = bundle.getString("bundleKey");
+
+                // Do something with the result
+//                if (bundle.getStringArrayList("bundleKey")!=null){
+//                    list = bundle.getStringArrayList("bundleKey");
+//                    int totalHobbyCount = list.size();
+//                    for (int index =0; index<totalHobbyCount; index++){
+//
+//
+//                        stringBuffer.append(list.get(index));
+//
+//                        //new StringBuilder().append(hobbyes).append(list.get(index)).toString();
+//                        //etHobby.append(","+list.get(index));
+//
+//                    }
+//
+//                    Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("bundleKey")));
+//                    Log.d("list", String.valueOf(list));
+//                    Log.d("hobbyes", String.valueOf(hobbyes));
+//                }else {
+//                    etHobby.setText("클릭하세요.");
+//                }
+
+
+
+            }
+        });
+
+    }
 
     @Nullable
     @Override
@@ -112,7 +148,7 @@ public class FragmentPlus extends Fragment {
         EditText etAge=vGroup.findViewById(R.id.etMeetAge);
         EditText etNumMem=vGroup.findViewById(R.id.etNumMem);
         EditText etContent=vGroup.findViewById(R.id.etContent);
-        EditText etHobby=vGroup.findViewById(R.id.etHobby);
+        etHobby=vGroup.findViewById(R.id.etHobby);
         EditText et_date = vGroup.findViewById(R.id.Date);
         et_locate =vGroup.findViewById(R.id.etLocate);
         RadioButton cb_male = vGroup.findViewById(R.id.check_male);
@@ -131,6 +167,9 @@ public class FragmentPlus extends Fragment {
         //uid=bundle.getString("uid");//null?
         uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        //etHobby.setText(stringBuffer);
+
+        //취미선택 2121-09-27
 
         if (bundle.getStringArrayList("hobby")!=null){
             list = bundle.getStringArrayList("hobby");
@@ -176,8 +215,16 @@ public class FragmentPlus extends Fragment {
             @Override
             public void onClick(View v) {
 
-                FragmentPlusSelectHobby fragmentPlusSelectHobby= new FragmentPlusSelectHobby();
-                ((MainActivity)getActivity()).addFragment(fragmentPlusSelectHobby);
+                Intent i = new Intent(getContext(), FragmentPlusSelectHobby.class);
+                startActivityForResult(i, SELECT_HOBBY);//
+
+//                FragmentPlusSelectHobby fragmentPlusSelectHobby= new FragmentPlusSelectHobby();
+//                ((MainActivity)getActivity()).addFragment(fragmentPlusSelectHobby);
+
+                /**
+                 * Intent i = new Intent(getContext(), MainActivityWebView.class);
+                 *                 startActivityForResult(i, MAIN_ACTIVITY_WEBVIEW);//requestcode 2000 전송
+                 */
 
             }
         });
@@ -424,9 +471,45 @@ public class FragmentPlus extends Fragment {
                 break;
 
         }
+        switch(requestCode){
+
+            case SELECT_HOBBY:
+
+                if(resultCode == RESULT_OK){
+
+
+
+                    list = data.getExtras().getStringArrayList("hobby");
+                    if (data != null){
+                        //list = bundle.getStringArrayList("hobby");
+                        //Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
+                        //받은 취미 목록을 차례로 tv에 입력
+                        int totalHobbyCount = list.size();
+                        for (int index =0; index<totalHobbyCount; index++){
+                            etHobby.append(","+list.get(index));
+                        }
+
+                        //address =data;
+
+
+                    }
+
+
+                }
+                break;
+
+        }
     } //갤러리에서 사진 불러와서 넣기
 
+    //취미선택
 
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+    }
 
     protected void onMainActivity(int requestCode, int resultCode, Intent data) {
         if(requestCode == GET_GALLERY_IMAGE&&resultCode == RESULT_OK&&data !=
@@ -487,4 +570,9 @@ public class FragmentPlus extends Fragment {
             });*/
 
     //return imageview
+
+
+
+
+
 }

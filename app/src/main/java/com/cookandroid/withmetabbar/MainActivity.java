@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity  {
     public static Context toast_context; //adapter에서 토스트 매시지를 띄우기 위한 변수
 
     private long lastTimeBackPressed; //액비티비종료구현
-    //주석으로 test
+
+
 
     UserFragment userFragment= new UserFragment();
     AlarmFragment alarmFragment= new AlarmFragment();
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity  {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼 생성
 
 
+
     }
 
 
@@ -230,3 +233,4 @@ public class MainActivity extends AppCompatActivity  {
 
 
 }
+
