@@ -43,6 +43,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -74,9 +76,10 @@ public class JoinStartFragment extends Fragment {
     private AlertDialog dialog;
     private final int GET_GALLERY_IMAGE = 200;//?무슨의미
     private ImageView imageView, imageView7;
-    private Uri imageUri;//모임이미지
+    private Uri imageUri;//프로필이미지
     private MediaPlayer MP;
     private static final int SELECT_HOBBY = 30000;
+    private String uid;
 
 
 
@@ -127,8 +130,6 @@ public class JoinStartFragment extends Fragment {
 
                 if(resultCode == RESULT_OK){
 
-
-
                     list = data.getExtras().getStringArrayList("hobby");
                     if (data != null){
                         //list = bundle.getStringArrayList("hobby");
@@ -150,17 +151,6 @@ public class JoinStartFragment extends Fragment {
 
         }
     } //갤러리에서 사진 불러와서 넣기
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -278,42 +268,6 @@ public class JoinStartFragment extends Fragment {
         });
 
 
-
-
-
-
-
-        //취미목록 setText
-//        try {
-//            if (bundle.getStringArrayList("hobby")!=null){
-//                list = bundle.getStringArrayList("hobby");
-//                Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
-//                //받은 취미 목록을 차례로 tv에 입력
-//                int totalHobbyCount = list.size();
-//                for (int index =0; index<totalHobbyCount; index++){
-//                    btn_hobbys.append(","+list.get(index));
-//                }
-//
-//            }else {
-//                btn_hobbys.setText("클릭하세요.");
-//            }
-//        }catch (NullPointerException e){
-//            Toast.makeText(getContext(),"null",Toast.LENGTH_SHORT);
-//        }
-//
-//        //주소 setText
-//        try {
-//            if (bundle.getString("address") !=null){
-//                btn_live.setText(bundle.getString("address"));
-//                Log.d("address",bundle.getString("address"));
-//
-//            }
-//
-//        }catch (Exception e){
-//            Toast.makeText(getContext(),"address error",Toast.LENGTH_SHORT);
-//        }
-
-
         //거주지역선택
         btn_live.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -382,6 +336,7 @@ public class JoinStartFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                btn_hobbys.setText("");//etHobby 초기화
                 Intent i = new Intent(getContext(), FragmentPlusSelectHobby.class);
                 startActivityForResult(i, SELECT_HOBBY);//
 
@@ -392,11 +347,12 @@ public class JoinStartFragment extends Fragment {
         });
 
 
-
-
         btn_join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Uri file = imageUri;
+
                 if (etId.getText().toString() == null || etName.getText().toString() == null || etPw.getText().toString() == null
                         || etNick.getText().toString() == null || etAge.getText().toString() == null
                         || btn_live.getText().toString() == null|| meetDate == null || list== null){
@@ -412,66 +368,80 @@ public class JoinStartFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()){
-                                            final String uid = task.getResult().getUser().getUid();
-                                            Member member = new Member();
-                                            member.uid =FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                            member.id = etId.getText().toString().trim();
-                                            member.pw = etPw.getText().toString().trim();
-                                            member.mName = etName.getText().toString().trim();
-                                            member.nick =etNick.getText().toString().trim();
-                                            try {
-                                                if (Integer.parseInt(etAge.getText().toString())!=0){
-                                                    member.mAge = Integer.parseInt(etAge.getText().toString());
-                                                }
 
-                                            }catch (Exception e){
+                                            uid = task.getResult().getUser().getUid();
 
-                                            }
-                                            member.mPlace = btn_live.getText().toString();
-                                            member.mBirth=meetDate;
-
-                                            //성별체크
-                                            if (cb_male.isChecked()){
-                                                member.mGen =1; //남자는 1
-                                            }else if (cb_female.isChecked()){
-                                                member.mGen =2; //여자는 2
-                                            }else if (cb_no.isChecked()){
-                                                member.mGen =0; //무관은 0
-                                            }else {
-                                                Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
-                                            }
-
-
-                                            //
-                                            int totalHobbyCount2 = list.size();
-                                            for (int index = 0; index < totalHobbyCount2; index++) {
-                                                member.hobbyCate.add(list.get(index));
-                                            }
-
-
-                                            //빈곳이 없는지 체크
-                                            if(member.id.equals("")||member.pw.equals("")||member.mName.equals("")||member.nick.equals("")||member.mAge==0||member.mPlace.equals("")){
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                                dialog = builder.setMessage("Empty text exist")
-                                                        .setNegativeButton("OK", null)
-                                                        .create();
-                                                dialog.show();
-                                                return;
-                                            }
-
-
-                                            //member.meetDate
-                                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
-
+                                            //img 저장
+                                            FirebaseStorage.getInstance().getReference().child("userProfiles/"+imageUri.getLastPathSegment()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                                 @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                                    fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
-                                                    Intent intent = new Intent(getContext(), MainActivity.class);
-                                                    startActivity(intent);
+                                                public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
+
+
+                                                    Member member = new Member();
+                                                    member.uid =FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                    member.id = etId.getText().toString().trim();
+                                                    member.pw = etPw.getText().toString().trim();
+                                                    member.mName = etName.getText().toString().trim();
+                                                    member.nick =etNick.getText().toString().trim();
+                                                    member.profileImageUrl= file.toString();
+                                                    try {
+                                                        if (Integer.parseInt(etAge.getText().toString())!=0){
+                                                            member.mAge = Integer.parseInt(etAge.getText().toString());
+                                                        }
+
+                                                    }catch (Exception e){
+
+                                                    }
+                                                    member.mPlace = btn_live.getText().toString();
+                                                    member.mBirth=meetDate;
+
+                                                    //성별체크
+                                                    if (cb_male.isChecked()){
+                                                        member.mGen =1; //남자는 1
+                                                    }else if (cb_female.isChecked()){
+                                                        member.mGen =2; //여자는 2
+                                                    }else if (cb_no.isChecked()){
+                                                        member.mGen =0; //무관은 0
+                                                    }else {
+                                                        Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
+                                                    }
+
+
+                                                    //
+                                                    int totalHobbyCount2 = list.size();
+                                                    for (int index = 0; index < totalHobbyCount2; index++) {
+                                                        member.hobbyCate.add(list.get(index));
+                                                    }
+
+
+                                                    //빈곳이 없는지 체크
+                                                    if(member.id.equals("")||member.pw.equals("")||member.mName.equals("")||member.nick.equals("")||member.mAge==0||member.mPlace.equals("")){
+                                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                        dialog = builder.setMessage("Empty text exist")
+                                                                .setNegativeButton("OK", null)
+                                                                .create();
+                                                        dialog.show();
+                                                        return;
+                                                    }
+
+
+                                                    //member.meetDate
+                                                    FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                                            fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
+                                                            Intent intent = new Intent(getContext(), MainActivity.class);
+                                                            startActivity(intent);
+
+                                                        }
+                                                    });
 
                                                 }
                                             });
+
+
                                         }else{
                                             Log.e(TAG, "Error getting sign in methods for user", task.getException());
                                         }
