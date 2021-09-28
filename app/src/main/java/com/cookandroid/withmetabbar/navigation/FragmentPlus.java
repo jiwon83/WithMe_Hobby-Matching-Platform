@@ -44,10 +44,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,6 +67,7 @@ import static android.app.Activity.RESULT_OK;
 public class FragmentPlus extends Fragment {
 
     String newKey;
+    private Uri file;
 
     private DatabaseReference mDatabase;
     private final int GET_GALLERY_IMAGE = 200;//?무슨의미
@@ -79,7 +82,7 @@ public class FragmentPlus extends Fragment {
     private Date meetDate;
     private int meetDateInt;//int형 데이터
     ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열
-    private EditText et_locate;
+    private EditText et_locate,etTitle ,etAge ,etNumMem ,etContent;
     private static final int MAIN_ACTIVITY_WEBVIEW = 20000; //웹뷰 액티비티 호출을 위한 코드
     private static final int SELECT_HOBBY = 30000; //웹뷰 액티비티 호출을 위한 코드
     //채팅방
@@ -87,6 +90,8 @@ public class FragmentPlus extends Fragment {
     private String destinationUid;
     private String pushkey;
     private EditText etHobby;
+    private RadioButton cb_male,cb_female,cb_no;
+    RadioGroup gender_plus;
     String hobbyes="";
     StringBuffer stringBuffer = new StringBuffer();
 
@@ -144,17 +149,17 @@ public class FragmentPlus extends Fragment {
 
 
         btnMeet= vGroup.findViewById(R.id.btn_meet);//버튼
-        EditText etTitle=vGroup.findViewById(R.id.etTitle);
-        EditText etAge=vGroup.findViewById(R.id.etMeetAge);
-        EditText etNumMem=vGroup.findViewById(R.id.etNumMem);
-        EditText etContent=vGroup.findViewById(R.id.etContent);
+        etTitle=vGroup.findViewById(R.id.etTitle);
+        etAge=vGroup.findViewById(R.id.etMeetAge);
+        etNumMem=vGroup.findViewById(R.id.etNumMem);
+        etContent=vGroup.findViewById(R.id.etContent);
         etHobby=vGroup.findViewById(R.id.etHobby);
         EditText et_date = vGroup.findViewById(R.id.Date);
         et_locate =vGroup.findViewById(R.id.etLocate);
-        RadioButton cb_male = vGroup.findViewById(R.id.check_male);
-        RadioButton cb_female = vGroup.findViewById(R.id.check_female);
-        RadioButton cb_no = vGroup.findViewById(R.id.checkNo);
-        RadioGroup gender_plus = vGroup.findViewById(R.id.gender_plus);
+        cb_male = vGroup.findViewById(R.id.check_male);
+        cb_female = vGroup.findViewById(R.id.check_female);
+        cb_no = vGroup.findViewById(R.id.checkNo);
+        gender_plus = vGroup.findViewById(R.id.gender_plus);
 
 
 
@@ -301,7 +306,7 @@ public class FragmentPlus extends Fragment {
                 //StorageReference storageRef = storage.getReference();
                 //파일명 만들기
                 String filename="meet"+uid+".jpeg";
-                Uri file = imageUri;//
+                file = imageUri;//
                 Log.d("imageUri", String.valueOf(file));
                 Log.d("filename", filename);
                 //여기서 원하는 이름 넣어준다.(filename 넣어주기)
@@ -310,115 +315,8 @@ public class FragmentPlus extends Fragment {
 
                 
                 try{
-                    //이미지 strage에 저장
-                    FirebaseStorage.getInstance().getReference().child("meetImages/"+imageUri.getLastPathSegment()).child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    contentUpload();
 
-                            Meet meet = new Meet();
-
-                            meet.uid =uid; //uid정보 추가
-                            meet.title = etTitle.getText().toString();
-                            meet.meetAge = Integer.parseInt(etAge.getText().toString());
-                            meet.numMember = Integer.parseInt(etNumMem.getText().toString());
-                            meet.content = etContent.getText().toString();
-                            meet.imgUrl = file.toString();
-                            meet.meetDate =meetDate;
-                            meet.hobbyCate = new ArrayList<>();
-                            meet.place = et_locate.getText().toString();
-
-
-                            int totalHobbyCount2 = list.size();
-                            for (int index = 0; index < totalHobbyCount2; index++) {
-                                meet.hobbyCate.add(list.get(index));
-                            }
-
-                            //성별체크
-                            if (cb_male.isChecked()){
-                                meet.meetGen =1; //남자는 1
-                            }else if (cb_female.isChecked()){
-                                meet.meetGen =2; //여자는 2
-                            }else if (cb_no.isChecked()){
-                                meet.meetGen =0; //무관은 0
-                            }else {
-                                Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
-                            }
-
-                            //meet라는 데이터 넣기
-
-                            DatabaseReference databaseReference,databaseReference2;
-
-                            databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();
-                            String key =databaseReference.getKey();//meet uid
-
-                            //2021-09-14 내가 만든 모임 구현
-                            //databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets"+uid+"/"+key).push();
-                            databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets").child(uid);//.child(key);
-
-                            //새로 추가한 것 hobby 저장을 위한 참조 데이타
-//                        newKey= databaseReference.getKey();
-//                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child("meet").child(newKey).child("hobby");
-
-
-
-                            databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-
-                                    //데이터 저장을 위한 객체 참조
-                                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-//                                Log.d("key_value", newKey);//key 는 uid가 아니라 meet 인듯
-
-                                    //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update
-//                                int totalHobbyCount2 = list.size();
-//                                for (int index = 0; index < totalHobbyCount2; index++) {
-//                                    databaseReference2.push().setValue(new Hobby(list.get(index)));
-//                                }
-
-                                    databaseReference2.push().setValue(meet);//user-meet 데이터 생성
-
-                                    //chatrooms데이터 생성
-                                    pushkey = key;
-                                    String key = pushkey;
-                                    ChatModel chatModel = new ChatModel();
-
-                                    MeetInfo meetInfo = new MeetInfo();
-                                    meetInfo.imgUrl=file.toString();
-                                    meetInfo.title = meet.title;
-
-
-                                    chatModel.meetInfo.put("meetUid",pushkey);
-                                    chatModel.meetInfo.put("title", meet.title);
-                                    chatModel.meetInfo.put("imgUrl", meet.imgUrl);
-                                    chatModel.meetInfo.put("meetGen", String.valueOf(meet.meetGen));
-                                    chatModel.meetInfo.put("meetAge", String.valueOf(meet.meetAge));
-                                    chatModel.meetInfo.put("numMember", String.valueOf(meet.numMember));
-
-
-                                    chatModel.users.put(uid, true);
-
-
-                                    Map<String,Object> map = new HashMap<>();
-                                    map.put("mid", key);
-                                    FirebaseDatabase.getInstance().getReference().child("meet").child(pushkey).updateChildren(map);//채틸방 경
-                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(pushkey).setValue(chatModel);
-
-
-
-
-                                    MainActivityHome mainActivityHome= new MainActivityHome();
-                                    ((MainActivity)getActivity()).replaceFragment(mainActivityHome);
-
-                                    //이 코드는 fragement 뒤로가기 코드
-                                    //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    //fragmentManager.beginTransaction().remove(FragmentPlus.this).commit();
-                                    //fragmentManager.popBackStack();
-
-                                }
-                            });
-                        }
-                    });
 
                 }catch (Exception e){
                     Toast.makeText(getContext(),"정보입력을 완료하세요.",Toast.LENGTH_SHORT);
@@ -429,12 +327,7 @@ public class FragmentPlus extends Fragment {
 
         return vGroup;
     }
-    //내용 업로드
-    private void contentUpload() {
 
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(System.currentTimeMillis());
-
-    }
 
     //갤러리로 가는 법
     @Override
@@ -513,6 +406,131 @@ public class FragmentPlus extends Fragment {
             Uri selectedImageUri = data.getData();
             imageView.setImageURI(selectedImageUri);
         }
+    }
+    public void contentUpload(){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_hhmmss");
+        sdf.format(timestamp);
+
+        String imageFileName = "IMAGE_"+ sdf.format(timestamp) + "_.png";
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("meetImages").child(imageFileName);
+
+        storageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Meet meet = new Meet();
+
+                        meet.uid =uid; //uid정보 추가
+                        meet.title = etTitle.getText().toString();
+                        meet.meetAge = Integer.parseInt(etAge.getText().toString());
+                        meet.numMember = Integer.parseInt(etNumMem.getText().toString());
+                        meet.content = etContent.getText().toString();
+                        //meet.imgUrl = file.toString();
+                        meet.imgUrl = uri.toString();
+                        meet.meetDate =meetDate;
+                        meet.hobbyCate = new ArrayList<>();
+                        meet.place = et_locate.getText().toString();
+
+
+                        int totalHobbyCount2 = list.size();
+                        for (int index = 0; index < totalHobbyCount2; index++) {
+                            meet.hobbyCate.add(list.get(index));
+                        }
+
+                        //성별체크
+                        if (cb_male.isChecked()){
+                            meet.meetGen =1; //남자는 1
+                        }else if (cb_female.isChecked()){
+                            meet.meetGen =2; //여자는 2
+                        }else if (cb_no.isChecked()){
+                            meet.meetGen =0; //무관은 0
+                        }else {
+                            Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
+                        }
+
+                        //meet라는 데이터 넣기
+
+                        DatabaseReference databaseReference,databaseReference2;
+
+                        databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();
+                        String key =databaseReference.getKey();//meet uid
+
+                        //2021-09-14 내가 만든 모임 구현
+                        //databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets"+uid+"/"+key).push();
+                        databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets").child(uid);//.child(key);
+
+                        //새로 추가한 것 hobby 저장을 위한 참조 데이타
+//                        newKey= databaseReference.getKey();
+//                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child("meet").child(newKey).child("hobby");
+
+
+
+                        databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                                //데이터 저장을 위한 객체 참조
+                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+//                                Log.d("key_value", newKey);//key 는 uid가 아니라 meet 인듯
+
+                                //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update
+//                                int totalHobbyCount2 = list.size();
+//                                for (int index = 0; index < totalHobbyCount2; index++) {
+//                                    databaseReference2.push().setValue(new Hobby(list.get(index)));
+//                                }
+
+                                databaseReference2.push().setValue(meet);//user-meet 데이터 생성
+
+                                //chatrooms데이터 생성
+                                pushkey = key;
+                                String key = pushkey;
+                                ChatModel chatModel = new ChatModel();
+
+                                MeetInfo meetInfo = new MeetInfo();
+                                meetInfo.imgUrl=file.toString();
+                                meetInfo.title = meet.title;
+
+
+                                chatModel.meetInfo.put("meetUid",pushkey);
+                                chatModel.meetInfo.put("title", meet.title);
+                                chatModel.meetInfo.put("imgUrl", meet.imgUrl);
+                                chatModel.meetInfo.put("meetGen", String.valueOf(meet.meetGen));
+                                chatModel.meetInfo.put("meetAge", String.valueOf(meet.meetAge));
+                                chatModel.meetInfo.put("numMember", String.valueOf(meet.numMember));
+
+
+                                chatModel.users.put(uid, true);
+
+
+                                Map<String,Object> map = new HashMap<>();
+                                map.put("mid", key);
+                                FirebaseDatabase.getInstance().getReference().child("meet").child(pushkey).updateChildren(map);//채틸방 경
+                                FirebaseDatabase.getInstance().getReference().child("chatrooms").child(pushkey).setValue(chatModel);
+
+
+
+
+                                MainActivityHome mainActivityHome= new MainActivityHome();
+                                ((MainActivity)getActivity()).replaceFragment(mainActivityHome);
+
+                                //이 코드는 fragement 뒤로가기 코드
+                                //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                //fragmentManager.beginTransaction().remove(FragmentPlus.this).commit();
+                                //fragmentManager.popBackStack();
+
+                            }
+                        });
+                    }
+                });
+                Toast.makeText(getContext(),"image upload success", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     /*public class MyGalleryAdapter extends BaseAdapter {

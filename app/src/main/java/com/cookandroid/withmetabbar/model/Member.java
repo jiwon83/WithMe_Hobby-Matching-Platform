@@ -103,6 +103,7 @@ public class Member {
     }
 
     public String getProfileImageUrl() {
+
         return profileImageUrl;
     }
 

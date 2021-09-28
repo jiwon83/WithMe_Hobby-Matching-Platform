@@ -4,13 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -54,9 +58,6 @@ public class MainActivity extends AppCompatActivity  {
     TalkPlaceFragment talkPlaceFragment = new TalkPlaceFragment();//톡방 프레그먼트 아직 xml없음
     FragmentMyMeetHome fragmentMyMeetHome = new FragmentMyMeetHome(); //내 모임 보기 화면
 
-    Toolbar tb;
-
-
 
 
 
@@ -66,10 +67,10 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //adpater 에서 토스트메시지
-        toast_context=this;
 
         setContentView(R.layout.activity_main);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+
         FragmentTransaction transaction = fragmentManager.beginTransaction();//트랜잭션 생성
         //FragmentTransaction.add(R.id.main_content, MyPageFragment.newInstance()).commit();//new
 
@@ -110,11 +111,14 @@ public class MainActivity extends AppCompatActivity  {
                         transaction.replace(R.id.main_content, fragmentMyMeetHome).commitAllowingStateLoss();
                         break;
                     case R.id.action_plus:
+                        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                            transaction.replace(R.id.main_content, fragmentPlus).commitAllowingStateLoss();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("uid",uid);
+                            fragmentPlus.setArguments(bundle);
+                        }
                         //transaction.add(R.id.main_content,fragmentPlus).addToBackStack(null).commit();
-                        transaction.replace(R.id.main_content, fragmentPlus).commitAllowingStateLoss();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("uid",uid);
-                        fragmentPlus.setArguments(bundle);
+
                         break;
                     case R.id.action_chatroom:
                         transaction.replace(R.id.main_content, chatFragment).commitAllowingStateLoss();

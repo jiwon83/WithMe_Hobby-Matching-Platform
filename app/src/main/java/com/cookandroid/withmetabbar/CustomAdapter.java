@@ -67,6 +67,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 .load(arrayList.get(position).getImgUrl())
                 .into(holder.iv_meet);
         holder.tv_meetTitle.setText("모임명: "+ arrayList.get(position).getTitle());
+        Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
+        Log.d("holder.itemView", String.valueOf(holder.itemView));
 
         String myFormat = "yyyy년 MM월 dd일 HH:mm";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.

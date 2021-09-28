@@ -1,7 +1,10 @@
 package com.cookandroid.withmetabbar.navigation;
 
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.cookandroid.withmetabbar.CustomAdapter;
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.R;
@@ -56,6 +60,7 @@ public class MyPageFragment extends Fragment {
         ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.mypage_fragment, container, false);
         TextView tvName= vGroup.findViewById(R.id.tv_mName);
         TextView tvNick= vGroup.findViewById(R.id.tv_nickname);
+        imageView = vGroup.findViewById(R.id.imagemy);
 
         Intent intent = new Intent();
 
@@ -74,6 +79,12 @@ public class MyPageFragment extends Fragment {
                 //Log.d("memberInput", String.valueOf(member.mName));
                 tvName.setText(member.mName);
                 tvNick.setText(member.nick);
+                member.getProfileImageUrl();
+                Log.d("getProfileImageUrl",member.getProfileImageUrl());
+//                imageView.setImageURI(Uri.parse(member.getProfileImageUrl()));
+                Glide.with(getContext())
+                        .load(member.getProfileImageUrl())
+                        .into(imageView);
 
             }
 
@@ -124,7 +135,7 @@ public class MyPageFragment extends Fragment {
             }
         });
 
-        imageView = vGroup.findViewById(R.id.imagemy);
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,11 +166,54 @@ public class MyPageFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == GET_GALLERY_IMAGE) {
             if (resultCode == RESULT_OK) {
+//                int takeFlas = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//                ContentResolver resolver = getContext().getContentResolver();
+//                if (data.getData()==null){
+//                    imageView.setImageURI(data.getData());
+//                    imageUri = data.getData();
+//                    return;
+//                }
+//                resolver.takePersistableUriPermission(data.getData(),takeFlas);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    try {
+                        getContext().grantUriPermission(
+                                getContext().getPackageName(),
+                                data.getData(),
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+                        );
+                        //imageView.setImageURI(data.getData());
+                    } catch (IllegalArgumentException e) {
+                        getContext().grantUriPermission(
+                                getContext().getPackageName(),
+                                data.getData(),
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        );  // kikat api only 0x3 are
+                        // allowed FLAG_GRANT_READ_URI_PERMISSION = 1 | FLAG_GRANT_WRITE_URI_PERMISSION = 2;
+                        //imageView.setImageURI(data.getData());
+                    } catch (SecurityException e) {
+                        // ignore
+                    }
+
+                    int takeFlags = data.getFlags();
+                    takeFlags &= (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+                    try {
+                        getContext().getContentResolver().takePersistableUriPermission(data.getData(), takeFlags);
+                        imageView.setImageURI(data.getData());
+                    } catch (SecurityException e) {
+                        // ignore
+                    }
+                }
+
+
+
                 imageView.setImageURI(data.getData());
                 imageUri = data.getData();
-                Log.d("갤러리에서 불러온 이미지 경로", String.valueOf(imageUri));
+                //Log.d("갤러리에서 불러온 이미지 경로", String.valueOf(imageUri));
+
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getContext(), "사진 선택 취소", Toast.LENGTH_LONG).show();
