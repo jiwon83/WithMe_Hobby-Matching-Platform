@@ -41,7 +41,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private AlertDialog dialog;
     private final Context context;
     private int userCount=1;
-    private Member memberObj = new Member(); //맴버객체 생성
+    private Member memberObj = new Member(); // 채팅방 입장을 위한 맴버 객체 생성
 
     String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();//채팅방 구현
 

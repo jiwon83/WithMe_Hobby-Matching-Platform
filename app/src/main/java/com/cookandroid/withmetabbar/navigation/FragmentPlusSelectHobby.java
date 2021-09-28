@@ -36,6 +36,7 @@ import com.cookandroid.withmetabbar.certify.JoinStartFragment;
 import com.cookandroid.withmetabbar.certify.MainActivity2;
 import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.HobbyBig;
+import com.cookandroid.withmetabbar.model.Meet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -167,6 +168,8 @@ public class FragmentPlusSelectHobby extends AppCompatActivity implements OnItem
 
                 Bundle bundle = new Bundle();
                 Intent intent = new Intent();//startActivity()를 할것이 아니므로 그냥 빈 인텐트로 만듦
+                //list 내부의 중복을 제거
+
                 bundle.putStringArrayList("hobby", list);
                 intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);
@@ -343,6 +346,7 @@ public class FragmentPlusSelectHobby extends AppCompatActivity implements OnItem
     @Override
     public void onClick(String value) {
         //value this data you receive when selectedItems() called
+        if (UniqueCheckAndAdd(list,value)==true)
         list.add(value);
         Log.d("onClickSuccess?",value); //성공적으로 받아진다.
     }
@@ -469,7 +473,12 @@ public class FragmentPlusSelectHobby extends AppCompatActivity implements OnItem
         HobbyBigList2.add(new HobbyBig( "반려동물"));
 
     }
+    public boolean UniqueCheckAndAdd(ArrayList<String> array, String stringPresent){
+        return !array.contains(stringPresent);
+    }
 }
+
+
 class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.HorizontalViewHolder> {
 
     private OnItemClick mCallback; //OnItemClick 인터페이스 객체

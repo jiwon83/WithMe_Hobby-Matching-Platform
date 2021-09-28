@@ -171,18 +171,18 @@ public class FragmentPlus extends Fragment {
 
         //취미선택 2121-09-27
 
-        if (bundle.getStringArrayList("hobby")!=null){
-            list = bundle.getStringArrayList("hobby");
-            Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
-            //받은 취미 목록을 차례로 tv에 입력
-            int totalHobbyCount = list.size();
-            for (int index =0; index<totalHobbyCount; index++){
-                etHobby.append(","+list.get(index));
-            }
-
-        }else {
-            etHobby.setText("클릭하세요.");
-        }
+//        if (bundle.getStringArrayList("hobby")!=null){
+//            list = bundle.getStringArrayList("hobby");
+//            Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
+//            //받은 취미 목록을 차례로 tv에 입력
+//            int totalHobbyCount = list.size();
+//            for (int index =0; index<totalHobbyCount; index++){
+//                etHobby.append(","+list.get(index));
+//            }
+//
+//        }else {
+//            etHobby.setText("클릭하세요.");
+//        }
 
 
 
@@ -215,16 +215,13 @@ public class FragmentPlus extends Fragment {
             @Override
             public void onClick(View v) {
 
+                etHobby.setText("");//etHobby 초기화
                 Intent i = new Intent(getContext(), FragmentPlusSelectHobby.class);
                 startActivityForResult(i, SELECT_HOBBY);//
 
 //                FragmentPlusSelectHobby fragmentPlusSelectHobby= new FragmentPlusSelectHobby();
 //                ((MainActivity)getActivity()).addFragment(fragmentPlusSelectHobby);
 
-                /**
-                 * Intent i = new Intent(getContext(), MainActivityWebView.class);
-                 *                 startActivityForResult(i, MAIN_ACTIVITY_WEBVIEW);//requestcode 2000 전송
-                 */
 
             }
         });
@@ -274,8 +271,6 @@ public class FragmentPlus extends Fragment {
         });
 
 
-
-
         imageView = vGroup.findViewById(R.id.imageView7);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -313,119 +308,122 @@ public class FragmentPlus extends Fragment {
                 //StorageReference riversRef = storageRef.child("meetImage/"+filename);
                 //UploadTask uploadTask = riversRef.putFile(file);//storage에 이미지 업로드
 
-
-
                 
+                try{
+                    //이미지 strage에 저장
+                    FirebaseStorage.getInstance().getReference().child("meetImages/"+imageUri.getLastPathSegment()).child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                //이미지 strage에 저장
-                FirebaseStorage.getInstance().getReference().child("meetImages/"+imageUri.getLastPathSegment()).child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            Meet meet = new Meet();
 
-                        Meet meet = new Meet();
-
-                        meet.uid =uid; //uid정보 추가
-                        meet.title = etTitle.getText().toString();
-                        meet.meetAge = Integer.parseInt(etAge.getText().toString());
-                        meet.numMember = Integer.parseInt(etNumMem.getText().toString());
-                        meet.content = etContent.getText().toString();
-                        meet.imgUrl = file.toString();
-                        meet.meetDate =meetDate;
-                        meet.hobbyCate = new ArrayList<>();
-                        meet.place = et_locate.getText().toString();
+                            meet.uid =uid; //uid정보 추가
+                            meet.title = etTitle.getText().toString();
+                            meet.meetAge = Integer.parseInt(etAge.getText().toString());
+                            meet.numMember = Integer.parseInt(etNumMem.getText().toString());
+                            meet.content = etContent.getText().toString();
+                            meet.imgUrl = file.toString();
+                            meet.meetDate =meetDate;
+                            meet.hobbyCate = new ArrayList<>();
+                            meet.place = et_locate.getText().toString();
 
 
-                        int totalHobbyCount2 = list.size();
-                        for (int index = 0; index < totalHobbyCount2; index++) {
-                            meet.hobbyCate.add(list.get(index));
-                        }
+                            int totalHobbyCount2 = list.size();
+                            for (int index = 0; index < totalHobbyCount2; index++) {
+                                meet.hobbyCate.add(list.get(index));
+                            }
 
-                        //성별체크
-                        if (cb_male.isChecked()){
-                            meet.meetGen =1; //남자는 1
-                        }else if (cb_female.isChecked()){
-                            meet.meetGen =2; //여자는 2
-                        }else if (cb_no.isChecked()){
-                            meet.meetGen =0; //무관은 0
-                        }else {
-                            Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
-                        }
+                            //성별체크
+                            if (cb_male.isChecked()){
+                                meet.meetGen =1; //남자는 1
+                            }else if (cb_female.isChecked()){
+                                meet.meetGen =2; //여자는 2
+                            }else if (cb_no.isChecked()){
+                                meet.meetGen =0; //무관은 0
+                            }else {
+                                Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
+                            }
 
-                        //meet라는 데이터 넣기
+                            //meet라는 데이터 넣기
 
-                        DatabaseReference databaseReference,databaseReference2;
+                            DatabaseReference databaseReference,databaseReference2;
 
-                        databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();
-                        String key =databaseReference.getKey();//meet uid
+                            databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();
+                            String key =databaseReference.getKey();//meet uid
 
-                        //2021-09-14 내가 만든 모임 구현
-                        //databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets"+uid+"/"+key).push();
-                        databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets").child(uid);//.child(key);
+                            //2021-09-14 내가 만든 모임 구현
+                            //databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets"+uid+"/"+key).push();
+                            databaseReference2= FirebaseDatabase.getInstance().getReference().child("user-meets").child(uid);//.child(key);
 
-                        //새로 추가한 것 hobby 저장을 위한 참조 데이타
+                            //새로 추가한 것 hobby 저장을 위한 참조 데이타
 //                        newKey= databaseReference.getKey();
 //                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child("meet").child(newKey).child("hobby");
 
 
 
-                        databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
+                            databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
 
-                                //데이터 저장을 위한 객체 참조
-                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    //데이터 저장을 위한 객체 참조
+                                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 //                                Log.d("key_value", newKey);//key 는 uid가 아니라 meet 인듯
 
-                                //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update
+                                    //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update
 //                                int totalHobbyCount2 = list.size();
 //                                for (int index = 0; index < totalHobbyCount2; index++) {
 //                                    databaseReference2.push().setValue(new Hobby(list.get(index)));
 //                                }
 
-                                databaseReference2.push().setValue(meet);//user-meet 데이터 생성
+                                    databaseReference2.push().setValue(meet);//user-meet 데이터 생성
 
-                                //chatrooms데이터 생성
-                                pushkey = key;
-                                String key = pushkey;
-                                ChatModel chatModel = new ChatModel();
+                                    //chatrooms데이터 생성
+                                    pushkey = key;
+                                    String key = pushkey;
+                                    ChatModel chatModel = new ChatModel();
 
-                                MeetInfo meetInfo = new MeetInfo();
-                                meetInfo.imgUrl=file.toString();
-                                meetInfo.title = meet.title;
-
-
-                                chatModel.meetInfo.put("meetUid",pushkey);
-                                chatModel.meetInfo.put("title", meet.title);
-                                chatModel.meetInfo.put("imgUrl", meet.imgUrl);
-                                chatModel.meetInfo.put("meetGen", String.valueOf(meet.meetGen));
-                                chatModel.meetInfo.put("meetAge", String.valueOf(meet.meetAge));
-                                chatModel.meetInfo.put("numMember", String.valueOf(meet.numMember));
+                                    MeetInfo meetInfo = new MeetInfo();
+                                    meetInfo.imgUrl=file.toString();
+                                    meetInfo.title = meet.title;
 
 
-                                chatModel.users.put(uid, true);
+                                    chatModel.meetInfo.put("meetUid",pushkey);
+                                    chatModel.meetInfo.put("title", meet.title);
+                                    chatModel.meetInfo.put("imgUrl", meet.imgUrl);
+                                    chatModel.meetInfo.put("meetGen", String.valueOf(meet.meetGen));
+                                    chatModel.meetInfo.put("meetAge", String.valueOf(meet.meetAge));
+                                    chatModel.meetInfo.put("numMember", String.valueOf(meet.numMember));
 
 
-                                Map<String,Object> map = new HashMap<>();
-                                map.put("mid", key);
-                                FirebaseDatabase.getInstance().getReference().child("meet").child(pushkey).updateChildren(map);//채틸방 경
-                                FirebaseDatabase.getInstance().getReference().child("chatrooms").child(pushkey).setValue(chatModel);
+                                    chatModel.users.put(uid, true);
+
+
+                                    Map<String,Object> map = new HashMap<>();
+                                    map.put("mid", key);
+                                    FirebaseDatabase.getInstance().getReference().child("meet").child(pushkey).updateChildren(map);//채틸방 경
+                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(pushkey).setValue(chatModel);
 
 
 
 
-                                MainActivityHome mainActivityHome= new MainActivityHome();
-                                ((MainActivity)getActivity()).replaceFragment(mainActivityHome);
+                                    MainActivityHome mainActivityHome= new MainActivityHome();
+                                    ((MainActivity)getActivity()).replaceFragment(mainActivityHome);
 
-                                //이 코드는 fragement 뒤로가기 코드
-                                //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                //fragmentManager.beginTransaction().remove(FragmentPlus.this).commit();
-                                //fragmentManager.popBackStack();
+                                    //이 코드는 fragement 뒤로가기 코드
+                                    //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    //fragmentManager.beginTransaction().remove(FragmentPlus.this).commit();
+                                    //fragmentManager.popBackStack();
 
-                            }
-                        });
-                    }
-                });
+                                }
+                            });
+                        }
+                    });
+
+                }catch (Exception e){
+                    Toast.makeText(getContext(),"정보입력을 완료하세요.",Toast.LENGTH_SHORT);
+                }
+
             }
         });
 
@@ -477,16 +475,14 @@ public class FragmentPlus extends Fragment {
 
                 if(resultCode == RESULT_OK){
 
-
-
-                    list = data.getExtras().getStringArrayList("hobby");
+                    list = data.getExtras().getStringArrayList("hobby"); //리스트에 받은 데이터들을 추가
                     if (data != null){
                         //list = bundle.getStringArrayList("hobby");
                         //Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
                         //받은 취미 목록을 차례로 tv에 입력
                         int totalHobbyCount = list.size();
                         for (int index =0; index<totalHobbyCount; index++){
-                            etHobby.append(","+list.get(index));
+                            etHobby.append(" "+list.get(index));
                         }
 
                         //address =data;
