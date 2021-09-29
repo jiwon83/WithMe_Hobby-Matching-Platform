@@ -23,6 +23,7 @@ public class SearchAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
+
         return list.size();
     }
 

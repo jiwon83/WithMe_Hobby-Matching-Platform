@@ -45,7 +45,7 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-public class InterMeetFragment extends Fragment {
+public class FragmentMyInter extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -83,7 +83,7 @@ public class InterMeetFragment extends Fragment {
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.inter_meet_fragment, container, false);
+        ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.activity_main_home, container, false);
 
         recyclerView=vGroup.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);//기존 리사이클러뷰의 성능 강화
@@ -91,14 +91,17 @@ public class InterMeetFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();//Meet객체를 담을 어레이리스트 (어뎁터 쪽으로)
         arrayList_copy = new ArrayList<>();
-        //검색기능
-        editSearch= vGroup.findViewById(R.id.editSearch);
-        listView= vGroup.findViewById(R.id.listView);
+
+
+
+
+
 
 
 
         //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
+        btn_inter = vGroup.findViewById(R.id.btn_inter);
         btn_time = vGroup.findViewById(R.id.btn_time);
 
         Calendar myCalendar = Calendar.getInstance();
@@ -125,129 +128,17 @@ public class InterMeetFragment extends Fragment {
         });
 
 
-        //취미추천기능 -유저의 취미목록 불러오기
-        String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
-        database= FirebaseDatabase.getInstance();
-        databaseReference=database.getReference("users").child(uid);//DB Table Connect
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+        //취미목록으로 필터링 버튼
+        btn_inter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onClick(View v) {
 
-                //firebase에서 데이터 받아오기
-                Member member = dataSnapshot.getValue(Member.class);
-
-                listUserHobby = member.getHobbyCate(); //listUserHobby에 유저의 취미값 받아오기
-
-                //여기서 모임데이터 검색
-
-                //2021-08-16 검색기능에 필요한 리스트 정의
-                list_search_recycle= new ArrayList<String>();
-                arrayList_search_recycle= new ArrayList<String>();//리스트의 모든 데이터를 arraylist_search에 복사
-                //data
-                database=FirebaseDatabase.getInstance();
-                databaseReference=database.getReference("meet");//DB Table Connect
-                //관심목록으로 필터링
-                databaseReference2 = FirebaseDatabase.getInstance().getReference();
-                Query recentPostsQuery = databaseReference2.child("meet")
-                        .equalTo(100); //내 hobby목록이랑 같은 지
-
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
-                        //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                        arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
-
-                            Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
-
-                            //필터링: 취미목록에 해당하는지 확인하고 add
-                            //meet.getHobbyCate()와 listUserHobby 의 비교
-                            for (int i =0; i< meet.getHobbyCate().size(); i++){
-                                for (int j=0; j< listUserHobby.size(); j++){
-                                    if (meet.getHobbyCate().get(i).equals(listUserHobby.get(j))){
-                                        if (UniqueCheckAndAdd(arrayList,meet) == true){
-                                            arrayList.add(meet);
-                                            arrayList_copy.addAll(arrayList);
-                                        }
-
-                                    }
-                                }
-                            }
-
-
-                            for (int i=0;i<arrayList_copy.size();i++){// 전체 meet 데이터 중에서
-                                if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
-                                    //arrayList에 업데이트
-                                    arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
-                                    //검색한 값만 잘 들어온다.
-                                    //Log.d("arrayList_new", String.valueOf(arrayList));
-                                    //Log.d("size", String.valueOf(arrayList_copy.size()));//253??
-                                }
-                            }
-
-                            //arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
-                            Log.d("arrayList", String.valueOf(arrayList));
-
-                            //검색기능에 필요한 작업 - meet model배열
-
-                            //단어 검색
-                            //2021-08-16 검색기능 구현
-                            // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
-                            if (meet.title!=null){
-
-                                Log.d("title",meet.title);
-                                list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
-                                //취미목록 검색 리스트에 넣기 2021-09-13
-
-
-                            }
-
-                            int totalHobbyCount2 = meet.hobbyCate.size();
-                            for (int index = 0; index < totalHobbyCount2; index++) {
-                                list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
-                            }
-                        }//for
-
-
-                        Log.d("list_search_recycle", String.valueOf(list_search_recycle));
-                        //2021-08-16 검색기능에 필요한 작업
-                        try {
-                            arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
-
-                            customAdapter= new CustomAdapter(arrayList,getContext());
-                            recyclerView.setAdapter(customAdapter);
-                        }catch (Exception e){
-                            Toast.makeText(getContext(),"검색어가 존재하지 않습니다.",Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull  DatabaseError error) {
-                        //디비를 가져오는 도중 에러 발생 시
-                        Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
-                        Log.e("MainActivityHome",String.valueOf(error.toException()));
-
-                    }
-                });
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //디비를 가져오는 도중 에러 발생 시
-                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", error.toException());
+                filterHobbyCateInMeetToRecyclerView(); //유저의 취미값에 해당하는 모임 검색
 
             }
         });
-
-        Log.d("listUserHobby", String.valueOf(listUserHobby));//null
-
-
-
 
         /*btn_all.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,7 +165,82 @@ public class InterMeetFragment extends Fragment {
 
 
 
-        Log.d("list_search_recycle", String.valueOf(list_search_recycle));
+        //2021-08-16 검색기능 구현
+        list_search_recycle= new ArrayList<String>();
+        arrayList_search_recycle= new ArrayList<String>();//리스트의 모든 데이터를 arraylist_search에 복사
+
+
+        //data
+        database=FirebaseDatabase.getInstance();
+        databaseReference=database.getReference("meet");//DB Table Connect
+
+        //관심목록으로 필터링
+        databaseReference2 = FirebaseDatabase.getInstance().getReference();
+        Query recentPostsQuery = databaseReference2.child("meet")
+                .equalTo(100); //내 hobby목록이랑 같은 지
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
+                //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+                arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
+
+                    Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
+
+
+                    arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
+                    Log.d("arrayList", String.valueOf(arrayList));
+
+                    arrayList_copy.addAll(arrayList);//arrayList_copy에 복사
+
+                    //단어 검색
+                    //2021-08-16 검색기능 구현
+                    // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
+                    if (meet.title!=null){
+                        list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
+                        //취미목록 검색 리스트에 넣기 2021-09-13
+                        int totalHobbyCount2 = meet.hobbyCate.size();
+                        for (int index = 0; index < totalHobbyCount2; index++) {
+                            list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
+                        }
+
+                    }
+                }
+
+                //2021-08-16 검색기능 구현
+                arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
+
+                filterHobbyCateInMeetToRecyclerView();
+
+                customAdapter= new CustomAdapter(arrayList,getContext());
+                recyclerView.setAdapter(customAdapter);
+
+
+                //test
+                for (int i=0;i<arrayList_copy.size();i++){
+                    Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getTitle()));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+                //디비를 가져오는 도중 에러 발생 시
+                Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Log.e("MainActivityHome",String.valueOf(error.toException()));
+
+            }
+        });
+
+
+
+
+
+        //검색기능
+        editSearch= vGroup.findViewById(R.id.editSearch);
+        listView= vGroup.findViewById(R.id.listView);
+
 
         //arrayList_search.addAll(list_search); 궅이 필요 x 제거해도 된다.
         searchAdapter = new SearchAdapter(list_search_recycle,getContext());
@@ -333,7 +299,7 @@ public class InterMeetFragment extends Fragment {
 
         list_search_recycle.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
 
-        //문자 입력이 없을때는 모든 데이터를 보여준다.
+         //문자 입력이 없을때는 모든 데이터를 보여준다.
         if (searchText.length()==0){
             list_search_recycle.addAll(arrayList_search_recycle);//list_search_recycler실제 검색이 끝난 후 리스트, arrayList_search_recycle: 모든 값이 들어있는 리스트
 
@@ -486,7 +452,7 @@ public class InterMeetFragment extends Fragment {
                 }
             }
         }
-        customAdapter.notifyDataSetChanged();
+        //customAdapter.notifyDataSetChanged();
 
     }
     // 유저가 선택한 취미카테고리인 모임정보만 보여준다.
