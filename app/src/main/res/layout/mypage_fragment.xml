@@ -19,8 +19,8 @@
             android:id="@+id/imagemy"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:layout_width="@dimen/myph_x"
-            android:layout_height="@dimen/myph_x"
+            android:layout_width="@dimen/myph"
+            android:layout_height="@dimen/myph"
             android:src="@drawable/myph_x"/>
 
 
@@ -412,7 +412,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="8dp"
             android:text="평일 오전 9시 ~ 오후 6시 운영"
             android:textSize="9dp" />
 

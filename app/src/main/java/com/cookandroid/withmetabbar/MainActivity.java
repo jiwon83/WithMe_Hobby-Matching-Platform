@@ -161,10 +161,7 @@ public class MainActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         //FragmentTransaction transaction = fragmentManager.beginTransaction();
         switch (item.getItemId()){
-            case R.id.action_category:
-                Intent intent = new Intent(MainActivity.this, MainActivity3.class);
-                startActivity(intent);
-                return  true;
+
             case R.id.action_alarm:
                 Intent intent1 = new Intent(MainActivity.this, MainActivity4.class);
                 startActivity(intent1);

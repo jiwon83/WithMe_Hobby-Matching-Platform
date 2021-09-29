@@ -87,12 +87,11 @@ public class JoinStartFragment extends Fragment {
     private MediaPlayer MP;
     private static final int SELECT_HOBBY = 30000;
     private String uid;
-    private EditText etId,etPw,etName,etNick,etBirth,etAge,etPhoneNum,et_Birth;
-    private RadioButton cb_male,cb_female,cb_no;
+    private EditText etId, etPw, etName, etNick, etBirth, etAge, etPhoneNum, et_Birth;
+    private RadioButton cb_male, cb_female, cb_no;
 
 
-
-    Button btn_join,btn_live,btn_hobbys;
+    Button btn_join, btn_live, btn_hobbys;
 
 
     @Override
@@ -101,17 +100,13 @@ public class JoinStartFragment extends Fragment {
     }
 
 
-
-
-
     protected void onMainActivity(int requestCode, int resultCode, Intent data) {
-        if(requestCode == GET_GALLERY_IMAGE&&resultCode == RESULT_OK&&data !=
-                null && data.getData()!=null){
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data !=
+                null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
             imageView.setImageURI(selectedImageUri);
         }
     }
-
 
 
     @Nullable
@@ -126,14 +121,14 @@ public class JoinStartFragment extends Fragment {
         etBirth = vGroup.findViewById(R.id.etBirth);
         etAge = vGroup.findViewById(R.id.etAge);
         etPhoneNum = vGroup.findViewById(R.id.etPhoneNum);
-        btn_join= vGroup.findViewById(R.id.button6);
+        btn_join = vGroup.findViewById(R.id.button6);
         btn_live = vGroup.findViewById(R.id.btn_live);
         btn_hobbys = vGroup.findViewById(R.id.btn_hobbys);
         cb_male = vGroup.findViewById(R.id.check_male);
         cb_female = vGroup.findViewById(R.id.check_female);
         cb_no = vGroup.findViewById(R.id.checkNo);
         et_Birth = vGroup.findViewById(R.id.etBirth);
-        Button check_overlap= vGroup.findViewById(R.id.button_check);
+        Button check_overlap = vGroup.findViewById(R.id.button_check);
         RadioGroup gender = vGroup.findViewById(R.id.gender);
 
         Intent intent = new Intent();
@@ -155,7 +150,7 @@ public class JoinStartFragment extends Fragment {
 
                         ArrayList<String> stringArrayList = new ArrayList<>();
 
-                        for (DataSnapshot dataSnapshott : snapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
+                        for (DataSnapshot dataSnapshott : snapshot.getChildren()) {//반복문으로 데이터 List를 추출해냄.
 
                             Member member = dataSnapshott.getValue(Member.class);
 
@@ -164,7 +159,6 @@ public class JoinStartFragment extends Fragment {
                             Log.d("stringArrayList", String.valueOf(stringArrayList));
 
                             //arrayList.add(member); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
-
 
 
                             //arrayList_copy.addAll(arrayList);//arrayList_copy에 복사
@@ -182,12 +176,12 @@ public class JoinStartFragment extends Fragment {
 //
 //                            }
                         }
-                        for (int i=0; i<stringArrayList.size(); i++){
+                        for (int i = 0; i < stringArrayList.size(); i++) {
 
-                            if (etId.getText().toString().equals(stringArrayList.get(i))){
+                            if (etId.getText().toString().equals(stringArrayList.get(i))) {
 
-                                Log.d("stringArrayList.get(i)",stringArrayList.get(i));
-                                Log.d("etId.getText().toString()",etId.getText().toString());
+                                Log.d("stringArrayList.get(i)", stringArrayList.get(i));
+                                Log.d("etId.getText().toString()", etId.getText().toString());
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 dialog = builder.setMessage("이미 존재하는 email입니다.")
@@ -198,7 +192,7 @@ public class JoinStartFragment extends Fragment {
                                 //Toast.makeText(getContext(),"이미 존재하는 email입니다.",Toast.LENGTH_SHORT).show();//토스메세지 출력
                                 //etId.setText("");
 
-                            }else{
+                            } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 dialog = builder.setMessage("중복확인 되었습니다.")
                                         .setNegativeButton("OK", null)
@@ -238,10 +232,6 @@ public class JoinStartFragment extends Fragment {
         });
 
 
-
-
-
-
         //날짜 선택
 
         Calendar myCalendar = Calendar.getInstance();
@@ -253,7 +243,7 @@ public class JoinStartFragment extends Fragment {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel();
 
-                meetDate=myCalendar.getTime();
+                meetDate = myCalendar.getTime();
             }
 
             private void updateLabel() {
@@ -312,33 +302,33 @@ public class JoinStartFragment extends Fragment {
 
                 if (etId.getText().toString() == null || etName.getText().toString() == null || etPw.getText().toString() == null
                         || etNick.getText().toString() == null || etAge.getText().toString() == null
-                        || btn_live.getText().toString() == null|| meetDate == null || list== null){
-                    Toast.makeText(getContext(),"정보 입력을 완료하세요 :)",Toast.LENGTH_SHORT).show();
+                        || btn_live.getText().toString() == null || meetDate == null || list == null) {
+                    Toast.makeText(getContext(), "정보 입력을 완료하세요 :)", Toast.LENGTH_SHORT).show();
 
 
-                }else{
+                } else {
                     try {
                         FirebaseAuth.getInstance()
-                                .createUserWithEmailAndPassword(etId.getText().toString(),etPw.getText().toString())
+                                .createUserWithEmailAndPassword(etId.getText().toString(), etPw.getText().toString())
                                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
 
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()){
+                                        if (task.isSuccessful()) {
 
                                             uid = task.getResult().getUser().getUid();
 
                                             contentUpload();
 
-                                        }else{
+                                        } else {
                                             Log.e(TAG, "Error getting sign in methods for user", task.getException());
                                         }
                                     }
                                 });
 
                         return;
-                    }catch (Exception e){
-                        Toast.makeText(getContext(),"모든 정보를 입력하세요.",Toast.LENGTH_SHORT);
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(), "모든 정보를 입력하세요.", Toast.LENGTH_SHORT);
                     }
 
                 }
@@ -377,14 +367,14 @@ public class JoinStartFragment extends Fragment {
                 Toast.makeText(getContext(), "사진 선택 취소", Toast.LENGTH_LONG).show();
             }
         }
-        switch(requestCode){
+        switch (requestCode) {
 
             case MAIN_ACTIVITY_WEBVIEW:
 
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
 
                     String address = data.getExtras().getString("address");
-                    if (data != null){
+                    if (data != null) {
                         btn_live.setText(address);
                         //address =data;
 
@@ -396,20 +386,20 @@ public class JoinStartFragment extends Fragment {
                 break;
 
         }
-        switch(requestCode){
+        switch (requestCode) {
 
             case SELECT_HOBBY:
 
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
 
                     list = data.getExtras().getStringArrayList("hobby");
-                    if (data != null){
+                    if (data != null) {
                         //list = bundle.getStringArrayList("hobby");
                         //Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("hobby")));
                         //받은 취미 목록을 차례로 tv에 입력
                         int totalHobbyCount = list.size();
-                        for (int index =0; index<totalHobbyCount; index++){
-                            btn_hobbys.append(","+list.get(index));
+                        for (int index = 0; index < totalHobbyCount; index++) {
+                            btn_hobbys.append("," + list.get(index));
                         }
 
                         //address =data;
@@ -425,12 +415,12 @@ public class JoinStartFragment extends Fragment {
     } //갤러리에서 사진 불러와서 넣기
 
     //업로드
-    public void contentUpload(){
+    public void contentUpload() {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_hhmmss");
         sdf.format(timestamp);
 
-        String imageFileName = "IMAGE_"+ sdf.format(timestamp) + "_.png";
+        String imageFileName = "IMAGE_" + sdf.format(timestamp) + "_.png";
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("userImages").child(imageFileName);
 
@@ -442,33 +432,33 @@ public class JoinStartFragment extends Fragment {
                     public void onSuccess(Uri uri) {
                         //String imageUrl2 = task.getResult().getUploadSessionUri().toString();
                         Member member = new Member();
-                        member.uid =FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        member.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         member.id = etId.getText().toString().trim();
                         member.pw = etPw.getText().toString().trim();
                         member.mName = etName.getText().toString().trim();
-                        member.nick =etNick.getText().toString().trim();
+                        member.nick = etNick.getText().toString().trim();
 //                                                    member.profileImageUrl= file.toString();
-                        member.profileImageUrl= uri.toString();
+                        member.profileImageUrl = uri.toString();
                         try {
-                            if (Integer.parseInt(etAge.getText().toString())!=0){
+                            if (Integer.parseInt(etAge.getText().toString()) != 0) {
                                 member.mAge = Integer.parseInt(etAge.getText().toString());
                             }
 
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                         member.mPlace = btn_live.getText().toString();
-                        member.mBirth=meetDate;
+                        member.mBirth = meetDate;
 
                         //성별체크
-                        if (cb_male.isChecked()){
-                            member.mGen =1; //남자는 1
-                        }else if (cb_female.isChecked()){
-                            member.mGen =2; //여자는 2
-                        }else if (cb_no.isChecked()){
-                            member.mGen =0; //무관은 0
-                        }else {
-                            Toast.makeText(getContext(),"성별을 체크하세요.",Toast.LENGTH_SHORT);
+                        if (cb_male.isChecked()) {
+                            member.mGen = 1; //남자는 1
+                        } else if (cb_female.isChecked()) {
+                            member.mGen = 2; //여자는 2
+                        } else if (cb_no.isChecked()) {
+                            member.mGen = 0; //무관은 0
+                        } else {
+                            Toast.makeText(getContext(), "성별을 체크하세요.", Toast.LENGTH_SHORT);
                         }
 
 
@@ -480,7 +470,7 @@ public class JoinStartFragment extends Fragment {
 
 
                         //빈곳이 없는지 체크
-                        if(member.id.equals("")||member.pw.equals("")||member.mName.equals("")||member.nick.equals("")||member.mAge==0||member.mPlace.equals("")){
+                        if (member.id.equals("") || member.pw.equals("") || member.mName.equals("") || member.nick.equals("") || member.mAge == 0 || member.mPlace.equals("")) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                             dialog = builder.setMessage("Empty text exist")
                                     .setNegativeButton("OK", null)
@@ -504,7 +494,7 @@ public class JoinStartFragment extends Fragment {
                         });
                     }
                 });
-                Toast.makeText(getContext(),"image upload success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "image upload success", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -528,11 +518,11 @@ public class JoinStartFragment extends Fragment {
                 //sendMsg = "memberId="+ strings[0]+"&password="+ strings[1];
 
                 //sendMsg = "meetId="+ strings[0]+"&meetName="+ strings[1];
-                sendMsg = "memberId="+ strings[0]+"&password="+ strings[1]+"&memberName="+ strings[2]+"&phoneNum="+ strings[3]
-                        +"&birth="+ strings[4];
+                sendMsg = "memberId=" + strings[0] + "&password=" + strings[1] + "&memberName=" + strings[2] + "&phoneNum=" + strings[3]
+                        + "&birth=" + strings[4];
                 osw.write(sendMsg);
                 osw.flush();
-                if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);//UTF-8로 데이터 읽어옴
                     BufferedReader reader = new BufferedReader(tmp);
                     StringBuffer buffer = new StringBuffer();
@@ -541,7 +531,7 @@ public class JoinStartFragment extends Fragment {
                     }
                     receiveMsg = buffer.toString();
                 } else {
-                    Log.i("통신 결과", conn.getResponseCode()+"에러");
+                    Log.i("통신 결과", conn.getResponseCode() + "에러");
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -552,31 +542,7 @@ public class JoinStartFragment extends Fragment {
         }
 
     }
-    //2021-09-19 주소검색
+}
+//2021-09-19 주소검색
 //    public void onActivityResult(int requestCode, int resultCode, Intent intent){
 //
-//        super.onActivityResult(requestCode, resultCode, intent);
-//
-//        switch(requestCode){
-//
-//            case SEARCH_ADDRESS_ACTIVITY:
-//
-//                if(resultCode == RESULT_OK){
-//
-//                    String data = intent.getExtras().getString("data");
-//                    if (data != null)
-//                        et_address.setText(data);
-//
-//                }
-//                break;
-//
-//        }
-//
-//    }
-
-
-
-
-
-
-}

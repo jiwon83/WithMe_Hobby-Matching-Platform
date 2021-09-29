@@ -90,10 +90,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         }else{
             holder.tv_meetGen.setText("성별: 무관");
         }
-        holder.tv_meetId.setText("모임아이디: "+ arrayList.get(position).getMeetId());
         holder.tv_numMember.setText("인원: "+ arrayList.get(position).getNumMember());
         holder.tv_place.setText("위치: "+ arrayList.get(position).getPlace());
-        holder.tv_content.setText("내용: "+ arrayList.get(position).getContent());
         holder.tv_hobbyCate.setText("취미목록: "+ arrayList.get(position).getHobbyCate());
 
 
@@ -231,7 +229,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_meet;
-        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_meetId, tv_numMember, tv_content, tv_meetGen, tv_place,tv_hobbyCate;
+        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place,tv_hobbyCate;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -239,9 +237,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.tv_meetTitle=itemView.findViewById(R.id.tv_meetTitle);
             this.tv_meetDate=itemView.findViewById(R.id.tv_meetDate);
             this.tv_meetAge=itemView.findViewById(R.id.tv_meetAge);
-            this.tv_meetId=itemView.findViewById(R.id.tv_meetId);
             this.tv_numMember=itemView.findViewById(R.id.tv_numMember);
-            this.tv_content=itemView.findViewById(R.id.tv_content);
             this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);
             this.tv_place=itemView.findViewById(R.id.tv_place);
             this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
