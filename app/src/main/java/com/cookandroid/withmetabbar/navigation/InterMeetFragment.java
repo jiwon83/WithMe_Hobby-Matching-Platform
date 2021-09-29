@@ -154,6 +154,7 @@ public class InterMeetFragment extends Fragment {
                     arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
                     arrayList_copy.addAll(arrayList);//arrayList_copy에 복사
 
+
                     //단어 검색
                     //2021-08-16 검색기능 구현
                     // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
@@ -168,6 +169,7 @@ public class InterMeetFragment extends Fragment {
                     }
 
                 }
+                Log.d("arrayList_copy", String.valueOf(arrayList_copy));
 
                 //2021-08-16 검색기능 구현
                 arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
@@ -178,9 +180,69 @@ public class InterMeetFragment extends Fragment {
 //                recyclerView.setAdapter(customAdapter);
 
                 //
-                filterHobbyCateInMeetToRecyclerView();
+                //filterHobbyCateInMeetToRecyclerView();
+                String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+                database= FirebaseDatabase.getInstance();
+                databaseReference=database.getReference("users").child(uid);//DB Table Connect
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //firebase에서 데이터 받아오기
+                        Member member = dataSnapshot.getValue(Member.class);
+
+                        listUserHobby = member.getHobbyCate(); //listUserHobby에 유저의 취미값 받아오기
+
+                        Log.d("listUserHobby.get(0)", String.valueOf(listUserHobby.get(0)));
+                        //Log.d("listUserHobby.get(1)", String.valueOf(listUserHobby.get(1)));
+
+                        Log.d("getHobbyCate", String.valueOf(member.getHobbyCate()));
+                        Log.d("getUser_listUserHobby", String.valueOf(listUserHobby));
+                        Log.d("after_listUserHobby", String.valueOf(listUserHobby));
+
+                        arrayList.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
+
+                        for (int i=0;i<arrayList_copy.size();i++){// 전체 meet 데이터 중에서
+                            //만약 listUserHobby의 값 중  listMeetsHobbyd의 값이 일치한다면
+                            int totalUserHobby = listUserHobby.size(); //user취미 리스트의 크기
+                            int totalHobbyCateSize = arrayList_copy.get(i).getHobbyCate().size(); //현재 meet데이터의 취미리스트 크기
+
+                            Log.d("totalUserHobby", String.valueOf(totalUserHobby));//1이여야하는데 왜 0이지?
+                            Log.d("totalHobbyCateSize", String.valueOf(totalHobbyCateSize));
+
+                            for (int j=0; j< totalHobbyCateSize; j++){
+                                for (int index =0; index<totalUserHobby; index++){
+                                    // 그에 해당하는 meet의 데이터만
+                                    if (listUserHobby.get(index).equals(arrayList_copy.get(i).getHobbyCate().get(j))  ){
+                                        Log.d("listuserhobbtgetindex",listUserHobby.get(index));//일식
+                                        Log.d("arrayList_copy_getHobby",arrayList_copy.get(i).getHobbyCate().get(j));//일식
+                                        if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
+                                            //arrayList에 업데이트
+                                            arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                                            //검색한 값만 잘 들어온다.
+                                            Log.d("arrayList_new", String.valueOf(arrayList));
+                                            //Log.d("size", String.valueOf(arrayList_copy.size()));//253??
+                                        }
+                                        //Log.d("if조건2", arrayList_copy.get(i).getHobbyCate().get(j));
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        //디비를 가져오는 도중 에러 발생 시
+                        Toast.makeText(getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                        // Getting Post failed, log a message
+                        Log.w(TAG, "loadPost:onCancelled", error.toException());
+
+                    }
+                });
 
                 customAdapter= new CustomAdapter(arrayList,getContext());
+                Log.d("arrayListget(0)getHobbyCate()", String.valueOf(arrayList.get(0).getHobbyCate()));//도자기공예, 한식
                 recyclerView.setAdapter(customAdapter);
 
 
@@ -357,8 +419,40 @@ public class InterMeetFragment extends Fragment {
 
                 listUserHobby = member.getHobbyCate(); //listUserHobby에 유저의 취미값 받아오기
 
+                Log.d("listUserHobby.get(0)", String.valueOf(listUserHobby.get(0)));
+                //Log.d("listUserHobby.get(1)", String.valueOf(listUserHobby.get(1)));
+
                 Log.d("getHobbyCate", String.valueOf(member.getHobbyCate()));
                 Log.d("getUser_listUserHobby", String.valueOf(listUserHobby));
+                Log.d("after_listUserHobby", String.valueOf(listUserHobby));
+
+                arrayList.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
+
+                for (int i=0;i<arrayList_copy.size();i++){// 전체 meet 데이터 중에서
+                    //만약 listUserHobby의 값 중  listMeetsHobbyd의 값이 일치한다면
+                    int totalUserHobby = listUserHobby.size(); //user취미 리스트의 크기
+                    int totalHobbyCateSize = arrayList_copy.get(i).getHobbyCate().size(); //현재 meet데이터의 취미리스트 크기
+
+                    Log.d("totalUserHobby", String.valueOf(totalUserHobby));//1이여야하는데 왜 0이지?
+                    Log.d("totalHobbyCateSize", String.valueOf(totalHobbyCateSize));
+
+                    for (int j=0; j< totalHobbyCateSize; j++){
+                        for (int index =0; index<totalUserHobby; index++){
+                            // 그에 해당하는 meet의 데이터만
+                            if (listUserHobby.get(index).equals(arrayList_copy.get(i).getHobbyCate().get(j))  ){
+
+                                if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
+                                    //arrayList에 업데이트
+                                    arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                                    //검색한 값만 잘 들어온다.
+                                    Log.d("arrayList_new", String.valueOf(arrayList));
+                                    //Log.d("size", String.valueOf(arrayList_copy.size()));//253??
+                                }
+                                //Log.d("if조건2", arrayList_copy.get(i).getHobbyCate().get(j));
+                            }
+                        }
+                    }
+                }
 
             }
 
@@ -373,35 +467,7 @@ public class InterMeetFragment extends Fragment {
         });
 
 
-        Log.d("after_listUserHobby", String.valueOf(listUserHobby));
 
-        arrayList.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
-
-        for (int i=0;i<arrayList_copy.size();i++){// 전체 meet 데이터 중에서
-            //만약 listUserHobby의 값 중  listMeetsHobbyd의 값이 일치한다면
-            int totalUserHobby = listUserHobby.size(); //user취미 리스트의 크기
-            int totalHobbyCateSize = arrayList_copy.get(i).getHobbyCate().size(); //현재 meet데이터의 취미리스트 크기
-
-            Log.d("totalUserHobby", String.valueOf(totalUserHobby));//1이여야하는데 왜 0이지?
-            Log.d("totalHobbyCateSize", String.valueOf(totalHobbyCateSize));
-
-            for (int j=0; j< totalHobbyCateSize; j++){
-                for (int index =0; index<totalUserHobby; index++){
-                    // 그에 해당하는 meet의 데이터만
-                    if (listUserHobby.get(index).equals(arrayList_copy.get(i).getHobbyCate().get(j))  ){
-
-                        if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
-                            //arrayList에 업데이트
-                            arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
-                            //검색한 값만 잘 들어온다.
-                            //Log.d("arrayList_new", String.valueOf(arrayList));
-                            //Log.d("size", String.valueOf(arrayList_copy.size()));//253??
-                        }
-                        //Log.d("if조건2", arrayList_copy.get(i).getHobbyCate().get(j));
-                    }
-                }
-            }
-        }
         //customAdapter.notifyDataSetChanged();
 
     }

@@ -67,8 +67,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 .load(arrayList.get(position).getImgUrl())
                 .into(holder.iv_meet);
         holder.tv_meetTitle.setText("모임명: "+ arrayList.get(position).getTitle());
-        Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
-        Log.d("holder.itemView", String.valueOf(holder.itemView));
+        //Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
+        //Log.d("holder.itemView", String.valueOf(holder.itemView));
 
         String myFormat = "yyyy년 MM월 dd일 HH:mm";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
@@ -104,7 +104,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             public void onClick(View view) {
 
                 try{
-                    Log.d("arrayList.get(position).mid",arrayList.get(position).mid);
 
                     //제한 사항이 맞는지 검사.
                     //user의 Gen, Age 가 meet의(또는 chatroom의) Gen, Age 와 동일한지 확인
@@ -112,7 +111,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                     List<Member> members = new ArrayList<>();
 
                     String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//.orderByChild("users/"+uid).equalTo(true)
+
                     FirebaseDatabase.getInstance().getReference().child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
