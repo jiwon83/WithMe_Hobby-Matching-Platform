@@ -28,6 +28,7 @@ import com.cookandroid.withmetabbar.navigation.AlarmFragment;
 import com.cookandroid.withmetabbar.navigation.CoinMainFragment;
 import com.cookandroid.withmetabbar.navigation.FragmentMyMeetHome;
 import com.cookandroid.withmetabbar.navigation.FragmentPlus;
+import com.cookandroid.withmetabbar.navigation.InterMeetFragment;
 import com.cookandroid.withmetabbar.navigation.MyPageFragment;
 import com.cookandroid.withmetabbar.navigation.PlaceCheckFragment;
 import com.cookandroid.withmetabbar.navigation.TalkPlaceFragment;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity  {
     PlaceCheckFragment placeCheckFragment = new PlaceCheckFragment();//위치인증 프레그 먼트
     TalkPlaceFragment talkPlaceFragment = new TalkPlaceFragment();//톡방 프레그먼트 아직 xml없음
     FragmentMyMeetHome fragmentMyMeetHome = new FragmentMyMeetHome(); //내 모임 보기 화면
+    InterMeetFragment interMeetFragment = new InterMeetFragment();// 관심취미 취미추천화면
 
 
 
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity  {
 
                         break;
                     case R.id.action_love:
-                        transaction.replace(R.id.main_content, fragmentMyMeetHome).commitAllowingStateLoss();
+                        transaction.replace(R.id.main_content, interMeetFragment).commitAllowingStateLoss();
                         break;
                     case R.id.action_plus:
                         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){

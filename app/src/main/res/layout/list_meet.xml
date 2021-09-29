@@ -32,6 +32,14 @@
 
             </TextView>
             <TextView
+                android:id="@+id/tv_hobbyCate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="취미목록"
+                android:textColor="@color/black"
+                android:layout_margin="5dp">
+            </TextView>
+            <TextView
                 android:id="@+id/tv_meetDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

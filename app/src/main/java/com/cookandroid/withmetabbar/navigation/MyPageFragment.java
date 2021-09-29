@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class MyPageFragment extends Fragment {
     //private FragmentPagerAdapter fragmentPagerAdapter;//코인충전어뎁터
     Button btn_charge, btn_ondo, btn_mygroup;
     ImageButton btn_block, btn_friends_invite;
+    LinearLayout myMeetLayout;
 
     @Nullable
     @Override
@@ -61,6 +63,7 @@ public class MyPageFragment extends Fragment {
         TextView tvName= vGroup.findViewById(R.id.tv_mName);
         TextView tvNick= vGroup.findViewById(R.id.tv_nickname);
         imageView = vGroup.findViewById(R.id.imagemy);
+        myMeetLayout = vGroup.findViewById(R.id.myMeetLayout);
 
         Intent intent = new Intent();
 
@@ -97,6 +100,16 @@ public class MyPageFragment extends Fragment {
 
             }
         });
+
+        //내모임보기
+        myMeetLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentMyMeetHome fragmentMyMeetHome = new FragmentMyMeetHome(); //내 모임 보기 화면
+                ((MainActivity)getActivity()).replaceFragment(fragmentMyMeetHome);
+            }
+        });
+
         //코인충전버튼
         btn_charge= vGroup.findViewById(R.id.charge);
         btn_charge.setOnClickListener(new View.OnClickListener() {
