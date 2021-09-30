@@ -1,0 +1,312 @@
+Index: app/src/main/res/layout/list_meet.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:layout_weight=\"1\"\r\n    android:orientation=\"vertical\">\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:background=\"@drawable/layout_background\"\r\n\r\n        >\r\n\r\n\r\n\r\n\r\n        <ImageView\r\n            android:id=\"@+id/iv_meet\"\r\n            android:layout_width=\"150dp\"\r\n            android:layout_height=\"match_parent\"\r\n            android:layout_margin=\"5dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/ic_launcher_background\" />\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"10\"\r\n\r\n            android:orientation=\"vertical\">\r\n            <TextView\r\n                android:id=\"@+id/tv_meetTitle\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_hobbyCate\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"취미목록\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n            </TextView>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"1dp\"\r\n                android:background=\"@color/dark\"\r\n                android:layout_marginLeft=\"10dp\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:layout_marginTop=\"5dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n            </LinearLayout>\r\n\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv_meetDate\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"시간\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_meetAge\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"나이\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_meetGen\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"성별\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n\r\n            <TextView\r\n                android:id=\"@+id/tv_numMember\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"모임인원\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_place\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"위치\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginBottom=\"10dp\"\r\n\r\n                >\r\n\r\n                <Space\r\n                    android:layout_width=\"160dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"8\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button_check\"\r\n                    android:layout_width=\"70dp\"\r\n                    android:layout_height=\"30dp\"\r\n                    android:background=\"@color/yellow\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:text=\"더보기\"\r\n                    android:textSize=\"35px\" />\r\n\r\n            </LinearLayout>\r\n\r\n\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/list_meet.xml	(revision 24530f9d9f0ec3670ef94db0d6f9175141085e72)
++++ app/src/main/res/layout/list_meet.xml	(date 1632983663678)
+@@ -41,6 +41,34 @@
+                 android:textColor="@color/black"
+                 android:layout_margin="5dp">
+ 
++            </TextView>
++
++
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="1dp"
++                android:background="@color/dark"
++                android:layout_marginLeft="10dp"
++                android:layout_marginRight="10dp"
++                android:orientation="horizontal">
++
++            </LinearLayout>
++
++
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:orientation="horizontal"
++                android:layout_marginBottom="10dp"
++
++                >
++            <TextView
++
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="취미목록"
++                android:textColor="@color/black"
++                android:layout_margin="5dp">
+             </TextView>
+             <TextView
+                 android:id="@+id/tv_hobbyCate"
+@@ -50,28 +78,38 @@
+                 android:textColor="@color/black"
+                 android:layout_margin="5dp">
+             </TextView>
++            </LinearLayout>
++
++
++
+ 
+             <LinearLayout
+                 android:layout_width="match_parent"
+-                android:layout_height="1dp"
+-                android:background="@color/dark"
+-                android:layout_marginLeft="10dp"
+-                android:layout_marginRight="10dp"
+-                android:layout_marginTop="5dp"
+-                android:orientation="horizontal">
+-
+-            </LinearLayout>
++                android:layout_height="wrap_content"
++                android:orientation="horizontal"
++                android:layout_marginBottom="10dp"
+ 
+-
+-            <TextView
+-                android:id="@+id/tv_meetDate"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:text="시간"
+-                android:textColor="@color/black"
+-                android:layout_margin="5dp">
++                >
++                <ImageView
++                    android:layout_width="30dp"
++                    android:layout_height="match_parent"
++                    android:backgroundTint="@color/Orange"
++                    android:background="@color/Orange"
++                    android:src="@drawable/calendar"/>
++                <TextView
++                    android:id="@+id/tv_meetDate"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:text="시간"
++                    android:textColor="@color/black"
++                    android:layout_margin="5dp">
+ 
+-            </TextView>
++                </TextView>
++
++
++
++            </LinearLayout>
++
+             <TextView
+                 android:id="@+id/tv_meetAge"
+                 android:layout_width="wrap_content"
+@@ -81,6 +119,7 @@
+                 android:layout_margin="5dp">
+ 
+             </TextView>
++
+             <TextView
+                 android:id="@+id/tv_meetGen"
+                 android:layout_width="wrap_content"
+@@ -112,25 +151,26 @@
+ 
+ 
+             <LinearLayout
+-                android:layout_width="wrap_content"
++                android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:layout_marginTop="10dp"
++                android:layout_marginRight="10dp"
+                 android:layout_marginBottom="10dp"
+ 
+                 >
+ 
+                 <Space
+-                    android:layout_width="160dp"
++                    android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+-                    android:layout_weight="8" />
++                    android:layout_weight="40" />
+ 
+                 <Button
+                     android:id="@+id/button_check"
+-                    android:layout_width="70dp"
++                    android:layout_width="0dp"
+                     android:layout_height="30dp"
+-                    android:background="@color/yellow"
+-                    android:backgroundTint="@color/Orange"
++                    android:layout_weight="15"
++                    android:background="@drawable/btn_background"
+                     android:text="더보기"
+                     android:textSize="35px" />
+ 
+Index: app/src/main/res/layout/activity_main_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/linearLayout\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginTop=\"3dp\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:orientation=\"vertical\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"6\"\r\n                android:background=\"@drawable/search_et_in\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <EditText\r\n                    android:id=\"@+id/editSearch\"\r\n                    android:layout_width=\"280dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_weight=\"8\"\r\n                    android:background=\"@null\"\r\n                    android:hint=\"검색어를 입력하세요.\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_search\"\r\n                    android:layout_width=\"@dimen/search\"\r\n                    android:layout_height=\"@dimen/search\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:background=\"@drawable/search\"\r\n                    />\r\n\r\n\r\n            </LinearLayout>\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_time\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:background=\"@drawable/calendar\"\r\n                    android:backgroundTint=\"@color/yellow\"\r\n\r\n\r\n                    android:text=\"\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n              android:layout_gravity=\"center_horizontal\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_inter\"\r\n                    android:layout_width=\"80dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:background=\"@color/Orange\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:layout_marginTop=\"5dp\"\r\n                    android:textSize=\"35px\"\r\n                    android:text=\"관심취미\"/>\r\n\r\n\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <ListView\r\n                android:id=\"@+id/listView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:divider=\"#999999\"\r\n                android:dividerHeight=\"1dp\"\r\n                android:visibility=\"gone\"\r\n                >\r\n            </ListView>\r\n\r\n            <androidx.recyclerview.widget.RecyclerView\r\n                android:id=\"@+id/recyclerView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"/>\r\n\r\n        </LinearLayout>\r\n    </LinearLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main_home.xml	(revision 24530f9d9f0ec3670ef94db0d6f9175141085e72)
++++ app/src/main/res/layout/activity_main_home.xml	(date 1632983663688)
+@@ -65,9 +65,9 @@
+                     android:id="@+id/btn_time"
+                     android:layout_width="0dp"
+                     android:layout_height="40dp"
+-                    android:layout_weight="1"
++                    android:layout_weight="0.8"
+                     android:background="@drawable/calendar"
+-                    android:backgroundTint="@color/yellow"
++                    android:backgroundTint="@color/Orange"
+ 
+ 
+                     android:text="" />
+Index: app/src/main/java/com/cookandroid/withmetabbar/CustomAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar;\r\n\r\nimport android.app.ActivityOptions;\r\nimport android.app.AlertDialog;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.text.TextUtils;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.Dimension;\r\nimport androidx.annotation.NonNull;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.bumptech.glide.Glide;\r\nimport com.cookandroid.withmetabbar.chat.GroupMessageActivity;\r\nimport com.cookandroid.withmetabbar.model.ChatModel;\r\nimport com.cookandroid.withmetabbar.model.Meet;\r\nimport com.cookandroid.withmetabbar.model.Member;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport org.jetbrains.annotations.NotNull;\r\n\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Locale;\r\nimport java.util.Map;\r\n\r\npublic class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {\r\n\r\n    private final ArrayList<com.cookandroid.withmetabbar.model.Meet> arrayList;\r\n    private AlertDialog dialog;\r\n    private final Context context;\r\n    private int userCount=1;\r\n    private Member memberObj = new Member(); // 채팅방 입장을 위한 맴버 객체 생성\r\n\r\n    String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();//채팅방 구현\r\n\r\n    public CustomAdapter(ArrayList<Meet> arrayList, Context context) {\r\n        this.arrayList = arrayList;\r\n        this.context = context;\r\n    }\r\n\r\n    /**ListView가 어덥터를 만들어 냈을 때 최초로 실행된다.*/\r\n    @NonNull\r\n    @Override\r\n    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_meet, parent, false);\r\n        CustomViewHolder holder = new CustomViewHolder(view);\r\n        return holder;\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull  CustomViewHolder holder, int position) {\r\n\r\n\r\n        Glide.with(holder.itemView)\r\n                .load(arrayList.get(position).getImgUrl())\r\n                .override(150,200)\r\n                .into(holder.iv_meet);\r\n        holder.tv_meetTitle.setText(\" \"+ arrayList.get(position).getTitle());\r\n        //Log.d(\"custom_imgUrl\",arrayList.get(position).getImgUrl());\r\n        //Log.d(\"holder.itemView\", String.valueOf(holder.itemView));\r\n\r\n        String myFormat = \"yyyy년 MM월 dd일 HH:mm\";    // 출력형식   2018/11/28\r\n        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.\r\n        try{\r\n            holder.tv_meetDate.setText(\"날짜: \"+sdf.format(arrayList.get(position).getMeetDate().getTime()));\r\n        }catch (Exception e){\r\n\r\n        }\r\n\r\n        //holder.tv_meetDate.setText(\"시간: \"+ arrayList.get(position).getMeetDate());\r\n\r\n        holder.tv_meetAge.setText(\"나이: \"+ arrayList.get(position).getMeetAge());\r\n        //성별\r\n        if (arrayList.get(position).getMeetGen()==1){\r\n            holder.tv_meetGen.setText(\"성별: 남\");\r\n\r\n        }else if (arrayList.get(position).getMeetGen()==2){\r\n            holder.tv_meetGen.setText(\"성별: 여\");\r\n        }else{\r\n            holder.tv_meetGen.setText(\"성별: 무관\");\r\n        }\r\n        holder.tv_numMember.setText(\"인원: \"+ arrayList.get(position).getNumMember());\r\n        holder.tv_place.setText(\"위치: \"+ arrayList.get(position).getPlace());\r\n        holder.tv_hobbyCate.setText(\"취미목록: \"+ arrayList.get(position).getHobbyCate());\r\n\r\n\r\n\r\n        //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성\r\n\r\n        holder.itemView.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n\r\n                try{\r\n\r\n                    //제한 사항이 맞는지 검사.\r\n                    //user의 Gen, Age 가 meet의(또는 chatroom의) Gen, Age 와 동일한지 확인\r\n                    //userData 가져오기\r\n                    List<Member> members = new ArrayList<>();\r\n\r\n                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();\r\n\r\n                    FirebaseDatabase.getInstance().getReference().child(\"users\").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {\r\n                        @Override\r\n                        public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n\r\n                            //member 객체에 user에서 받아온 값 넣기\r\n                            Member member = snapshot.getValue(Member.class);\r\n                            memberObj.mGen =member.mGen;\r\n                            memberObj.mAge =member.mAge;\r\n\r\n\r\n                            List<String> keysChatroomUsers = new ArrayList<>();//chatrooms - uid -users 의 uid 값들을 답을 리스트\r\n                            //구조변경\r\n                            //채팅방에서 userCount 받아오기 chatrooms - chatroom uid(=meet uid)\r\n                            FirebaseDatabase.getInstance().getReference().child(\"chatrooms\").child(arrayList.get(position).mid).child(\"users\").addListenerForSingleValueEvent(new ValueEventListener() {\r\n                                @Override\r\n                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {\r\n\r\n\r\n                                    for (DataSnapshot item : snapshot.getChildren()){\r\n                                        keysChatroomUsers.add(item.getKey());\r\n                                    }\r\n                                    userCount = keysChatroomUsers.size(); //chatroom에 있는 user의 수\r\n\r\n\r\n                                    boolean agePass = memberObj.mAge>arrayList.get(position).getMeetAge();\r\n                                    boolean genPass = memberObj.mGen>=arrayList.get(position).getMeetGen() || (arrayList.get(position).getMeetGen()==0) ;\r\n                                    boolean numMemberPass =( userCount < arrayList.get(position).getNumMember() );\r\n\r\n\r\n                                    //조건 비교\r\n                                    try {\r\n                                        if (  agePass && genPass && numMemberPass){\r\n\r\n\r\n                                            Map<String,Object> map = new HashMap<>();\r\n                                            map.put(myUid,true);\r\n\r\n                                            Intent intent = new Intent (view.getContext(), GroupMessageActivity.class);\r\n\r\n                                            //chatrooms의 user에 내 uid 넣는것.\r\n                                            FirebaseDatabase.getInstance().getReference().child(\"chatrooms\").child(arrayList.get(position).mid)\r\n                                                    .child(\"users\").updateChildren(map);\r\n\r\n                                            //chatroom 의 userCount에 현재 userCount 넣기.\r\n                                            userCount += 1;\r\n                                            FirebaseDatabase.getInstance().getReference().child(\"chatrooms\").child(arrayList.get(position).mid)\r\n                                                    .child(\"userCount\").setValue(userCount);\r\n\r\n                                            intent.putExtra(\"destinationRoom\",arrayList.get(position).mid);// 채팅방을 띄우기 위한 chatroom uid 전송.\r\n\r\n                                            ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(),R.anim.fromright,R.anim.toleft);\r\n                                            view.getContext().startActivity(intent,activityOptions.toBundle());\r\n\r\n                                        }else {\r\n\r\n                                            //조건 불만족시 처리\r\n                                            if (agePass==false){\r\n                                                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());\r\n                                                dialog = builder.setMessage(\"모임 연령을 확인하세요. 모임연령: \"+arrayList.get(position).getMeetAge())\r\n                                                        .setNegativeButton(\"OK\", null)\r\n                                                        .create();\r\n                                                dialog.show();\r\n                                            }else if (genPass ==false ){\r\n                                                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());\r\n                                                dialog = builder.setMessage(\"모임 성별을 확인하세요.\")\r\n                                                        .setNegativeButton(\"OK\", null)\r\n                                                        .create();\r\n                                                dialog.show();\r\n                                            }else {\r\n                                                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());\r\n                                                dialog = builder.setMessage(\"인원이 마감되었습니다.\")\r\n                                                        .setNegativeButton(\"OK\", null)\r\n                                                        .create();\r\n                                                dialog.show();\r\n                                            }\r\n//\r\n                                        }\r\n                                    }catch (Exception e){\r\n                                        Toast.makeText(view.getContext(), e.getMessage(),  Toast.LENGTH_SHORT);\r\n                                    }\r\n\r\n\r\n                                }\r\n\r\n                                @Override\r\n                                public void onCancelled(@NonNull @NotNull DatabaseError error) {\r\n\r\n                                }\r\n                            });\r\n                        }\r\n\r\n                        @Override\r\n                        public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n                        }\r\n                    });\r\n\r\n\r\n\r\n\r\n\r\n                }catch (Exception e){\r\n\r\n                }\r\n\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return (arrayList !=null ? arrayList.size() : 0);\r\n    }\r\n    /**MeetViewHolder*/\r\n    public class CustomViewHolder extends RecyclerView.ViewHolder {\r\n\r\n        ImageView iv_meet;\r\n        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place,tv_hobbyCate;\r\n\r\n\r\n        public CustomViewHolder(@NonNull View itemView) {\r\n            super(itemView);\r\n            this.iv_meet=itemView.findViewById(R.id.iv_meet);\r\n            this.tv_meetTitle=itemView.findViewById(R.id.tv_meetTitle);\r\n            this.tv_meetDate=itemView.findViewById(R.id.tv_meetDate);\r\n            this.tv_meetAge=itemView.findViewById(R.id.tv_meetAge);\r\n            this.tv_numMember=itemView.findViewById(R.id.tv_numMember);\r\n            this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);\r\n            this.tv_place=itemView.findViewById(R.id.tv_place);\r\n            this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);\r\n            tv_meetTitle.setTextSize(Dimension.SP, 15);\r\n            tv_place.setEllipsize(TextUtils.TruncateAt.END);\r\n            tv_place.setMaxLines(10);\r\n            tv_place.setSelected(true);\r\n            tv_place.setSingleLine(true);\r\n\r\n\r\n\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/CustomAdapter.java	(revision 24530f9d9f0ec3670ef94db0d6f9175141085e72)
++++ app/src/main/java/com/cookandroid/withmetabbar/CustomAdapter.java	(date 1632982475639)
+@@ -4,6 +4,7 @@
+ import android.app.AlertDialog;
+ import android.content.Context;
+ import android.content.Intent;
++import android.graphics.Color;
+ import android.text.TextUtils;
+ import android.util.Log;
+ import android.view.LayoutInflater;
+@@ -16,6 +17,7 @@
+ 
+ import androidx.annotation.Dimension;
+ import androidx.annotation.NonNull;
++import androidx.core.content.ContextCompat;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+ import com.bumptech.glide.Glide;
+@@ -74,29 +76,34 @@
+         //Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
+         //Log.d("holder.itemView", String.valueOf(holder.itemView));
+ 
+-        String myFormat = "yyyy년 MM월 dd일 HH:mm";    // 출력형식   2018/11/28
++        String myFormat = "yyyy/ MM/ dd/ HH:mm";    // 출력형식   2018/11/28
+         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
+         try{
+-            holder.tv_meetDate.setText("날짜: "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
++            holder.tv_meetDate.setText("날짜 "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
+         }catch (Exception e){
+ 
+         }
+ 
+         //holder.tv_meetDate.setText("시간: "+ arrayList.get(position).getMeetDate());
+ 
+-        holder.tv_meetAge.setText("나이: "+ arrayList.get(position).getMeetAge());
++        holder.tv_meetAge.setText("나이 "+ arrayList.get(position).getMeetAge());
+         //성별
+         if (arrayList.get(position).getMeetGen()==1){
+-            holder.tv_meetGen.setText("성별: 남");
++            holder.tv_meetGen.setText("남");
++            holder.tv_meetGen.setTextColor(Color.parseColor("#255AAC"));
+ 
+         }else if (arrayList.get(position).getMeetGen()==2){
+-            holder.tv_meetGen.setText("성별: 여");
++            holder.tv_meetGen.setText("여");
++            holder.tv_meetGen.setTextColor(Color.parseColor("#A5472A"));
+         }else{
+-            holder.tv_meetGen.setText("성별: 무관");
++            holder.tv_meetGen.setText("무관");
++            holder.tv_meetGen.setTextColor(Color.parseColor("#555353"));
+         }
+-        holder.tv_numMember.setText("인원: "+ arrayList.get(position).getNumMember());
+-        holder.tv_place.setText("위치: "+ arrayList.get(position).getPlace());
+-        holder.tv_hobbyCate.setText("취미목록: "+ arrayList.get(position).getHobbyCate());
++        //holder.tv_numMember.setText(" "+ arrayList.get(position).getNumMember());
++        holder.tv_numMember.setText("인원 "+ arrayList.get(position).getNumMember());
++        holder.tv_place.setText("위치 "+ arrayList.get(position).getPlace());
++        holder.tv_hobbyCate.setText(""+arrayList.get(position).getHobbyCate());
++
+ 
+ 
+ 
+@@ -235,7 +242,7 @@
+     public class CustomViewHolder extends RecyclerView.ViewHolder {
+ 
+         ImageView iv_meet;
+-        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place,tv_hobbyCate;
++        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place, tv_hobbyCate, tv_hobbyCate2;
+ 
+ 
+         public CustomViewHolder(@NonNull View itemView) {
+@@ -248,11 +255,17 @@
+             this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);
+             this.tv_place=itemView.findViewById(R.id.tv_place);
+             this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
+-            tv_meetTitle.setTextSize(Dimension.SP, 15);
++
++
++            tv_meetTitle.setTextSize(Dimension.SP, 17);
+             tv_place.setEllipsize(TextUtils.TruncateAt.END);
+             tv_place.setMaxLines(10);
+             tv_place.setSelected(true);
+             tv_place.setSingleLine(true);
++            tv_meetDate.setTextColor(Color.parseColor("#555353"));
++            tv_meetAge.setTextColor(Color.parseColor("#555353"));
++            tv_numMember.setTextColor(Color.parseColor("#555353"));
++            tv_place.setTextColor(Color.parseColor("#555353"));
+ 
+ 
+ 
+Index: app/src/main/res/drawable/layout_background.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<shape\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:shape=\"rectangle\">\r\n    <solid android:color=\"#EEEEEE\" />\r\n    <stroke android:color=\"#CCCCCC\" android:width=\"1dp\" />\r\n    <corners android:radius=\"7dp\" />\r\n</shape>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/layout_background.xml	(revision 24530f9d9f0ec3670ef94db0d6f9175141085e72)
++++ app/src/main/res/drawable/layout_background.xml	(date 1632980207250)
+@@ -3,6 +3,6 @@
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:shape="rectangle">
+     <solid android:color="#EEEEEE" />
+-    <stroke android:color="#CCCCCC" android:width="1dp" />
++    <stroke android:color="#EEEEEE" android:width="1dp" />
+     <corners android:radius="7dp" />
+ </shape>
+\ No newline at end of file
+Index: app/src/main/res/drawable/btn_background.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/btn_background.xml	(date 1632981822434)
++++ app/src/main/res/drawable/btn_background.xml	(date 1632981822434)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:shape="rectangle">
++    <solid android:color="#F49C19" />
++    <stroke android:color="#F49C19" android:width="1dp" />
++    <corners android:radius="10dp" />
++</shape>
+\ No newline at end of file
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <color name=\"purple_200\">#FFBB86FC</color>\r\n    <color name=\"purple_500\">#FF6200EE</color>\r\n    <color name=\"purple_700\">#FF3700B3</color>\r\n    <color name=\"teal_200\">#FF03DAC5</color>\r\n    <color name=\"teal_700\">#FF018786</color>\r\n    <color name=\"black\">#FF000000</color>\r\n    <color name=\"white\">#FFFFFFFF</color>\r\n    <color name=\"lite_gray\">#E6E2D7</color>\r\n    <color name=\"Orange\">#F49C19</color>\r\n    <color name=\"gray\">#D6D6D5</color>\r\n    <color name=\"darkgray\">#777772</color>\r\n    <color name=\"yellow\">#F4DE6C</color>\r\n    <color name=\"dark\">#93928D</color>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(revision 24530f9d9f0ec3670ef94db0d6f9175141085e72)
++++ app/src/main/res/values/colors.xml	(date 1632978902828)
+@@ -13,4 +13,7 @@
+     <color name="darkgray">#777772</color>
+     <color name="yellow">#F4DE6C</color>
+     <color name="dark">#93928D</color>
++    <color name="blue">#255AAC</color>
++    <color name="red">#A5472A</color>
++    <color name="none">#555353</color>
+ </resources>
+\ No newline at end of file

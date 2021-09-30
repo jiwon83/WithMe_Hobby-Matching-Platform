@@ -4,6 +4,8 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -74,29 +77,34 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         //Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
         //Log.d("holder.itemView", String.valueOf(holder.itemView));
 
-        String myFormat = "yyyy년 MM월 dd일 HH:mm";    // 출력형식   2018/11/28
+        String myFormat = "yyyy/ MM/ dd/ HH:mm";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
         try{
-            holder.tv_meetDate.setText("날짜: "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
+            holder.tv_meetDate.setText("날짜 "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
         }catch (Exception e){
 
         }
 
         //holder.tv_meetDate.setText("시간: "+ arrayList.get(position).getMeetDate());
 
-        holder.tv_meetAge.setText("나이: "+ arrayList.get(position).getMeetAge());
+        holder.tv_meetAge.setText("나이 "+ arrayList.get(position).getMeetAge());
         //성별
         if (arrayList.get(position).getMeetGen()==1){
-            holder.tv_meetGen.setText("성별: 남");
+            holder.tv_meetGen.setText("남");
+            holder.tv_meetGen.setTextColor(Color.parseColor("#255AAC"));
 
         }else if (arrayList.get(position).getMeetGen()==2){
-            holder.tv_meetGen.setText("성별: 여");
+            holder.tv_meetGen.setText("여");
+            holder.tv_meetGen.setTextColor(Color.parseColor("#A5472A"));
         }else{
-            holder.tv_meetGen.setText("성별: 무관");
+            holder.tv_meetGen.setText("무관");
+            holder.tv_meetGen.setTextColor(Color.parseColor("#555353"));
         }
-        holder.tv_numMember.setText("인원: "+ arrayList.get(position).getNumMember());
-        holder.tv_place.setText("위치: "+ arrayList.get(position).getPlace());
-        holder.tv_hobbyCate.setText("취미목록: "+ arrayList.get(position).getHobbyCate());
+        //holder.tv_numMember.setText(" "+ arrayList.get(position).getNumMember());
+        holder.tv_numMember.setText("인원 "+ arrayList.get(position).getNumMember());
+        holder.tv_place.setText("위치 "+ arrayList.get(position).getPlace());
+        holder.tv_hobbyCate.setText(""+arrayList.get(position).getHobbyCate());
+
 
 
 
@@ -235,7 +243,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_meet;
-        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place,tv_hobbyCate;
+        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place, tv_hobbyCate, tv_hobbyCate2;
+        ImageView img_meetDate;
 
 
         public CustomViewHolder(@NonNull View itemView) {
@@ -248,11 +257,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);
             this.tv_place=itemView.findViewById(R.id.tv_place);
             this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
-            tv_meetTitle.setTextSize(Dimension.SP, 15);
+            this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
+            this.img_meetDate=itemView.findViewById(R.id.img_meetDate);
+
+
+            tv_meetTitle.setTextSize(Dimension.SP, 17);
             tv_place.setEllipsize(TextUtils.TruncateAt.END);
             tv_place.setMaxLines(10);
             tv_place.setSelected(true);
             tv_place.setSingleLine(true);
+            tv_meetDate.setTextColor(Color.parseColor("#555353"));
+            tv_meetAge.setTextColor(Color.parseColor("#555353"));
+            tv_numMember.setTextColor(Color.parseColor("#555353"));
+            tv_place.setTextColor(Color.parseColor("#555353"));
+            img_meetDate.setColorFilter(Color.parseColor("#F49C19"));
+
+
+
 
 
 

@@ -13,4 +13,7 @@
     <color name="darkgray">#777772</color>
     <color name="yellow">#F4DE6C</color>
     <color name="dark">#93928D</color>
+    <color name="blue">#255AAC</color>
+    <color name="red">#A5472A</color>
+    <color name="none">#555353</color>
 </resources>
