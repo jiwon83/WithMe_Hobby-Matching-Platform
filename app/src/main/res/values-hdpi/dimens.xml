@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="naver">60dp</dimen>
-    <dimen name="kakao">60dp</dimen>
-    <dimen name="facebook">60dp</dimen>
+    <dimen name="naver">50dp</dimen>
+    <dimen name="kakao">50dp</dimen>
+    <dimen name="facebook">50dp</dimen>
     <dimen name="logow">200dp</dimen>
     <dimen name="alarm_x">60dp</dimen>
     <dimen name="coin">50dp</dimen>

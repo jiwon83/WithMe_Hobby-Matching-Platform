@@ -80,14 +80,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         String myFormat = "yyyy/ MM/ dd/ HH:mm";    // 출력형식   2018/11/28
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
         try{
-            holder.tv_meetDate.setText("날짜 "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
+            holder.tv_meetDate.setText(" "+sdf.format(arrayList.get(position).getMeetDate().getTime()));
         }catch (Exception e){
 
         }
 
         //holder.tv_meetDate.setText("시간: "+ arrayList.get(position).getMeetDate());
 
-        holder.tv_meetAge.setText("나이 "+ arrayList.get(position).getMeetAge());
+        holder.tv_meetAge.setText(" "+ arrayList.get(position).getMeetAge());
         //성별
         if (arrayList.get(position).getMeetGen()==1){
             holder.tv_meetGen.setText("남");
@@ -101,8 +101,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             holder.tv_meetGen.setTextColor(Color.parseColor("#555353"));
         }
         //holder.tv_numMember.setText(" "+ arrayList.get(position).getNumMember());
-        holder.tv_numMember.setText("인원 "+ arrayList.get(position).getNumMember());
-        holder.tv_place.setText("위치 "+ arrayList.get(position).getPlace());
+        holder.tv_numMember.setText(""+ arrayList.get(position).getNumMember());
+        holder.tv_place.setText(" "+ arrayList.get(position).getPlace());
         holder.tv_hobbyCate.setText(""+arrayList.get(position).getHobbyCate());
 
 
@@ -243,8 +243,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_meet;
-        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place, tv_hobbyCate, tv_hobbyCate2;
-        ImageView img_meetDate;
+        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place, tv_hobbyCate;
+        ImageView img_meetDate, img_place;
+        Button button_check;
 
 
         public CustomViewHolder(@NonNull View itemView) {
@@ -257,20 +258,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);
             this.tv_place=itemView.findViewById(R.id.tv_place);
             this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
-            this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
             this.img_meetDate=itemView.findViewById(R.id.img_meetDate);
+            this.img_place=itemView.findViewById(R.id.img_place);
+            this.button_check=itemView.findViewById(R.id.button_check);
+
 
 
             tv_meetTitle.setTextSize(Dimension.SP, 17);
+            tv_meetAge.setTextSize(Dimension.SP, 16);
+            tv_numMember.setTextSize(Dimension.SP, 16);
+            tv_meetGen.setTextSize(Dimension.SP, 16);
             tv_place.setEllipsize(TextUtils.TruncateAt.END);
             tv_place.setMaxLines(10);
             tv_place.setSelected(true);
             tv_place.setSingleLine(true);
-            tv_meetDate.setTextColor(Color.parseColor("#555353"));
-            tv_meetAge.setTextColor(Color.parseColor("#555353"));
-            tv_numMember.setTextColor(Color.parseColor("#555353"));
-            tv_place.setTextColor(Color.parseColor("#555353"));
+            tv_meetDate.setTextColor(Color.parseColor("#3E3B3B"));
+            tv_meetAge.setTextColor(Color.parseColor("#3E3B3B"));
+            tv_numMember.setTextColor(Color.parseColor("#3E3B3B"));
+            tv_place.setTextColor(Color.parseColor("#3E3B3B"));
             img_meetDate.setColorFilter(Color.parseColor("#F49C19"));
+            img_place.setColorFilter(Color.parseColor("#F49C19"));
 
 
 
