@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -49,6 +51,7 @@ import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -56,6 +59,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -74,7 +78,7 @@ public class FragmentPlus extends Fragment {
     private ImageView imageView, imageView7;
     private ImageButton imageButton;
     //private ToggleButton toggleButton, toggleButton1,toggleButton2,toggleButton3,toggleButton4;
-    private Button btnMeet;
+    private Button btnMeet,btnTextToMap;
     private MediaPlayer MP;
     private Uri imageUri;//모임이미지
     private String uid="";
@@ -160,8 +164,9 @@ public class FragmentPlus extends Fragment {
         cb_female = vGroup.findViewById(R.id.check_female);
         cb_no = vGroup.findViewById(R.id.checkNo);
         gender_plus = vGroup.findViewById(R.id.gender_plus);
+        btnTextToMap =vGroup.findViewById(R.id.btnTextToMap);
 
-
+        final Geocoder geocoder = new Geocoder(getContext());
 
         Intent intent = new Intent();
 
@@ -295,6 +300,43 @@ public class FragmentPlus extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), MainActivityWebView.class);
                 startActivityForResult(i, MAIN_ACTIVITY_WEBVIEW);//requestcode 2000 전송
+            }
+        });
+
+        //장소 구글맵으로 보기
+        btnTextToMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Address> list = null;
+
+                String address = et_locate.getText().toString();
+                try {
+                    list = geocoder.getFromLocationName
+                            (address, // 지역 이름
+                                    10); // 읽을 개수
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
+                }
+
+                if (list != null) {
+                    if (list.size() == 0) {
+                        Toast.makeText(getContext(),"해당되는 주소 정보는 없습니다.",Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 해당되는 주소로 인텐트 날리기
+                        Address addr = list.get(0);
+                        double lat = addr.getLatitude();
+                        double lon = addr.getLongitude();
+
+                        String sss = String.format("geo:%f,%f", lat, lon);//위도경도로 포맷
+
+                        Intent intent = new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse(sss));//위도경도를가지고
+                        startActivity(intent);
+                    }
+                }
+
             }
         });
 

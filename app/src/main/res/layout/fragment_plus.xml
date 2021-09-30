@@ -353,6 +353,11 @@
                     android:text=""
                     android:textSize="40px"
                     android:hint="클릭하세요"/>
+                <Button
+                    android:id="@+id/btnTextToMap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="지도로보기"/>
 
             </LinearLayout>
 
