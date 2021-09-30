@@ -226,6 +226,7 @@
                     android:layout_weight="15"
                     android:background="@drawable/btn_background"
                     android:text="더보기"
+                    android:onClick="showDialog"
                     android:textSize="35px" />
 
             </LinearLayout>

@@ -3,6 +3,7 @@ package com.cookandroid.withmetabbar;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,6 +111,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
 
         //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성
+        holder.button_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,6 +244,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             }
         });
 
+
+
+
     }
 
 
@@ -249,6 +264,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
 
         public CustomViewHolder(@NonNull View itemView) {
+
+
+
+
             super(itemView);
             this.iv_meet=itemView.findViewById(R.id.iv_meet);
             this.tv_meetTitle=itemView.findViewById(R.id.tv_meetTitle);
@@ -278,6 +297,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             tv_place.setTextColor(Color.parseColor("#3E3B3B"));
             img_meetDate.setColorFilter(Color.parseColor("#F49C19"));
             img_place.setColorFilter(Color.parseColor("#F49C19"));
+
+
+
 
 
 
