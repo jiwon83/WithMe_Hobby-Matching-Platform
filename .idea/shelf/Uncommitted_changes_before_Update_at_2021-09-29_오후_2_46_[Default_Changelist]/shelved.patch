@@ -1,0 +1,795 @@
+Index: app/src/main/res/layout/join_start_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:gravity=\"center\"\r\n        android:layout_gravity=\"center\"\r\n        android:text=\"With Me 회원가입\"\r\n        android:textColor=\"@color/Orange\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:textSize=\"60px\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_gravity=\"center\"\r\n        android:gravity=\"center\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <de.hdodenhof.circleimageview.CircleImageView\r\n                android:id=\"@+id/imagejoin\"\r\n                android:layout_gravity=\"center_vertical\"\r\n                android:layout_marginLeft=\"25dp\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_width=\"@dimen/myph_x\"\r\n                android:layout_height=\"@dimen/myph_x\"\r\n                android:src=\"@drawable/myph_x\"/>\r\n\r\n\r\n\r\n\r\n            <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"4\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etId\"\r\n                android:layout_width=\"150dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"10dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"아이디\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"40px\" />\r\n\r\n            <Button\r\n                android:id=\"@+id/button_check\"\r\n                android:layout_width=\"50dp\"\r\n                android:layout_height=\"30dp\"\r\n                android:backgroundTint=\"@color/yellow\"\r\n                android:background=\"@color/yellow\"\r\n                android:layout_marginLeft=\"5dp\"\r\n                android:text=\"확인\"\r\n                android:textSize=\"35px\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etPw\"\r\n                android:layout_width=\"150dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"10dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"비밀번호\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"40px\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etName\"\r\n                android:layout_width=\"150dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"10dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"이름\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"40px\" />\r\n\r\n        </LinearLayout>\r\n\r\n            <RadioGroup\r\n                android:id=\"@+id/gender\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\">\r\n            <RadioButton\r\n                android:id=\"@+id/check_male\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n             android:buttonTint=\"@color/yellow\"\r\n                android:textSize=\"40px\"\r\n                android:text=\"남\" />\r\n\r\n            <RadioButton\r\n                android:id=\"@+id/check_female\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:buttonTint=\"@color/yellow\"\r\n                android:textSize=\"40px\"\r\n                android:text=\"여\" />\r\n\r\n            <RadioButton\r\n                android:id=\"@+id/checkNo\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:buttonTint=\"@color/yellow\"\r\n                android:textSize=\"40px\"\r\n                android:text=\"무관\" />\r\n        </RadioGroup>\r\n\r\n        </LinearLayout>\r\n        </LinearLayout>\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etNick\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"닉네임\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"40px\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etBirth\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:clickable=\"true\"\r\n                android:editable=\"false\"\r\n                android:ems=\"10\"\r\n                android:focusable=\"false\"\r\n                android:hint=\"생년월일\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"15dp\" />\r\n        </LinearLayout>\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etAge\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"나이\"\r\n                android:inputType=\"textPersonName\"\r\n                android:textSize=\"40px\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/etPhoneNum\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:ems=\"10\"\r\n                android:hint=\"휴대폰번호\"\r\n                android:inputType=\"phone\"\r\n                android:maxLength=\"13\"\r\n                android:textSize=\"40px\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <Button\r\n                android:id=\"@+id/btn_hobbys\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"60dp\"\r\n                android:layout_marginLeft=\"20dp\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:backgroundTint=\"@color/gray\"\r\n                android:gravity=\"center_vertical\"\r\n                android:hint=\"취미 선택\"\r\n                android:textSize=\"40px\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n        <Button\r\n            android:id=\"@+id/btn_live\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:gravity=\"center_vertical\"\r\n            android:hint=\"거주지역 선택\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:textSize=\"40px\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n        <Button\r\n            android:id=\"@+id/button4\"\r\n            android:layout_width=\"300dp\"\r\n            android:layout_height=\"60dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:backgroundTint=\"@color/gray\"\r\n            android:gravity=\"center_vertical\"\r\n            android:hint=\"관심지역 선택\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:textSize=\"40px\" />\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n\r\n<LinearLayout\r\nandroid:layout_width=\"match_parent\"\r\nandroid:layout_height=\"wrap_content\"\r\n    android:gravity=\"center\"\r\nandroid:orientation=\"horizontal\">\r\n\r\n\r\n\r\n    <Button\r\n            android:id=\"@+id/button6\"\r\n            android:layout_width=\"200dp\"\r\n            android:layout_height=\"40dp\"\r\n          android:layout_gravity=\"center\"\r\n            android:backgroundTint=\"@color/Orange\"\r\n            android:textSize=\"40px\"\r\n            android:gravity=\"center\"\r\n            android:text=\"가입하기\"\r\n            />\r\n\r\n</LinearLayout>\r\n\r\n</LinearLayout>\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/join_start_fragment.xml	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/res/layout/join_start_fragment.xml	(date 1632892658309)
+@@ -5,6 +5,7 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
++    android:gravity="center"
+     tools:context=".MainActivity">
+ 
+     <TextView
+@@ -18,6 +19,14 @@
+         android:layout_marginTop="20dp"
+         android:textSize="60px" />
+ 
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_gravity="center"
++        android:gravity="center"
++        android:orientation="vertical">
++
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+@@ -34,7 +43,8 @@
+             <de.hdodenhof.circleimageview.CircleImageView
+                 android:id="@+id/imagejoin"
+                 android:layout_gravity="center_vertical"
+-                android:layout_marginLeft="25dp"
++                android:layout_marginLeft="15dp"
++                android:layout_marginRight="20dp"
+                 android:layout_marginTop="20dp"
+                 android:layout_width="@dimen/myph_x"
+                 android:layout_height="@dimen/myph_x"
+@@ -44,7 +54,7 @@
+ 
+ 
+             <LinearLayout
+-            android:layout_width="match_parent"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+                 android:layout_weight="4"
+             android:layout_gravity="center"
+@@ -54,17 +64,15 @@
+ 
+ 
+         <LinearLayout
+-            android:layout_width="match_parent"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_gravity="center"
+             android:layout_marginTop="20dp"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etId"
+-                android:layout_width="150dp"
++                android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="10dp"
+                 android:ems="10"
+                 android:hint="아이디"
+                 android:inputType="textPersonName"
+@@ -72,28 +80,27 @@
+ 
+             <Button
+                 android:id="@+id/button_check"
+-                android:layout_width="50dp"
++                android:layout_width="55dp"
+                 android:layout_height="30dp"
+-                android:backgroundTint="@color/yellow"
++                android:backgroundTint="@color/Orange"
+                 android:background="@color/yellow"
+                 android:layout_marginLeft="5dp"
+-                android:text="확인"
++                android:text="중복확인"
+                 android:textSize="35px" />
+ 
+ 
+         </LinearLayout>
+ 
+         <LinearLayout
+-            android:layout_width="match_parent"
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_gravity="center"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etPw"
+-                android:layout_width="150dp"
++                android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="10dp"
+                 android:ems="10"
+                 android:hint="비밀번호"
+                 android:inputType="textPersonName"
+@@ -105,52 +112,46 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etName"
+                 android:layout_width="150dp"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="10dp"
+                 android:ems="10"
+                 android:hint="이름"
+                 android:inputType="textPersonName"
+                 android:textSize="40px" />
+-
+-        </LinearLayout>
+-
+             <RadioGroup
+                 android:id="@+id/gender"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+-            <RadioButton
+-                android:id="@+id/check_male"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-             android:buttonTint="@color/yellow"
+-                android:textSize="40px"
+-                android:text="남" />
++                <RadioButton
++                    android:id="@+id/check_male"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:buttonTint="@color/yellow"
++                    android:textSize="40px"
++                    android:text="남" />
+ 
+-            <RadioButton
+-                android:id="@+id/check_female"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:buttonTint="@color/yellow"
+-                android:textSize="40px"
+-                android:text="여" />
++                <RadioButton
++                    android:id="@+id/check_female"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:buttonTint="@color/yellow"
++                    android:textSize="40px"
++                    android:text="여" />
+ 
+-            <RadioButton
+-                android:id="@+id/checkNo"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:buttonTint="@color/yellow"
+-                android:textSize="40px"
+-                android:text="무관" />
+-        </RadioGroup>
++            </RadioGroup>
+ 
+         </LinearLayout>
++
++
++
+         </LinearLayout>
++        </LinearLayout>
+ 
+         </LinearLayout>
+ 
+@@ -159,14 +160,13 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="10dp"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etNick"
+                 android:layout_width="300dp"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="20dp"
+                 android:ems="10"
+                 android:hint="닉네임"
+                 android:inputType="textPersonName"
+@@ -176,14 +176,13 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="10dp"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etBirth"
+                 android:layout_width="300dp"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="20dp"
+                 android:clickable="true"
+                 android:editable="false"
+                 android:ems="10"
+@@ -197,14 +196,13 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="10dp"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etAge"
+                 android:layout_width="300dp"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="20dp"
+                 android:ems="10"
+                 android:hint="나이"
+                 android:inputType="textPersonName"
+@@ -215,14 +213,13 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="10dp"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+             <EditText
+                 android:id="@+id/etPhoneNum"
+                 android:layout_width="300dp"
+                 android:layout_height="wrap_content"
+-                android:layout_marginLeft="20dp"
+                 android:ems="10"
+                 android:hint="휴대폰번호"
+                 android:inputType="phone"
+@@ -235,14 +232,13 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="10dp"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+             <Button
+                 android:id="@+id/btn_hobbys"
+                 android:layout_width="300dp"
+                 android:layout_height="60dp"
+-                android:layout_marginLeft="20dp"
+                 android:layout_marginTop="10dp"
+                 android:backgroundTint="@color/gray"
+                 android:gravity="center_vertical"
+@@ -255,7 +251,7 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="10dp"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+ 
+@@ -267,7 +263,6 @@
+             android:backgroundTint="@color/gray"
+             android:gravity="center_vertical"
+             android:hint="거주지역 선택"
+-            android:layout_marginLeft="20dp"
+             android:textSize="40px" />
+ 
+         </LinearLayout>
+@@ -275,7 +270,7 @@
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginLeft="10dp"
++            android:gravity="center"
+             android:orientation="horizontal">
+ 
+         <Button
+@@ -286,7 +281,6 @@
+             android:backgroundTint="@color/gray"
+             android:gravity="center_vertical"
+             android:hint="관심지역 선택"
+-            android:layout_marginLeft="20dp"
+             android:textSize="40px" />
+ 
+         </LinearLayout>
+@@ -306,6 +300,7 @@
+             android:id="@+id/button6"
+             android:layout_width="200dp"
+             android:layout_height="40dp"
++        android:layout_marginTop="10dp"
+           android:layout_gravity="center"
+             android:backgroundTint="@color/Orange"
+             android:textSize="40px"
+@@ -314,6 +309,8 @@
+             />
+ 
+ </LinearLayout>
++
++    </LinearLayout>
+ 
+ </LinearLayout>
+ 
+Index: app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlusSelectHobby.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.navigation;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.graphics.Color;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.os.Parcelable;\r\nimport android.util.Log;\r\nimport android.util.SparseBooleanArray;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.BaseAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.RequiresApi;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityCompat;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.cookandroid.withmetabbar.MainActivity;\r\nimport com.cookandroid.withmetabbar.R;\r\nimport com.cookandroid.withmetabbar.certify.FragmentSelectHobby;\r\nimport com.cookandroid.withmetabbar.certify.JoinStartFragment;\r\nimport com.cookandroid.withmetabbar.certify.MainActivity2;\r\nimport com.cookandroid.withmetabbar.model.Hobby;\r\nimport com.cookandroid.withmetabbar.model.HobbyBig;\r\nimport com.cookandroid.withmetabbar.model.Meet;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.collection.LLRBNode;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport static android.graphics.Color.GRAY;\r\nimport static android.graphics.Color.MAGENTA;\r\nimport static android.graphics.Color.WHITE;\r\nimport static android.graphics.Color.YELLOW;\r\n\r\npublic class FragmentPlusSelectHobby extends AppCompatActivity implements OnItemClick{\r\n\r\n    // TODO: Rename parameter arguments, choose names that match\r\n    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER\r\n    private static final String ARG_PARAM1 = \"param1\";\r\n    private static final String ARG_PARAM2 = \"param2\";\r\n\r\n    ImageButton imgBtn;\r\n    TextView tv;//취미분야 선택\r\n    ProgressBar progressBar;\r\n    private String selectedHobbyBig;\r\n    Button btnFinish; //메인화면으로 화면전환버튼\r\n    ArrayList<String> list = new ArrayList<>(); //bundle 전달을 위해 선택한 취미값들을 받아서 저장할 배열\r\n\r\n    //중첩 recyclerView에 넣을 데이터\r\n    private final ArrayList<ArrayList<Hobby>> allHobbyList = new ArrayList();\r\n    private final ArrayList<HobbyBig> HobbyBigList2 = new ArrayList();//대분류\r\n\r\n\r\n    // TODO: Rename and change types of parameters\r\n    private String mParam1;\r\n    private String mParam2;\r\n    int color; //색깔 넣기\r\n\r\n\r\n    public FragmentPlusSelectHobby() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n    /**\r\n     * Use this factory method to create a new instance of\r\n     * this fragment using the provided parameters.\r\n     *\r\n     * @param param1 Parameter 1.\r\n     * @param param2 Parameter 2.\r\n     * @return A new instance of fragment FragmentSelectHobby.\r\n     */\r\n    // TODO: Rename and change types and number of parameters\r\n    public static FragmentSelectHobby newInstance(String param1, String param2) {\r\n        FragmentSelectHobby fragment = new FragmentSelectHobby();\r\n        Bundle args = new Bundle();\r\n        args.putString(ARG_PARAM1, param1);\r\n        args.putString(ARG_PARAM2, param2);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.fragment_select_hobby2);\r\n\r\n        tv=findViewById(R.id.textView);\r\n        progressBar=findViewById(R.id.progressBar);\r\n        btnFinish= findViewById(R.id.selectHobby2_btn_next);\r\n\r\n        tv.setText(\"취미 분야 선택 \");\r\n\r\n\r\n\r\n\r\n//        int[] img ={\r\n//                R.drawable.hobby_music,R.drawable.hb_craft,R.drawable.hb_sport\r\n//\r\n//        };\r\n\r\n\r\n\r\n        //바로 해보기\r\n        ArrayList<ArrayList<String>> hbLists = new ArrayList<ArrayList<String>>();\r\n\r\n        ArrayList<String> hbList_music = new ArrayList<>();\r\n        hbList_music.add(\"음악\");\r\n        hbList_music.add(\"클래식\");\r\n        hbList_music.add(\"k-pop\");\r\n        hbList_music.add(\"뉴에이지\");\r\n        hbList_music.add(\"발라드\");\r\n        hbList_music.add(\"랩/힙합\");\r\n        hbList_music.add(\"인디음악\");\r\n        hbList_music.add(\"록/메탈\");\r\n        hbList_music.add(\"포크/블루스\");\r\n\r\n        //2차원배열에 답기\r\n        hbLists.add(hbList_music);\r\n\r\n        //tv.setText((CharSequence) hbLists.get(0).get(0));\r\n\r\n        //응용참고\r\n        /*\r\n        System.out.println(datas.size());\r\n        \t//결과: 3\r\n\t\tSystem.out.println(datas.toString());\r\n        \t//결과: [[1, 2, 3], [11, 22, 33], [111, 222, 333]]\r\n\r\n\t\tSystem.out.println(datas.get(0));\r\n\t\t//결과: [1, 2, 3]\r\n         */\r\n\r\n        //리사이클러뷰\r\n        this.initializeData();\r\n        this.initializeData2();\r\n\r\n        RecyclerView view = findViewById(R.id.recyclerViewVertical);\r\n\r\n        VerticalAdapter verticalAdapter = new VerticalAdapter(getApplicationContext(), allHobbyList, HobbyBigList2,this);\r\n        //여기의 this는 이 클래스 자체를 의미한다. 아래의 OnItemClick 을 override한 onClick()메서드가 실행되어야 하기 때문이다.\r\n        view.setHasFixedSize(true);\r\n        view.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));\r\n        view.setAdapter(verticalAdapter);\r\n\r\n\r\n        //화면전환\r\n        btnFinish.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                Bundle bundle = new Bundle();\r\n                Intent intent = new Intent();//startActivity()를 할것이 아니므로 그냥 빈 인텐트로 만듦\r\n                //list 내부의 중복을 제거\r\n\r\n                bundle.putStringArrayList(\"hobby\", list);\r\n                intent.putExtras(bundle);\r\n                setResult(RESULT_OK, intent);\r\n                finish();\r\n//                FragmentPlus fragmentPlus = new FragmentPlus();\r\n//                fragmentPlus.setArguments(bundle);\r\n\r\n\r\n                //취미 result api 구현\r\n//                Bundle result = new Bundle();\r\n//                result.putStringArrayList(\"bundleKey\", list);\r\n//                getParentFragmentManager().setFragmentResult(\"requestKey\",result);//fragmentPlus의 fragmentManager에 전달\r\n\r\n\r\n                //hide & show\r\n//                ((MainActivity)getActivity()).hideFragment(FragmentPlusSelectHobby.this);\r\n                //FragmentPlus fragmentPlus = new FragmentPlus();\r\n//                ((MainActivity)getActivity()).showFragment(fragmentPlus);\r\n\r\n                //remove\r\n                //((MainActivity)getActivity()).removeFragment(FragmentPlusSelectHobby.this);\r\n                //FragmentPlus fragmentPlus = new FragmentPlus();\r\n\r\n                //replace\r\n                //((MainActivity)getActivity()).replaceFragment(fragmentPlus);\r\n\r\n\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n//    @Override\r\n//    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n//                             Bundle savedInstanceState) {\r\n//        // Inflate the layout for this fragment\r\n//        ViewGroup vg =  (ViewGroup)inflater.inflate(R.layout.fragment_select_hobby2, container, false);\r\n//\r\n//        //imgBtn = vg.findViewById(R.id.imageButton);\r\n//        tv=vg.findViewById(R.id.textView);\r\n//        progressBar=vg.findViewById(R.id.progressBar);\r\n//        btnFinish= vg.findViewById(R.id.selectHobby2_btn_next);\r\n//\r\n//        tv.setText(\"취미 분야 선택 \");\r\n//\r\n//\r\n//\r\n//\r\n////        int[] img ={\r\n////                R.drawable.hobby_music,R.drawable.hb_craft,R.drawable.hb_sport\r\n////\r\n////        };\r\n//\r\n//\r\n//\r\n//        //바로 해보기\r\n//        ArrayList<ArrayList<String>> hbLists = new ArrayList<ArrayList<String>>();\r\n//\r\n//        ArrayList<String> hbList_music = new ArrayList<>();\r\n//        hbList_music.add(\"음악\");\r\n//        hbList_music.add(\"클래식\");\r\n//        hbList_music.add(\"k-pop\");\r\n//        hbList_music.add(\"뉴에이지\");\r\n//        hbList_music.add(\"발라드\");\r\n//        hbList_music.add(\"랩/힙합\");\r\n//        hbList_music.add(\"인디음악\");\r\n//        hbList_music.add(\"록/메탈\");\r\n//        hbList_music.add(\"포크/블루스\");\r\n//\r\n//        //2차원배열에 답기\r\n//        hbLists.add(hbList_music);\r\n//\r\n//        //tv.setText((CharSequence) hbLists.get(0).get(0));\r\n//\r\n//        //응용참고\r\n//        /*\r\n//        System.out.println(datas.size());\r\n//        \t//결과: 3\r\n//\t\tSystem.out.println(datas.toString());\r\n//        \t//결과: [[1, 2, 3], [11, 22, 33], [111, 222, 333]]\r\n//\r\n//\t\tSystem.out.println(datas.get(0));\r\n//\t\t//결과: [1, 2, 3]\r\n//         */\r\n//\r\n//        //리사이클러뷰\r\n//        this.initializeData();\r\n//        this.initializeData2();\r\n//\r\n//        RecyclerView view = vg.findViewById(R.id.recyclerViewVertical);\r\n//\r\n//        VerticalAdapter verticalAdapter = new VerticalAdapter(getApplicationContext(), allHobbyList, HobbyBigList2,this);\r\n//        //여기의 this는 이 클래스 자체를 의미한다. 아래의 OnItemClick 을 override한 onClick()메서드가 실행되어야 하기 때문이다.\r\n//        view.setHasFixedSize(true);\r\n//        view.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));\r\n//        view.setAdapter(verticalAdapter);\r\n//\r\n//\r\n//        //화면전환\r\n//        btnFinish.setOnClickListener(new View.OnClickListener() {\r\n//            @Override\r\n//            public void onClick(View v) {\r\n//\r\n//                Bundle bundle = new Bundle();\r\n//                bundle.putStringArrayList(\"hobby\", list);\r\n//                FragmentPlus fragmentPlus = new FragmentPlus();\r\n//                fragmentPlus.setArguments(bundle);\r\n//\r\n//                //취미 result api 구현\r\n////                Bundle result = new Bundle();\r\n////                result.putStringArrayList(\"bundleKey\", list);\r\n////                getParentFragmentManager().setFragmentResult(\"requestKey\",result);//fragmentPlus의 fragmentManager에 전달\r\n//\r\n//\r\n//                //hide & show\r\n////                ((MainActivity)getActivity()).hideFragment(FragmentPlusSelectHobby.this);\r\n//                //FragmentPlus fragmentPlus = new FragmentPlus();\r\n////                ((MainActivity)getActivity()).showFragment(fragmentPlus);\r\n//\r\n//                //remove\r\n//                //((MainActivity)getActivity()).removeFragment(FragmentPlusSelectHobby.this);\r\n//                //FragmentPlus fragmentPlus = new FragmentPlus();\r\n//\r\n//                //replace\r\n//                ((MainActivity)getActivity()).replaceFragment(fragmentPlus);\r\n//\r\n//\r\n//            }\r\n//        });\r\n//\r\n//        //데이터 저장을 위한 객체 참조\r\n////        final FirebaseDatabase database = FirebaseDatabase.getInstance();\r\n////        DatabaseReference ref = database.getReference();\r\n////        DatabaseReference usersRef = ref.child(\"users\");\r\n////        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();//사용자 uid\r\n////        DatabaseReference hopperRef = usersRef.child(uid); //  /users/uid\r\n//\r\n//        //push 데이터 저장\r\n////        DatabaseReference pushRef = hopperRef.child(\"hobby\");\r\n////        pushRef.push().setValue(new Hobby(\"탁구\"));\r\n////        pushRef.push().setValue(new Hobby(\"배구\"));\r\n//\r\n//        //update 데이터 저장\r\n////        Map<String, Object> hopperUpdates = new HashMap<>();\r\n////        hopperUpdates.put(\"hobby1\", \"베이킹\");\r\n////        hopperUpdates.put(\"hobby2\", new Hobby(\"공예\"));\r\n////        hopperUpdates.put(\"hobby2\", new Hobby(\"베이킹\"));\r\n//        //hopperUpdates.put(\"hobby\", hobbyListTest);\r\n////        hopperRef.updateChildren(hopperUpdates); //데이터 업데이트\r\n//\r\n//\r\n//\r\n////        Bundle data = getArguments();\r\n////        String data1 = data.getString(\"selectedList\");\r\n////        pushRef.push().setValue(new Hobby(data1));\r\n//\r\n//        //선택한 hobby값을 가져오기 위한, 커스텀 리스너 객체 생성 및 전달\r\n////        HorizontalAdapter horizontalAdapter= new HorizontalAdapter();\r\n////        horizontalAdapter.setOnItemClickListener(new HorizontalAdapter.OnItemClickListener() {\r\n////            @Override\r\n////            public void onItemClick(View v, int position) {\r\n////                //받아온 값을 데이터에 저장\r\n////                Bundle data = getArguments();\r\n////                String data1 = data.getString(\"selectedList\");\r\n////                pushRef.push().setValue(new Hobby(data1));\r\n////\r\n////            }\r\n////        });\r\n//\r\n//        return vg;\r\n//    }\r\n\r\n    @Override\r\n    public void onClick(String value) {\r\n        //value this data you receive when selectedItems() called\r\n        if (UniqueCheckAndAdd(list,value)==true)\r\n        list.add(value);\r\n        Log.d(\"onClickSuccess?\",value); //성공적으로 받아진다.\r\n    }\r\n\r\n    //소분류 취미목록 데이터 입력\r\n    public void initializeData()\r\n    {\r\n        ArrayList<Hobby> hobbyList1 = new ArrayList();\r\n\r\n        hobbyList1.add(new Hobby( \"클래식\"));\r\n        hobbyList1.add(new Hobby(\"K-pop\"));\r\n        hobbyList1.add(new Hobby(\"뉴에이지\"));\r\n        hobbyList1.add(new Hobby(\"발라드\"));\r\n        hobbyList1.add(new Hobby(\"랩/힙합\"));\r\n        hobbyList1.add(new Hobby(\"인디음악\"));\r\n        hobbyList1.add(new Hobby(\"록/메탈\"));\r\n        hobbyList1.add(new Hobby(\"포크.블루스\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList1);\r\n\r\n        ArrayList<Hobby> hobbyList2 = new ArrayList();\r\n\r\n        hobbyList2.add(new Hobby( \"야구\"));\r\n        hobbyList2.add(new Hobby( \"축구\"));\r\n        hobbyList2.add(new Hobby( \"농구\"));\r\n        hobbyList2.add(new Hobby( \"볼링\"));\r\n        hobbyList2.add(new Hobby( \"당구\"));\r\n        hobbyList2.add(new Hobby( \"수영\"));\r\n        hobbyList2.add(new Hobby( \"탁구\"));\r\n        hobbyList2.add(new Hobby( \"폴댄스\"));\r\n        hobbyList2.add(new Hobby( \"골프\"));\r\n        hobbyList2.add(new Hobby( \"배드민턴\"));\r\n        hobbyList2.add(new Hobby( \"클라이밍\"));\r\n\r\n        allHobbyList.add(hobbyList2);\r\n\r\n        ArrayList<Hobby> hobbyList3 = new ArrayList();\r\n\r\n        hobbyList3.add(new Hobby( \"캠핑\"));\r\n        hobbyList3.add(new Hobby( \"바다\"));\r\n        hobbyList3.add(new Hobby( \"국내\"));\r\n        hobbyList3.add(new Hobby( \"해외\"));\r\n        hobbyList3.add(new Hobby( \"당일치기\"));\r\n        hobbyList3.add(new Hobby( \"배낭여행\"));\r\n        hobbyList3.add(new Hobby( \"익스트림\"));\r\n        hobbyList3.add(new Hobby( \"기타\"));\r\n\r\n        allHobbyList.add(hobbyList3);\r\n        ArrayList<Hobby> hobbyList4 = new ArrayList();\r\n\r\n        hobbyList4.add(new Hobby( \"전시\"));\r\n        hobbyList4.add(new Hobby( \"뮤지컬\"));\r\n        hobbyList4.add(new Hobby( \"영화\"));\r\n        hobbyList4.add(new Hobby( \"해외\"));\r\n        hobbyList4.add(new Hobby( \"콘서트\"));\r\n        hobbyList4.add(new Hobby( \"연극\"));\r\n        hobbyList4.add(new Hobby( \"오페라\"));\r\n        hobbyList4.add(new Hobby( \"연주회\"));\r\n        hobbyList4.add(new Hobby( \"오케스트라\"));\r\n        hobbyList4.add(new Hobby( \"기타\"));\r\n\r\n        allHobbyList.add(hobbyList4);\r\n\r\n        ArrayList<Hobby> hobbyList5 = new ArrayList();\r\n\r\n        hobbyList5.add(new Hobby( \"리본공예\"));\r\n        hobbyList5.add(new Hobby( \"비즈공예\"));\r\n        hobbyList5.add(new Hobby( \"도자기공예\"));\r\n        hobbyList5.add(new Hobby( \"넵킨공예\"));\r\n        hobbyList5.add(new Hobby( \"포크아트\"));\r\n        hobbyList5.add(new Hobby( \"북아트\"));\r\n        hobbyList5.add(new Hobby( \"클레이아트\"));\r\n        hobbyList5.add(new Hobby( \"가죽공예\"));\r\n        hobbyList5.add(new Hobby( \"유리공예\"));\r\n        hobbyList5.add(new Hobby( \"플라워아트\"));\r\n\r\n        allHobbyList.add(hobbyList5);\r\n\r\n        ArrayList<Hobby> hobbyList6 = new ArrayList();\r\n\r\n        hobbyList6.add(new Hobby( \"양식\"));\r\n        hobbyList6.add(new Hobby( \"한식\"));\r\n        hobbyList6.add(new Hobby( \"일식\"));\r\n        hobbyList6.add(new Hobby( \"중식\"));\r\n        hobbyList6.add(new Hobby( \"베이킹\"));\r\n        hobbyList6.add(new Hobby( \"설탕공예\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList6);\r\n\r\n        ArrayList<Hobby> hobbyList7 = new ArrayList();\r\n\r\n        hobbyList6.add(new Hobby( \"강아지\"));\r\n        hobbyList6.add(new Hobby( \"고양이\"));\r\n        hobbyList6.add(new Hobby( \"조류\"));\r\n        hobbyList6.add(new Hobby( \"햄스터\"));\r\n        hobbyList6.add(new Hobby( \"파충류\"));\r\n        hobbyList6.add(new Hobby( \"곤충\"));\r\n\r\n\r\n        allHobbyList.add(hobbyList7);\r\n    }\r\n\r\n    //대분류 취미목록 데이터 입력\r\n    public void initializeData2()\r\n    {\r\n//        ArrayList<HobbyBig> hobbyBigList = new ArrayList();\r\n//        hobbyBigList.add(new HobbyBig( \"음악\"));\r\n//        hobbyBigList.add(new HobbyBig(\"스포츠\"));\r\n//        hobbyBigList.add(new HobbyBig(\"여행\"));\r\n//        hobbyBigList.add(new HobbyBig(\"문화\"));\r\n//        hobbyBigList.add(new HobbyBig(\"공예\"));\r\n//        hobbyBigList.add(new HobbyBig(\"요리\"));\r\n//        hobbyBigList.add(new HobbyBig(\"게임\"));\r\n//        hobbyBigList.add(new HobbyBig(\"팬모임\"));\r\n\r\n        HobbyBigList2.add(new HobbyBig( \"음악\"));\r\n        HobbyBigList2.add(new HobbyBig( \"스포츠\"));\r\n        HobbyBigList2.add(new HobbyBig( \"여행\"));\r\n        HobbyBigList2.add(new HobbyBig( \"문화\"));\r\n        HobbyBigList2.add(new HobbyBig( \"공예\"));\r\n        HobbyBigList2.add(new HobbyBig( \"요리\"));\r\n        HobbyBigList2.add(new HobbyBig( \"반려동물\"));\r\n\r\n    }\r\n    public boolean UniqueCheckAndAdd(ArrayList<String> array, String stringPresent){\r\n        return !array.contains(stringPresent);\r\n    }\r\n}\r\n\r\n\r\nclass HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.HorizontalViewHolder> {\r\n\r\n    private OnItemClick mCallback; //OnItemClick 인터페이스 객체\r\n   private ArrayList<Hobby> dataList;\r\n    private final SparseBooleanArray mSelectedItems = new SparseBooleanArray(0);//클릭하면 색상변경//클릭 안하면 0 하면 1??\r\n    private final ArrayList<Hobby> selectedList= new ArrayList<>(); //선택한 취미 값\r\n\r\n    public HorizontalAdapter(){}\r\n\r\n    public HorizontalAdapter(ArrayList<Hobby> data, OnItemClick listener)\r\n    {\r\n        this.dataList = data;\r\n        this.mCallback = listener;\r\n    }\r\n\r\n//    public interface OnItemClickListener{\r\n//        void onItemClick(View v, int position);\r\n//    }//어텝터 내에서 커스텀 리스너 인터페이스 정의\r\n\r\n\r\n    public class HorizontalViewHolder extends RecyclerView.ViewHolder{\r\n        protected TextView tv;\r\n        private final ArrayList<String> selectData = null ;\r\n        private final String selected=\"\";\r\n        int count=1;\r\n\r\n        //받아올 값\r\n        public void selectedItems(){\r\n            mCallback.onClick(tv.getText().toString());//tv를 클릭하면?\r\n        }\r\n\r\n        public HorizontalViewHolder(View view)\r\n        {\r\n            super(view);\r\n            tv = view.findViewById(R.id.btn_hbList_in);\r\n            //클릭하면 색상변경\r\n            view.setOnClickListener(new View.OnClickListener() {\r\n                @RequiresApi(api = Build.VERSION_CODES.O)\r\n                @SuppressLint(\"ResourceAsColor\")\r\n                @Override\r\n                public void onClick(View v) {\r\n                    int position = getAdapterPosition();\r\n\r\n                    Log.d(\"tv\",tv.getText().toString());\r\n                    selectedItems();\r\n\r\n\r\n\r\n                    if ( mSelectedItems.get(position, false) ){\r\n\r\n                        mSelectedItems.put(position, false);\r\n                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.gray));\r\n\r\n\r\n\r\n                    } else {\r\n                        mSelectedItems.put(position, true);\r\n                        v.setBackgroundColor(ContextCompat.getColor(v.getContext().getApplicationContext(), R.color.Orange));\r\n                    }\r\n                    Log.d(\"test\", \"position = \" + position);\r\n\r\n                }\r\n\r\n\r\n            });\r\n\r\n        }\r\n\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public HorizontalViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)\r\n    {\r\n        View v = LayoutInflater\r\n                .from(viewGroup.getContext())\r\n                .inflate(R.layout.select_hobby2_grid_in2, null);\r\n\r\n\r\n\r\n\r\n        return new HorizontalViewHolder(v);\r\n    }\r\n\r\n    @SuppressLint(\"ResourceAsColor\")\r\n    @Override\r\n    public void onBindViewHolder(HorizontalViewHolder horizontalViewHolder, int position)\r\n    {\r\n//        horizontalViewHolder\r\n//                .image\r\n//                .setImageResource(dataList.get(position).getResourceID());\r\n        horizontalViewHolder\r\n                .tv\r\n                .setText(dataList.get(position).getHobbyname());\r\n\r\n        //클릭하면 색상 변경\r\n        if ( mSelectedItems.get(position, false) ){\r\n            horizontalViewHolder.itemView.setBackgroundColor(R.color.Orange);//선택했을 때\r\n        } else {\r\n            horizontalViewHolder.itemView.setBackgroundColor(R.color.gray);//기본, 선택 안했을 때\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return dataList.size();\r\n    }\r\n\r\n    public ArrayList<Hobby> getSelected(){\r\n\r\n        return selectedList;\r\n    }\r\n\r\n\r\n\r\n\r\n}\r\n\r\nclass VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.VerticalViewHolder>{\r\n\r\n    private OnItemClick mCallback;\r\n    private ArrayList<ArrayList<Hobby>> AllHobbyList;//전체 취미목록들을 2차원 배열에 넣어준다.\r\n    private Context context;\r\n    //test 취미목록 대분류 넣기\r\n    private final ArrayList<HobbyBig> DataListBig;\r\n\r\n    //test\r\n    public VerticalAdapter(ArrayList<HobbyBig> data)\r\n    {\r\n        this.DataListBig = data;\r\n    }\r\n    //\r\n\r\n    public VerticalAdapter(Context context, ArrayList<ArrayList<Hobby>> data, ArrayList<HobbyBig> data2,OnItemClick listener)\r\n    {\r\n        this.mCallback =listener;\r\n        this.context = context;\r\n        this.AllHobbyList = data;\r\n        this.DataListBig = data2;//대분류\r\n    }\r\n    //VerticalViewHolder 맨 처음 10개의 뷰객체를 기억하고 있을(홀딩) 객체\r\n    public class VerticalViewHolder extends RecyclerView.ViewHolder{\r\n        protected RecyclerView recyclerView;\r\n        protected TextView textView;\r\n\r\n        public VerticalViewHolder(View view)\r\n        {\r\n            super(view);\r\n            textView = view.findViewById(R.id.tv_hobby);\r\n            this.recyclerView = view.findViewById(R.id.recyclerViewVertical);\r\n        }\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public VerticalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {\r\n        View v = LayoutInflater\r\n                .from(viewGroup.getContext())\r\n                .inflate(R.layout.select_hobby2_grid_in, null);\r\n        return new VerticalViewHolder(v);\r\n    }\r\n    //수직 RecyclerView의 데이터 항목은 앞서 구현한 수평 RecyclerView가 배치된다고 하였습니다.\r\n    // 그러기 위해 onBindViewHolder에서 HorizontalAdapter 객체를 생성\r\n    @Override\r\n    public void onBindViewHolder(@NonNull VerticalViewHolder verticalViewHolder, int position) {\r\n        HorizontalAdapter adapter = new HorizontalAdapter(AllHobbyList.get(position),mCallback);\r\n        //adapter.getSelected();\r\n        //현재 위치의 arrayList를 AllHobbyList로 받아서 adapter생성.\r\n\r\n        //대분류 배열 처리- textView에 넣기\r\n        verticalViewHolder\r\n                .textView\r\n                .setText(DataListBig.get(position).getHobbyBigname());\r\n\r\n        verticalViewHolder.recyclerView.setHasFixedSize(true);\r\n        verticalViewHolder.recyclerView.setLayoutManager(new LinearLayoutManager(context\r\n                , LinearLayoutManager.HORIZONTAL\r\n                ,false));\r\n        verticalViewHolder.recyclerView.setAdapter(adapter);\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return AllHobbyList.size();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlusSelectHobby.java	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlusSelectHobby.java	(date 1632891966263)
+@@ -440,15 +440,55 @@
+ 
+         ArrayList<Hobby> hobbyList7 = new ArrayList();
+ 
+-        hobbyList6.add(new Hobby( "강아지"));
+-        hobbyList6.add(new Hobby( "고양이"));
+-        hobbyList6.add(new Hobby( "조류"));
+-        hobbyList6.add(new Hobby( "햄스터"));
+-        hobbyList6.add(new Hobby( "파충류"));
+-        hobbyList6.add(new Hobby( "곤충"));
++        hobbyList7.add(new Hobby( "강아지"));
++        hobbyList7.add(new Hobby( "고양이"));
++        hobbyList7.add(new Hobby( "조류"));
++        hobbyList7.add(new Hobby( "햄스터"));
++        hobbyList7.add(new Hobby( "파충류"));
++        hobbyList7.add(new Hobby( "곤충"));
+ 
+ 
+         allHobbyList.add(hobbyList7);
++
++
++        ArrayList<Hobby> hobbyList8 = new ArrayList();
++
++        hobbyList8.add(new Hobby( "서핑"));
++        hobbyList8.add(new Hobby( "패들보드"));
++        hobbyList8.add(new Hobby( "카약"));
++        hobbyList8.add(new Hobby( "번지점프"));
++        hobbyList8.add(new Hobby( "패러글라이딩"));
++        hobbyList8.add(new Hobby( "스카이다이빙"));
++        hobbyList8.add(new Hobby( "스킨스쿠버"));
++
++
++        allHobbyList.add(hobbyList8);
++
++        ArrayList<Hobby> hobbyList9 = new ArrayList();
++
++        hobbyList9.add(new Hobby( "피아노"));
++        hobbyList9.add(new Hobby( "기타"));
++        hobbyList9.add(new Hobby( "드럼"));
++        hobbyList9.add(new Hobby( "베이스"));
++        hobbyList9.add(new Hobby( "바이올린"));
++        hobbyList9.add(new Hobby( "첼로"));
++        hobbyList9.add(new Hobby( "작곡"));
++
++
++        allHobbyList.add(hobbyList9);
++
++        ArrayList<Hobby> hobbyList10 = new ArrayList();
++
++        hobbyList10.add(new Hobby( "중국어"));
++        hobbyList10.add(new Hobby( "일본어"));
++        hobbyList10.add(new Hobby( "불어"));
++        hobbyList10.add(new Hobby( "스페인어"));
++        hobbyList10.add(new Hobby( "토플"));
++        hobbyList10.add(new Hobby( "토익"));
++        hobbyList10.add(new Hobby( "코딩"));
++
++
++        allHobbyList.add(hobbyList10);
+     }
+ 
+     //대분류 취미목록 데이터 입력
+@@ -471,6 +511,9 @@
+         HobbyBigList2.add(new HobbyBig( "공예"));
+         HobbyBigList2.add(new HobbyBig( "요리"));
+         HobbyBigList2.add(new HobbyBig( "반려동물"));
++        HobbyBigList2.add(new HobbyBig( "익스트림"));
++        HobbyBigList2.add(new HobbyBig( "악기연주"));
++        HobbyBigList2.add(new HobbyBig( "공부"));
+ 
+     }
+     public boolean UniqueCheckAndAdd(ArrayList<String> array, String stringPresent){
+Index: .idea/runConfigurations.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/runConfigurations.xml	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ .idea/runConfigurations.xml	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <color name=\"purple_200\">#FFBB86FC</color>\r\n    <color name=\"purple_500\">#FF6200EE</color>\r\n    <color name=\"purple_700\">#FF3700B3</color>\r\n    <color name=\"teal_200\">#FF03DAC5</color>\r\n    <color name=\"teal_700\">#FF018786</color>\r\n    <color name=\"black\">#FF000000</color>\r\n    <color name=\"white\">#FFFFFFFF</color>\r\n    <color name=\"lite_gray\">#E6E2D7</color>\r\n    <color name=\"Orange\">#F49C19</color>\r\n    <color name=\"gray\">#D6D6D5</color>\r\n    <color name=\"darkgray\">#777772</color>\r\n    <color name=\"yellow\">#F4DE6C</color>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/res/values/colors.xml	(date 1632888990428)
+@@ -7,9 +7,9 @@
+     <color name="teal_700">#FF018786</color>
+     <color name="black">#FF000000</color>
+     <color name="white">#FFFFFFFF</color>
+-    <color name="lite_gray">#E6E2D7</color>
++    <color name="lite_gray">#F4F3EE</color>
+     <color name="Orange">#F49C19</color>
+     <color name="gray">#D6D6D5</color>
+-    <color name="darkgray">#777772</color>
++    <color name="darkgray">#A3A39F</color>
+     <color name="yellow">#F4DE6C</color>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/menu/main_menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<menu xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\">\r\n    <item\r\n        android:id=\"@+id/action_category\"\r\n        app:showAsAction=\"ifRoom\"\r\n        android:icon=\"@drawable/place_x\"\r\n        android:title=\"place_check\" />\r\n\r\n    <item\r\n        android:id=\"@+id/action_alarm\"\r\n        app:showAsAction=\"ifRoom\"\r\n        android:icon=\"@drawable/alarm_x\"\r\n        android:title=\"alarm_check\" />\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</menu>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/menu/main_menu.xml	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/res/menu/main_menu.xml	(date 1632889115474)
+@@ -1,11 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <menu xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto">
+-    <item
+-        android:id="@+id/action_category"
+-        app:showAsAction="ifRoom"
+-        android:icon="@drawable/place_x"
+-        android:title="place_check" />
++
+ 
+     <item
+         android:id="@+id/action_alarm"
+Index: app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlus.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.navigation;\r\n\r\n\r\nimport android.app.DatePickerDialog;\r\nimport android.app.TimePickerDialog;\r\nimport android.content.Intent;\r\nimport android.content.pm.PackageManager;\r\nimport android.media.MediaPlayer;\r\nimport android.net.Uri;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.DatePicker;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ImageView;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.TimePicker;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentResultListener;\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport com.cookandroid.withmetabbar.MainActivity;\r\nimport com.cookandroid.withmetabbar.MainActivityHome;\r\n\r\nimport com.cookandroid.withmetabbar.MainActivityWebView;\r\nimport com.cookandroid.withmetabbar.R;\r\nimport com.cookandroid.withmetabbar.model.ChatModel;\r\nimport com.cookandroid.withmetabbar.model.Meet;\r\nimport com.cookandroid.withmetabbar.model.MeetInfo;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\n\r\nimport org.jetbrains.annotations.NotNull;\r\n\r\nimport java.sql.Timestamp;\r\nimport java.text.DateFormat;\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.Calendar;\r\nimport java.util.Date;\r\nimport java.util.HashMap;\r\nimport java.util.Locale;\r\nimport java.util.Map;\r\n\r\nimport static android.app.Activity.RESULT_CANCELED;\r\nimport static android.app.Activity.RESULT_OK;\r\n\r\n\r\n@SuppressWarnings(\"deprecation\")\r\npublic class FragmentPlus extends Fragment {\r\n\r\n    String newKey;\r\n    private Uri file;\r\n\r\n    private DatabaseReference mDatabase;\r\n    private final int GET_GALLERY_IMAGE = 200;//?무슨의미\r\n    private ImageView imageView, imageView7;\r\n    private ImageButton imageButton;\r\n    //private ToggleButton toggleButton, toggleButton1,toggleButton2,toggleButton3,toggleButton4;\r\n    private Button btnMeet;\r\n    private MediaPlayer MP;\r\n    private Uri imageUri;//모임이미지\r\n    private String uid=\"\";\r\n    TimePickerDialog mTimePicker;\r\n    private Date meetDate;\r\n    private int meetDateInt;//int형 데이터\r\n    ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열\r\n    private EditText et_locate,etTitle ,etAge ,etNumMem ,etContent;\r\n    private static final int MAIN_ACTIVITY_WEBVIEW = 20000; //웹뷰 액티비티 호출을 위한 코드\r\n    private static final int SELECT_HOBBY = 30000; //웹뷰 액티비티 호출을 위한 코드\r\n    //채팅방\r\n    private String meetUid;\r\n    private String destinationUid;\r\n    private String pushkey;\r\n    private EditText etHobby;\r\n    private RadioButton cb_male,cb_female,cb_no;\r\n    RadioGroup gender_plus;\r\n    String hobbyes=\"\";\r\n    StringBuffer stringBuffer = new StringBuffer();\r\n\r\n    //취미목록 2021-09-27\r\n    @Override\r\n    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n\r\n\r\n        getParentFragmentManager().setFragmentResultListener(\"requestKey\", this, new FragmentResultListener() {\r\n            @Override\r\n            public void onFragmentResult(@NonNull @NotNull String requestKey, @NonNull @NotNull Bundle bundle) {\r\n                // We use a String here, but any type that can be put in a Bundle is supported\r\n                // String resultHobby = bundle.getString(\"bundleKey\");\r\n\r\n                // Do something with the result\r\n//                if (bundle.getStringArrayList(\"bundleKey\")!=null){\r\n//                    list = bundle.getStringArrayList(\"bundleKey\");\r\n//                    int totalHobbyCount = list.size();\r\n//                    for (int index =0; index<totalHobbyCount; index++){\r\n//\r\n//\r\n//                        stringBuffer.append(list.get(index));\r\n//\r\n//                        //new StringBuilder().append(hobbyes).append(list.get(index)).toString();\r\n//                        //etHobby.append(\",\"+list.get(index));\r\n//\r\n//                    }\r\n//\r\n//                    Log.d(\"getBundleInPlus\", String.valueOf(bundle.getStringArrayList(\"bundleKey\")));\r\n//                    Log.d(\"list\", String.valueOf(list));\r\n//                    Log.d(\"hobbyes\", String.valueOf(hobbyes));\r\n//                }else {\r\n//                    etHobby.setText(\"클릭하세요.\");\r\n//                }\r\n\r\n\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,\r\n                             @Nullable Bundle savedInstanceState) {\r\n        ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.fragment_plus, container, false);\r\n        //getSupportActionBar().setDisplayShowHomeEnabled(true);\r\n        //getSupportActionBar().setIcon(R.drawable.ic_launcher);\r\n        //setTitle(\"레이아웃 선택\");\r\n\r\n\r\n\r\n\r\n        btnMeet= vGroup.findViewById(R.id.btn_meet);//버튼\r\n        etTitle=vGroup.findViewById(R.id.etTitle);\r\n        etAge=vGroup.findViewById(R.id.etMeetAge);\r\n        etNumMem=vGroup.findViewById(R.id.etNumMem);\r\n        etContent=vGroup.findViewById(R.id.etContent);\r\n        etHobby=vGroup.findViewById(R.id.etHobby);\r\n        EditText et_date = vGroup.findViewById(R.id.Date);\r\n        et_locate =vGroup.findViewById(R.id.etLocate);\r\n        cb_male = vGroup.findViewById(R.id.check_male);\r\n        cb_female = vGroup.findViewById(R.id.check_female);\r\n        cb_no = vGroup.findViewById(R.id.checkNo);\r\n        gender_plus = vGroup.findViewById(R.id.gender_plus);\r\n\r\n\r\n\r\n        Intent intent = new Intent();\r\n\r\n//        Intent intent2 = Intent.getIntent();\r\n//        intent2.getExtras(getActivity().getClass())\r\n\r\n        Bundle bundle = getArguments();\r\n        //uid=bundle.getString(\"uid\");//null?\r\n        uid= FirebaseAuth.getInstance().getCurrentUser().getUid();\r\n\r\n        //etHobby.setText(stringBuffer);\r\n\r\n        //취미선택 2121-09-27\r\n\r\n//        if (bundle.getStringArrayList(\"hobby\")!=null){\r\n//            list = bundle.getStringArrayList(\"hobby\");\r\n//            Log.d(\"getBundleInPlus\", String.valueOf(bundle.getStringArrayList(\"hobby\")));\r\n//            //받은 취미 목록을 차례로 tv에 입력\r\n//            int totalHobbyCount = list.size();\r\n//            for (int index =0; index<totalHobbyCount; index++){\r\n//                etHobby.append(\",\"+list.get(index));\r\n//            }\r\n//\r\n//        }else {\r\n//            etHobby.setText(\"클릭하세요.\");\r\n//        }\r\n\r\n\r\n\r\n\r\n        //날짜 선택\r\n\r\n        Calendar myCalendar = Calendar.getInstance();\r\n        DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {\r\n            @Override\r\n            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {\r\n                myCalendar.set(Calendar.YEAR, year);\r\n                myCalendar.set(Calendar.MONTH, month);\r\n                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);\r\n                updateLabel();\r\n            }\r\n\r\n            private void updateLabel() {\r\n                String myFormat = \"yyyy/MM/dd\";    // 출력형식   2018/11/28\r\n                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.\r\n\r\n                et_date.setText(sdf.format(myCalendar.getTime()));\r\n                DateFormat sdFormat = new SimpleDateFormat(\"yyyy-MM-dd\");//필요x\r\n\r\n\r\n            }\r\n        };\r\n\r\n        //취미선택\r\n        etHobby.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                etHobby.setText(\"\");//etHobby 초기화\r\n                Intent i = new Intent(getContext(), FragmentPlusSelectHobby.class);\r\n                startActivityForResult(i, SELECT_HOBBY);//\r\n\r\n//                FragmentPlusSelectHobby fragmentPlusSelectHobby= new FragmentPlusSelectHobby();\r\n//                ((MainActivity)getActivity()).addFragment(fragmentPlusSelectHobby);\r\n\r\n\r\n            }\r\n        });\r\n        //날짜 클릭\r\n\r\n        et_date.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();\r\n            }\r\n        });\r\n\r\n        //시간선택\r\n        final EditText et_time = vGroup.findViewById(R.id.Time);\r\n        et_time.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Calendar mcurrentTime = Calendar.getInstance();\r\n                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY); //선택한 시간(24시간제)\r\n                int minute = mcurrentTime.get(Calendar.MINUTE); //선택한 분\r\n                //TimePickerDialog mTimePicker;\r\n                mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {\r\n                    @Override\r\n                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {\r\n                        String state = \"AM\";\r\n                        myCalendar.set(Calendar.AM_PM, 0);//오전이면 0\r\n\r\n                        // 선택한 시간이 12를 넘을경우 \"PM\"으로 변경 및 -12시간하여 출력 (ex : PM 6시 30분)\r\n                        if (selectedHour > 12) {\r\n                            selectedHour -= 12;\r\n                            state = \"PM\";\r\n                            myCalendar.set(Calendar.AM_PM, 1);//오후면 1\r\n                        }\r\n                        // EditText에 출력할 형식 지정\r\n                        et_time.setText(state + \" \" + selectedHour + \"시 \" + selectedMinute + \"분\");\r\n                        myCalendar.set(Calendar.HOUR, selectedHour);\r\n                        myCalendar.set(Calendar.MINUTE, selectedMinute);\r\n\r\n                        meetDate=myCalendar.getTime();\r\n\r\n\r\n                    }\r\n                }, hour, minute, false); // true의 경우 24시간 형식의 TimePicker 출현\r\n                mTimePicker.setTitle(\"Select Time\");\r\n                mTimePicker.show();\r\n            }\r\n        });\r\n\r\n\r\n        imageView = vGroup.findViewById(R.id.imageView7);\r\n        imageView.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n//                Intent intent = new Intent();\r\n                intent.setType(\"image/*\");\r\n                intent.setAction(Intent.ACTION_GET_CONTENT);\r\n                startActivityForResult(intent, GET_GALLERY_IMAGE);\r\n\r\n\r\n            }\r\n        });\r\n\r\n        //장소 검색하면 MainActivityWebView로 이동.\r\n        et_locate.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent i = new Intent(getContext(), MainActivityWebView.class);\r\n                startActivityForResult(i, MAIN_ACTIVITY_WEBVIEW);//requestcode 2000 전송\r\n            }\r\n        });\r\n\r\n        //버튼 누르면 데이터에 저장\r\n        btnMeet.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                //FirebaseStorage storage= FirebaseStorage.getInstance();\r\n                //StorageReference storageRef = storage.getReference();\r\n                //파일명 만들기\r\n                String filename=\"meet\"+uid+\".jpeg\";\r\n                file = imageUri;//\r\n                Log.d(\"imageUri\", String.valueOf(file));\r\n                Log.d(\"filename\", filename);\r\n                //여기서 원하는 이름 넣어준다.(filename 넣어주기)\r\n                //StorageReference riversRef = storageRef.child(\"meetImage/\"+filename);\r\n                //UploadTask uploadTask = riversRef.putFile(file);//storage에 이미지 업로드\r\n\r\n                \r\n                try{\r\n                    contentUpload();\r\n\r\n\r\n                }catch (Exception e){\r\n                    Toast.makeText(getContext(),\"정보입력을 완료하세요.\",Toast.LENGTH_SHORT);\r\n                }\r\n\r\n            }\r\n        });\r\n\r\n        return vGroup;\r\n    }\r\n\r\n\r\n    //갤러리로 가는 법\r\n    @Override\r\n    public void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        if (requestCode == GET_GALLERY_IMAGE) {\r\n            if (resultCode == RESULT_OK) {\r\n                imageView.setImageURI(data.getData());\r\n                imageUri = data.getData();\r\n                Log.d(\"갤러리에서 불러온 이미지 경로\", String.valueOf(imageUri));\r\n\r\n            } else if (resultCode == RESULT_CANCELED) {\r\n                Toast.makeText(getContext(), \"사진 선택 취소\", Toast.LENGTH_LONG).show();\r\n            }\r\n        }\r\n        switch(requestCode){\r\n\r\n            case MAIN_ACTIVITY_WEBVIEW:\r\n\r\n                if(resultCode == RESULT_OK){\r\n\r\n                    String address = data.getExtras().getString(\"address\");\r\n                    if (data != null){\r\n                        et_locate.setText(address);\r\n                        //address =data;\r\n\r\n\r\n                    }\r\n\r\n\r\n                }\r\n                break;\r\n\r\n        }\r\n        switch(requestCode){\r\n\r\n            case SELECT_HOBBY:\r\n\r\n                if(resultCode == RESULT_OK){\r\n\r\n                    list = data.getExtras().getStringArrayList(\"hobby\"); //리스트에 받은 데이터들을 추가\r\n                    if (data != null){\r\n                        //list = bundle.getStringArrayList(\"hobby\");\r\n                        //Log.d(\"getBundleInPlus\", String.valueOf(bundle.getStringArrayList(\"hobby\")));\r\n                        //받은 취미 목록을 차례로 tv에 입력\r\n                        int totalHobbyCount = list.size();\r\n                        for (int index =0; index<totalHobbyCount; index++){\r\n                            etHobby.append(\" \"+list.get(index));\r\n                        }\r\n\r\n                        //address =data;\r\n\r\n\r\n                    }\r\n\r\n\r\n                }\r\n                break;\r\n\r\n        }\r\n    } //갤러리에서 사진 불러와서 넣기\r\n\r\n    //취미선택\r\n\r\n\r\n    @Override\r\n    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n\r\n    }\r\n\r\n    protected void onMainActivity(int requestCode, int resultCode, Intent data) {\r\n        if(requestCode == GET_GALLERY_IMAGE&&resultCode == RESULT_OK&&data !=\r\n                null && data.getData()!=null){\r\n            Uri selectedImageUri = data.getData();\r\n            imageView.setImageURI(selectedImageUri);\r\n        }\r\n    }\r\n    public void contentUpload(){\r\n        Timestamp timestamp = new Timestamp(System.currentTimeMillis());\r\n        SimpleDateFormat sdf = new SimpleDateFormat(\"yyyyMMdd_hhmmss\");\r\n        sdf.format(timestamp);\r\n\r\n        String imageFileName = \"IMAGE_\"+ sdf.format(timestamp) + \"_.png\";\r\n\r\n        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(\"meetImages\").child(imageFileName);\r\n\r\n        storageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n            @Override\r\n            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {\r\n                    @Override\r\n                    public void onSuccess(Uri uri) {\r\n                        Meet meet = new Meet();\r\n\r\n                        meet.uid =uid; //uid정보 추가\r\n                        meet.title = etTitle.getText().toString();\r\n                        meet.meetAge = Integer.parseInt(etAge.getText().toString());\r\n                        meet.numMember = Integer.parseInt(etNumMem.getText().toString());\r\n                        meet.content = etContent.getText().toString();\r\n                        //meet.imgUrl = file.toString();\r\n                        meet.imgUrl = uri.toString();\r\n                        meet.meetDate =meetDate;\r\n                        meet.hobbyCate = new ArrayList<>();\r\n                        meet.place = et_locate.getText().toString();\r\n\r\n\r\n                        int totalHobbyCount2 = list.size();\r\n                        for (int index = 0; index < totalHobbyCount2; index++) {\r\n                            meet.hobbyCate.add(list.get(index));\r\n                        }\r\n\r\n                        //성별체크\r\n                        if (cb_male.isChecked()){\r\n                            meet.meetGen =1; //남자는 1\r\n                        }else if (cb_female.isChecked()){\r\n                            meet.meetGen =2; //여자는 2\r\n                        }else if (cb_no.isChecked()){\r\n                            meet.meetGen =0; //무관은 0\r\n                        }else {\r\n                            Toast.makeText(getContext(),\"성별을 체크하세요.\",Toast.LENGTH_SHORT);\r\n                        }\r\n\r\n                        //meet라는 데이터 넣기\r\n\r\n                        DatabaseReference databaseReference,databaseReference2;\r\n\r\n                        databaseReference= FirebaseDatabase.getInstance().getReference().child(\"meet\").push();\r\n                        String key =databaseReference.getKey();//meet uid\r\n\r\n                        //2021-09-14 내가 만든 모임 구현\r\n                        //databaseReference2= FirebaseDatabase.getInstance().getReference().child(\"user-meets\"+uid+\"/\"+key).push();\r\n                        databaseReference2= FirebaseDatabase.getInstance().getReference().child(\"user-meets\").child(uid);//.child(key);\r\n\r\n                        //새로 추가한 것 hobby 저장을 위한 참조 데이타\r\n//                        newKey= databaseReference.getKey();\r\n//                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child(\"meet\").child(newKey).child(\"hobby\");\r\n\r\n\r\n\r\n                        databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                            @Override\r\n                            public void onSuccess(Void aVoid) {\r\n\r\n                                //데이터 저장을 위한 객체 참조\r\n                                final FirebaseDatabase database = FirebaseDatabase.getInstance();\r\n\r\n//                                Log.d(\"key_value\", newKey);//key 는 uid가 아니라 meet 인듯\r\n\r\n                                //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update\r\n//                                int totalHobbyCount2 = list.size();\r\n//                                for (int index = 0; index < totalHobbyCount2; index++) {\r\n//                                    databaseReference2.push().setValue(new Hobby(list.get(index)));\r\n//                                }\r\n\r\n                                databaseReference2.push().setValue(meet);//user-meet 데이터 생성\r\n\r\n                                //chatrooms데이터 생성\r\n                                pushkey = key;\r\n                                String key = pushkey;\r\n                                ChatModel chatModel = new ChatModel();\r\n\r\n                                MeetInfo meetInfo = new MeetInfo();\r\n                                meetInfo.imgUrl=file.toString();\r\n                                meetInfo.title = meet.title;\r\n\r\n\r\n                                chatModel.meetInfo.put(\"meetUid\",pushkey);\r\n                                chatModel.meetInfo.put(\"title\", meet.title);\r\n                                chatModel.meetInfo.put(\"imgUrl\", meet.imgUrl);\r\n                                chatModel.meetInfo.put(\"meetGen\", String.valueOf(meet.meetGen));\r\n                                chatModel.meetInfo.put(\"meetAge\", String.valueOf(meet.meetAge));\r\n                                chatModel.meetInfo.put(\"numMember\", String.valueOf(meet.numMember));\r\n\r\n\r\n                                chatModel.users.put(uid, true);\r\n\r\n\r\n                                Map<String,Object> map = new HashMap<>();\r\n                                map.put(\"mid\", key);\r\n                                FirebaseDatabase.getInstance().getReference().child(\"meet\").child(pushkey).updateChildren(map);//채틸방 경\r\n                                FirebaseDatabase.getInstance().getReference().child(\"chatrooms\").child(pushkey).setValue(chatModel);\r\n\r\n\r\n\r\n\r\n                                MainActivityHome mainActivityHome= new MainActivityHome();\r\n                                ((MainActivity)getActivity()).replaceFragment(mainActivityHome);\r\n\r\n                                //이 코드는 fragement 뒤로가기 코드\r\n                                //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();\r\n                                //fragmentManager.beginTransaction().remove(FragmentPlus.this).commit();\r\n                                //fragmentManager.popBackStack();\r\n\r\n                            }\r\n                        });\r\n                    }\r\n                });\r\n                Toast.makeText(getContext(),\"image upload success\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    /*public class MyGalleryAdapter extends BaseAdapter {\r\n\r\n        Context context;\r\n        Integer[] posterID = { R.drawable.layout1, R.drawable.layout2,\r\n                R.drawable.layout3, R.drawable.layout4, R.drawable.layout5,\r\n                R.drawable.layout6, R.drawable.layout7, R.drawable.layout8,\r\n                R.drawable.layout9, R.drawable.layout10};\r\n        String[] title = {\"레이아웃1\",\"레이아웃2\", \"레이아웃3\",\r\n                \"레이아웃4\",\"레이아웃5\",\"레이아웃6\",\"레이아웃7\",\"레이아웃8\",\"레이아웃9\",\"레이아웃10\"};\r\n\r\n        public MyGalleryAdapter(Context c) {\r\n            context = c;\r\n        }\r\n\r\n        public int getCount() {\r\n            return posterID.length;\r\n        }\r\n\r\n\r\n\r\n        public Object getItem(int arg0) {\r\n            return null;\r\n        }\r\n\r\n        public long getItemId(int position) {\r\n            return 0;\r\n        }\r\n\r\n        /*public View getView(int position, View convertView, ViewGroup parent) {\r\n            ImageView imageview = new ImageView(context);\r\n            imageview.setLayoutParams(new Gallery.LayoutParams(200, 300));\r\n            imageview.setScaleType(ImageView.ScaleType.FIT_CENTER);\r\n            imageview.setPadding(5, 5, 5, 5);\r\n            imageview.setImageResource(posterID[position]);\r\n\r\n\r\n            final int pos = position;\r\n            imageview.setOnTouchListener(new View.OnTouchListener() {\r\n                public boolean onTouch (View v, MotionEvent event) {\r\n                    ImageView ivPoster = (ImageView) findViewById(R.id.ivPoster);\r\n                    ivPoster.setScaleType(ImageView.ScaleType.FIT_CENTER);\r\n                    ivPoster.setImageResource(posterID[pos]);\r\n                    Toast.makeText(getApplicationContext(),title[pos],Toast.LENGTH_SHORT).show();\r\n\r\n                    //dlg.setIcon(R.drawable.movie_icon);\r\n\r\n                    return false;\r\n                }\r\n            });*/\r\n\r\n    //return imageview\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlus.java	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlus.java	(date 1632889569133)
+@@ -26,7 +26,7 @@
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.fragment.app.Fragment;
+-import androidx.fragment.app.FragmentResultListener;
++
+ import androidx.lifecycle.ViewModelProvider;
+ 
+ import com.cookandroid.withmetabbar.MainActivity;
+@@ -102,37 +102,7 @@
+ 
+ 
+ 
+-        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+-            @Override
+-            public void onFragmentResult(@NonNull @NotNull String requestKey, @NonNull @NotNull Bundle bundle) {
+-                // We use a String here, but any type that can be put in a Bundle is supported
+-                // String resultHobby = bundle.getString("bundleKey");
+-
+-                // Do something with the result
+-//                if (bundle.getStringArrayList("bundleKey")!=null){
+-//                    list = bundle.getStringArrayList("bundleKey");
+-//                    int totalHobbyCount = list.size();
+-//                    for (int index =0; index<totalHobbyCount; index++){
+-//
+-//
+-//                        stringBuffer.append(list.get(index));
+-//
+-//                        //new StringBuilder().append(hobbyes).append(list.get(index)).toString();
+-//                        //etHobby.append(","+list.get(index));
+-//
+-//                    }
+-//
+-//                    Log.d("getBundleInPlus", String.valueOf(bundle.getStringArrayList("bundleKey")));
+-//                    Log.d("list", String.valueOf(list));
+-//                    Log.d("hobbyes", String.valueOf(hobbyes));
+-//                }else {
+-//                    etHobby.setText("클릭하세요.");
+-//                }
+ 
+-
+-
+-            }
+-        });
+ 
+     }
+ 
+Index: app/src/main/res/drawable/round_background.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/round_background.xml	(date 1632889115316)
++++ app/src/main/res/drawable/round_background.xml	(date 1632889115316)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android">
++    <solid android:color="@color/lite_gray"/>
++    <stroke android:width="1dp" android:color="@color/lite_gray"/>
++    <padding android:left="1dp" android:top="1dp" android:right="1dp"
++        android:bottom="1dp"/>
++    <corners android:radius="20dp" />
++
++</shape>
+\ No newline at end of file
+Index: app/src/main/res/drawable/round_background_border.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/round_background_border.xml	(date 1632889115435)
++++ app/src/main/res/drawable/round_background_border.xml	(date 1632889115435)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="utf-8"?>
++
++    <shape xmlns:android="http://schemas.android.com/apk/res/android">
++    <solid android:color="@null"/>
++    <stroke android:width="1dp" android:color="@color/gray"/>
++    <padding android:left="1dp" android:top="1dp" android:right="1dp"
++        android:bottom="1dp"/>
++    <corners android:radius="5dp" />
++
++    </shape>
++
+Index: app/src/main/java/com/cookandroid/withmetabbar/CustomAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar;\r\n\r\nimport android.app.ActivityOptions;\r\nimport android.app.AlertDialog;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.bumptech.glide.Glide;\r\nimport com.cookandroid.withmetabbar.chat.GroupMessageActivity;\r\nimport com.cookandroid.withmetabbar.model.ChatModel;\r\nimport com.cookandroid.withmetabbar.model.Meet;\r\nimport com.cookandroid.withmetabbar.model.Member;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport org.jetbrains.annotations.NotNull;\r\n\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Locale;\r\nimport java.util.Map;\r\n\r\npublic class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {\r\n\r\n    private final ArrayList<com.cookandroid.withmetabbar.model.Meet> arrayList;\r\n    private AlertDialog dialog;\r\n    private final Context context;\r\n    private int userCount=1;\r\n    private Member memberObj = new Member(); // 채팅방 입장을 위한 맴버 객체 생성\r\n\r\n    String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();//채팅방 구현\r\n\r\n    public CustomAdapter(ArrayList<Meet> arrayList, Context context) {\r\n        this.arrayList = arrayList;\r\n        this.context = context;\r\n    }\r\n\r\n    /**ListView가 어덥터를 만들어 냈을 때 최초로 실행된다.*/\r\n    @NonNull\r\n    @Override\r\n    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_meet, parent, false);\r\n        CustomViewHolder holder = new CustomViewHolder(view);\r\n        return holder;\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull  CustomViewHolder holder, int position) {\r\n\r\n\r\n        Glide.with(holder.itemView)\r\n                .load(arrayList.get(position).getImgUrl())\r\n                .into(holder.iv_meet);\r\n        holder.tv_meetTitle.setText(\"모임명: \"+ arrayList.get(position).getTitle());\r\n        Log.d(\"custom_imgUrl\",arrayList.get(position).getImgUrl());\r\n        Log.d(\"holder.itemView\", String.valueOf(holder.itemView));\r\n\r\n        String myFormat = \"yyyy년 MM월 dd일 HH:mm\";    // 출력형식   2018/11/28\r\n        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.\r\n        try{\r\n            holder.tv_meetDate.setText(\"날짜: \"+sdf.format(arrayList.get(position).getMeetDate().getTime()));\r\n        }catch (Exception e){\r\n\r\n        }\r\n\r\n        //holder.tv_meetDate.setText(\"시간: \"+ arrayList.get(position).getMeetDate());\r\n\r\n        holder.tv_meetAge.setText(\"나이: \"+ arrayList.get(position).getMeetAge());\r\n        //성별\r\n        if (arrayList.get(position).getMeetGen()==1){\r\n            holder.tv_meetGen.setText(\"성별: 남\");\r\n\r\n        }else if (arrayList.get(position).getMeetGen()==2){\r\n            holder.tv_meetGen.setText(\"성별: 여\");\r\n        }else{\r\n            holder.tv_meetGen.setText(\"성별: 무관\");\r\n        }\r\n        holder.tv_meetId.setText(\"모임아이디: \"+ arrayList.get(position).getMeetId());\r\n        holder.tv_numMember.setText(\"인원: \"+ arrayList.get(position).getNumMember());\r\n        holder.tv_place.setText(\"위치: \"+ arrayList.get(position).getPlace());\r\n        holder.tv_content.setText(\"내용: \"+ arrayList.get(position).getContent());\r\n\r\n        //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성\r\n\r\n        holder.itemView.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n\r\n                try{\r\n                    Log.d(\"arrayList.get(position).mid\",arrayList.get(position).mid);\r\n\r\n                    //제한 사항이 맞는지 검사.\r\n                    //user의 Gen, Age 가 meet의(또는 chatroom의) Gen, Age 와 동일한지 확인\r\n                    //userData 가져오기\r\n                    List<Member> members = new ArrayList<>();\r\n\r\n                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();\r\n//.orderByChild(\"users/\"+uid).equalTo(true)\r\n                    FirebaseDatabase.getInstance().getReference().child(\"users\").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {\r\n                        @Override\r\n                        public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n\r\n                            //member 객체에 user에서 받아온 값 넣기\r\n                            Member member = snapshot.getValue(Member.class);\r\n                            memberObj.mGen =member.mGen;\r\n                            memberObj.mAge =member.mAge;\r\n\r\n\r\n                            List<String> keysChatroomUsers = new ArrayList<>();//chatrooms - uid -users 의 uid 값들을 답을 리스트\r\n                            //구조변경\r\n                            //채팅방에서 userCount 받아오기 chatrooms - chatroom uid(=meet uid)\r\n                            FirebaseDatabase.getInstance().getReference().child(\"chatrooms\").child(arrayList.get(position).mid).child(\"users\").addListenerForSingleValueEvent(new ValueEventListener() {\r\n                                @Override\r\n                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {\r\n\r\n\r\n                                    for (DataSnapshot item : snapshot.getChildren()){\r\n                                        keysChatroomUsers.add(item.getKey());\r\n                                    }\r\n                                    userCount = keysChatroomUsers.size(); //chatroom에 있는 user의 수\r\n\r\n\r\n                                    boolean agePass = memberObj.mAge>arrayList.get(position).getMeetAge();\r\n                                    boolean genPass = memberObj.mGen>=arrayList.get(position).getMeetGen() || (arrayList.get(position).getMeetGen()==0) ;\r\n                                    boolean numMemberPass =( userCount < arrayList.get(position).getNumMember() );\r\n\r\n\r\n                                    //조건 비교\r\n                                    try {\r\n                                        if (  agePass && genPass && numMemberPass){\r\n\r\n\r\n                                            Map<String,Object> map = new HashMap<>();\r\n                                            map.put(myUid,true);\r\n\r\n                                            Intent intent = new Intent (view.getContext(), GroupMessageActivity.class);\r\n\r\n                                            //chatrooms의 user에 내 uid 넣는것.\r\n                                            FirebaseDatabase.getInstance().getReference().child(\"chatrooms\").child(arrayList.get(position).mid)\r\n                                                    .child(\"users\").updateChildren(map);\r\n\r\n                                            //chatroom 의 userCount에 현재 userCount 넣기.\r\n                                            userCount += 1;\r\n                                            FirebaseDatabase.getInstance().getReference().child(\"chatrooms\").child(arrayList.get(position).mid)\r\n                                                    .child(\"userCount\").setValue(userCount);\r\n\r\n                                            intent.putExtra(\"destinationRoom\",arrayList.get(position).mid);// 채팅방을 띄우기 위한 chatroom uid 전송.\r\n\r\n                                            ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(),R.anim.fromright,R.anim.toleft);\r\n                                            view.getContext().startActivity(intent,activityOptions.toBundle());\r\n\r\n                                        }else {\r\n\r\n                                            //조건 불만족시 처리\r\n                                            if (agePass==false){\r\n                                                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());\r\n                                                dialog = builder.setMessage(\"모임 연령을 확인하세요. 모임연령: \"+arrayList.get(position).getMeetAge())\r\n                                                        .setNegativeButton(\"OK\", null)\r\n                                                        .create();\r\n                                                dialog.show();\r\n                                            }else if (genPass ==false ){\r\n                                                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());\r\n                                                dialog = builder.setMessage(\"모임 성별을 확인하세요.\")\r\n                                                        .setNegativeButton(\"OK\", null)\r\n                                                        .create();\r\n                                                dialog.show();\r\n                                            }else {\r\n                                                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());\r\n                                                dialog = builder.setMessage(\"인원이 마감되었습니다.\")\r\n                                                        .setNegativeButton(\"OK\", null)\r\n                                                        .create();\r\n                                                dialog.show();\r\n                                            }\r\n//\r\n                                        }\r\n                                    }catch (Exception e){\r\n                                        Toast.makeText(view.getContext(), e.getMessage(),  Toast.LENGTH_SHORT);\r\n                                    }\r\n\r\n\r\n                                }\r\n\r\n                                @Override\r\n                                public void onCancelled(@NonNull @NotNull DatabaseError error) {\r\n\r\n                                }\r\n                            });\r\n                        }\r\n\r\n                        @Override\r\n                        public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n                        }\r\n                    });\r\n\r\n\r\n\r\n\r\n\r\n                }catch (Exception e){\r\n\r\n                }\r\n\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return (arrayList !=null ? arrayList.size() : 0);\r\n    }\r\n    /**MeetViewHolder*/\r\n    public class CustomViewHolder extends RecyclerView.ViewHolder {\r\n\r\n        ImageView iv_meet;\r\n        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_meetId, tv_numMember, tv_content, tv_meetGen, tv_place;\r\n\r\n        public CustomViewHolder(@NonNull View itemView) {\r\n            super(itemView);\r\n            this.iv_meet=itemView.findViewById(R.id.iv_meet);\r\n            this.tv_meetTitle=itemView.findViewById(R.id.tv_meetTitle);\r\n            this.tv_meetDate=itemView.findViewById(R.id.tv_meetDate);\r\n            this.tv_meetAge=itemView.findViewById(R.id.tv_meetAge);\r\n            this.tv_meetId=itemView.findViewById(R.id.tv_meetId);\r\n            this.tv_numMember=itemView.findViewById(R.id.tv_numMember);\r\n            this.tv_content=itemView.findViewById(R.id.tv_content);\r\n            this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);\r\n            this.tv_place=itemView.findViewById(R.id.tv_place);\r\n\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/CustomAdapter.java	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/java/com/cookandroid/withmetabbar/CustomAdapter.java	(date 1632889569148)
+@@ -40,8 +40,8 @@
+     private final ArrayList<com.cookandroid.withmetabbar.model.Meet> arrayList;
+     private AlertDialog dialog;
+     private final Context context;
+-    private int userCount=1;
+-    private Member memberObj = new Member(); // 채팅방 입장을 위한 맴버 객체 생성
++    private int userCount=0;
++    private Member memberObj = new Member(); //맴버객체 생성
+ 
+     String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();//채팅방 구현
+ 
+@@ -67,8 +67,6 @@
+                 .load(arrayList.get(position).getImgUrl())
+                 .into(holder.iv_meet);
+         holder.tv_meetTitle.setText("모임명: "+ arrayList.get(position).getTitle());
+-        Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
+-        Log.d("holder.itemView", String.valueOf(holder.itemView));
+ 
+         String myFormat = "yyyy년 MM월 dd일 HH:mm";    // 출력형식   2018/11/28
+         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
+@@ -90,10 +88,10 @@
+         }else{
+             holder.tv_meetGen.setText("성별: 무관");
+         }
+-        holder.tv_meetId.setText("모임아이디: "+ arrayList.get(position).getMeetId());
++        //holder.tv_meetId.setText("모임아이디: "+ arrayList.get(position).getMeetId());
+         holder.tv_numMember.setText("인원: "+ arrayList.get(position).getNumMember());
+         holder.tv_place.setText("위치: "+ arrayList.get(position).getPlace());
+-        holder.tv_content.setText("내용: "+ arrayList.get(position).getContent());
++        //holder.tv_content.setText("내용: "+ arrayList.get(position).getContent());
+ 
+         //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성
+ 
+@@ -133,6 +131,9 @@
+                                         keysChatroomUsers.add(item.getKey());
+                                     }
+                                     userCount = keysChatroomUsers.size(); //chatroom에 있는 user의 수
++//                                    ChatModel chatModel = new ChatModel();
++//                                    userCount = chatModel.userCount;//userCount에 대입.
++
+ 
+ 
+                                     boolean agePass = memberObj.mAge>arrayList.get(position).getMeetAge();
+@@ -230,7 +231,7 @@
+     public class CustomViewHolder extends RecyclerView.ViewHolder {
+ 
+         ImageView iv_meet;
+-        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_meetId, tv_numMember, tv_content, tv_meetGen, tv_place;
++        TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place;
+ 
+         public CustomViewHolder(@NonNull View itemView) {
+             super(itemView);
+@@ -238,9 +239,7 @@
+             this.tv_meetTitle=itemView.findViewById(R.id.tv_meetTitle);
+             this.tv_meetDate=itemView.findViewById(R.id.tv_meetDate);
+             this.tv_meetAge=itemView.findViewById(R.id.tv_meetAge);
+-            this.tv_meetId=itemView.findViewById(R.id.tv_meetId);
+             this.tv_numMember=itemView.findViewById(R.id.tv_numMember);
+-            this.tv_content=itemView.findViewById(R.id.tv_content);
+             this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);
+             this.tv_place=itemView.findViewById(R.id.tv_place);
+ 
+Index: app/src/main/res/layout/list_meet.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:orientation=\"vertical\">\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\"\r\n        >\r\n        <ImageView\r\n            android:id=\"@+id/iv_meet\"\r\n            android:layout_width=\"80dp\"\r\n            android:layout_height=\"88dp\"\r\n            android:layout_margin=\"5dp\"\r\n            android:src=\"@drawable/ic_launcher_background\"/>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_margin=\"15dp\"\r\n            android:orientation=\"vertical\">\r\n            <TextView\r\n                android:id=\"@+id/tv_meetTitle\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"방제목\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_meetDate\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"시간\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_meetAge\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"나이\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_meetGen\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"성별\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_meetId\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"모임아이디\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_numMember\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"모임인원\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_place\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"위치\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            <TextView\r\n                android:id=\"@+id/tv_content\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"내용\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n            </TextView>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"2dp\"\r\n                android:background=\"@color/yellow\"\r\n                android:layout_marginLeft=\"10dp\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n            </LinearLayout>\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/list_meet.xml	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/res/layout/list_meet.xml	(date 1632889115213)
+@@ -8,15 +8,24 @@
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:orientation="horizontal"
+-        >
++        android:background="@drawable/round_background"
++        android:layout_marginTop="5dp"
++        android:orientation="horizontal">
++
++
++
+         <ImageView
+             android:id="@+id/iv_meet"
+-            android:layout_width="80dp"
+-            android:layout_height="88dp"
+-            android:layout_margin="5dp"
++            android:layout_width="150dp"
++            android:layout_height="200dp"
++            android:layout_margin="15dp"
++
++            android:scaleType="centerCrop"
++            android:background="@drawable/round_background_border"
+             android:src="@drawable/ic_launcher_background"/>
+ 
++
++
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+@@ -26,7 +35,7 @@
+                 android:id="@+id/tv_meetTitle"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="방제목"
++                android:text="모임명"
+                 android:textColor="@color/black"
+                 android:layout_margin="5dp">
+ 
+@@ -58,15 +67,7 @@
+                 android:layout_margin="5dp">
+ 
+             </TextView>
+-            <TextView
+-                android:id="@+id/tv_meetId"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:text="모임아이디"
+-                android:textColor="@color/black"
+-                android:layout_margin="5dp">
+-
+-            </TextView>
++
+             <TextView
+                 android:id="@+id/tv_numMember"
+                 android:layout_width="wrap_content"
+@@ -85,25 +86,17 @@
+                 android:layout_margin="5dp">
+ 
+             </TextView>
+-            <TextView
+-                android:id="@+id/tv_content"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:text="내용"
+-                android:textColor="@color/black"
+-                android:layout_margin="5dp">
+-            </TextView>
+ 
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="2dp"
++            <Button
++                android:id="@+id/more_data"
++                android:layout_width="50dp"
++                android:layout_height="30dp"
++                android:backgroundTint="@color/yellow"
+                 android:background="@color/yellow"
+-                android:layout_marginLeft="10dp"
+-                android:layout_marginRight="10dp"
+-                android:layout_marginTop="10dp"
+-                android:orientation="horizontal">
++                android:layout_gravity="right"
++                android:textSize="35px"
++                android:text="더보기" />
+ 
+-            </LinearLayout>
+ 
+         </LinearLayout>
+ 
+Index: app/src/main/java/com/cookandroid/withmetabbar/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.RequiresApi;\r\nimport androidx.appcompat.widget.Toolbar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityCompat;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport android.Manifest;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.pm.PackageManager;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.view.Menu;\r\nimport android.view.MenuInflater;\r\nimport android.view.MenuItem;\r\nimport android.widget.Toast;\r\n\r\nimport com.cookandroid.withmetabbar.chat.ChatFragment;\r\nimport com.cookandroid.withmetabbar.model.Member;\r\nimport com.cookandroid.withmetabbar.navigation.AlarmFragment;\r\nimport com.cookandroid.withmetabbar.navigation.CoinMainFragment;\r\nimport com.cookandroid.withmetabbar.navigation.FragmentMyMeetHome;\r\nimport com.cookandroid.withmetabbar.navigation.FragmentPlus;\r\nimport com.cookandroid.withmetabbar.navigation.MyPageFragment;\r\nimport com.cookandroid.withmetabbar.navigation.PlaceCheckFragment;\r\nimport com.cookandroid.withmetabbar.navigation.TalkPlaceFragment;\r\nimport com.cookandroid.withmetabbar.navigation.UserFragment;\r\nimport com.cookandroid.withmetabbar.toolbar.MainActivity3;\r\nimport com.cookandroid.withmetabbar.toolbar.MainActivity4;\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\n\r\npublic class MainActivity extends AppCompatActivity  {\r\n\r\n    public static Context toast_context; //adapter에서 토스트 매시지를 띄우기 위한 변수\r\n\r\n    private long lastTimeBackPressed; //액비티비종료구현\r\n\r\n\r\n\r\n    UserFragment userFragment= new UserFragment();\r\n    AlarmFragment alarmFragment= new AlarmFragment();\r\n    //HomeFragment homeFragment= new HomeFragment();\r\n    MainActivityHome mainActivityHome=new MainActivityHome();\r\n    FragmentPlus fragmentPlus= new FragmentPlus();\r\n    MyPageFragment myPageFragment = new MyPageFragment();\r\n    ChatFragment chatFragment= new ChatFragment();//채팅프래그먼트\r\n    //DetailViewFragment detailViewFragment = new DetailViewFragment();\r\n    FragmentManager fragmentManager = getSupportFragmentManager();//for 프래그먼트 전환\r\n    CoinMainFragment coinMainFragment = new CoinMainFragment(); //코인 충전 프레그 먼트\r\n    PlaceCheckFragment placeCheckFragment = new PlaceCheckFragment();//위치인증 프레그 먼트\r\n    TalkPlaceFragment talkPlaceFragment = new TalkPlaceFragment();//톡방 프레그먼트 아직 xml없음\r\n    FragmentMyMeetHome fragmentMyMeetHome = new FragmentMyMeetHome(); //내 모임 보기 화면\r\n\r\n\r\n\r\n\r\n\r\n    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n\r\n        setContentView(R.layout.activity_main);\r\n        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);\r\n\r\n        FragmentTransaction transaction = fragmentManager.beginTransaction();//트랜잭션 생성\r\n        //FragmentTransaction.add(R.id.main_content, MyPageFragment.newInstance()).commit();//new\r\n\r\n        //transaction.replace(R.id.main_content, homeFragment).commitAllowingStateLoss();//처음에 띄우는 fragment\r\n        transaction.replace(R.id.main_content, mainActivityHome).commitAllowingStateLoss();//처음에 띄우는 fragment\r\n\r\n\r\n\r\n        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);\r\n        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()   {\r\n\r\n            //로그인에서 넣어준 intent 받기\r\n            final Intent intentMain = getIntent();\r\n            public final String uid = intentMain.getStringExtra(\"uid\");\r\n            final Member member = new Member();\r\n\r\n\r\n\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                FragmentTransaction transaction = fragmentManager.beginTransaction();\r\n\r\n                switch (item.getItemId()) {\r\n                    case R.id.action_home:\r\n                        //Intent intentHome= new Intent(getApplicationContext(), MainActivityHome.class);\r\n                        //startActivity(intentHome);\r\n                        transaction.replace(R.id.main_content, mainActivityHome).commitAllowingStateLoss();\r\n\r\n                        //homeFragment.setArguments(bundle);\r\n                        //transaction.replace(R.id.main_content, homeFragment).commitAllowingStateLoss();\r\n                        //transaction.addToBackStack(null);\r\n                        //transaction.commit();\r\n                        //fragmentManager.beginTransaction().remove(detailViewFragment.this).commit;\r\n                        //fragmentManager.popBackStack();\r\n\r\n                        break;\r\n                    case R.id.action_love:\r\n                        transaction.replace(R.id.main_content, fragmentMyMeetHome).commitAllowingStateLoss();\r\n                        break;\r\n                    case R.id.action_plus:\r\n                        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){\r\n                            transaction.replace(R.id.main_content, fragmentPlus).commitAllowingStateLoss();\r\n                            Bundle bundle = new Bundle();\r\n                            bundle.putString(\"uid\",uid);\r\n                            fragmentPlus.setArguments(bundle);\r\n                        }\r\n                        //transaction.add(R.id.main_content,fragmentPlus).addToBackStack(null).commit();\r\n\r\n                        break;\r\n                    case R.id.action_chatroom:\r\n                        transaction.replace(R.id.main_content, chatFragment).commitAllowingStateLoss();\r\n                        break;\r\n                    case R.id.action_mypage:\r\n                        transaction.replace(R.id.main_content, myPageFragment).commitAllowingStateLoss();\r\n                        break;\r\n\r\n                }\r\n\r\n\r\n                return true;\r\n            }\r\n        });\r\n\r\n\r\n        //toolbar선언\r\n        Toolbar tb = findViewById(R.id.my_toolbar);\r\n        setSupportActionBar(tb);\r\n        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼 생성\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n    @Override\r\n    public boolean onCreateOptionsMenu(Menu menu) {\r\n        MenuInflater menuInflater = getMenuInflater();\r\n        menuInflater.inflate(R.menu.main_menu, menu);\r\n        return true;\r\n    }\r\n\r\n\r\n    @Override\r\n    public boolean onOptionsItemSelected(MenuItem item) {\r\n        //FragmentTransaction transaction = fragmentManager.beginTransaction();\r\n        switch (item.getItemId()){\r\n            case R.id.action_category:\r\n                Intent intent = new Intent(MainActivity.this, MainActivity3.class);\r\n                startActivity(intent);\r\n                return  true;\r\n            case R.id.action_alarm:\r\n                Intent intent1 = new Intent(MainActivity.this, MainActivity4.class);\r\n                startActivity(intent1);\r\n\r\n            default:\r\n                return super.onOptionsItemSelected(item);\r\n\r\n        }\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n    public void replaceFragment(Fragment fragment){\r\n//        getSupportFragmentManager().beginTransaction().replace(R.id.main_content2, fragment).commit();\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.replace(R.id.main_content, fragment).commit();\r\n        \r\n    }\r\n    public void removeFragment(Fragment fragment) {\r\n        //getSupportFragmentManager().beginTransaction().remove(R.id.main_content2, fragment).commit();\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.remove(fragment).commit();                                //로그아웃, 뒤로가기버튼 누를시\r\n    }\r\n\r\n    public void addFragment(Fragment fragment){\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();\r\n        fragmentTransaction.add(R.id.main_content, fragment).addToBackStack(null).commit();\r\n    }\r\n\r\n    public void hideFragment(Fragment fragment){\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.hide(fragment).commit();\r\n    }\r\n    public void showFragment(Fragment fragment){\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.show(fragment).commit();\r\n    }\r\n\r\n\r\n\r\n    @Override\r\n    public void onBackPressed() {\r\n\r\n        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){\r\n\r\n            moveTaskToBack(true);\t\t\t\t\t\t// 태스크를 백그라운드로 이동\r\n            finishAndRemoveTask();\t\t\t\t\t\t// 액티비티 종료 + 태스크 리스트에서 지우기\r\n            android.os.Process.killProcess(android.os.Process.myPid());\t// 앱 프로세스 종료\r\n            //finish();\r\n\r\n            return;\r\n        }\r\n        lastTimeBackPressed = System.currentTimeMillis();\r\n        Toast.makeText(this,\"'뒤로' 버튼을 한 번 더 누르면 종료됩니다.\",Toast.LENGTH_SHORT).show();\r\n\r\n\r\n//        Toast.makeText(this, \"Log Out\", Toast.LENGTH_SHORT).show();\r\n//        Intent intent = new Intent(MainActivity.this, MainActivity2.class);\r\n//        startActivity(intent);\r\n        //super.onBackPressed();\r\n    }\r\n\r\n\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/MainActivity.java	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/java/com/cookandroid/withmetabbar/MainActivity.java	(date 1632889115355)
+@@ -159,10 +159,7 @@
+     public boolean onOptionsItemSelected(MenuItem item) {
+         //FragmentTransaction transaction = fragmentManager.beginTransaction();
+         switch (item.getItemId()){
+-            case R.id.action_category:
+-                Intent intent = new Intent(MainActivity.this, MainActivity3.class);
+-                startActivity(intent);
+-                return  true;
++
+             case R.id.action_alarm:
+                 Intent intent1 = new Intent(MainActivity.this, MainActivity4.class);
+                 startActivity(intent1);
+Index: app/src/main/res/layout/activity_main_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/linearLayout\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginTop=\"3dp\"\r\n        android:layout_marginEnd=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:orientation=\"vertical\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"6\"\r\n                android:background=\"@drawable/search_et_in\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <EditText\r\n                    android:id=\"@+id/editSearch\"\r\n                    android:layout_width=\"280dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_weight=\"8\"\r\n                    android:background=\"@null\"\r\n                    android:hint=\"검색어를 입력하세요.\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_search\"\r\n                    android:layout_width=\"@dimen/search\"\r\n                    android:layout_height=\"@dimen/search\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:background=\"@drawable/search\"\r\n                    />\r\n\r\n\r\n            </LinearLayout>\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_time\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:background=\"@drawable/calendar\"\r\n                    android:backgroundTint=\"@color/yellow\"\r\n\r\n\r\n                    android:text=\"\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n              android:layout_gravity=\"center_horizontal\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_inter\"\r\n                    android:layout_width=\"80dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:background=\"@color/Orange\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:layout_marginTop=\"5dp\"\r\n                    android:textSize=\"35px\"\r\n                    android:text=\"관심취미\"/>\r\n\r\n\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <ListView\r\n                android:id=\"@+id/listView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:divider=\"#999999\"\r\n                android:dividerHeight=\"1dp\"\r\n                android:visibility=\"gone\"\r\n                >\r\n            </ListView>\r\n\r\n            <androidx.recyclerview.widget.RecyclerView\r\n                android:id=\"@+id/recyclerView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"/>\r\n\r\n        </LinearLayout>\r\n    </LinearLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main_home.xml	(revision 55c8a0a722814a51bf3e2d563523ce63aeecfbf3)
++++ app/src/main/res/layout/activity_main_home.xml	(date 1632889115398)
+@@ -34,9 +34,8 @@
+ 
+ 
+             <LinearLayout
+-                android:layout_width="0dp"
++                android:layout_width="390dp"
+                 android:layout_height="wrap_content"
+-                android:layout_weight="6"
+                 android:background="@drawable/search_et_in"
+                 android:layout_marginRight="10dp"
+                 android:orientation="horizontal">
+@@ -54,23 +53,26 @@
+                     android:id="@+id/btn_search"
+                     android:layout_width="@dimen/search"
+                     android:layout_height="@dimen/search"
+-                    android:layout_marginRight="20dp"
++                    android:layout_marginRight="10dp"
+                     android:background="@drawable/search"
+                     />
+ 
+-
+-            </LinearLayout>
+-
+                 <Button
+                     android:id="@+id/btn_time"
+-                    android:layout_width="0dp"
+-                    android:layout_height="40dp"
+-                    android:layout_weight="1"
++                    android:layout_width="25dp"
++                    android:layout_height="25dp"
++                    android:layout_marginRight="10dp"
++                    android:layout_marginBottom="20dp"
+                     android:background="@drawable/calendar"
+-                    android:backgroundTint="@color/yellow"
++                    android:backgroundTint="@color/darkgray"
+ 
+ 
+                     android:text="" />
++
++
++            </LinearLayout>
++
++
+             </LinearLayout>
+ 
+             <LinearLayout
+diff --git .idea/shelf/Uncommitted_changes_before_Update_at_2021-09-25__3_50__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Update_at_2021-09-25__3_50__Default_Changelist_.xml
+diff --git .idea/shelf/Uncommitted_changes_before_Update_at_2021-09-25__1_13__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Update_at_2021-09-25__1_13__Default_Changelist_.xml

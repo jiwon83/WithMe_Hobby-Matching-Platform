@@ -1,0 +1,395 @@
+[33mcommit 55c8a0a722814a51bf3e2d563523ce63aeecfbf3[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 29 02:44:18 2021 +0900
+
+    이미지 저장 업로드 전체 수정
+
+[33mcommit 55feb3faea6448b417a165feb1e1c90b2d7a8d4c[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Tue Sep 28 15:11:55 2021 +0900
+
+    프로필이미지데이터저장
+
+[33mcommit 68766717c82c19b6718d697bd6ccde4bc9ce2edd[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Tue Sep 28 14:39:48 2021 +0900
+
+    취미선택버그수정(액티비티로수정,중복제거)
+
+[33mcommit 5796995714f90bb80482dee62792483676c8f46b[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Sep 27 22:26:43 2021 +0900
+
+    취미선택버그수정
+
+[33mcommit 25086ef3c498d9583d927a39e622914376db202b[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Sep 27 13:58:15 2021 +0900
+
+    방입장 인원제한 구현
+
+[33mcommit 471c731a9ea47dbb9d04e5342ccd95e19cf840cf[m
+Merge: 2f9ee98 6ab49d5
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Sep 27 02:35:17 2021 +0900
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 2f9ee9849308633f35742ee1e700533d02aa2f97[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Sep 27 02:35:06 2021 +0900
+
+    조검으로 방 입장.
+
+[33mcommit 148e85c45ebc2235f94ec8f59d1dd5bded4b6c35[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Sep 27 02:09:53 2021 +0900
+
+    조검으로 방 입장.
+
+[33mcommit 6ab49d5c33ceb69eadf100bbbc0ccaad17c9a42a[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Sun Sep 26 22:59:43 2021 +0900
+
+    회원가입시 프로필 사진 설정 가능
+
+[33mcommit 04abe7e4107364a01b3b5cbc57c4a38a2d7ac21d[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sun Sep 26 18:39:57 2021 +0900
+
+    채팅방 합치기
+
+[33mcommit 7b6007d67d0d6d085ff428c93c0ece4f0ae9ac8a[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sun Sep 26 18:38:37 2021 +0900
+
+    채팅방 합치기
+
+[33mcommit 88f2b81784fce00d1378316f2d0c58f78c4582f6[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Sun Sep 26 17:38:07 2021 +0900
+
+    메인 화면 위젯 배치 수정
+
+[33mcommit 8ecba99eefe541b2081ea2b2bdd25ded148d5031[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Sun Sep 26 12:49:14 2021 +0900
+
+    전화번호 입력
+    성별 각각 선택 화면 (버튼 노란색)구현
+
+[33mcommit e3e9ec00f48f251c41cf3768c6cd3bb94c3047fc[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Sun Sep 26 12:47:20 2021 +0900
+
+    전화번호 입력
+    성별 각각 선택 화면 구현
+
+[33mcommit e65d264143360a923dc6dcf7caa2f7014dd63e17[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Sun Sep 26 12:46:30 2021 +0900
+
+    전화번호 입력
+    성별 각각 선택 화면 구현
+
+[33mcommit 76894802a50bd6979a0f0b661545ab1727114c4d[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sat Sep 25 15:47:50 2021 +0900
+
+    아이디 중복체크
+
+[33mcommit 5aa9e7df8ab2ca667ef326bd50d24ad25f31b173[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sat Sep 25 14:01:21 2021 +0900
+
+    검색버그수정
+
+[33mcommit e48b93fe38f824eda8d69cdd390d3f550ddff0b2[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sat Sep 25 13:10:06 2021 +0900
+
+    앱 종료 버그 수정, 회원가입 보완 진행중
+
+[33mcommit bf825654f7814aa6c34a08803db7e751da3b151d[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 22 23:13:22 2021 +0900
+
+    주소입력구현 - 데이터 입력 성공
+
+[33mcommit 081c37a34b20f33cfe4e449ddcc66ab92e98ff04[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 22 22:25:07 2021 +0900
+
+    주소입력구현 - 서버 내서버로 변경
+
+[33mcommit d4fb88fbcaca82a3d08dc838ffa7ffede4ae6922[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 22 18:50:25 2021 +0900
+
+    주소입력구현
+
+[33mcommit 2e325dcf832c0d310e740208f0828948ad312982[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sat Sep 18 16:38:09 2021 +0900
+
+    code cleanUp
+
+[33mcommit af62c2c8df525935985fec9d6749379bbcc5fb2e[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sat Sep 18 16:37:34 2021 +0900
+
+    날짜검색기능완성
+
+[33mcommit 8850fec013432a30fa81473094d6cdb7bd803b2d[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sat Sep 18 16:18:05 2021 +0900
+
+    update누락해결, 날짜 검색 예외처리
+
+[33mcommit b4b9a263a41ba7d8130d057507037abafa371ae7[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Fri Sep 17 19:19:59 2021 +0900
+
+    홈화면 날짜 선택용 캘린더 삽입
+
+[33mcommit a1c83148d680aecada9364f203f00cf1c177ae6d[m
+Merge: 4ea2d7e 2c5814e
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Fri Sep 17 18:54:36 2021 +0900
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/java/com/cookandroid/withmetabbar/MainActivityHome.java
+
+[33mcommit 4ea2d7ef3c0cc49cf6822d0417c8e75d8bfac75f[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Fri Sep 17 18:45:09 2021 +0900
+
+    홈화면 날짜 선택용 캘린더 삽입
+
+[33mcommit 2c5814ee162e3eee7af8024b203bdb1c4ba4062d[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Fri Sep 17 16:21:07 2021 +0900
+
+    홈화면 날짜 출력 형식 변경
+
+[33mcommit a9b3f42c6b86a41599530e52bddd5dd010823aea[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Fri Sep 17 16:02:50 2021 +0900
+
+    날짜로 검색기능 구현( 선택한 데이터는 sample data로 )
+
+[33mcommit a5c18d5f9e778963fe401d0fb28552c5af159061[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Thu Sep 16 14:12:01 2021 +0900
+
+    회원가입-생일-데이터입력
+
+[33mcommit d49ac674b999fdd687ac79710d93ee1a32d4f88b[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Thu Sep 16 14:03:06 2021 +0900
+
+    조인 취미 선택 색깔 바꾸기
+
+[33mcommit d94633f36abfe39f8e3162fd8683c29d77ee065f[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Thu Sep 16 13:26:48 2021 +0900
+
+    2021-09-16 13:24 내모임, 취미카테고리로검색, 회원가입시 취미선택 복구
+
+[33mcommit d23f905a6ad9c715f53feba318b3ae7745882e3d[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Thu Sep 16 13:09:26 2021 +0900
+
+    2021-09-16 13:09
+
+[33mcommit b0f5b77a0d68e5fcbaa5afb06e8a93510ba8a249[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Thu Sep 16 13:03:15 2021 +0900
+
+    Revert "검색기능 보완: 입력없으면 검색어 아예 안보이도록"
+    
+    This reverts commit 0116c26f
+
+[33mcommit ff82c2c94f6cefeb6d6e525acd6ce08ebc4edfe7[m
+Merge: 0116c26 8618c8b
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Thu Sep 16 10:53:27 2021 +0900
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 0116c26fdf794c6e0780c0696e3f0dc805204ba1[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 15 23:40:17 2021 +0900
+
+    검색기능 보완: 입력없으면 검색어 아예 안보이도록
+
+[33mcommit 8618c8b13abcc6c14249cbbe29f6cfcc7b1514a3[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Wed Sep 15 23:26:50 2021 +0900
+
+    JOIN화면 생년월일 달력 띄우기
+
+[33mcommit 3490dffbe79a67fa5099354b8d8427b16e837f08[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Wed Sep 15 23:26:34 2021 +0900
+
+    JOIN화면 생년월일 달력 띄우기
+
+[33mcommit 61518bda48947942801de4706066db5509a396cd[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 15 23:07:01 2021 +0900
+
+    유저의 취미값으로 모임 필터링 구현 및 보완
+
+[33mcommit 6f1ddd1546c93e4fb716147bd313108f11059a83[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 15 22:38:48 2021 +0900
+
+    유저의 취미값으로 모임 필터링 구현 및 보완
+
+[33mcommit e581179f09a479e4ee1adfbde9021492a7b8d99c[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 15 22:18:06 2021 +0900
+
+    유저의 취미값으로 모임검색기능 구현
+
+[33mcommit a22a73676c775023707efed756768f32cff7f424[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 15 20:31:10 2021 +0900
+
+    join화면수정( 취미데이터입력부분 update)
+
+[33mcommit ab3ba6ab2771b15fb05ed1aa621df9660f1f8c84[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 15 16:48:20 2021 +0900
+
+    내 모임만 따로 보기 구현
+
+[33mcommit e27a672758ffcce6f0ca731398e296e43b977177[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Sep 13 22:39:07 2021 +0900
+
+    취미선택-데이터구조수정, 취미로 검색기능 구현완료.
+
+[33mcommit 899cd99765ddb61eaf8c4a6c17c27543297ecf9a[m
+Merge: 721f0c8 eb8d070
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Fri Sep 10 16:37:48 2021 +0900
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 721f0c87ef1bb204bd5bedd80bfb2180d5c98958[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Fri Sep 10 00:28:41 2021 +0900
+
+    취미선택 setText 성공 , 데이터 입력 성공
+
+[33mcommit 4b822349fe619c3f06b6bce836a3f108209805dc[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Thu Sep 9 16:54:14 2021 +0900
+
+    취미선택 setText 성공
+
+[33mcommit 4bdf346b91e7c5c1da84a378b86d06d17352b632[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Thu Sep 9 16:54:08 2021 +0900
+
+    취미선택 setText 성공
+
+[33mcommit eb8d070f7216f80e6aaa1782dea9d16eb8e63b13[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Wed Sep 8 19:11:24 2021 +0900
+
+    mypage xml 이름, 닉네임, 소개 변경
+
+[33mcommit 97c0bf7ea24bdb005d58cdf509eb628b7769910a[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Wed Sep 8 18:10:21 2021 +0900
+
+    test please
+
+[33mcommit 57f7658778e9ce0cd70e8e8f0702eb3f514c30e6[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Wed Sep 8 18:01:20 2021 +0900
+
+    new git
+
+[33mcommit 888f39b5a22f57b5153d442d9c54e3fd6406b909[m
+Author: soyeongP <88358606+soyeongP@users.noreply.github.com>
+Date:   Wed Sep 8 17:51:28 2021 +0900
+
+    new git
+
+[33mcommit 099b159cc170954ba450ca1772f97e9b068e30b4[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 8 16:57:43 2021 +0900
+
+    2121.09.08 16;57
+
+[33mcommit 8eee87e5349378acf13d30c70db0d394abf225eb[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 8 16:32:58 2021 +0900
+
+    2121.09.08 16;32
+
+[33mcommit 2de79a034e826a1733b39d8cd926b90aac7afb38[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Sep 8 01:13:44 2021 +0900
+
+    모임생성시에도 취미선택화면나오게
+
+[33mcommit a03a1442d03b4086581e221047c5411cf395af5e[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Tue Sep 7 18:51:33 2021 +0900
+
+    hobby 선택하면 데이터에 저장 ( 두번선택버그 있음 )
+
+[33mcommit 08ae79ca9d03634804825f8e6d5c6b42e431d148[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Tue Sep 7 14:26:26 2021 +0900
+
+    hobby 데이터에 저장 push와 update
+
+[33mcommit 34777735a5598fa465c46c8770b7703802270cab[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Sep 6 16:58:43 2021 +0900
+
+    성별 데이터 입력 구현, 취미목록 선택하면 색상 바뀌기 성공
+
+[33mcommit 1eb3170986ac7de8e6d51ef6d9969131953f7c52[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Fri Aug 27 07:49:58 2021 +0900
+
+    모임정보- 날짜 선택,데이터 입력 완료/취미선택과 합치기(보류)
+
+[33mcommit a6f38cf9f8a7df0da7a7246cf9ac2c11adef172f[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Sun Aug 22 18:47:29 2021 +0900
+
+    취미선택과 합치기
+
+[33mcommit 303819ef9ccbb4a6997157be5b9ee0aad5b668a9[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Wed Aug 18 21:39:43 2021 +0900
+
+    검색기능 보완3-도배 버그 해결(검색하면 같은 값이 여러번 리사클러뷰에 도배)
+
+[33mcommit a28af490c0e9949384570b856f4425f022428a19[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Tue Aug 17 01:49:12 2021 +0900
+
+    검색기능 보완2- meet 의 title로 검색 가능, but 도배 버그 있음
+
+[33mcommit 2080249ecacf69b33abf465097aebd8fe35c6361[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Aug 16 23:13:03 2021 +0900
+
+    검색기능 보완- 검색 리스트 meet의 title에서 가져오기
+
+[33mcommit 40a902558c670237b31569f54e3daf122657afc2[m
+Author: Jiwon_83 <gkswldnj0803@gmail.com>
+Date:   Mon Aug 16 13:04:41 2021 +0900
+
+    first Commit
