@@ -4,14 +4,17 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,8 +68,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getImgUrl())
+                .override(150,200)
                 .into(holder.iv_meet);
-        holder.tv_meetTitle.setText("모임명: "+ arrayList.get(position).getTitle());
+        holder.tv_meetTitle.setText(" "+ arrayList.get(position).getTitle());
         //Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
         //Log.d("holder.itemView", String.valueOf(holder.itemView));
 
@@ -93,6 +97,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.tv_numMember.setText("인원: "+ arrayList.get(position).getNumMember());
         holder.tv_place.setText("위치: "+ arrayList.get(position).getPlace());
         holder.tv_hobbyCate.setText("취미목록: "+ arrayList.get(position).getHobbyCate());
+
 
 
         //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성
@@ -221,6 +226,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     }
 
+
     @Override
     public int getItemCount() {
         return (arrayList !=null ? arrayList.size() : 0);
@@ -230,6 +236,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         ImageView iv_meet;
         TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place,tv_hobbyCate;
+
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -241,6 +248,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.tv_meetGen=itemView.findViewById(R.id.tv_meetGen);
             this.tv_place=itemView.findViewById(R.id.tv_place);
             this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
+            tv_meetTitle.setTextSize(Dimension.SP, 15);
+            tv_place.setEllipsize(TextUtils.TruncateAt.END);
+            tv_place.setMaxLines(10);
+            tv_place.setSelected(true);
+            tv_place.setSingleLine(true);
+
+
 
         }
     }
