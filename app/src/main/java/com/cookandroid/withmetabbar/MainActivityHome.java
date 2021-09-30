@@ -62,7 +62,7 @@ public class MainActivityHome extends Fragment {
     private SearchAdapter searchAdapter;
     private EditText editSearch;//검색어를 입력할 Input창
     private ListView listView;//검색을 보여줄 리스변수
-    private Button btn_inter,btn_all,btn_time;//캘린더
+    private Button btn_time;//캘린더
     private DatePickerDialog datePickerDialog;
 
 
@@ -90,16 +90,7 @@ public class MainActivityHome extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();//Meet객체를 담을 어레이리스트 (어뎁터 쪽으로)
         arrayList_copy = new ArrayList<>();
-
-
-
-
-
-
-
-        //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
-        btn_inter = vGroup.findViewById(R.id.btn_inter);
         btn_time = vGroup.findViewById(R.id.btn_time);
 
         Calendar myCalendar = Calendar.getInstance();
@@ -124,43 +115,6 @@ public class MainActivityHome extends Fragment {
                 new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
-
-
-
-        //취미목록으로 필터링 버튼
-        btn_inter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                filterHobbyCateInMeetToRecyclerView(); //유저의 취미값에 해당하는 모임 검색
-
-            }
-        });
-
-        /*btn_all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
-        //전체모임보기
-//        btn_all.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //이건 화면전환tab bar로 구현해야할 것 같다.
-//                //allInRecyclerView();
-////                arrayList.clear();
-////                arrayList = arrayList_copy;
-////                customAdapter.notifyDataSetChanged();
-//                //test date로 검색
-//                filterDateInMeetToRecyclerView();
-//
-//            }
-//        });
-
-
 
 
         //2021-08-16 검색기능 구현

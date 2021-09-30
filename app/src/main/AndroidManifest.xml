@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.cookandroid.withmetabbar">
 
     <uses-feature
@@ -9,6 +10,7 @@
     <permission
         android:name="com.cookandroid.withmetabbar.permission.MAPS_RECEIVE"
         android:label="signature" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -18,7 +20,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -28,29 +30,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".toolbar.MainActivity3"/>
-        <activity android:name=".toolbar.MainActivity4"/>
-
-        <activity android:name=".certify.MainActivity2">
+        <activity android:name=".googlemap.GoogleMapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDGwrK_S8I6RmzwBgYy-sK5ANpvxCiyy-E" />
+
+        <activity android:name=".MainActivity"></activity>
+
+        <activity android:name=".certify.MainActivity2">
 
         </activity>
-        <activity android:name=".MainActivityWebView">
+        <activity android:name=".MainActivityWebView"></activity>
+        <activity android:name=".WebViewActivity" />
+        <activity android:name=".chat.GroupMessageActivity" />
+        <activity android:name=".navigation.FragmentPlusSelectHobby" />
 
-
-        </activity>
-        <activity android:name=".WebViewActivity"/>
-
-        <activity android:name=".chat.GroupMessageActivity"/>
-        <activity android:name=".navigation.FragmentPlusSelectHobby"/>
 
 
     </application>
+
 </manifest>

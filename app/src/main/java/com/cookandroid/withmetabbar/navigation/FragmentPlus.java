@@ -331,9 +331,11 @@ public class FragmentPlus extends Fragment {
                         String sss = String.format("geo:%f,%f", lat, lon);//위도경도로 포맷
 
                         Intent intent = new Intent(
-                                Intent.ACTION_VIEW,
+                                Intent.ACTION_VIEW, //보여줘라
                                 Uri.parse(sss));//위도경도를가지고
                         startActivity(intent);
+
+
                     }
                 }
 
