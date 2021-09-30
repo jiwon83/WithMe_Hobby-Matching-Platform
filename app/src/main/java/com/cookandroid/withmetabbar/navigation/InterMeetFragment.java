@@ -92,10 +92,8 @@ public class InterMeetFragment extends Fragment {
         arrayList = new ArrayList<>();//Meet객체를 담을 어레이리스트 (어뎁터 쪽으로)
         arrayList_copy = new ArrayList<>();
         //검색기능
-        editSearch= vGroup.findViewById(R.id.editSearch);
-        listView= vGroup.findViewById(R.id.listView);
-
-
+//        editSearch= vGroup.findViewById(R.id.editSearch);
+//        listView= vGroup.findViewById(R.id.listView);
 
         //Button btn_back= vGroup.findViewById(R.id.btn_back);
         Button btn_search= vGroup.findViewById(R.id.btn_search);
@@ -113,8 +111,6 @@ public class InterMeetFragment extends Fragment {
                 filterDateInMeetToRecyclerView();
             }
         };
-
-
 
         //달력클릭하면 날짜 검색
         btn_time.setOnClickListener(new View.OnClickListener() {
@@ -159,10 +155,13 @@ public class InterMeetFragment extends Fragment {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
 
                             Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
+                            Log.d("data_meettitle",meet.title);
 
                             //필터링: 취미목록에 해당하는지 확인하고 add
                             //meet.getHobbyCate()와 listUserHobby 의 비교
                             for (int i =0; i< meet.getHobbyCate().size(); i++){
+                                //list_search_recycle.add(meet.hobbyCate.get(i)); //검색리스트에 취미카테고리 값 넣기
+
                                 for (int j=0; j< listUserHobby.size(); j++){
                                     if (meet.getHobbyCate().get(i).equals(listUserHobby.get(j))){
                                         if (UniqueCheckAndAdd(arrayList,meet) == true){
@@ -173,46 +172,33 @@ public class InterMeetFragment extends Fragment {
                                     }
                                 }
                             }
-
-
-                            for (int i=0;i<arrayList_copy.size();i++){// 전체 meet 데이터 중에서
-                                if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
-                                    //arrayList에 업데이트
-                                    arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
-                                    //검색한 값만 잘 들어온다.
-                                    //Log.d("arrayList_new", String.valueOf(arrayList));
-                                    //Log.d("size", String.valueOf(arrayList_copy.size()));//253??
-                                }
-                            }
-
                             //arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
                             Log.d("arrayList", String.valueOf(arrayList));
 
                             //검색기능에 필요한 작업 - meet model배열
-
                             //단어 검색
                             //2021-08-16 검색기능 구현
                             // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
-                            if (meet.title!=null){
+//                            if (meet.title!=null){
+//
+//                                Log.d("title",meet.title);
+//                                list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
+//                                //취미목록 검색 리스트에 넣기 2021-09-13
+//
+//
+//                            }
 
-                                Log.d("title",meet.title);
-                                list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
-                                //취미목록 검색 리스트에 넣기 2021-09-13
-
-
-                            }
-
-                            int totalHobbyCount2 = meet.hobbyCate.size();
-                            for (int index = 0; index < totalHobbyCount2; index++) {
-                                list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
-                            }
+//                            int totalHobbyCount2 = meet.hobbyCate.size();
+//                            for (int index = 0; index < totalHobbyCount2; index++) {
+//                                list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
+//                            }
                         }//for
 
 
                         Log.d("list_search_recycle", String.valueOf(list_search_recycle));
                         //2021-08-16 검색기능에 필요한 작업
                         try {
-                            arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
+//                            arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
 
                             customAdapter= new CustomAdapter(arrayList,getContext());
                             recyclerView.setAdapter(customAdapter);
@@ -277,48 +263,48 @@ public class InterMeetFragment extends Fragment {
         Log.d("list_search_recycle", String.valueOf(list_search_recycle));
 
         //arrayList_search.addAll(list_search); 궅이 필요 x 제거해도 된다.
-        searchAdapter = new SearchAdapter(list_search_recycle,getContext());
-        listView.setAdapter(searchAdapter);
-        editSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //입력하기 전에 조치
-            }
+//        searchAdapter = new SearchAdapter(list_search_recycle,getContext());
+//        listView.setAdapter(searchAdapter);
+//        editSearch.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                //입력하기 전에 조치
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                //입력란에 변화가 있을 시 조치
+//                listView.setVisibility(View.VISIBLE);
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                //입력이 끝났을 때
+//                // input창에 문자를 입력할때마다 호출된다.
+//                // search 메소드를 호출한다.
+//                String searchText = editSearch.getText().toString();
+//                searchInMeet(searchText);
+//
+//                //2021-08-16 검색기능 구현
+//                //검색된 단어가 제목에 들어가는 게시물 띄어보이기(recycler view)
+//                //검색한 단어와 meetName이 같은 모임만 다시 띄운다.
+//                //customAdapter= new CustomAdapter(arrayList_search_recycle,getContext());
+//                //recyclerView.setAdapter(customAdapter);
+//
+//            }
+//
+//        });
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //입력란에 변화가 있을 시 조치
-                listView.setVisibility(View.VISIBLE);
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //입력이 끝났을 때
-                // input창에 문자를 입력할때마다 호출된다.
-                // search 메소드를 호출한다.
-                String searchText = editSearch.getText().toString();
-                searchInMeet(searchText);
-
-                //2021-08-16 검색기능 구현
-                //검색된 단어가 제목에 들어가는 게시물 띄어보이기(recycler view)
-                //검색한 단어와 meetName이 같은 모임만 다시 띄운다.
-                //customAdapter= new CustomAdapter(arrayList_search_recycle,getContext());
-                //recyclerView.setAdapter(customAdapter);
-
-            }
-
-        });
-
-        //검색버튼 클릭하면면
-        btn_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String searchText =editSearch.getText().toString();//검색어를 가져와서
-                searchInMeetToRecyclerView(searchText);//검색기능 메서드호출
-
-            }
-        });
+//        //검색버튼 클릭하면면
+//        btn_search.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String searchText =editSearch.getText().toString();//검색어를 가져와서
+//                searchInMeetToRecyclerView(searchText);//검색기능 메서드호출
+//
+//            }
+//        });
 
 
 

@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.content.Context;
@@ -26,7 +25,6 @@ import com.cookandroid.withmetabbar.chat.ChatFragment;
 import com.cookandroid.withmetabbar.model.Member;
 import com.cookandroid.withmetabbar.navigation.AlarmFragment;
 import com.cookandroid.withmetabbar.navigation.CoinMainFragment;
-import com.cookandroid.withmetabbar.navigation.FragmentMyInter;
 import com.cookandroid.withmetabbar.navigation.FragmentMyMeetHome;
 import com.cookandroid.withmetabbar.navigation.FragmentPlus;
 import com.cookandroid.withmetabbar.navigation.InterMeetFragment;
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity  {
     TalkPlaceFragment talkPlaceFragment = new TalkPlaceFragment();//톡방 프레그먼트 아직 xml없음
     FragmentMyMeetHome fragmentMyMeetHome = new FragmentMyMeetHome(); //내 모임 보기 화면
     InterMeetFragment interMeetFragment = new InterMeetFragment();// 관심취미 취미추천화면
-    FragmentMyInter fragmentMyInter = new FragmentMyInter();
+
 
 
 
@@ -112,7 +110,7 @@ public class MainActivity extends AppCompatActivity  {
 
                         break;
                     case R.id.action_love:
-                        transaction.replace(R.id.main_content, fragmentMyInter).commitAllowingStateLoss();
+                        transaction.replace(R.id.main_content, interMeetFragment).commitAllowingStateLoss();
                         break;
                     case R.id.action_plus:
                         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
