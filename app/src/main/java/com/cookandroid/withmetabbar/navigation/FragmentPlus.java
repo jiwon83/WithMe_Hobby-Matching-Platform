@@ -500,7 +500,7 @@ public class FragmentPlus extends Fragment {
 
                         DatabaseReference databaseReference,databaseReference2;
 
-                        databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();
+                        databaseReference= FirebaseDatabase.getInstance().getReference().child("meet").push();//푸시키를 먼저 생성하고
                         String key =databaseReference.getKey();//meet uid
 
                         //2021-09-14 내가 만든 모임 구현
@@ -512,7 +512,7 @@ public class FragmentPlus extends Fragment {
 //                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child("meet").child(newKey).child("hobby");
 
 
-
+                        //그후에 데이터 setValue
                         databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
