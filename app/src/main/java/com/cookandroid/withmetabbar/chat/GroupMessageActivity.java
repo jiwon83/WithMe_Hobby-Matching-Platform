@@ -167,6 +167,7 @@ public class GroupMessageActivity extends AppCompatActivity {
 
     class GroupMessageRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public GroupMessageRecyclerviewAdapter() {
+            setGridView();
             getMessageList();
         }
 
