@@ -229,7 +229,7 @@ public class FragmentPlus extends Fragment {
 
                 etHobby.setText("");//etHobby 초기화
                 Intent i = new Intent(getContext(), FragmentPlusSelectHobby.class);
-                startActivityForResult(i, SELECT_HOBBY);//
+                startActivityForResult(i, SELECT_HOBBY);
 
 //                FragmentPlusSelectHobby fragmentPlusSelectHobby= new FragmentPlusSelectHobby();
 //                ((MainActivity)getActivity()).addFragment(fragmentPlusSelectHobby);

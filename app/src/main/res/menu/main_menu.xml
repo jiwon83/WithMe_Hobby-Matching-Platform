@@ -7,6 +7,12 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/alarm_x"
         android:title="alarm_check" />
+    <item
+        android:id="@+id/map"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/coin"
+        android:title="alarm_check" />
+
 
 
 

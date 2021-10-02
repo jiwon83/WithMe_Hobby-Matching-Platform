@@ -37,7 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCallback,LatLngCallback {
+public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCallback,LatLngCallback,GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mGoogleMap;//create google map object
     LatLng myPosition;//my position
@@ -97,6 +97,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             myPosition = new LatLng(latitude, longitude);
         }
 
+
         getContactsFromFirebase(this);
         //transferStringToAddress("서울시");
         //Log.d("thisLatLng_seul", String.valueOf(thisLatLng)); 잘 받아옴.
@@ -136,7 +137,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         mGoogleMap.setMyLocationEnabled(true);//나의 위치정보찾기버튼활성화여부
 
         //위도경도값 객체 생성
-        LatLng SEOUL = new LatLng(37.56,126.97);
+        LatLng HERE = new LatLng(37.56,126.97);
 
         //마커생성
 //        MarkerOptions markerOptions = new MarkerOptions();//create markerOPtions object
@@ -147,32 +148,15 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 //
 //        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL,10));//put zoom size
 
-        //모든 모임의 마커 생성
-        //address to location
-//        Marker [] markers = new Marker[allMeetList.size()];
-//        //모임리스트의 크기만큼 반복
-//        for(int index=0; index<allMeetList.size(); index++){
-//            MarkerOptions makerOp = new MarkerOptions();
-//            makerOp.position(new LatLng( allLocation.get(index).getLatitude(), allLocation.get(index).getLongitude()))//position= Lating객체, 위경도
-//                    .title(allMeetList.get(index).getTitle())
-//                    .snippet(String.valueOf(allMeetList.get(index).hobbyCate));
-//            markers[index]=mGoogleMap.addMarker(makerOp);
-//            Log.d("makerOp", String.valueOf(makerOp));
-//            //
-//        }
+
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 10));//내위치를 지점으로
+        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+
+
 
         Log.d("allLatLngs_onMapReady", String.valueOf(allLatLngs));//null
-        //Marker [] markers = new Marker[allLatLngs.size()];
-        //모임리스트의 크기만큼 반복
-//        for(int index=0; index<allLatLngs.size(); index++){
-//            MarkerOptions makerOp = new MarkerOptions();
-//            makerOp.position(new LatLng( allLatLngs.get(index).latitude, allLatLngs.get(index).longitude ))//position= Lating객체, 위경도
-//                    .title(allMeetList.get(index).getTitle())
-//                    .snippet(String.valueOf(allMeetList.get(index).hobbyCate));
-//            markers[index]=mGoogleMap.addMarker(makerOp);
-//            Log.d("makerOp", String.valueOf(makerOp));
-//            //
-//        }
+        mGoogleMap.setOnMarkerClickListener(this::onMarkerClick);//this?
+
 
 
         //mGoogleMap.moveCamera(new LatLng(allLocation.get(0).getLatitude(), allLocation.get(0).getLongitude()));
@@ -259,7 +243,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
                     Log.d("allMeetAddress_in_method", String.valueOf(allMeetAddress));
 
-                    // allMeetAddress(String) to Address
+                    // allMeetAddress(String) to LatLng (이전방식)
                     if (allMeetAddress != null){
                         for (int j=0; j<allMeetAddress.size(); j++){
                             Log.d("allMeetAddress_size", String.valueOf(allMeetAddress.size()));//14
@@ -277,6 +261,15 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                         }
 
                     }
+                    //모임정보에서 아예 위도경도정보를 가져오는 방법 : error 앱종료 : java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+//                    for (int i=0; i< allMeetList.size(); i++){
+//                        double lat = allMeetList.get(i).getLatLng().get(0);
+//                        double lng = allMeetList.get(i).getLatLng().get(1);
+//                        LatLng preLatLng = new LatLng(lat, lng);
+//                        allLatLngs.add(preLatLng);
+//                    }
+
+
 
 
                 }
@@ -308,8 +301,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     public void latLangCall(ArrayList<LatLng> list,ArrayList<Meet> meets) {
         globalAllLatLngs=list;//latlangCall에서만 사용하는 globalAllLatLngs에 넣어주기
         globalAllmeet= meets;//latlangCall에서만 사용하는 globalAllmeet에 넣어주기
-        Log.d("globalAllLatLngs_in_callbackmethod", String.valueOf(globalAllLatLngs.size()));//ok//105
-        Log.d("globalAllmeet_in_callback", String.valueOf(globalAllmeet.size()));//ok//14
+        Log.d("globalAllLatLngs_in_callbackmethod", String.valueOf(globalAllLatLngs.size()));//ok//6
+        Log.d("globalAllmeet_in_callback", String.valueOf(globalAllmeet.size()));//ok//3
 
 
         Marker [] markers = new Marker[globalAllLatLngs.size()];
@@ -317,10 +310,14 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         for(int index=0; index<globalAllLatLngs.size(); index++){
             MarkerOptions makerOp = new MarkerOptions();
             try {
-                makerOp.position(new LatLng( globalAllLatLngs.get(index).latitude, globalAllLatLngs.get(index).longitude ));//position= Lating객체, 위경도
-                //.title(globalAllmeet.get(index).getTitle())
-                //.snippet(globalAllmeet.get(index).getHobbyCate().toString());
+                makerOp.position(new LatLng( globalAllLatLngs.get(index).latitude, globalAllLatLngs.get(index).longitude ))//position= Lating객체, 위경도
+                .title(globalAllmeet.get(index).getTitle())
+//                        .snippet(globalAllmeet.get(index).getMid());
+                .snippet(globalAllmeet.get(index).getHobbyCate().toString());
+
+
                 markers[index]=mGoogleMap.addMarker(makerOp);
+                markers[index].setTag(globalAllmeet.get(index).getMid());
                 Log.d("makerOp", String.valueOf(makerOp));
             }catch (Exception e){
                 //expect null value
@@ -328,5 +325,15 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
 
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(@NonNull @NotNull Marker marker) {
+        String mid = (String)marker.getTag();
+        Log.d("marker_of_mid",mid);//ok
+        //mid만 상세화면으로 전달하던지
+        //여기서 데이터를 조회하던지
+
+        return false;
     }
 }

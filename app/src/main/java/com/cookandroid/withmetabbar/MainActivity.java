@@ -19,14 +19,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cookandroid.withmetabbar.chat.ChatFragment;
+import com.cookandroid.withmetabbar.googlemap.GoogleMapActivity;
 import com.cookandroid.withmetabbar.model.Member;
 import com.cookandroid.withmetabbar.navigation.AlarmFragment;
 import com.cookandroid.withmetabbar.navigation.CoinMainFragment;
 import com.cookandroid.withmetabbar.navigation.FragmentMyMeetHome;
 import com.cookandroid.withmetabbar.navigation.FragmentPlus;
+import com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;
 import com.cookandroid.withmetabbar.navigation.InterMeetFragment;
 import com.cookandroid.withmetabbar.navigation.MyPageFragment;
 import com.cookandroid.withmetabbar.navigation.PlaceCheckFragment;
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
 
         setContentView(R.layout.activity_main);
@@ -144,6 +149,8 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
+
+
     }
 
 
@@ -165,6 +172,10 @@ public class MainActivity extends AppCompatActivity  {
             case R.id.action_alarm:
                 Intent intent1 = new Intent(MainActivity.this, MainActivity4.class);
                 startActivity(intent1);
+            case R.id.map:
+                Intent intent2 = new Intent(MainActivity.this, GoogleMapActivity.class);
+                startActivity(intent2);
+                finish();
 
             default:
                 return super.onOptionsItemSelected(item);

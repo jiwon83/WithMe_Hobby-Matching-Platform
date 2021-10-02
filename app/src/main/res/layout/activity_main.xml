@@ -25,7 +25,9 @@
                 android:src="@drawable/logo_x"><!--logo-->
             </ImageView>
 
+
         </RelativeLayout>
+
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:id="@+id/toolbar_division"

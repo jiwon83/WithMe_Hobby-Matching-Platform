@@ -31,7 +31,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".googlemap.GoogleMapActivity">
 
-
         </activity>
 
         <meta-data
@@ -46,7 +45,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".MainActivityWebView"></activity>
         <activity android:name=".WebViewActivity" />
