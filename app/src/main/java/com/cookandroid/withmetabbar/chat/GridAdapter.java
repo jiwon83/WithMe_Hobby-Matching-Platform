@@ -15,8 +15,7 @@ import com.cookandroid.withmetabbar.R;
 
 import java.util.List;
 
-public class MacroAdapter extends BaseAdapter {
-
+public class GridAdapter extends BaseAdapter {
     private List<String> macro;
 
 
@@ -24,7 +23,7 @@ public class MacroAdapter extends BaseAdapter {
 
     private int selectedPos = 0;
 
-    public MacroAdapter(Context context, List<String> macro){
+    public GridAdapter(Context context, List<String> macro){
         this.macro = macro;
         this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
