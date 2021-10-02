@@ -39,6 +39,7 @@ import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.ChatModel;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.MeetInfo;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -98,6 +99,7 @@ public class FragmentPlus extends Fragment {
     RadioGroup gender_plus;
     String hobbyes="";
     StringBuffer stringBuffer = new StringBuffer();
+    private Geocoder geocoder;
 
     //취미목록 2021-09-27
     @Override
@@ -148,7 +150,7 @@ public class FragmentPlus extends Fragment {
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getSupportActionBar().setIcon(R.drawable.ic_launcher);
         //setTitle("레이아웃 선택");
-
+        geocoder= new Geocoder(getContext());
 
 
 
@@ -479,6 +481,11 @@ public class FragmentPlus extends Fragment {
                         meet.hobbyCate = new ArrayList<>();
                         meet.place = et_locate.getText().toString();
 
+                        meet.latLng =  new ArrayList<>();
+                        LatLng preLatLng  =transferStringToAddress(et_locate.getText().toString());
+                        meet.latLng.add(0,preLatLng.latitude );
+                        meet.latLng.add(1,preLatLng.longitude );
+
 
                         int totalHobbyCount2 = list.size();
                         for (int index = 0; index < totalHobbyCount2; index++) {
@@ -574,6 +581,42 @@ public class FragmentPlus extends Fragment {
                 Toast.makeText(getContext(),"image upload success", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+    public LatLng transferStringToAddress(String str) {
+        List<Address> longlatList = null; //위경도임시적으로저장할list 10개의 비슷한 값들을 저장
+        LatLng latLng = null;
+
+        //String str = "경기도 화성시 융건로99 풍성신미주아파트";
+        //allMeetAddress
+
+        try {
+            longlatList = (ArrayList<Address>) geocoder.getFromLocationName(str, 1);//maxResults : 10 -> 1  1개만 검색?
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+
+        }
+
+
+        if (longlatList != null) {
+            if (longlatList.size() == 0) {
+                Log.d("longlatList=0해당되는주소정보없다", String.valueOf(longlatList));
+
+
+            } else {
+                double lat = longlatList.get(0).getLatitude();
+                double lng = longlatList.get(0).getLongitude();
+                latLng = new LatLng(lat, lng);
+                //thisLatLng = new LatLng(lat, lng);
+                //addressLogLat = longlatList.get(0);//10개 중 가장 정확한 첫번째 값
+                //return addressLogLat;
+
+            }
+        }
+
+        return latLng;
 
     }
 

@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -136,42 +137,81 @@ public class MainActivityHome extends Fragment {
             @Override
             public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
                 //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
+                try {
+                    arrayList.clear(); //기존 배열리스트가 존재하지 않게 초기화
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
 
-                    Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
 
+                        Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
 
-                    arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
-                    Log.d("arrayList", String.valueOf(arrayList));
+                        //2021-10-02
+//                        if (snapshot.exists()){
+//
+//                            for (DataSnapshot snapshotLatLng : snapshot.getChildren()){
+//
+//                                LatLng latLng =snapshotLatLng.child("placeLatLng").getValue(LatLng.class);
+//                                Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
+//                                meet.placeLatLng =latLng;
+//                                Log.d("meet_placeLatLng", String.valueOf(meet.placeLatLng));
+//                                arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
+//                                Log.d("arrayList", String.valueOf(arrayList));
+//
+//                                arrayList_copy.addAll(arrayList);//arrayList_copy에 복사
+//
+//                                //단어 검색
+//                                //2021-08-16 검색기능 구현
+//                                // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
+//                                if (meet.title!=null){
+//                                    list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
+//                                    //취미목록 검색 리스트에 넣기 2021-09-13
+//                                    int totalHobbyCount2 = meet.hobbyCate.size();
+//                                    for (int index = 0; index < totalHobbyCount2; index++) {
+//                                        list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
+//                                    }
+//
+//                                }
+//
+//
+//                            }
+//
+//
+//                        }
 
-                    arrayList_copy.addAll(arrayList);//arrayList_copy에 복사
+                        arrayList.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
+                        Log.d("arrayList", String.valueOf(arrayList));
 
-                    //단어 검색
-                    //2021-08-16 검색기능 구현
-                    // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
-                    if (meet.title!=null){
-                        list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
-                        //취미목록 검색 리스트에 넣기 2021-09-13
-                        int totalHobbyCount2 = meet.hobbyCate.size();
-                        for (int index = 0; index < totalHobbyCount2; index++) {
-                            list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
+                        arrayList_copy.addAll(arrayList);//arrayList_copy에 복사
+
+                        //단어 검색
+                        //2021-08-16 검색기능 구현
+                        // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
+                        if (meet.title!=null){
+                            list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
+                            //취미목록 검색 리스트에 넣기 2021-09-13
+                            int totalHobbyCount2 = meet.hobbyCate.size();
+                            for (int index = 0; index < totalHobbyCount2; index++) {
+                                list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
+                            }
+
                         }
-
                     }
+
+                    //2021-08-16 검색기능 구현
+                    arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
+
+                    customAdapter= new CustomAdapter(arrayList,getContext());
+                    recyclerView.setAdapter(customAdapter);
+
+
+                    //test
+                    for (int i=0;i<arrayList_copy.size();i++){
+                        Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getTitle()));
+                    }
+                }catch (Exception e){
+                    Toast.makeText(getContext(),"load error",Toast.LENGTH_SHORT).show();
+                    Log.d("error:",e.getMessage());
                 }
 
-                //2021-08-16 검색기능 구현
-                arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
-
-                customAdapter= new CustomAdapter(arrayList,getContext());
-                recyclerView.setAdapter(customAdapter);
-
-
-                //test
-                for (int i=0;i<arrayList_copy.size();i++){
-                    Log.d("arrayList_copy vaule", String.valueOf(arrayList_copy.get(i).getTitle()));
-                }
             }
 
             @Override

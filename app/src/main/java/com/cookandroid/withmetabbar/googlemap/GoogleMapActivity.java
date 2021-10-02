@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -15,11 +17,13 @@ import android.widget.Toast;
 import com.cookandroid.withmetabbar.CustomAdapter;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.Meet;
+import com.cookandroid.withmetabbar.navigation.OnItemClick;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,9 +33,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCallback,LatLngCallback {
 
     private GoogleMap mGoogleMap;//create google map object
     LatLng myPosition;//my position
@@ -40,13 +46,27 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
     private FirebaseDatabase database;//database
     private DatabaseReference databaseReference;//dataref
-    private ArrayList<Meet> allMeetList;//list all of meet
+    private ArrayList<Meet> allMeetList= new ArrayList<>();//list all of meet
+    //private ArrayList<LatLng> la
+    final Geocoder geocoder = new Geocoder(this);
+    private ArrayList<String> allMeetAddress;
+    private ArrayList<Address> addressesLongLat =null;
+    public ArrayList<Location> allLocation=new ArrayList<>();
+    private static ArrayList<LatLng> allLatLngs; //= new ArrayList<>();
+    Address addressLogLat = null;
+    LatLng thisLatLng = null;
+    ArrayList<Marker> markers;
+    private static ArrayList<LatLng> globalAllLatLngs;
+    private static ArrayList<Meet> globalAllmeet;
+    LatLngCallback mLatLngCallback;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_map);
+
+        allLatLngs= new ArrayList<>();
 
         //view googlemap in fragment
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager()
@@ -77,6 +97,24 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             myPosition = new LatLng(latitude, longitude);
         }
 
+        getContactsFromFirebase(this);
+        //transferStringToAddress("서울시");
+        //Log.d("thisLatLng_seul", String.valueOf(thisLatLng)); 잘 받아옴.
+        //맵에 마커 표시
+        //getMeetDataFromFirebase();//meet
+
+
+        Log.d("globalallLatLngs_out_method", String.valueOf(globalAllLatLngs));//null
+
+        Log.d("afterMethod_allMeetList", String.valueOf(allMeetList));//null
+
+        Log.d("allMeetAddress_out_method", String.valueOf(allMeetAddress));//null
+
+        //allLatLngs= new ArrayList<>();
+
+
+        //Log.d("transferStringToAddress>test", String.valueOf(transferStringToAddress(allMeetAddress.get(0))));
+
 
     }
 
@@ -101,17 +139,105 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         LatLng SEOUL = new LatLng(37.56,126.97);
 
         //마커생성
-        MarkerOptions markerOptions = new MarkerOptions();//create markerOPtions object
-        markerOptions.position(SEOUL);
-        markerOptions.title("서울");
-        markerOptions.snippet("한국의 수도");//sinppet : 작은 설명
-        mGoogleMap.addMarker(markerOptions);
+//        MarkerOptions markerOptions = new MarkerOptions();//create markerOPtions object
+//        markerOptions.position(SEOUL);
+//        markerOptions.title("서울");
+//        markerOptions.snippet("한국의 수도");//sinppet : 작은 설명
+//        mGoogleMap.addMarker(markerOptions);
+//
+//        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL,10));//put zoom size
 
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL,10));//put zoom size
+        //모든 모임의 마커 생성
+        //address to location
+//        Marker [] markers = new Marker[allMeetList.size()];
+//        //모임리스트의 크기만큼 반복
+//        for(int index=0; index<allMeetList.size(); index++){
+//            MarkerOptions makerOp = new MarkerOptions();
+//            makerOp.position(new LatLng( allLocation.get(index).getLatitude(), allLocation.get(index).getLongitude()))//position= Lating객체, 위경도
+//                    .title(allMeetList.get(index).getTitle())
+//                    .snippet(String.valueOf(allMeetList.get(index).hobbyCate));
+//            markers[index]=mGoogleMap.addMarker(makerOp);
+//            Log.d("makerOp", String.valueOf(makerOp));
+//            //
+//        }
+
+        Log.d("allLatLngs_onMapReady", String.valueOf(allLatLngs));//null
+        //Marker [] markers = new Marker[allLatLngs.size()];
+        //모임리스트의 크기만큼 반복
+//        for(int index=0; index<allLatLngs.size(); index++){
+//            MarkerOptions makerOp = new MarkerOptions();
+//            makerOp.position(new LatLng( allLatLngs.get(index).latitude, allLatLngs.get(index).longitude ))//position= Lating객체, 위경도
+//                    .title(allMeetList.get(index).getTitle())
+//                    .snippet(String.valueOf(allMeetList.get(index).hobbyCate));
+//            markers[index]=mGoogleMap.addMarker(makerOp);
+//            Log.d("makerOp", String.valueOf(makerOp));
+//            //
+//        }
+
+
+        //mGoogleMap.moveCamera(new LatLng(allLocation.get(0).getLatitude(), allLocation.get(0).getLongitude()));
+
+        //
+        // for loop를 통한 n개의 마커 생성
+//        for (int idx = 0; idx < 10; idx++) {
+//            // 1. 마커 옵션 설정 (만드는 과정)
+//            MarkerOptions makerOptions = new MarkerOptions();
+//            makerOptions // LatLng에 대한 어레이를 만들어서 이용할 수도 있다.
+//                    .position(new LatLng(37.52487 + idx, 126.92723))
+//                    .title("마커" + idx); // 타이틀.
+//
+//            // 2. 마커 생성 (마커를 나타냄)
+//            mMap.addMarker(makerOptions);
+//        }
 
 
     }
-    public void getMeetDataFromFirebase(){
+
+
+    //주소 ->위경도 string을 주면 그에 대항하는 위경도 값을 가져오는 역할
+    //geocoder 이용
+    public LatLng transferStringToAddress(String str) {
+        List<Address> longlatList = null; //위경도임시적으로저장할list 10개의 비슷한 값들을 저장
+        LatLng latLng = null;
+
+        //String str = "경기도 화성시 융건로99 풍성신미주아파트";
+        //allMeetAddress
+
+        try {
+            longlatList = (ArrayList<Address>) geocoder.getFromLocationName(str, 1);//maxResults : 10 -> 1  1개만 검색?
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+
+        }
+
+
+        if (longlatList != null) {
+            if (longlatList.size() == 0) {
+                Log.d("longlatList=0해당되는주소정보없다", String.valueOf(longlatList));
+
+
+            } else {
+                double lat = longlatList.get(0).getLatitude();
+                double lng = longlatList.get(0).getLongitude();
+                latLng = new LatLng(lat, lng);
+                //thisLatLng = new LatLng(lat, lng);
+                //addressLogLat = longlatList.get(0);//10개 중 가장 정확한 첫번째 값
+                //return addressLogLat;
+
+            }
+        }
+        Log.d("addressLogLat_in_method", String.valueOf(addressLogLat));
+        //return addressLogLat; //return Address addressLogLat;
+        Log.d("thisLatLng_in_method", String.valueOf(thisLatLng));
+        return latLng;
+
+    }
+    public void getContactsFromFirebase(final LatLngCallback myCallback){
+        LatLngCallback latLngCallback;
+        latLngCallback=myCallback;
+        allMeetList= new ArrayList<>();
         database= FirebaseDatabase.getInstance();
         databaseReference=database.getReference("meet");//DB Table Connect
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -123,28 +249,40 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
                     Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
                     allMeetList.add(meet);
+                    Log.d("allMeetList_getMeetDataFromFirebase", String.valueOf(allMeetList));
+
+                    //meet의 장소 allMeetAddress 에 넣기
+                    allMeetAddress= new ArrayList<>();
+                    for (int i =0; i< allMeetList.size(); i++){
+                        allMeetAddress.add(allMeetList.get(i).getPlace());
+                    }
+
+                    Log.d("allMeetAddress_in_method", String.valueOf(allMeetAddress));
+
+                    // allMeetAddress(String) to Address
+                    if (allMeetAddress != null){
+                        for (int j=0; j<allMeetAddress.size(); j++){
+                            Log.d("allMeetAddress_size", String.valueOf(allMeetAddress.size()));//14
+                            LatLng latLng1= transferStringToAddress(allMeetAddress.get(j)); //각각의 주소를 Address객체(Address addressLogLat)로 받는다.
+                            Log.d("latLng1_check", String.valueOf(latLng1));
+                            Log.d("addressLogLat_out_method", String.valueOf(addressLogLat)); //ok
+
+                            Log.d("thisLatLng_out_method", String.valueOf(thisLatLng));//ok lat/lng: (37.4831816,127.06186590000002)
+                            //LatLng객체를 다 갯수로 셀 수 없기 때무에 받아온 각각의 LatLng객체를 배열에 담아준다. LatLng 배열 객체는 전역변수여야 한다.
+                            allLatLngs.add(latLng1);
+                            Log.d("allLatLngs_size_before", String.valueOf(allLatLngs.size()));//105
+                            //double 형으로 lat long값 받기
+                            //double lat = addressesLongLat.latitde;
+
+                        }
+
+                    }
 
 
-
-                    //단어 검색
-                    //2021-08-16 검색기능 구현
-//                    // meet의 값이 null값이 아니면, list_search_recycle이라는 리스트에 넣어라.
-//                    if (meet.title!=null){
-//                        list_search_recycle.add(meet.title);//list_search_recycle에 title값 저장
-//                        //취미목록 검색 리스트에 넣기 2021-09-13
-//                        int totalHobbyCount2 = meet.hobbyCate.size();
-//                        for (int index = 0; index < totalHobbyCount2; index++) {
-//                            list_search_recycle.add(meet.hobbyCate.get(index)); //hobbyCate의 배열값을 넣는다.
-//                        }
-//
-//                    }
                 }
+                Log.d("allLatLngs_in_method", String.valueOf(allLatLngs));//
+                latLngCallback.latLangCall(allLatLngs,allMeetList);//LatingCallback interface 객체의 메서드에 값 집어 넣기
 
-                //2021-08-16 검색기능 구현
-//                arrayList_search_recycle.addAll(list_search_recycle);//제목으로 모임검색 구현,복사해준다.
-//
-//                customAdapter= new CustomAdapter(arrayList,getContext());
-//                recyclerView.setAdapter(customAdapter);
             }
 
             @Override
@@ -155,5 +293,40 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
             }
         });
+//        getContactsFromFirebase(new LatLngCallback() {
+//            @Override
+//            public void latLangCall(ArrayList<LatLng> list) {
+//                globalAllLatLngs=list;
+//            }
+//        });
+
+
+    }
+
+
+    @Override
+    public void latLangCall(ArrayList<LatLng> list,ArrayList<Meet> meets) {
+        globalAllLatLngs=list;//latlangCall에서만 사용하는 globalAllLatLngs에 넣어주기
+        globalAllmeet= meets;//latlangCall에서만 사용하는 globalAllmeet에 넣어주기
+        Log.d("globalAllLatLngs_in_callbackmethod", String.valueOf(globalAllLatLngs.size()));//ok//105
+        Log.d("globalAllmeet_in_callback", String.valueOf(globalAllmeet.size()));//ok//14
+
+
+        Marker [] markers = new Marker[globalAllLatLngs.size()];
+        //모임리스트의 크기만큼 반복
+        for(int index=0; index<globalAllLatLngs.size(); index++){
+            MarkerOptions makerOp = new MarkerOptions();
+            try {
+                makerOp.position(new LatLng( globalAllLatLngs.get(index).latitude, globalAllLatLngs.get(index).longitude ));//position= Lating객체, 위경도
+                //.title(globalAllmeet.get(index).getTitle())
+                //.snippet(globalAllmeet.get(index).getHobbyCate().toString());
+                markers[index]=mGoogleMap.addMarker(makerOp);
+                Log.d("makerOp", String.valueOf(makerOp));
+            }catch (Exception e){
+                //expect null value
+            }
+
+
+        }
     }
 }

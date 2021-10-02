@@ -1,7 +1,10 @@
 package com.cookandroid.withmetabbar.model;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Meet {
     public String mid;
@@ -14,11 +17,13 @@ public class Meet {
     public int numMember;
     public int meetGen;//남 1, 여 2, 무관 0
     public String place; //장소
+    //public LatLng placeLatLng;//장소위도경도정보
     public String content;
 
     //public String hash;
     //public ArrayList<Hobby> hobbyCate;
     public ArrayList<String> hobbyCate = new ArrayList<>();
+    public List<Double> latLng= new ArrayList<>();
 
 
     public Meet() {
@@ -131,5 +136,13 @@ public class Meet {
 
     public void setHobbyCate(ArrayList<String> hobbyCate) {
         this.hobbyCate = hobbyCate;
+    }
+
+    public List<Double> getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(List<Double> latLng) {
+        this.latLng = latLng;
     }
 }
