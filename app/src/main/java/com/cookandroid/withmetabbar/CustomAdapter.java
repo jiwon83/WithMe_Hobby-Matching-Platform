@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -21,9 +23,12 @@ import android.widget.Toast;
 import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.cookandroid.withmetabbar.certify.JoinStartFragment;
+import com.cookandroid.withmetabbar.certify.MainActivity2;
 import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
 import com.cookandroid.withmetabbar.model.ChatModel;
 import com.cookandroid.withmetabbar.model.Meet;
@@ -46,10 +51,18 @@ import java.util.Map;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
     private final ArrayList<com.cookandroid.withmetabbar.model.Meet> arrayList;
-    private AlertDialog dialog;
+    private AlertDialog dialog,dialog2;
+    private CustomDialog customDialog;
     private final Context context;
     private int userCount=1;
     private Member memberObj = new Member(); // 채팅방 입장을 위한 맴버 객체 생성
+    private Button button_check;//캘린더
+    private View v_d;
+    private TextView tv1, tv2;
+    private EditText et1, et2;
+
+
+
 
     String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();//채팅방 구현
 
@@ -63,6 +76,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_meet, parent, false);
+
         CustomViewHolder holder = new CustomViewHolder(view);
         return holder;
     }
@@ -110,21 +124,69 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
 
 
-        //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성
+
+
+
+
+        //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성\
         holder.button_check.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle(("제목"));
+
+
+                //View.inflate 이용하여 그 뷰에 해당하는 것을 '구현/실행'해주고,
+                v_d = (View) View.inflate(view.getContext(), R.layout.cutomdialog, null);
+                //실행한 것을 setView 함수로 전달.
+                builder.setView(v_d);
+
+                v_d.findViewById(R.id.cu_meetTitle);
+                v_d.findViewById(R.id.cu_meetDate);
+                v_d.findViewById(R.id.cu_meetAge);
+                v_d.findViewById(R.id.cu_meetGen);
+                v_d.findViewById(R.id.cu_numMember);
+                v_d.findViewById(R.id.cu_place);
+                v_d.findViewById(R.id.cu_content);
+                v_d.findViewById(R.id.button_go);
+
+
+//                builder.setButton("입력",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                                //dialog라는 레이아웃이 실제로 생성(inflate)되고 난 다음에, v_d라는 애를 통해서,
+//                                //그 안에 속한 것 중에서 찾아오는 것이 가능하다.
+//                                //setPositiveButton이 눌리게 되었을 때, dialog에 해당하는 우리가 만든 View (=v_d)로부터 et를 찾아옴
+//                                et1 = (EditText) v_d.findViewById(R.id.et_mail);
+//                                et2 = (EditText) v_d.findViewById(R.id.et_name);
+//
+//                                //사용자에게 입력받은 et1, et2를 tv1, tv2에 표시
+//                                tv1.setText(et1.getText());
+//                                tv2.setText(et2.getText());
+//
+//                            }
+//                        });
+
+                builder.show();
+
+
+
+
+
+
 
             }
         });
 
 
 
-
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
                 try{
 
@@ -184,6 +246,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                                     .child("userCount").setValue(userCount);
 
                                             intent.putExtra("destinationRoom",arrayList.get(position).mid);// 채팅방을 띄우기 위한 chatroom uid 전송.
+
+
 
                                             ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(),R.anim.fromright,R.anim.toleft);
                                             view.getContext().startActivity(intent,activityOptions.toBundle());
@@ -247,7 +311,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
 
 
-    }
+
+
+
+
+
+        }
+
+
+
+
+
 
 
     @Override
@@ -261,6 +335,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place, tv_hobbyCate;
         ImageView img_meetDate, img_place;
         Button button_check;
+
+
+
+
 
 
         public CustomViewHolder(@NonNull View itemView) {
@@ -307,5 +385,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
 
         }
-    }
+
+
+
+
+}
+
+
+
+
+
 }
