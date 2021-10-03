@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/et_address"
         android:textSize="60px"
-        android:hint="주소검색: 클릭하세요.">
+        android:hint="주소검색(터치해주세요)">
 
     </EditText>
     <EditText

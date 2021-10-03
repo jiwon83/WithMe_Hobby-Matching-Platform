@@ -36,8 +36,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:textColor="@color/Orange"
+                    android:layout_weight="8"
+                    android:textSize="50px"
+                    android:textColor="@color/none"
                     android:text="이런 모임은 어떠세요?"/>
 
 
@@ -47,13 +48,14 @@
                     android:id="@+id/btn_time"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_weight="6"
+                    android:layout_weight="2"
                     android:layout_marginLeft="170dp"
-                    android:background="#00ff0000"
+                    android:background="@drawable/calendar"
                     android:textColor="@color/none"
 
 
-                    android:text="날짜로 검색" />
+                    android:text="" />
+
             </LinearLayout>
 
             <LinearLayout
