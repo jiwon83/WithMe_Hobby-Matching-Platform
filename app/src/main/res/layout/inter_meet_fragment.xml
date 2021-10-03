@@ -33,18 +33,27 @@
                 android:orientation="horizontal">
 
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:textColor="@color/Orange"
+                    android:text="이런 모임은 어떠세요?"/>
+
+
 
 
                 <Button
                     android:id="@+id/btn_time"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/calendar"
-                    android:backgroundTint="@color/yellow"
+                    android:layout_weight="6"
+                    android:layout_marginLeft="170dp"
+                    android:background="#00ff0000"
+                    android:textColor="@color/none"
 
 
-                    android:text="" />
+                    android:text="날짜로 검색" />
             </LinearLayout>
 
             <LinearLayout
@@ -70,10 +79,7 @@
                 >
             </ListView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="이런 모임은 어떠세요?"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"

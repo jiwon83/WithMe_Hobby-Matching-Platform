@@ -1,20 +1,26 @@
 package com.cookandroid.withmetabbar;
 
+import android.app.Application;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cookandroid.withmetabbar.certify.JoinStartFragment;
 import com.cookandroid.withmetabbar.model.Hobby;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
@@ -53,6 +60,7 @@ public class MainActivityHome extends Fragment {
     private ArrayList<Meet> arrayList;//검색 후에도 recycler view에 올라갈 진짜 meet 데이터들
     private ArrayList<Meet> arrayList_copy; //recycler view에 올라갈 전체 meet 데이터들
     private CustomAdapter customAdapter;
+    private Dialog popuping;
 
     private FirebaseDatabase database;
     private DatabaseReference databaseReference,databaseReference2;
@@ -63,8 +71,8 @@ public class MainActivityHome extends Fragment {
     private SearchAdapter searchAdapter;
     private EditText editSearch;//검색어를 입력할 Input창
     private ListView listView;//검색을 보여줄 리스변수
-    private Button btn_time;//캘린더
-    private DatePickerDialog datePickerDialog;
+    private Button btn_time,button_check;//캘린더
+    private CustomDialog cd;
 
 
     //2021-08-16 검색기능 구현
@@ -93,6 +101,19 @@ public class MainActivityHome extends Fragment {
         arrayList_copy = new ArrayList<>();
         Button btn_search= vGroup.findViewById(R.id.btn_search);
         btn_time = vGroup.findViewById(R.id.btn_time);
+        //button_check = vGroup.findViewById(R.id.button_check);
+
+
+
+
+
+
+
+
+
+
+
+
 
         Calendar myCalendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
@@ -502,6 +523,10 @@ public class MainActivityHome extends Fragment {
 
 
     }
+
+
+
+
 
 
 }
