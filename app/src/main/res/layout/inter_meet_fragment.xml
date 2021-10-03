@@ -37,7 +37,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="8"
-                    android:textSize="50px"
+                    android:textSize="40px"
                     android:textColor="@color/none"
                     android:text="이런 모임은 어떠세요?"/>
 
