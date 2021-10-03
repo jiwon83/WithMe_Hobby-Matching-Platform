@@ -125,31 +125,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.tv_place.setText(" "+ arrayList.get(position).getPlace());
         holder.tv_hobbyCate.setText(""+arrayList.get(position).getHobbyCate());
 
-
-
-
-
-
-
-
-        //imageView클릭하면 MessageActivity 생성, Firebase dataBase 채팅방 데이터 생성\
+        //더보기 버튼
         holder.button_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View OnCickview) {
 
-
-
-
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(OnCickview.getContext());
                 builder.setTitle((" "+ arrayList.get(position).getTitle()));
-
 
                 //View.inflate 이용하여 그 뷰에 해당하는 것을 '구현/실행'해주고,
                 v_d = (View) View.inflate(OnCickview.getContext(), R.layout.cutomdialog, null);
                 //실행한 것을 setView 함수로 전달.
                 builder.setView(v_d);
-
 
                 ImageView cu_iv_meet=v_d.findViewById(R.id.iv_meet);
                 TextView cu_meetDate = v_d.findViewById(R.id.cu_meetDate);
@@ -167,8 +154,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                         .override(150,200)
                         .into(cu_iv_meet);
 
-                //Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
-                //Log.d("holder.itemView", String.valueOf(holder.itemView));
 
                 String myFormat = "yyyy/ MM/ dd/ HH:mm";    // 출력형식   2018/11/28
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.
@@ -191,7 +176,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                     cu_meetGen.setText("무관");
                     cu_meetGen.setTextColor(Color.parseColor("#555353"));
                 }
-                //holder.tv_numMember.setText(" "+ arrayList.get(position).getNumMember());
                 cu_numMember.setText(""+ arrayList.get(position).getNumMember());
                 cu_place.setText(" "+ arrayList.get(position).getPlace());
                 cu_content.setText(""+arrayList.get(position).getHobbyCate());
@@ -344,34 +328,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                 }
                             });
 
-
-
-
-
                         }catch (Exception e){
 
                         }
                     }
                 });
-
-
-//                builder.setButton("입력",
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                                //dialog라는 레이아웃이 실제로 생성(inflate)되고 난 다음에, v_d라는 애를 통해서,
-//                                //그 안에 속한 것 중에서 찾아오는 것이 가능하다.
-//                                //setPositiveButton이 눌리게 되었을 때, dialog에 해당하는 우리가 만든 View (=v_d)로부터 et를 찾아옴
-//                                et1 = (EditText) v_d.findViewById(R.id.et_mail);
-//                                et2 = (EditText) v_d.findViewById(R.id.et_name);
-//
-//                                //사용자에게 입력받은 et1, et2를 tv1, tv2에 표시
-//                                tv1.setText(et1.getText());
-//                                tv2.setText(et2.getText());
-//
-//                            }
-//                        });
 
                 builder.show();
 

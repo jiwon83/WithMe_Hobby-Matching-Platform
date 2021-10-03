@@ -346,6 +346,7 @@ public class MainActivityHome extends Fragment {
             // 리스트의 모든 데이터를 검색
             for (int i=0;i<arrayList_copy.size();i++){
 
+                //제목으로 검색
                 try {
                     // arraylist_search의 모든 데이터에 입력받은 단어(searchText)가 포함되어 있으면 true를 반환
                     if(arrayList_copy.get(i).getTitle().toLowerCase().contains(searchText)){
@@ -359,6 +360,7 @@ public class MainActivityHome extends Fragment {
                 }catch (NullPointerException exception){
 
                 }
+                //취미목록으로 검색
                 try {
                     // 취미목록으로 검색클릭하면 recyclerview에 반영
                     for (int j=0; j<arrayList_copy.get(i).getHobbyCate().size(); j++){
@@ -374,8 +376,17 @@ public class MainActivityHome extends Fragment {
                 }catch (NullPointerException exception){
 
                 }
+                //장소로 검색
+                try {
+                    // arraylist_search의 모든 데이터에 입력받은 단어(searchText)가 포함되어 있으면 true를 반환
+                    if(arrayList_copy.get(i).getPlace().toLowerCase().contains(searchText)){
+                        if (UniqueCheckAndAdd(arrayList,arrayList_copy.get(i)) == true){
+                            arrayList.add(arrayList_copy.get(i));//검색된 데이터를 리스트에 추가
+                        }
+                    }
+                }catch (NullPointerException exception){
 
-
+                }
 
             }//for
         }//else
@@ -463,7 +474,7 @@ public class MainActivityHome extends Fragment {
         customAdapter.notifyDataSetChanged();
 
     }
-    // 유저가 선택한 취미카테고리인 모임정보만 보여준다.
+    // 날짜별 모임정보만 보여준다.
     private void filterDateInMeetToRecyclerView() {
 
         arrayList.clear();//되랏, 수박 등 실제 meet에서 가져온 정보들 list_search와 동일
@@ -475,7 +486,6 @@ public class MainActivityHome extends Fragment {
 //        selectDate.setDate(14);
 //        selectDate.setMonth(8);
 //        selectDate.setYear(121);
-
 
         //방법 2 날짜 일치 확인을 위한 데이터 포멧 설정
         String pattern = "yyyy-MM-dd";
@@ -520,13 +530,7 @@ public class MainActivityHome extends Fragment {
 
     private void allInRecyclerView(){
 
-
-
     }
-
-
-
-
 
 
 }

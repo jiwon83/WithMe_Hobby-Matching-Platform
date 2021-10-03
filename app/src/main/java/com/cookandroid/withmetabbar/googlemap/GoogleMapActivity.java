@@ -337,6 +337,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
 
         }
+        //Log.d("", markers.length);
     }
 
     public boolean UniqueMarkerCheck(Marker[] markers, LatLng latLng){
