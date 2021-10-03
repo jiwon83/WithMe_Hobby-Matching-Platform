@@ -55,9 +55,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
+                        android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:text="방 제목"
-                        android:layout_marginLeft="20dp"
                         android:textSize="40px" />
 
                     <EditText
@@ -65,11 +65,11 @@
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginRight="20dp"
                         android:layout_weight="1"
                         android:ems="10"
                         android:gravity="center"
                         android:inputType="textPersonName"
-                        android:layout_marginRight="20dp"
                         android:text="" />
 
                 </LinearLayout>
@@ -87,20 +87,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:text="해시태그"
-                    android:layout_marginLeft="20dp"
                     android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etHash"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:layout_marginRight="20dp"
                     android:text="" />
 
             </LinearLayout>
@@ -116,23 +116,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:text="취미분야"
-                    android:layout_marginLeft="20dp"
                     android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etHobby"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
-                    android:inputType="textPersonName"
-                    android:layout_marginRight="20dp"
-                    android:textSize="40px"
                     android:hint="클릭하세요"
-                    android:text="" />
+                    android:inputType="textPersonName"
+                    android:text=""
+                    android:textSize="40px" />
 
             </LinearLayout>
 
@@ -147,9 +147,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:text="날짜/시간"
-                    android:layout_marginLeft="20dp"
                     android:textSize="40px" />
 
                 <EditText
@@ -171,16 +171,16 @@
                     android:id="@+id/Time"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
                     android:clickable="true"
                     android:editable="false"
-                    android:focusable="false"
-                    android:layout_weight="1"
                     android:ems="10"
+                    android:focusable="false"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:layout_marginRight="20dp"
-                    android:textSize="40px"
-                    android:text="Time" />
+                    android:text="Time"
+                    android:textSize="40px" />
 
             </LinearLayout>
 
@@ -195,12 +195,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:text="나이"
-                    android:layout_marginLeft="20dp"
                     android:textSize="40px" />
-
-
 
 
                 <NumberPicker
@@ -223,14 +221,12 @@
                     android:id="@+id/picker2"
                     android:layout_width="20dp"
                     android:layout_height="60dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:layout_marginRight="20dp"
 
 
                     />
-
-
 
 
             </LinearLayout>
@@ -246,9 +242,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:text="모집인원"
-                    android:layout_marginLeft="20dp"
                     android:textSize="40px" />
 
                 <EditText
@@ -277,8 +273,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="성별"
                     android:layout_marginLeft="20dp"
+                    android:text="성별"
                     android:textSize="40px" />
 
                 <RadioGroup
@@ -288,29 +284,29 @@
                     android:layout_marginLeft="80dp"
                     android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/check_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/yellow"
-                    android:text="여" />
+                    <RadioButton
+                        android:id="@+id/check_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/yellow"
+                        android:text="여" />
 
-                <RadioButton
-                    android:id="@+id/check_male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/yellow"
-                    android:layout_weight="1"
-                    android:text="남" />
+                    <RadioButton
+                        android:id="@+id/check_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/yellow"
+                        android:text="남" />
 
-                <RadioButton
-                    android:id="@+id/checkNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/yellow"
-                    android:layout_weight="1"
-                    android:text="상관없음" />
+                    <RadioButton
+                        android:id="@+id/checkNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/yellow"
+                        android:text="상관없음" />
 
                 </RadioGroup>
 
@@ -328,20 +324,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:text="설명"
-                    android:layout_marginLeft="20dp"
                     android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etContent"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:layout_marginRight="20dp"
                     android:text="" />
 
             </LinearLayout>
@@ -357,28 +353,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:text="장소"
-                    android:layout_marginLeft="20dp"
                     android:textSize="40px" />
 
                 <EditText
                     android:id="@+id/etLocate"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
+                    android:hint="클릭하세요"
                     android:inputType="textPersonName"
-                    android:layout_marginRight="20dp"
                     android:text=""
-                    android:textSize="40px"
-                    android:hint="클릭하세요"/>
+                    android:textSize="40px" />
+
                 <Button
                     android:id="@+id/btnTextToMap"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="지도로보기"/>
+                    android:text="지도로보기" />
 
             </LinearLayout>
 
@@ -386,13 +383,12 @@
                 android:id="@+id/btn_meet"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:text="모임 생성"
-                android:background="@drawable/shape"
-                app:backgroundTint="@color/Orange"
-                android:layout_marginTop="60dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/shape"
+                android:text="모임 생성"
                 android:textSize="45px"
-                />
+                app:backgroundTint="@color/Orange" />
 
 
         </LinearLayout>
