@@ -25,10 +25,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -58,6 +60,10 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     ArrayList<Marker> markers;
     private static ArrayList<LatLng> globalAllLatLngs;
     private static ArrayList<Meet> globalAllmeet;
+    //모임데이터 조회
+    private DatabaseReference databaseReference2;
+    private ArrayList<Meet> arrayListMeet;
+    //
     LatLngCallback mLatLngCallback;
 
 
@@ -67,6 +73,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         setContentView(R.layout.activity_google_map);
 
         allLatLngs= new ArrayList<>();
+        arrayListMeet = new ArrayList<>();
 
         //view googlemap in fragment
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager()
@@ -145,7 +152,6 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 //        markerOptions.title("서울");
 //        markerOptions.snippet("한국의 수도");//sinppet : 작은 설명
 //        mGoogleMap.addMarker(markerOptions);
-//
 //        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL,10));//put zoom size
 
 
@@ -310,6 +316,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         for(int index=0; index<globalAllLatLngs.size(); index++){
             MarkerOptions makerOp = new MarkerOptions();
             try {
+                //지금까지의 마커에 같은 위도경도 정보가 존재하지 않는다면
+
                 makerOp.position(new LatLng( globalAllLatLngs.get(index).latitude, globalAllLatLngs.get(index).longitude ))//position= Lating객체, 위경도
                 .title(globalAllmeet.get(index).getTitle())
 //                        .snippet(globalAllmeet.get(index).getMid());
@@ -318,6 +326,10 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
                 markers[index]=mGoogleMap.addMarker(makerOp);
                 markers[index].setTag(globalAllmeet.get(index).getMid());
+
+                Log.d("marker_mid_before",globalAllmeet.get(index).getMid());//ok
+
+
                 Log.d("makerOp", String.valueOf(makerOp));
             }catch (Exception e){
                 //expect null value
@@ -327,10 +339,63 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         }
     }
 
+    public boolean UniqueMarkerCheck(Marker[] markers, LatLng latLng){
+
+        for (int i=0; i< markers.length; i++){
+            if (markers[i].getPosition()== latLng){
+                return false;
+            }
+
+
+        }
+        return true;
+    }
     @Override
     public boolean onMarkerClick(@NonNull @NotNull Marker marker) {
-        String mid = (String)marker.getTag();
+
+        Log.d("marker-getTag", String.valueOf(marker.getTag()));
+
+        String mid = String.valueOf(marker.getTag());//null
         Log.d("marker_of_mid",mid);//ok
+        //mid로 meet 데이터 조회
+        databaseReference2 = database.getReference("meet").child(mid);
+
+
+        //String myUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+       // Query myTopPostsQuery = databaseReference2.child("meet").child(mid);
+                //.orderByChild("title");
+        //databaseReference=database.getReference("meet");
+
+        databaseReference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
+                Meet meet = dataSnapshot.getValue(Meet.class);
+                Toast.makeText(GoogleMapActivity.this,"meet"+meet.title,Toast.LENGTH_SHORT).show();
+                //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
+//                arrayListMeet.clear(); //기존 배열리스트가 존재하지 않게 초기화
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
+//
+//                    Meet meet = snapshot.getValue(Meet.class); // 만들어놨던 Meet 객체에 데이터를 담는다.
+//
+//                    arrayListMeet.add(meet); //담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비.
+//                    Log.d("arrayList-maker", String.valueOf(arrayListMeet));
+//
+//
+//
+//                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+                //디비를 가져오는 도중 에러 발생 시
+                Toast.makeText(GoogleMapActivity.this, error.getMessage(),Toast.LENGTH_SHORT).show();
+                Log.e("MainActivityHome",String.valueOf(error.toException()));
+
+            }
+        });
+        //dailog 띄우기
+
         //mid만 상세화면으로 전달하던지
         //여기서 데이터를 조회하던지
 
