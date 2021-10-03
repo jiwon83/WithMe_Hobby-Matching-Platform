@@ -371,15 +371,35 @@
                     android:text=""
                     android:textSize="40px" />
 
-                <Button
-                    android:id="@+id/btnTextToMap"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="지도로보기" />
 
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+
+
             <Button
+                android:id="@+id/btnTextToMap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:text="지도로보기" />
+
+        </LinearLayout>
+
+
+
+
+        <Button
                 android:id="@+id/btn_meet"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
