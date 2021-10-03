@@ -21,6 +21,7 @@
             android:id="@+id/chatitem_textview_title"
             android:text="방 이름"
             android:textSize="20dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>

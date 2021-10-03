@@ -82,7 +82,7 @@
                 >
                 <ImageView
                     android:id="@+id/img_meetDate"
-                    android:layout_width="25dp"
+                    android:layout_width="20dp"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/Orange"
                     android:src="@drawable/calendar"/>
@@ -188,7 +188,7 @@
 
             <ImageView
                 android:id="@+id/img_place"
-                android:layout_width="20dp"
+                android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/Orange"
                 android:src="@drawable/place_x"/>
