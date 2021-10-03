@@ -7,6 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +44,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,8 +62,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private Member memberObj = new Member(); // 채팅방 입장을 위한 맴버 객체 생성
     private Button button_check;//캘린더
     private View v_d;
-    private TextView tv1, tv2;
-    private EditText et1, et2;
+
+
 
 
 
@@ -155,6 +159,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 TextView cu_place = v_d.findViewById(R.id.cu_place);
                 TextView cu_content = v_d.findViewById(R.id.cu_content);
                 Button button_go = v_d.findViewById(R.id.button_go);
+                Button cu_map = v_d.findViewById(R.id.cu_map);
 
                 //meet정보출력 onClickview
                 Glide.with(holder.itemView)
@@ -190,6 +195,43 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 cu_numMember.setText(""+ arrayList.get(position).getNumMember());
                 cu_place.setText(" "+ arrayList.get(position).getPlace());
                 cu_content.setText(""+arrayList.get(position).getHobbyCate());
+                cu_map.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Geocoder geocoder = new Geocoder(context);
+                        List<Address> list = null;
+
+                        String address = cu_place.getText().toString();
+                        try {
+                            list = geocoder.getFromLocationName
+                                    (address, // 지역 이름
+                                            10); // 읽을 개수
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
+                        }
+
+                        if (list != null) {
+                            if (list.size() == 0) {
+                                Toast.makeText(context,"해당되는 주소 정보는 없습니다.",Toast.LENGTH_SHORT).show();
+                            } else {
+                                // 해당되는 주소로 인텐트 날리기
+                                Address addr = list.get(0);
+                                double lat = addr.getLatitude();
+                                double lon = addr.getLongitude();
+
+                                String sss = String.format("geo:%f,%f", lat, lon);//위도경도로 포맷
+
+                                Intent intent = new Intent(
+                                        Intent.ACTION_VIEW, //보여줘라
+                                        Uri.parse(sss));//위도경도를가지고
+                                context.startActivity(intent);
+
+
+                            }
+                        }
+                    }
+                });
 
                 button_go.setOnClickListener(new View.OnClickListener() {
                     @Override
