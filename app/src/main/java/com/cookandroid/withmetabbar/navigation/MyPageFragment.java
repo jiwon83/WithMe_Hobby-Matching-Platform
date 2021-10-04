@@ -170,12 +170,16 @@ public class MyPageFragment extends Fragment {
         //내가 만든 모임 화면으로 전환
         //ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.mypage_fragment, container, false);
 
+        //logout로그아웃
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getContext(), MainActivity2.class);
+                startActivity(intent);
             }
         });
+        //withdraw회원탈퇴
         btn_withdrawal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,6 +191,8 @@ public class MyPageFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Log.d(TAG, "User account deleted.");
+                                    Intent intent = new Intent(getContext(), MainActivity2.class);
+                                    startActivity(intent);
                                 }
                             }
                         });

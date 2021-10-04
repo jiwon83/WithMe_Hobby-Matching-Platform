@@ -91,6 +91,7 @@ public class JoinStartFragment extends Fragment {
     private RadioButton cb_male, cb_female, cb_no;
 
 
+
     Button btn_join, btn_live, btn_hobbys;
 
 
@@ -142,17 +143,18 @@ public class JoinStartFragment extends Fragment {
         check_overlap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<String> stringArrayList = new ArrayList<>();
                 FirebaseDatabase.getInstance().getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
                         //ArrayList<Member> arrayList = new ArrayList<>();
 
-                        ArrayList<String> stringArrayList = new ArrayList<>();
 
-                        for (DataSnapshot dataSnapshott : snapshot.getChildren()) {//반복문으로 데이터 List를 추출해냄.
 
-                            Member member = dataSnapshott.getValue(Member.class);
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {//반복문으로 데이터 List를 추출해냄.
+
+                            Member member = dataSnapshot.getValue(Member.class);
 
                             stringArrayList.add(member.id);
 
@@ -309,7 +311,7 @@ public class JoinStartFragment extends Fragment {
                 } else {
                     try {
                         FirebaseAuth.getInstance()
-                                .createUserWithEmailAndPassword(etId.getText().toString(), etPw.getText().toString())
+                                .createUserWithEmailAndPassword(etId.getText().toString().trim(), etPw.getText().toString().trim())
                                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
 
                                     @Override
@@ -480,7 +482,6 @@ public class JoinStartFragment extends Fragment {
                         }
 
 
-                        //member.meetDate
                         FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
 
                             @Override
