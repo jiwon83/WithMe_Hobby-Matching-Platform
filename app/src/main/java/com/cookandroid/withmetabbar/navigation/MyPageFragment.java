@@ -66,7 +66,7 @@ public class MyPageFragment extends Fragment {
         ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.mypage_fragment, container, false);
         TextView tvName= vGroup.findViewById(R.id.tv_mName);
         TextView tvNick= vGroup.findViewById(R.id.tv_nickname);
-        //TextView tvGen= vGroup.findViewById(R.id.tv_gender);
+
         TextView tvAge= vGroup.findViewById(R.id.tv_age);
         imageView = vGroup.findViewById(R.id.imagemy);
         myMeetLayout = vGroup.findViewById(R.id.myMeetLayout);

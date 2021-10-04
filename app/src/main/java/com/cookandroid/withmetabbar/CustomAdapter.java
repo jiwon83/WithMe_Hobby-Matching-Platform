@@ -141,6 +141,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 builder.setView(v_d);
 
                 ImageView cu_iv_meet=v_d.findViewById(R.id.iv_meet);
+                TextView cu_hobbyCate= v_d.findViewById(R.id.cy_hobbyCate);
                 TextView cu_meetDate = v_d.findViewById(R.id.cu_meetDate);
                 TextView cu_meetAge = v_d.findViewById(R.id.cu_meetAge);
                 TextView cu_meetGen = v_d.findViewById(R.id.cu_meetGen);
@@ -153,7 +154,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 //meet정보출력 onClickview
                 Glide.with(holder.itemView)
                         .load(arrayList.get(position).getImgUrl())
-                        .override(150,200)
+                        .override(Target.SIZE_ORIGINAL)
                         .into(cu_iv_meet);
 
 
@@ -164,7 +165,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 }catch (Exception e){
 
                 }
-
+                cu_hobbyCate.setText(arrayList.get(position).getHobbyCate().toString());
                 cu_meetAge.setText(" "+ arrayList.get(position).getMeetAge());
                 //성별
                 if (arrayList.get(position).getMeetGen()==1){
@@ -180,7 +181,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 }
                 cu_numMember.setText(""+ arrayList.get(position).getNumMember());
                 cu_place.setText(" "+ arrayList.get(position).getPlace());
-                cu_content.setText(""+arrayList.get(position).getHobbyCate());
+                cu_content.setText(""+arrayList.get(position).getContent());
                 cu_map.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -473,16 +474,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 //        });
 
 
-
-
-
-
-
-
-
         }
-
-
 
 
 
@@ -502,12 +494,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
 
 
-
-
-
         public CustomViewHolder(@NonNull View itemView) {
-
-
 
 
             super(itemView);
@@ -521,7 +508,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
             this.img_meetDate=itemView.findViewById(R.id.img_meetDate);
             this.img_place=itemView.findViewById(R.id.img_place);
-            this.btn_more=itemView.findViewById(R.id.button_check);
+            this.btn_more=itemView.findViewById(R.id.btn_more);
 
 
 
@@ -539,13 +526,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             tv_place.setTextColor(Color.parseColor("#3E3B3B"));
             img_meetDate.setColorFilter(Color.parseColor("#F49C19"));
             img_place.setColorFilter(Color.parseColor("#F49C19"));
-
-
-
-
-
-
-
 
 
         }
