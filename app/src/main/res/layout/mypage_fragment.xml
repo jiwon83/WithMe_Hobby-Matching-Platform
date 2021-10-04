@@ -460,8 +460,9 @@
                 android:textSize="40px" />
 
             <Space
-                android:layout_width="140dp"
-                android:layout_height="35dp" />
+                android:layout_width="260dp"
+                android:layout_height="35dp"/>
+
 
             <ImageButton
                 android:id="@+id/btn_logout"
@@ -494,7 +495,7 @@
                 android:textSize="40px" />
 
             <Space
-                android:layout_width="140dp"
+                android:layout_width="260dp"
                 android:layout_height="35dp"/>
 
             <ImageButton
