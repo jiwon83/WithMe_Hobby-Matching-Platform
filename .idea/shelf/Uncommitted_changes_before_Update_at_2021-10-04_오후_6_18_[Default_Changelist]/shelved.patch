@@ -1,0 +1,410 @@
+Index: app/src/main/res/layout/list_meet.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:layout_weight=\"1\"\r\n    android:orientation=\"vertical\">\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"horizontal\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:background=\"@drawable/layout_background\"\r\n\r\n        >\r\n\r\n\r\n\r\n\r\n        <ImageView\r\n            android:id=\"@+id/iv_meet\"\r\n            android:layout_width=\"150dp\"\r\n            android:layout_height=\"match_parent\"\r\n            android:layout_margin=\"5dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/ic_launcher_background\" />\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"10\"\r\n\r\n            android:orientation=\"vertical\">\r\n            <TextView\r\n                android:id=\"@+id/tv_meetTitle\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"1dp\"\r\n                android:background=\"@color/dark\"\r\n                android:layout_marginLeft=\"10dp\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n            </LinearLayout>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n            <TextView\r\n                android:id=\"@+id/tv_hobbyCate\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"취미목록\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n            </TextView>\r\n            </LinearLayout>\r\n\r\n\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n                <ImageView\r\n                    android:id=\"@+id/img_meetDate\"\r\n                    android:layout_width=\"20dp\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:backgroundTint=\"@color/Orange\"\r\n                    android:src=\"@drawable/calendar\"/>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_meetDate\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"시간\"\r\n                    android:textColor=\"@color/black\"\r\n                    android:layout_margin=\"5dp\">\r\n\r\n                </TextView>\r\n\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"5dp\"\r\n                    android:text=\"나이\"\r\n                    android:textColor=\"@color/none\">\r\n\r\n                </TextView>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_meetAge\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"5dp\"\r\n                    android:text=\"나이\"\r\n                    android:textColor=\"@color/black\">\r\n\r\n                </TextView>\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"5dp\"\r\n                    android:text=\"성별\"\r\n                    android:textColor=\"@color/none\">\r\n\r\n                </TextView>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_meetGen\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_margin=\"5dp\"\r\n                    android:text=\"성별\"\r\n                    android:textColor=\"@color/black\">\r\n\r\n                </TextView>\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"모임인원\"\r\n                    android:textColor=\"@color/none\"\r\n                    android:layout_margin=\"5dp\">\r\n\r\n                </TextView>\r\n\r\n\r\n                <TextView\r\n                android:id=\"@+id/tv_numMember\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"모임인원\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n\r\n\r\n\r\n            <ImageView\r\n                android:id=\"@+id/img_place\"\r\n                android:layout_width=\"15dp\"\r\n                android:layout_height=\"match_parent\"\r\n                android:backgroundTint=\"@color/Orange\"\r\n                android:src=\"@drawable/place_x\"/>\r\n            <TextView\r\n                android:id=\"@+id/tv_place\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"위치\"\r\n                android:textColor=\"@color/black\"\r\n                android:layout_margin=\"5dp\">\r\n\r\n            </TextView>\r\n            </LinearLayout>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:layout_marginBottom=\"10dp\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n\r\n                <Space\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"40\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button_check\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"30dp\"\r\n                    android:layout_weight=\"15\"\r\n                    android:background=\"@drawable/btn_background\"\r\n                    android:text=\"더보기\"\r\n                    android:onClick=\"showDialog\"\r\n                    android:textSize=\"35px\" />\r\n\r\n            </LinearLayout>\r\n\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/list_meet.xml	(revision a62a4a70104ba7ab8fd4e80aa323348cfbb7b3a0)
++++ app/src/main/res/layout/list_meet.xml	(date 1633338926923)
+@@ -188,7 +188,7 @@
+ 
+             <ImageView
+                 android:id="@+id/img_place"
+-                android:layout_width="15dp"
++                android:layout_width="20dp"
+                 android:layout_height="match_parent"
+                 android:backgroundTint="@color/Orange"
+                 android:src="@drawable/place_x"/>
+Index: app/src/main/res/layout/cutomdialog.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\" android:orientation=\"vertical\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n\r\n            <ImageView\r\n                android:id=\"@+id/iv_meet\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"300dp\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                android:src=\"@drawable/ic_launcher_background\" />\r\n\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/cu_meetDate\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n\r\n        android:text=\"시간\"\r\n        android:textColor=\"@color/none\"\r\n        android:layout_margin=\"5dp\">\r\n\r\n    </TextView>\r\n\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_margin=\"5dp\"\r\n        android:id=\"@+id/cu_meetAge\"\r\n        android:text=\"나이\"\r\n        android:textColor=\"@color/none\">\r\n\r\n    </TextView>\r\n\r\n    <TextView\r\n        android:id=\"@+id/cu_meetGen\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_margin=\"5dp\"\r\n        android:text=\"성별\"\r\n        android:textColor=\"@color/none\">\r\n\r\n    </TextView>\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"모임인원\"\r\n        android:textColor=\"@color/none\"\r\n        android:id=\"@+id/cu_numMember\"\r\n        android:layout_margin=\"5dp\">\r\n\r\n    </TextView>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n        <TextView\r\n            android:id=\"@+id/cu_place\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"위치\"\r\n            android:textColor=\"@color/none\"\r\n            android:layout_margin=\"5dp\">\r\n        </TextView>\r\n\r\n    </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:layout_marginBottom=\"10dp\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n\r\n            <Space\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"40\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/cu_map\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"35dp\"\r\n                    android:layout_weight=\"15\"\r\n                    android:background=\"@drawable/btn_background3\"\r\n                    android:text=\"지도보기\"\r\n                    android:onClick=\"showDialog\"\r\n                    android:textSize=\"35px\" />\r\n\r\n        </LinearLayout>\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/cu_content\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"내용\"\r\n        android:textColor=\"@color/none\"\r\n        android:layout_margin=\"5dp\">\r\n\r\n    </TextView>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:layout_marginBottom=\"10dp\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n\r\n                <Space\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"40\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button_go\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"35dp\"\r\n                    android:layout_weight=\"15\"\r\n                    android:background=\"@drawable/btn_background\"\r\n                    android:text=\"채팅입장\"\r\n                    android:onClick=\"showDialog\"\r\n                    android:textSize=\"35px\" />\r\n\r\n            </LinearLayout>\r\n\r\n\r\n        </LinearLayout>\r\n\r\n    </ScrollView>\r\n\r\n</LinearLayout>\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/cutomdialog.xml	(revision a62a4a70104ba7ab8fd4e80aa323348cfbb7b3a0)
++++ app/src/main/res/layout/cutomdialog.xml	(date 1633338926950)
+@@ -22,18 +22,66 @@
+                 android:scaleType="centerCrop"
+                 android:src="@drawable/ic_launcher_background" />
+ 
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            android:layout_marginLeft="20dp"
++            android:layout_marginTop="20dp"
+ 
++            >
++
++            <ImageView
++                android:id="@+id/img_meetDate"
++                android:layout_width="20dp"
++                android:layout_height="match_parent"
++                android:backgroundTint="@color/Orange"
++                android:src="@drawable/calendar"/>
+ 
+-    <TextView
+-        android:id="@+id/cu_meetDate"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-
+-        android:text="시간"
+-        android:textColor="@color/none"
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="시간"
++                android:textColor="@color/none"
++                android:textSize="40px"
++                android:layout_margin="5dp">
++
++            </TextView>
++
++
++
++            <TextView
++        android:id="@+id/cu_meetDate"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++                android:text="시간"
++        android:textColor="@color/black"
++                android:textSize="40px"
+         android:layout_margin="5dp">
+ 
+     </TextView>
++
++        </LinearLayout>
++
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            android:layout_marginLeft="40dp"
++
++
++            >
++
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_margin="5dp"
++                android:text="나이"
++                android:textSize="40px"
++                android:textColor="@color/none">
++
++            </TextView>
+ 
+ 
+     <TextView
+@@ -42,9 +90,31 @@
+         android:layout_margin="5dp"
+         android:id="@+id/cu_meetAge"
+         android:text="나이"
+-        android:textColor="@color/none">
++        android:textSize="40px"
++        android:textColor="@color/black">
++
++    </TextView>
++
++        </LinearLayout>
++
++            <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            android:layout_marginLeft="40dp"
++
++
++            >
++
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_margin="5dp"
++                android:text="성별"
++                android:textSize="40px"
++                android:textColor="@color/none">
+ 
+-    </TextView>
++            </TextView>
+ 
+     <TextView
+         android:id="@+id/cu_meetGen"
+@@ -52,29 +122,68 @@
+         android:layout_height="wrap_content"
+         android:layout_margin="5dp"
+         android:text="성별"
+-        android:textColor="@color/none">
++        android:textSize="40px"
++        android:textColor="@color/black">
++
++    </TextView>
++            </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            android:layout_marginLeft="40dp"
++
++
++            >
++
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_margin="5dp"
++                android:text="모집인원"
++                android:textSize="40px"
++                android:textColor="@color/none">
+ 
+-    </TextView>
++            </TextView>
+ 
+-    <TextView
++
++            <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="모임인원"
+-        android:textColor="@color/none"
++        android:textColor="@color/black"
+         android:id="@+id/cu_numMember"
++                android:textSize="40px"
+         android:layout_margin="5dp">
+ 
+     </TextView>
+ 
++        </LinearLayout>
++
+     <LinearLayout
+         android:layout_width="match_parent"
+-        android:layout_height="match_parent">
++        android:layout_height="match_parent"
++        android:orientation="horizontal"
++        android:layout_marginLeft="40dp">
++
++
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_margin="5dp"
++            android:text="위치"
++            android:textSize="40px"
++            android:textColor="@color/none">
++
++        </TextView>
+         <TextView
+             android:id="@+id/cu_place"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="위치"
+-            android:textColor="@color/none"
++            android:textColor="@color/black"
++            android:textSize="40px"
+             android:layout_margin="5dp">
+         </TextView>
+ 
+@@ -100,24 +209,51 @@
+                     android:layout_width="0dp"
+                     android:layout_height="35dp"
+                     android:layout_weight="15"
+-                    android:background="@drawable/btn_background3"
++                    android:background="@color/lite_gray"
+                     android:text="지도보기"
+                     android:onClick="showDialog"
+                     android:textSize="35px" />
+ 
+         </LinearLayout>
+ 
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:orientation="horizontal"
++            android:layout_marginLeft="20dp">
++
++            <ImageView
++                android:id="@+id/img_place"
++                android:layout_width="20dp"
++                android:layout_height="match_parent"
++                android:backgroundTint="@color/Orange"
++                android:src="@drawable/place_x"/>
++
++
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_margin="5dp"
++                android:text="위치"
++                android:textSize="40px"
++                android:textColor="@color/none">
++
++            </TextView>
++
+ 
+     <TextView
+         android:id="@+id/cu_content"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="내용"
+-        android:textColor="@color/none"
++        android:textColor="@color/black"
++        android:textSize="40px"
+         android:layout_margin="5dp">
+ 
+     </TextView>
+ 
++        </LinearLayout>
++
+ 
+             <LinearLayout
+                 android:layout_width="match_parent"
+@@ -139,7 +275,7 @@
+                     android:layout_width="0dp"
+                     android:layout_height="35dp"
+                     android:layout_weight="15"
+-                    android:background="@drawable/btn_background"
++                    android:background="@color/Orange"
+                     android:text="채팅입장"
+                     android:onClick="showDialog"
+                     android:textSize="35px" />
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nbuildscript {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n    }\r\n    dependencies {\r\n        classpath 'com.android.tools.build:gradle:4.1.0'\r\n        classpath 'com.google.gms:google-services:4.3.8'\r\n        classpath \"com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:1.3.0\"\r\n\r\n\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n    }\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision a62a4a70104ba7ab8fd4e80aa323348cfbb7b3a0)
++++ build.gradle	(date 1633335848262)
+@@ -8,6 +8,7 @@
+         classpath 'com.android.tools.build:gradle:4.1.0'
+         classpath 'com.google.gms:google-services:4.3.8'
+         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:1.3.0"
++        //classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.0"
+ 
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+Index: app/src/main/res/layout/fragment_plus.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"fill_parent\"\r\n    android:layout_height=\"fill_parent\"\r\n    android:orientation=\"vertical\" >\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <Gallery\r\n                android:id=\"@+id/gallery1\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:spacing=\"5dp\">\r\n\r\n            </Gallery>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"300dp\"\r\n                android:layout_gravity=\"center\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/imageView7\"\r\n                    android:layout_width=\"300dp\"\r\n                    android:layout_height=\"300dp\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:scaleType=\"fitXY\"\r\n                    app:srcCompat=\"@drawable/camera\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:orientation=\"horizontal\">\r\n\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/textView1\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"bottom\"\r\n                        android:layout_marginLeft=\"20dp\"\r\n                        android:layout_weight=\"1\"\r\n                        android:text=\"방 제목\"\r\n                        android:textSize=\"40px\" />\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/etTitle\"\r\n                        android:layout_width=\"200dp\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginRight=\"20dp\"\r\n                        android:layout_weight=\"1\"\r\n                        android:ems=\"10\"\r\n                        android:gravity=\"center\"\r\n                        android:inputType=\"textPersonName\"\r\n                        android:text=\"\" />\r\n\r\n                </LinearLayout>\r\n            </LinearLayout>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"해시태그\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etHash\"\r\n                    android:layout_width=\"200dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView3\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"취미분야\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etHobby\"\r\n                    android:layout_width=\"200dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:hint=\"클릭하세요\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"\"\r\n                    android:textSize=\"40px\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView4\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"날짜/시간\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/Date\"\r\n                    android:layout_width=\"50dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:clickable=\"true\"\r\n                    android:editable=\"false\"\r\n                    android:ems=\"10\"\r\n                    android:focusable=\"false\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"Date\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/Time\"\r\n                    android:layout_width=\"50dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:clickable=\"true\"\r\n                    android:editable=\"false\"\r\n                    android:ems=\"10\"\r\n                    android:focusable=\"false\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"Time\"\r\n                    android:textSize=\"40px\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView5\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"나이\"\r\n                    android:textSize=\"40px\" />\r\n\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etMeetAge\"\r\n                    android:layout_width=\"200dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:maxLength=\"2\"\r\n                    android:text=\"\" />\r\n\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView6\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"모집인원\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etNumMem\"\r\n                    android:layout_width=\"200dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:maxLength=\"2\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"15dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView7\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:text=\"성별\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <RadioGroup\r\n                    android:id=\"@+id/gender_plus\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginLeft=\"80dp\"\r\n                    android:orientation=\"horizontal\">\r\n\r\n                    <RadioButton\r\n                        android:id=\"@+id/check_female\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"1\"\r\n                        android:buttonTint=\"@color/yellow\"\r\n                        android:text=\"여\" />\r\n\r\n                    <RadioButton\r\n                        android:id=\"@+id/check_male\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"1\"\r\n                        android:buttonTint=\"@color/yellow\"\r\n                        android:text=\"남\" />\r\n\r\n                    <RadioButton\r\n                        android:id=\"@+id/checkNo\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"1\"\r\n                        android:buttonTint=\"@color/yellow\"\r\n                        android:text=\"상관없음\" />\r\n\r\n                </RadioGroup>\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView8\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"설명\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etContent\"\r\n                    android:layout_width=\"180dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView9\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"장소\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etLocate\"\r\n                    android:layout_width=\"180dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:hint=\"클릭하세요\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"\"\r\n                    android:textSize=\"40px\" />\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <Space\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\" />\r\n\r\n\r\n\r\n                <Button\r\n                    android:id=\"@+id/btnTextToMap\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"2\"\r\n                    android:text=\"지도로보기\" />\r\n\r\n            </LinearLayout>\r\n\r\n\r\n\r\n\r\n            <Button\r\n                android:id=\"@+id/btn_meet\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"60dp\"\r\n                android:background=\"@drawable/shape\"\r\n                android:text=\"모임 생성\"\r\n                android:textSize=\"45px\"\r\n                app:backgroundTint=\"@color/Orange\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n    </ScrollView>\r\n\r\n\r\n</LinearLayout>\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_plus.xml	(revision a62a4a70104ba7ab8fd4e80aa323348cfbb7b3a0)
++++ app/src/main/res/layout/fragment_plus.xml	(date 1633337610889)
+@@ -76,34 +76,7 @@
+             </LinearLayout>
+ 
+ 
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:orientation="horizontal">
+-
+-
+-                <TextView
+-                    android:id="@+id/textView2"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:layout_gravity="bottom"
+-                    android:layout_marginLeft="20dp"
+-                    android:layout_weight="1"
+-                    android:text="해시태그"
+-                    android:textSize="40px" />
+-
+-                <EditText
+-                    android:id="@+id/etHash"
+-                    android:layout_width="200dp"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginRight="20dp"
+-                    android:layout_weight="1"
+-                    android:ems="10"
+-                    android:gravity="center"
+-                    android:inputType="textPersonName"
+-                    android:text="" />
+-
+-            </LinearLayout>
++
+ 
+             <LinearLayout
+                 android:layout_width="match_parent"
+@@ -194,7 +167,7 @@
+                     android:id="@+id/textView5"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+-                    android:layout_gravity="center"
++                    android:layout_gravity="bottom"
+                     android:layout_marginLeft="20dp"
+                     android:layout_weight="1"
+                     android:text="나이"
+@@ -203,7 +176,7 @@
+ 
+                 <EditText
+                     android:id="@+id/etMeetAge"
+-                    android:layout_width="200dp"
++                    android:layout_width="180dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginRight="20dp"
+                     android:layout_weight="1"
+@@ -228,6 +201,7 @@
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="bottom"
++
+                     android:layout_marginLeft="20dp"
+                     android:layout_weight="1"
+                     android:text="모집인원"
+@@ -275,6 +249,7 @@
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
++                        android:layout_marginLeft="5dp"
+                         android:buttonTint="@color/yellow"
+                         android:text="여" />
+ 
+@@ -283,6 +258,7 @@
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
++                        android:layout_marginLeft="5dp"
+                         android:buttonTint="@color/yellow"
+                         android:text="남" />
+ 
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'com.google.gms.google-services'\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.2\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.cookandroid.withmetabbar\"\r\n        minSdkVersion 24\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation 'de.hdodenhof:circleimageview:2.2.0' //CircleImageView 원형 이미지\r\n    implementation \"androidx.fragment:fragment-ktx:1.3.0\"\r\n\r\n    implementation 'com.google.android.gms:play-services-auth:11.2.0'\r\n\r\n    implementation 'com.google.firebase:firebase-auth:20.0.1'\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-storage:20.0.0'\r\n    implementation 'com.google.firebase:firebase-database:20.0.0'\r\n    implementation 'com.google.firebase:firebase-config:21.0.0'\r\n    implementation 'com.github.bumptech.glide:glide:4.9.0'\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n    implementation 'com.firebaseui:firebase-ui-storage:7.2.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    /**\r\n     * google api 사용\r\n     */\r\n    implementation 'com.google.android.gms:play-services-maps:17.0.1'\r\n    implementation 'com.google.android.gms:play-services-location:18.0.0'\r\n    \r\n    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'\r\n    testImplementation 'junit:junit:4.+'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision a62a4a70104ba7ab8fd4e80aa323348cfbb7b3a0)
++++ app/build.gradle	(date 1633335706724)
+@@ -7,6 +7,7 @@
+ 
+ 
+ 
++
+ }
+ 
+ android {
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android API 30 Platform\" project-jdk-type=\"Android SDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision a62a4a70104ba7ab8fd4e80aa323348cfbb7b3a0)
++++ .idea/misc.xml	(date 1633336611957)
+@@ -1,4 +1,4 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 30 Platform" project-jdk-type="Android SDK" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="Android API 30 Platform" project-jdk-type="Android SDK" />
+ </project>
+\ No newline at end of file
