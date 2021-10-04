@@ -29,7 +29,10 @@ import com.cookandroid.withmetabbar.certify.JoinStartFragment;
 import com.cookandroid.withmetabbar.certify.MainActivity2;
 import com.cookandroid.withmetabbar.model.Meet;
 import com.cookandroid.withmetabbar.model.Member;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,7 +55,7 @@ public class MyPageFragment extends Fragment {
 
     //private FragmentPagerAdapter fragmentPagerAdapter;//코인충전어뎁터
     Button btn_charge, btn_ondo, btn_mygroup;
-    ImageButton btn_block, btn_friends_invite;
+    ImageButton btn_block, btn_friends_invite,btn_logout, btn_withdrawal;
     LinearLayout myMeetLayout;
 
     @Nullable
@@ -64,6 +67,9 @@ public class MyPageFragment extends Fragment {
         TextView tvNick= vGroup.findViewById(R.id.tv_nickname);
         imageView = vGroup.findViewById(R.id.imagemy);
         myMeetLayout = vGroup.findViewById(R.id.myMeetLayout);
+        btn_logout=vGroup.findViewById(R.id.btn_logout);
+        btn_withdrawal=vGroup.findViewById(R.id.btn_withdrawal);
+
 
         Intent intent = new Intent();
 
@@ -160,13 +166,33 @@ public class MyPageFragment extends Fragment {
 
             }
         });
-        //버튼 누르면 데이터에 저장
-
 
         //내가 만든 모임 화면으로 전환
         //ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.mypage_fragment, container, false);
 
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+            }
+        });
+        btn_withdrawal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+                user.delete()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d(TAG, "User account deleted.");
+                                }
+                            }
+                        });
+
+            }
+        });
 
 
 
