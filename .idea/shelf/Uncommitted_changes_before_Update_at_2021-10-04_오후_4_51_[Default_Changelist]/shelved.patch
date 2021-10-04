@@ -1,0 +1,724 @@
+Index: app/src/main/java/com/cookandroid/withmetabbar/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.RequiresApi;\r\nimport androidx.appcompat.widget.Toolbar;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityCompat;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\n\r\nimport android.Manifest;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.pm.PackageManager;\r\nimport android.content.res.ColorStateList;\r\nimport android.graphics.Color;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.view.Menu;\r\nimport android.view.MenuInflater;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.ImageView;\r\nimport android.widget.Toast;\r\n\r\nimport com.cookandroid.withmetabbar.chat.ChatFragment;\r\nimport com.cookandroid.withmetabbar.googlemap.GoogleMapActivity;\r\nimport com.cookandroid.withmetabbar.model.Member;\r\nimport com.cookandroid.withmetabbar.navigation.AlarmFragment;\r\nimport com.cookandroid.withmetabbar.navigation.CoinMainFragment;\r\nimport com.cookandroid.withmetabbar.navigation.FragmentMyMeetHome;\r\nimport com.cookandroid.withmetabbar.navigation.FragmentPlus;\r\nimport com.cookandroid.withmetabbar.navigation.FragmentPlusSelectHobby;\r\nimport com.cookandroid.withmetabbar.navigation.InterMeetFragment;\r\nimport com.cookandroid.withmetabbar.navigation.MyPageFragment;\r\nimport com.cookandroid.withmetabbar.navigation.PlaceCheckFragment;\r\nimport com.cookandroid.withmetabbar.navigation.TalkPlaceFragment;\r\nimport com.cookandroid.withmetabbar.navigation.UserFragment;\r\nimport com.cookandroid.withmetabbar.toolbar.MainActivity3;\r\nimport com.cookandroid.withmetabbar.toolbar.MainActivity4;\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\n\r\npublic class MainActivity extends AppCompatActivity  {\r\n\r\n    public static Context toast_context; //adapter에서 토스트 매시지를 띄우기 위한 변수\r\n\r\n    private long lastTimeBackPressed; //액비티비종료구현\r\n\r\n\r\n\r\n\r\n    UserFragment userFragment= new UserFragment();\r\n    AlarmFragment alarmFragment= new AlarmFragment();\r\n    //HomeFragment homeFragment= new HomeFragment();\r\n    MainActivityHome mainActivityHome=new MainActivityHome();\r\n    FragmentPlus fragmentPlus= new FragmentPlus();\r\n    MyPageFragment myPageFragment = new MyPageFragment();\r\n    ChatFragment chatFragment= new ChatFragment();//채팅프래그먼트\r\n    //DetailViewFragment detailViewFragment = new DetailViewFragment();\r\n    FragmentManager fragmentManager = getSupportFragmentManager();//for 프래그먼트 전환\r\n    CoinMainFragment coinMainFragment = new CoinMainFragment(); //코인 충전 프레그 먼트\r\n    PlaceCheckFragment placeCheckFragment = new PlaceCheckFragment();//위치인증 프레그 먼트\r\n    TalkPlaceFragment talkPlaceFragment = new TalkPlaceFragment();//톡방 프레그먼트 아직 xml없음\r\n    FragmentMyMeetHome fragmentMyMeetHome = new FragmentMyMeetHome(); //내 모임 보기 화면\r\n    InterMeetFragment interMeetFragment = new InterMeetFragment();// 관심취미 취미추천화면\r\n\r\n\r\n\r\n\r\n\r\n\r\n    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n        setContentView(R.layout.activity_main);\r\n        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);\r\n\r\n        FragmentTransaction transaction = fragmentManager.beginTransaction();//트랜잭션 생성\r\n        //FragmentTransaction.add(R.id.main_content, MyPageFragment.newInstance()).commit();//new\r\n\r\n        //transaction.replace(R.id.main_content, homeFragment).commitAllowingStateLoss();//처음에 띄우는 fragment\r\n        transaction.replace(R.id.main_content, mainActivityHome).commitAllowingStateLoss();//처음에 띄우는 fragment\r\n\r\n\r\n\r\n        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);\r\n        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()   {\r\n\r\n            //로그인에서 넣어준 intent 받기\r\n            final Intent intentMain = getIntent();\r\n            public final String uid = intentMain.getStringExtra(\"uid\");\r\n            final Member member = new Member();\r\n\r\n\r\n\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                FragmentTransaction transaction = fragmentManager.beginTransaction();\r\n\r\n                switch (item.getItemId()) {\r\n                    case R.id.action_home:\r\n                        //Intent intentHome= new Intent(getApplicationContext(), MainActivityHome.class);\r\n                        //startActivity(intentHome);\r\n                        transaction.replace(R.id.main_content, mainActivityHome).commitAllowingStateLoss();\r\n\r\n                        //homeFragment.setArguments(bundle);\r\n                        //transaction.replace(R.id.main_content, homeFragment).commitAllowingStateLoss();\r\n                        //transaction.addToBackStack(null);\r\n                        //transaction.commit();\r\n                        //fragmentManager.beginTransaction().remove(detailViewFragment.this).commit;\r\n                        //fragmentManager.popBackStack();\r\n\r\n                        break;\r\n                    case R.id.action_love:\r\n                        transaction.replace(R.id.main_content, interMeetFragment).commitAllowingStateLoss();\r\n                        break;\r\n                    case R.id.action_plus:\r\n                        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){\r\n                            transaction.replace(R.id.main_content, fragmentPlus).commitAllowingStateLoss();\r\n                            Bundle bundle = new Bundle();\r\n                            bundle.putString(\"uid\",uid);\r\n                            fragmentPlus.setArguments(bundle);\r\n                        }\r\n                        //transaction.add(R.id.main_content,fragmentPlus).addToBackStack(null).commit();\r\n\r\n                        break;\r\n                    case R.id.action_chatroom:\r\n                        transaction.replace(R.id.main_content, chatFragment).commitAllowingStateLoss();\r\n                        break;\r\n                    case R.id.action_mypage:\r\n                        transaction.replace(R.id.main_content, myPageFragment).commitAllowingStateLoss();\r\n                        break;\r\n\r\n                }\r\n\r\n\r\n                return true;\r\n            }\r\n        });\r\n\r\n\r\n        //toolbar선언\r\n        Toolbar tb = findViewById(R.id.my_toolbar);\r\n        setSupportActionBar(tb);\r\n        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼 생성\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n    @Override\r\n    public boolean onCreateOptionsMenu(Menu menu) {\r\n        MenuInflater menuInflater = getMenuInflater();\r\n        menuInflater.inflate(R.menu.main_menu, menu);\r\n        return true;\r\n    }\r\n\r\n\r\n    @Override\r\n    public boolean onOptionsItemSelected(MenuItem item) {\r\n        //FragmentTransaction transaction = fragmentManager.beginTransaction();\r\n        switch (item.getItemId()){\r\n\r\n            case R.id.action_alarm:\r\n                Intent intent1 = new Intent(MainActivity.this, MainActivity4.class);\r\n                startActivity(intent1);\r\n            case R.id.map:\r\n                Intent intent2 = new Intent(MainActivity.this, GoogleMapActivity.class);\r\n                startActivity(intent2);\r\n                finish();\r\n\r\n            default:\r\n                return super.onOptionsItemSelected(item);\r\n\r\n        }\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n    public void replaceFragment(Fragment fragment){\r\n//        getSupportFragmentManager().beginTransaction().replace(R.id.main_content2, fragment).commit();\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.replace(R.id.main_content, fragment).commit();\r\n        \r\n    }\r\n    public void removeFragment(Fragment fragment) {\r\n        //getSupportFragmentManager().beginTransaction().remove(R.id.main_content2, fragment).commit();\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.remove(fragment).commit();                                //로그아웃, 뒤로가기버튼 누를시\r\n    }\r\n\r\n    public void addFragment(Fragment fragment){\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();\r\n        fragmentTransaction.add(R.id.main_content, fragment).addToBackStack(null).commit();\r\n    }\r\n\r\n    public void hideFragment(Fragment fragment){\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.hide(fragment).commit();\r\n    }\r\n    public void showFragment(Fragment fragment){\r\n        FragmentManager fragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.show(fragment).commit();\r\n    }\r\n\r\n\r\n\r\n    @Override\r\n    public void onBackPressed() {\r\n\r\n        if(System.currentTimeMillis() - lastTimeBackPressed < 1500){\r\n\r\n            moveTaskToBack(true);\t\t\t\t\t\t// 태스크를 백그라운드로 이동\r\n            finishAndRemoveTask();\t\t\t\t\t\t// 액티비티 종료 + 태스크 리스트에서 지우기\r\n            android.os.Process.killProcess(android.os.Process.myPid());\t// 앱 프로세스 종료\r\n            //finish();\r\n\r\n            return;\r\n        }\r\n        lastTimeBackPressed = System.currentTimeMillis();\r\n        Toast.makeText(this,\"'뒤로' 버튼을 한 번 더 누르면 종료됩니다.\",Toast.LENGTH_SHORT).show();\r\n\r\n\r\n//        Toast.makeText(this, \"Log Out\", Toast.LENGTH_SHORT).show();\r\n//        Intent intent = new Intent(MainActivity.this, MainActivity2.class);\r\n//        startActivity(intent);\r\n        //super.onBackPressed();\r\n    }\r\n\r\n\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/MainActivity.java	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/java/com/cookandroid/withmetabbar/MainActivity.java	(date 1633332968256)
+@@ -11,6 +11,7 @@
+ import androidx.fragment.app.FragmentTransaction;
+ 
+ import android.Manifest;
++import android.app.Dialog;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.pm.PackageManager;
+@@ -55,7 +56,12 @@
+     AlarmFragment alarmFragment= new AlarmFragment();
+     //HomeFragment homeFragment= new HomeFragment();
+     MainActivityHome mainActivityHome=new MainActivityHome();
+-    FragmentPlus fragmentPlus= new FragmentPlus();
++    FragmentPlus fragmentPlus= new FragmentPlus() {
++        @Override
++        public Dialog onCreateDialog(Bundle savedInstanceState) {
++            return null;
++        }
++    };
+     MyPageFragment myPageFragment = new MyPageFragment();
+     ChatFragment chatFragment= new ChatFragment();//채팅프래그먼트
+     //DetailViewFragment detailViewFragment = new DetailViewFragment();
+Index: app/src/main/res/layout/login_start_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n\r\n    <EditText\r\n        android:id=\"@+id/etId\"\r\n        android:layout_width=\"200dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"228dp\"\r\n        android:hint=\"id\"\r\n        android:inputType=\"textEmailAddress\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.497\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/etPassword\"\r\n        android:layout_width=\"200dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"288dp\"\r\n        android:hint=\"password\"\r\n        android:inputType=\"textPassword\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.502\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnLogin\"\r\n        android:layout_width=\"180dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginTop=\"360dp\"\r\n        android:background=\"@drawable/shape\"\r\n        android:text=\"Login\"\r\n        android:textColor=\"@color/black\"\r\n        app:backgroundTint=\"@color/Orange\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.502\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/btnJoin\"\r\n        android:layout_width=\"180dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginTop=\"424dp\"\r\n        android:background=\"@drawable/shape\"\r\n        android:text=\"Join\"\r\n        app:backgroundTint=\"@color/Orange\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.497\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/title\"\r\n        android:layout_width=\"@dimen/logow\"\r\n        android:layout_height=\"@dimen/logow\"\r\n        android:layout_marginTop=\"16dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.496\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/logo_x\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/naver\"\r\n        android:layout_width=\"@dimen/naver\"\r\n        android:layout_height=\"@dimen/naver\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginTop=\"120dp\"\r\n        android:layout_marginEnd=\"40dp\"\r\n        android:layout_marginBottom=\"100dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.176\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.987\"\r\n        app:srcCompat=\"@drawable/naver\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/kakaotalk\"\r\n        android:layout_width=\"@dimen/kakao\"\r\n        android:layout_height=\"@dimen/kakao\"\r\n        android:layout_marginTop=\"120dp\"\r\n        android:layout_marginEnd=\"40dp\"\r\n        android:layout_marginBottom=\"100dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.56\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.989\"\r\n        app:srcCompat=\"@drawable/kakao\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/facebook\"\r\n        android:layout_width=\"@dimen/facebook\"\r\n        android:layout_height=\"@dimen/facebook\"\r\n        android:layout_marginTop=\"120dp\"\r\n        android:layout_marginEnd=\"60dp\"\r\n        android:layout_marginBottom=\"100dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.85\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.987\"\r\n        app:srcCompat=\"@drawable/facebook\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/login_start_fragment.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/res/layout/login_start_fragment.xml	(date 1633332728116)
+@@ -60,7 +60,7 @@
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+     <ImageView
+-        android:id="@+id/title"
++        android:id="@+id/title1"
+         android:layout_width="@dimen/logow"
+         android:layout_height="@dimen/logow"
+         android:layout_marginTop="16dp"
+@@ -68,7 +68,7 @@
+         app:layout_constraintHorizontal_bias="0.496"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+-        app:srcCompat="@drawable/logo_x" />
++        app:srcCompat="@drawable/title1" />
+ 
+     <ImageView
+         android:id="@+id/naver"
+Index: app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlus.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cookandroid.withmetabbar.navigation;\r\n\r\n\r\nimport android.app.DatePickerDialog;\r\nimport android.app.TimePickerDialog;\r\nimport android.content.Intent;\r\nimport android.content.pm.PackageManager;\r\nimport android.location.Address;\r\nimport android.location.Geocoder;\r\nimport android.media.MediaPlayer;\r\nimport android.net.Uri;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.DatePicker;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ImageView;\r\nimport android.widget.NumberPicker;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.TimePicker;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentResultListener;\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport com.cookandroid.withmetabbar.MainActivity;\r\nimport com.cookandroid.withmetabbar.MainActivityHome;\r\n\r\nimport com.cookandroid.withmetabbar.MainActivityWebView;\r\nimport com.cookandroid.withmetabbar.R;\r\nimport com.cookandroid.withmetabbar.model.ChatModel;\r\nimport com.cookandroid.withmetabbar.model.Meet;\r\nimport com.cookandroid.withmetabbar.model.MeetInfo;\r\nimport com.google.android.gms.maps.model.LatLng;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\n\r\nimport org.jetbrains.annotations.NotNull;\r\n\r\nimport java.io.IOException;\r\nimport java.sql.Timestamp;\r\nimport java.text.DateFormat;\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.Calendar;\r\nimport java.util.Date;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Locale;\r\nimport java.util.Map;\r\n\r\nimport static android.app.Activity.RESULT_CANCELED;\r\nimport static android.app.Activity.RESULT_OK;\r\n\r\n\r\n@SuppressWarnings(\"deprecation\")\r\npublic class FragmentPlus extends Fragment {\r\n\r\n    String newKey;\r\n    private Uri file;\r\n\r\n    private DatabaseReference mDatabase;\r\n    private final int GET_GALLERY_IMAGE = 200;//?무슨의미\r\n    private ImageView imageView, imageView7;\r\n    private ImageButton imageButton;\r\n    //private ToggleButton toggleButton, toggleButton1,toggleButton2,toggleButton3,toggleButton4;\r\n    private Button btnMeet,btnTextToMap;\r\n    private MediaPlayer MP;\r\n    private Uri imageUri;//모임이미지\r\n    private String uid=\"\";\r\n    TimePickerDialog mTimePicker;\r\n    private Date meetDate;\r\n    private int meetDateInt;//int형 데이터\r\n    ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열\r\n    private EditText et_locate,etTitle ,etAge ,etNumMem ,etContent;\r\n    private static final int MAIN_ACTIVITY_WEBVIEW = 20000; //웹뷰 액티비티 호출을 위한 코드\r\n    private static final int SELECT_HOBBY = 30000; //웹뷰 액티비티 호출을 위한 코드\r\n    //채팅방\r\n    private String meetUid;\r\n    private String destinationUid;\r\n    private String pushkey;\r\n    private EditText etHobby;\r\n    private RadioButton cb_male,cb_female,cb_no;\r\n    RadioGroup gender_plus;\r\n    String hobbyes=\"\";\r\n    StringBuffer stringBuffer = new StringBuffer();\r\n    private Geocoder geocoder;\r\n\r\n    //취미목록 2021-09-27\r\n    @Override\r\n    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n\r\n\r\n        getParentFragmentManager().setFragmentResultListener(\"requestKey\", this, new FragmentResultListener() {\r\n            @Override\r\n            public void onFragmentResult(@NonNull @NotNull String requestKey, @NonNull @NotNull Bundle bundle) {\r\n                // We use a String here, but any type that can be put in a Bundle is supported\r\n                // String resultHobby = bundle.getString(\"bundleKey\");\r\n\r\n                // Do something with the result\r\n//                if (bundle.getStringArrayList(\"bundleKey\")!=null){\r\n//                    list = bundle.getStringArrayList(\"bundleKey\");\r\n//                    int totalHobbyCount = list.size();\r\n//                    for (int index =0; index<totalHobbyCount; index++){\r\n//\r\n//\r\n//                        stringBuffer.append(list.get(index));\r\n//\r\n//                        //new StringBuilder().append(hobbyes).append(list.get(index)).toString();\r\n//                        //etHobby.append(\",\"+list.get(index));\r\n//\r\n//                    }\r\n//\r\n//                    Log.d(\"getBundleInPlus\", String.valueOf(bundle.getStringArrayList(\"bundleKey\")));\r\n//                    Log.d(\"list\", String.valueOf(list));\r\n//                    Log.d(\"hobbyes\", String.valueOf(hobbyes));\r\n//                }else {\r\n//                    etHobby.setText(\"클릭하세요.\");\r\n//                }\r\n\r\n\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,\r\n                             @Nullable Bundle savedInstanceState) {\r\n        ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.fragment_plus, container, false);\r\n        //getSupportActionBar().setDisplayShowHomeEnabled(true);\r\n        //getSupportActionBar().setIcon(R.drawable.ic_launcher);\r\n        //setTitle(\"레이아웃 선택\");\r\n        geocoder= new Geocoder(getContext());\r\n\r\n\r\n\r\n        btnMeet= vGroup.findViewById(R.id.btn_meet);//버튼\r\n        etTitle=vGroup.findViewById(R.id.etTitle);\r\n        //etAge=vGroup.findViewById(R.id.etMeetAge);\r\n        etNumMem=vGroup.findViewById(R.id.etNumMem);\r\n        etContent=vGroup.findViewById(R.id.etContent);\r\n        etHobby=vGroup.findViewById(R.id.etHobby);\r\n        EditText et_date = vGroup.findViewById(R.id.Date);\r\n        et_locate =vGroup.findViewById(R.id.etLocate);\r\n        cb_male = vGroup.findViewById(R.id.check_male);\r\n        cb_female = vGroup.findViewById(R.id.check_female);\r\n        cb_no = vGroup.findViewById(R.id.checkNo);\r\n        gender_plus = vGroup.findViewById(R.id.gender_plus);\r\n        btnTextToMap =vGroup.findViewById(R.id.btnTextToMap);\r\n\r\n        NumberPicker picker1 = (NumberPicker)vGroup.findViewById(R.id.picker1);\r\n        picker1.setMinValue(1);\r\n        picker1.setMaxValue(100);\r\n        picker1.setWrapSelectorWheel(false);\r\n\r\n        NumberPicker picker2 = (NumberPicker)vGroup.findViewById(R.id.picker2);\r\n        picker2.setMinValue(1);\r\n        picker2.setMaxValue(100);\r\n        picker2.setWrapSelectorWheel(false);\r\n\r\n\r\n\r\n\r\n        final Geocoder geocoder = new Geocoder(getContext());\r\n\r\n        Intent intent = new Intent();\r\n\r\n//        Intent intent2 = Intent.getIntent();\r\n//        intent2.getExtras(getActivity().getClass())\r\n\r\n        Bundle bundle = getArguments();\r\n        //uid=bundle.getString(\"uid\");//null?\r\n        uid= FirebaseAuth.getInstance().getCurrentUser().getUid();\r\n\r\n        //etHobby.setText(stringBuffer);\r\n\r\n        //취미선택 2121-09-27\r\n\r\n//        if (bundle.getStringArrayList(\"hobby\")!=null){\r\n//            list = bundle.getStringArrayList(\"hobby\");\r\n//            Log.d(\"getBundleInPlus\", String.valueOf(bundle.getStringArrayList(\"hobby\")));\r\n//            //받은 취미 목록을 차례로 tv에 입력\r\n//            int totalHobbyCount = list.size();\r\n//            for (int index =0; index<totalHobbyCount; index++){\r\n//                etHobby.append(\",\"+list.get(index));\r\n//            }\r\n//\r\n//        }else {\r\n//            etHobby.setText(\"클릭하세요.\");\r\n//        }\r\n\r\n\r\n\r\n\r\n        //날짜 선택\r\n\r\n        Calendar myCalendar = Calendar.getInstance();\r\n        DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {\r\n            @Override\r\n            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {\r\n                myCalendar.set(Calendar.YEAR, year);\r\n                myCalendar.set(Calendar.MONTH, month);\r\n                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);\r\n                updateLabel();\r\n            }\r\n\r\n            private void updateLabel() {\r\n                String myFormat = \"yyyy/MM/dd\";    // 출력형식   2018/11/28\r\n                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA); //string형태로 바뀐다.\r\n\r\n                et_date.setText(sdf.format(myCalendar.getTime()));\r\n                DateFormat sdFormat = new SimpleDateFormat(\"yyyy-MM-dd\");//필요x\r\n\r\n\r\n            }\r\n        };\r\n\r\n        //취미선택\r\n        etHobby.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n                etHobby.setText(\"\");//etHobby 초기화\r\n                Intent i = new Intent(getContext(), FragmentPlusSelectHobby.class);\r\n                startActivityForResult(i, SELECT_HOBBY);\r\n\r\n//                FragmentPlusSelectHobby fragmentPlusSelectHobby= new FragmentPlusSelectHobby();\r\n//                ((MainActivity)getActivity()).addFragment(fragmentPlusSelectHobby);\r\n\r\n\r\n            }\r\n        });\r\n        //날짜 클릭\r\n\r\n        et_date.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();\r\n            }\r\n        });\r\n\r\n        //시간선택\r\n        final EditText et_time = vGroup.findViewById(R.id.Time);\r\n        et_time.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Calendar mcurrentTime = Calendar.getInstance();\r\n                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY); //선택한 시간(24시간제)\r\n                int minute = mcurrentTime.get(Calendar.MINUTE); //선택한 분\r\n                //TimePickerDialog mTimePicker;\r\n                mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {\r\n                    @Override\r\n                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {\r\n                        String state = \"AM\";\r\n                        myCalendar.set(Calendar.AM_PM, 0);//오전이면 0\r\n\r\n                        // 선택한 시간이 12를 넘을경우 \"PM\"으로 변경 및 -12시간하여 출력 (ex : PM 6시 30분)\r\n                        if (selectedHour > 12) {\r\n                            selectedHour -= 12;\r\n                            state = \"PM\";\r\n                            myCalendar.set(Calendar.AM_PM, 1);//오후면 1\r\n                        }\r\n                        // EditText에 출력할 형식 지정\r\n                        et_time.setText(state + \" \" + selectedHour + \"시 \" + selectedMinute + \"분\");\r\n                        myCalendar.set(Calendar.HOUR, selectedHour);\r\n                        myCalendar.set(Calendar.MINUTE, selectedMinute);\r\n\r\n                        meetDate=myCalendar.getTime();\r\n\r\n\r\n                    }\r\n                }, hour, minute, false); // true의 경우 24시간 형식의 TimePicker 출현\r\n                mTimePicker.setTitle(\"Select Time\");\r\n                mTimePicker.show();\r\n            }\r\n        });\r\n\r\n\r\n        imageView = vGroup.findViewById(R.id.imageView7);\r\n        imageView.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n//                Intent intent = new Intent();\r\n                intent.setType(\"image/*\");\r\n                intent.setAction(Intent.ACTION_GET_CONTENT);\r\n                startActivityForResult(intent, GET_GALLERY_IMAGE);\r\n\r\n\r\n            }\r\n        });\r\n\r\n        //장소 검색하면 MainActivityWebView로 이동.\r\n        et_locate.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent i = new Intent(getContext(), MainActivityWebView.class);\r\n                startActivityForResult(i, MAIN_ACTIVITY_WEBVIEW);//requestcode 2000 전송\r\n            }\r\n        });\r\n\r\n        //장소 구글맵으로 보기\r\n        btnTextToMap.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                List<Address> list = null;\r\n\r\n                String address = et_locate.getText().toString();\r\n                try {\r\n                    list = geocoder.getFromLocationName\r\n                            (address, // 지역 이름\r\n                                    10); // 읽을 개수\r\n                } catch (IOException e) {\r\n                    e.printStackTrace();\r\n                    Log.e(\"test\",\"입출력 오류 - 서버에서 주소변환시 에러발생\");\r\n                }\r\n\r\n                if (list != null) {\r\n                    if (list.size() == 0) {\r\n                        Toast.makeText(getContext(),\"해당되는 주소 정보는 없습니다.\",Toast.LENGTH_SHORT).show();\r\n                    } else {\r\n                        // 해당되는 주소로 인텐트 날리기\r\n                        Address addr = list.get(0);\r\n                        double lat = addr.getLatitude();\r\n                        double lon = addr.getLongitude();\r\n\r\n                        String sss = String.format(\"geo:%f,%f\", lat, lon);//위도경도로 포맷\r\n\r\n                        Intent intent = new Intent(\r\n                                Intent.ACTION_VIEW, //보여줘라\r\n                                Uri.parse(sss));//위도경도를가지고\r\n                        startActivity(intent);\r\n\r\n\r\n                    }\r\n                }\r\n\r\n            }\r\n        });\r\n\r\n        //버튼 누르면 데이터에 저장\r\n        btnMeet.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                //FirebaseStorage storage= FirebaseStorage.getInstance();\r\n                //StorageReference storageRef = storage.getReference();\r\n                //파일명 만들기\r\n                String filename=\"meet\"+uid+\".jpeg\";\r\n                file = imageUri;//\r\n                Log.d(\"imageUri\", String.valueOf(file));\r\n                Log.d(\"filename\", filename);\r\n                //여기서 원하는 이름 넣어준다.(filename 넣어주기)\r\n                //StorageReference riversRef = storageRef.child(\"meetImage/\"+filename);\r\n                //UploadTask uploadTask = riversRef.putFile(file);//storage에 이미지 업로드\r\n\r\n                \r\n                try{\r\n                    contentUpload();\r\n\r\n\r\n                }catch (Exception e){\r\n                    Toast.makeText(getContext(),\"정보입력을 완료하세요.\",Toast.LENGTH_SHORT);\r\n                }\r\n\r\n            }\r\n        });\r\n\r\n        return vGroup;\r\n    }\r\n\r\n\r\n    //갤러리로 가는 법\r\n    @Override\r\n    public void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        if (requestCode == GET_GALLERY_IMAGE) {\r\n            if (resultCode == RESULT_OK) {\r\n                imageView.setImageURI(data.getData());\r\n                imageUri = data.getData();\r\n                Log.d(\"갤러리에서 불러온 이미지 경로\", String.valueOf(imageUri));\r\n\r\n            } else if (resultCode == RESULT_CANCELED) {\r\n                Toast.makeText(getContext(), \"사진 선택 취소\", Toast.LENGTH_LONG).show();\r\n            }\r\n        }\r\n        switch(requestCode){\r\n\r\n            case MAIN_ACTIVITY_WEBVIEW:\r\n\r\n                if(resultCode == RESULT_OK){\r\n\r\n                    String address = data.getExtras().getString(\"address\");\r\n                    if (data != null){\r\n                        et_locate.setText(address);\r\n                        //address =data;\r\n\r\n\r\n                    }\r\n\r\n\r\n                }\r\n                break;\r\n\r\n        }\r\n        switch(requestCode){\r\n\r\n            case SELECT_HOBBY:\r\n\r\n                if(resultCode == RESULT_OK){\r\n\r\n                    list = data.getExtras().getStringArrayList(\"hobby\"); //리스트에 받은 데이터들을 추가\r\n                    if (data != null){\r\n                        //list = bundle.getStringArrayList(\"hobby\");\r\n                        //Log.d(\"getBundleInPlus\", String.valueOf(bundle.getStringArrayList(\"hobby\")));\r\n                        //받은 취미 목록을 차례로 tv에 입력\r\n                        int totalHobbyCount = list.size();\r\n                        for (int index =0; index<totalHobbyCount; index++){\r\n                            etHobby.append(\" \"+list.get(index));\r\n                        }\r\n\r\n                        //address =data;\r\n\r\n\r\n                    }\r\n\r\n\r\n                }\r\n                break;\r\n\r\n        }\r\n    } //갤러리에서 사진 불러와서 넣기\r\n\r\n    //취미선택\r\n\r\n\r\n    @Override\r\n    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n\r\n    }\r\n\r\n    protected void onMainActivity(int requestCode, int resultCode, Intent data) {\r\n        if(requestCode == GET_GALLERY_IMAGE&&resultCode == RESULT_OK&&data !=\r\n                null && data.getData()!=null){\r\n            Uri selectedImageUri = data.getData();\r\n            imageView.setImageURI(selectedImageUri);\r\n        }\r\n    }\r\n    public void contentUpload(){\r\n        Timestamp timestamp = new Timestamp(System.currentTimeMillis());\r\n        SimpleDateFormat sdf = new SimpleDateFormat(\"yyyyMMdd_hhmmss\");\r\n        sdf.format(timestamp);\r\n\r\n        String imageFileName = \"IMAGE_\"+ sdf.format(timestamp) + \"_.png\";\r\n\r\n        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(\"meetImages\").child(imageFileName);\r\n\r\n        storageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n            @Override\r\n            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {\r\n                    @Override\r\n                    public void onSuccess(Uri uri) {\r\n                        Meet meet = new Meet();\r\n\r\n                        meet.uid =uid; //uid정보 추가\r\n                        meet.title = etTitle.getText().toString();\r\n                        meet.meetAge = Integer.parseInt(etAge.getText().toString());\r\n                        meet.numMember = Integer.parseInt(etNumMem.getText().toString());\r\n                        meet.content = etContent.getText().toString();\r\n                        //meet.imgUrl = file.toString();\r\n                        meet.imgUrl = uri.toString();\r\n                        meet.meetDate =meetDate;\r\n                        meet.hobbyCate = new ArrayList<>();\r\n                        meet.place = et_locate.getText().toString();\r\n\r\n                        meet.latLng =  new ArrayList<>();\r\n                        LatLng preLatLng  =transferStringToAddress(et_locate.getText().toString());\r\n                        meet.latLng.add(0,preLatLng.latitude );\r\n                        meet.latLng.add(1,preLatLng.longitude );\r\n\r\n\r\n                        int totalHobbyCount2 = list.size();\r\n                        for (int index = 0; index < totalHobbyCount2; index++) {\r\n                            meet.hobbyCate.add(list.get(index));\r\n                        }\r\n\r\n                        //성별체크\r\n                        if (cb_male.isChecked()){\r\n                            meet.meetGen =1; //남자는 1\r\n                        }else if (cb_female.isChecked()){\r\n                            meet.meetGen =2; //여자는 2\r\n                        }else if (cb_no.isChecked()){\r\n                            meet.meetGen =0; //무관은 0\r\n                        }else {\r\n                            Toast.makeText(getContext(),\"성별을 체크하세요.\",Toast.LENGTH_SHORT);\r\n                        }\r\n\r\n                        //meet라는 데이터 넣기\r\n\r\n                        DatabaseReference databaseReference,databaseReference2;\r\n\r\n                        databaseReference= FirebaseDatabase.getInstance().getReference().child(\"meet\").push();//푸시키를 먼저 생성하고\r\n                        String key =databaseReference.getKey();//meet uid\r\n\r\n                        //2021-09-14 내가 만든 모임 구현\r\n                        //databaseReference2= FirebaseDatabase.getInstance().getReference().child(\"user-meets\"+uid+\"/\"+key).push();\r\n                        databaseReference2= FirebaseDatabase.getInstance().getReference().child(\"user-meets\").child(uid);//.child(key);\r\n\r\n                        //새로 추가한 것 hobby 저장을 위한 참조 데이타\r\n//                        newKey= databaseReference.getKey();\r\n//                        databaseReference2 =FirebaseDatabase.getInstance().getReference().child(\"meet\").child(newKey).child(\"hobby\");\r\n\r\n\r\n                        //그후에 데이터 setValue\r\n                        databaseReference.setValue(meet).addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                            @Override\r\n                            public void onSuccess(Void aVoid) {\r\n\r\n                                //데이터 저장을 위한 객체 참조\r\n                                final FirebaseDatabase database = FirebaseDatabase.getInstance();\r\n\r\n//                                Log.d(\"key_value\", newKey);//key 는 uid가 아니라 meet 인듯\r\n\r\n                                //받은 취미 목록을 차례로 저장 : 이미 저장한뒤 push로 update\r\n//                                int totalHobbyCount2 = list.size();\r\n//                                for (int index = 0; index < totalHobbyCount2; index++) {\r\n//                                    databaseReference2.push().setValue(new Hobby(list.get(index)));\r\n//                                }\r\n\r\n                                databaseReference2.push().setValue(meet);//user-meet 데이터 생성\r\n\r\n                                //chatrooms데이터 생성\r\n                                pushkey = key;\r\n                                String key = pushkey;\r\n                                ChatModel chatModel = new ChatModel();\r\n\r\n                                MeetInfo meetInfo = new MeetInfo();\r\n                                meetInfo.imgUrl=file.toString();\r\n                                meetInfo.title = meet.title;\r\n\r\n\r\n                                chatModel.meetInfo.put(\"meetUid\",pushkey);\r\n                                chatModel.meetInfo.put(\"title\", meet.title);\r\n                                chatModel.meetInfo.put(\"imgUrl\", meet.imgUrl);\r\n                                chatModel.meetInfo.put(\"meetGen\", String.valueOf(meet.meetGen));\r\n                                chatModel.meetInfo.put(\"meetAge\", String.valueOf(meet.meetAge));\r\n                                chatModel.meetInfo.put(\"numMember\", String.valueOf(meet.numMember));\r\n\r\n\r\n                                chatModel.users.put(uid, true);\r\n\r\n\r\n                                Map<String,Object> map = new HashMap<>();\r\n                                map.put(\"mid\", key);\r\n                                FirebaseDatabase.getInstance().getReference().child(\"meet\").child(pushkey).updateChildren(map);//채틸방 경\r\n                                FirebaseDatabase.getInstance().getReference().child(\"chatrooms\").child(pushkey).setValue(chatModel);\r\n\r\n\r\n\r\n\r\n                                MainActivityHome mainActivityHome= new MainActivityHome();\r\n                                ((MainActivity)getActivity()).replaceFragment(mainActivityHome);\r\n\r\n                                //이 코드는 fragement 뒤로가기 코드\r\n                                //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();\r\n                                //fragmentManager.beginTransaction().remove(FragmentPlus.this).commit();\r\n                                //fragmentManager.popBackStack();\r\n\r\n                            }\r\n                        });\r\n                    }\r\n                });\r\n                Toast.makeText(getContext(),\"image upload success\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n    }\r\n    public LatLng transferStringToAddress(String str) {\r\n        List<Address> longlatList = null; //위경도임시적으로저장할list 10개의 비슷한 값들을 저장\r\n        LatLng latLng = null;\r\n\r\n        //String str = \"경기도 화성시 융건로99 풍성신미주아파트\";\r\n        //allMeetAddress\r\n\r\n        try {\r\n            longlatList = (ArrayList<Address>) geocoder.getFromLocationName(str, 1);//maxResults : 10 -> 1  1개만 검색?\r\n\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            Log.e(\"test\", \"입출력 오류 - 서버에서 주소변환시 에러발생\");\r\n\r\n        }\r\n\r\n\r\n        if (longlatList != null) {\r\n            if (longlatList.size() == 0) {\r\n                Log.d(\"longlatList=0해당되는주소정보없다\", String.valueOf(longlatList));\r\n\r\n\r\n            } else {\r\n                double lat = longlatList.get(0).getLatitude();\r\n                double lng = longlatList.get(0).getLongitude();\r\n                latLng = new LatLng(lat, lng);\r\n                //thisLatLng = new LatLng(lat, lng);\r\n                //addressLogLat = longlatList.get(0);//10개 중 가장 정확한 첫번째 값\r\n                //return addressLogLat;\r\n\r\n            }\r\n        }\r\n\r\n        return latLng;\r\n\r\n    }\r\n\r\n    /*public class MyGalleryAdapter extends BaseAdapter {\r\n\r\n        Context context;\r\n        Integer[] posterID = { R.drawable.layout1, R.drawable.layout2,\r\n                R.drawable.layout3, R.drawable.layout4, R.drawable.layout5,\r\n                R.drawable.layout6, R.drawable.layout7, R.drawable.layout8,\r\n                R.drawable.layout9, R.drawable.layout10};\r\n        String[] title = {\"레이아웃1\",\"레이아웃2\", \"레이아웃3\",\r\n                \"레이아웃4\",\"레이아웃5\",\"레이아웃6\",\"레이아웃7\",\"레이아웃8\",\"레이아웃9\",\"레이아웃10\"};\r\n\r\n        public MyGalleryAdapter(Context c) {\r\n            context = c;\r\n        }\r\n\r\n        public int getCount() {\r\n            return posterID.length;\r\n        }\r\n\r\n\r\n\r\n        public Object getItem(int arg0) {\r\n            return null;\r\n        }\r\n\r\n        public long getItemId(int position) {\r\n            return 0;\r\n        }\r\n\r\n        /*public View getView(int position, View convertView, ViewGroup parent) {\r\n            ImageView imageview = new ImageView(context);\r\n            imageview.setLayoutParams(new Gallery.LayoutParams(200, 300));\r\n            imageview.setScaleType(ImageView.ScaleType.FIT_CENTER);\r\n            imageview.setPadding(5, 5, 5, 5);\r\n            imageview.setImageResource(posterID[position]);\r\n\r\n\r\n            final int pos = position;\r\n            imageview.setOnTouchListener(new View.OnTouchListener() {\r\n                public boolean onTouch (View v, MotionEvent event) {\r\n                    ImageView ivPoster = (ImageView) findViewById(R.id.ivPoster);\r\n                    ivPoster.setScaleType(ImageView.ScaleType.FIT_CENTER);\r\n                    ivPoster.setImageResource(posterID[pos]);\r\n                    Toast.makeText(getApplicationContext(),title[pos],Toast.LENGTH_SHORT).show();\r\n\r\n                    //dlg.setIcon(R.drawable.movie_icon);\r\n\r\n                    return false;\r\n                }\r\n            });*/\r\n\r\n    //return imageview\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlus.java	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/java/com/cookandroid/withmetabbar/navigation/FragmentPlus.java	(date 1633332728085)
+@@ -2,6 +2,7 @@
+ 
+ 
+ import android.app.DatePickerDialog;
++import android.app.Dialog;
+ import android.app.TimePickerDialog;
+ import android.content.Intent;
+ import android.content.pm.PackageManager;
+@@ -36,6 +37,7 @@
+ import com.cookandroid.withmetabbar.MainActivityHome;
+ 
+ import com.cookandroid.withmetabbar.MainActivityWebView;
++import com.cookandroid.withmetabbar.NumberPickerDialog;
+ import com.cookandroid.withmetabbar.R;
+ import com.cookandroid.withmetabbar.model.ChatModel;
+ import com.cookandroid.withmetabbar.model.Meet;
+@@ -60,6 +62,7 @@
+ import java.util.ArrayList;
+ import java.util.Calendar;
+ import java.util.Date;
++import java.util.Formatter;
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.Locale;
+@@ -70,7 +73,7 @@
+ 
+ 
+ @SuppressWarnings("deprecation")
+-public class FragmentPlus extends Fragment {
++public abstract class FragmentPlus extends Fragment {
+ 
+     String newKey;
+     private Uri file;
+@@ -85,6 +88,7 @@
+     private Uri imageUri;//모임이미지
+     private String uid="";
+     TimePickerDialog mTimePicker;
++    NumberPicker numberPicker;
+     private Date meetDate;
+     private int meetDateInt;//int형 데이터
+     ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열
+@@ -102,6 +106,10 @@
+     StringBuffer stringBuffer = new StringBuffer();
+     private Geocoder geocoder;
+ 
++
++    
++
++
+     //취미목록 2021-09-27
+     @Override
+     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+@@ -158,10 +166,11 @@
+         btnMeet= vGroup.findViewById(R.id.btn_meet);//버튼
+         etTitle=vGroup.findViewById(R.id.etTitle);
+         //etAge=vGroup.findViewById(R.id.etMeetAge);
+-        etNumMem=vGroup.findViewById(R.id.etNumMem);
++        //etNumMem=vGroup.findViewById(R.id.etNumMem);
+         etContent=vGroup.findViewById(R.id.etContent);
+         etHobby=vGroup.findViewById(R.id.etHobby);
+         EditText et_date = vGroup.findViewById(R.id.Date);
++        EditText et_age = vGroup.findViewById(R.id.Age1);
+         et_locate =vGroup.findViewById(R.id.etLocate);
+         cb_male = vGroup.findViewById(R.id.check_male);
+         cb_female = vGroup.findViewById(R.id.check_female);
+@@ -169,15 +178,14 @@
+         gender_plus = vGroup.findViewById(R.id.gender_plus);
+         btnTextToMap =vGroup.findViewById(R.id.btnTextToMap);
+ 
+-        NumberPicker picker1 = (NumberPicker)vGroup.findViewById(R.id.picker1);
+-        picker1.setMinValue(1);
+-        picker1.setMaxValue(100);
+-        picker1.setWrapSelectorWheel(false);
++
+ 
+-        NumberPicker picker2 = (NumberPicker)vGroup.findViewById(R.id.picker2);
+-        picker2.setMinValue(1);
+-        picker2.setMaxValue(100);
+-        picker2.setWrapSelectorWheel(false);
++        NumberPicker picker3 = (NumberPicker)vGroup.findViewById(R.id.picker3);
++        picker3.setMinValue(1);
++        picker3.setMaxValue(10);
++        picker3.setWrapSelectorWheel(false);
++        //picker3.setFormatter(new formatter);
++
+ 
+ 
+ 
+@@ -236,6 +244,9 @@
+             }
+         };
+ 
++
++
++
+         //취미선택
+         etHobby.setOnClickListener(new View.OnClickListener() {
+             @Override
+@@ -260,6 +271,9 @@
+             }
+         });
+ 
++
++
++
+         //시간선택
+         final EditText et_time = vGroup.findViewById(R.id.Time);
+         et_time.setOnClickListener(new View.OnClickListener() {
+@@ -634,6 +648,8 @@
+ 
+     }
+ 
++    public abstract Dialog onCreateDialog(Bundle savedInstanceState);
++
+     /*public class MyGalleryAdapter extends BaseAdapter {
+ 
+         Context context;
+Index: app/src/main/res/layout/cutomdialog.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\" android:orientation=\"vertical\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n\r\n            <ImageView\r\n                android:id=\"@+id/iv_meet\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"300dp\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:scaleType=\"centerCrop\"\r\n                android:src=\"@drawable/ic_launcher_background\" />\r\n\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/cu_meetDate\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n\r\n        android:text=\"시간\"\r\n        android:textColor=\"@color/none\"\r\n        android:layout_margin=\"5dp\">\r\n\r\n    </TextView>\r\n\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_margin=\"5dp\"\r\n        android:id=\"@+id/cu_meetAge\"\r\n        android:text=\"나이\"\r\n        android:textColor=\"@color/none\">\r\n\r\n    </TextView>\r\n\r\n    <TextView\r\n        android:id=\"@+id/cu_meetGen\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_margin=\"5dp\"\r\n        android:text=\"성별\"\r\n        android:textColor=\"@color/none\">\r\n\r\n    </TextView>\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"모임인원\"\r\n        android:textColor=\"@color/none\"\r\n        android:id=\"@+id/cu_numMember\"\r\n        android:layout_margin=\"5dp\">\r\n\r\n    </TextView>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n        <TextView\r\n            android:id=\"@+id/cu_place\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"위치\"\r\n            android:textColor=\"@color/none\"\r\n            android:layout_margin=\"5dp\">\r\n        </TextView>\r\n        <Button\r\n            android:id=\"@+id/cu_map\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"지도보기\"/>\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/cu_content\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"내용\"\r\n        android:textColor=\"@color/none\"\r\n        android:layout_margin=\"5dp\">\r\n\r\n    </TextView>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginRight=\"10dp\"\r\n                android:layout_marginBottom=\"10dp\"\r\n                android:orientation=\"horizontal\"\r\n\r\n                >\r\n\r\n                <Space\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"40\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/button_go\"\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"30dp\"\r\n                    android:layout_weight=\"15\"\r\n                    android:background=\"@drawable/btn_background\"\r\n                    android:text=\"채팅입장\"\r\n                    android:onClick=\"showDialog\"\r\n                    android:textSize=\"35px\" />\r\n\r\n            </LinearLayout>\r\n\r\n\r\n        </LinearLayout>\r\n\r\n    </ScrollView>\r\n\r\n</LinearLayout>\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/cutomdialog.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/res/layout/cutomdialog.xml	(date 1633333320848)
+@@ -77,14 +77,35 @@
+             android:textColor="@color/none"
+             android:layout_margin="5dp">
+         </TextView>
+-        <Button
+-            android:id="@+id/cu_map"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:text="지도보기"/>
+-
++
++    </LinearLayout>
++
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:layout_marginTop="10dp"
++                android:layout_marginRight="10dp"
++                android:layout_marginBottom="10dp"
++                android:orientation="horizontal"
++
++                >
++
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="wrap_content"
++                android:layout_weight="40" />
++
++                <Button
++                    android:id="@+id/cu_map"
++                    android:layout_width="0dp"
++                    android:layout_height="35dp"
++                    android:layout_weight="15"
++                    android:background="@drawable/btn_background3"
++                    android:text="지도보기"
++                    android:onClick="showDialog"
++                    android:textSize="35px" />
+ 
+-    </LinearLayout>
++        </LinearLayout>
+ 
+ 
+     <TextView
+@@ -100,7 +121,7 @@
+ 
+             <LinearLayout
+                 android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
++                android:layout_height="match_parent"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginRight="10dp"
+                 android:layout_marginBottom="10dp"
+@@ -116,7 +137,7 @@
+                 <Button
+                     android:id="@+id/button_go"
+                     android:layout_width="0dp"
+-                    android:layout_height="30dp"
++                    android:layout_height="35dp"
+                     android:layout_weight="15"
+                     android:background="@drawable/btn_background"
+                     android:text="채팅입장"
+Index: app/src/main/java/com/cookandroid/withmetabbar/certify/LivePlaceFragment.java
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/certify/LivePlaceFragment.java	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/java/com/cookandroid/withmetabbar/certify/LivePlaceFragment.java	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
+@@ -1,43 +0,0 @@
+-package com.cookandroid.withmetabbar.certify;
+-
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.Button;
+-import android.widget.Toolbar;
+-
+-import androidx.annotation.Nullable;
+-import androidx.fragment.app.Fragment;
+-
+-import com.cookandroid.withmetabbar.R;
+-
+-public class LivePlaceFragment extends Fragment {
+-    Button btn_done;
+-  
+-
+-    @Nullable
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-
+-
+-
+-        ViewGroup vGroup = (ViewGroup)
+-                inflater.inflate(R.layout.live_place_fragment, container, false);
+-        btn_done= vGroup.findViewById(R.id.btn_done);
+-        btn_done.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                JoinStartFragment joinStartFragment= new JoinStartFragment();
+-                ((MainActivity2)getActivity()).replaceFragment(joinStartFragment);
+-            }
+-        });
+-
+-
+-        return vGroup;
+-    }
+-
+-
+-
+-}
+Index: .idea/runConfigurations.xml
+===================================================================
+--- .idea/runConfigurations.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ .idea/runConfigurations.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/res/layout/live_place_fragment.xml
+===================================================================
+--- app/src/main/res/layout/live_place_fragment.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/res/layout/live_place_fragment.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
+@@ -1,46 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:orientation="vertical"
+-    tools:context=".MainActivity">
+-
+-
+-    <TextView
+-        android:id="@+id/textView10"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:textColor="@color/black"
+-        android:layout_marginTop="10dp"
+-        android:textSize="16dp"
+-        android:gravity="center"
+-        android:text="관심지역 소모임 찾기" />
+-
+-    <EditText
+-        android:id="@+id/editTextTextPersonName"
+-        android:layout_width="380dp"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="15dp"
+-        android:layout_marginTop="20dp"
+-        android:background="@drawable/shape"
+-        android:backgroundTint="@color/gray"
+-        android:ems="10"
+-        android:gravity="center"
+-        android:textSize="15dp"
+-        android:hint="동.읍.면을 입력해주세요"
+-        android:inputType="textPersonName" />
+-
+-    <Button
+-        android:id="@+id/btn_done"
+-        android:layout_width="100dp"
+-        android:layout_height="wrap_content"
+-        android:layout_marginTop="20dp"
+-        android:layout_gravity="center"
+-        android:backgroundTint="@color/Orange"
+-        android:background="@drawable/shape"
+-        android:textSize="12dp"
+-        android:text="확인" />
+-
+-</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main_web_view.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:orientation=\"vertical\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <EditText\r\n\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:id=\"@+id/et_address\"\r\n        android:textSize=\"60px\"\r\n        android:hint=\"주소검색(터치해주세요)\">\r\n\r\n    </EditText>\r\n    <EditText\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:id=\"@+id/et_address_detail\"\r\n        android:textSize=\"60px\"\r\n        android:hint=\"상세주소 입력\">\r\n\r\n    </EditText>\r\n\r\n    <Button\r\n        android:id=\"@+id/button\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginLeft=\"150dp\"\r\n        android:backgroundTint=\"@color/Orange\"\r\n        android:text=\"확인\">\r\n\r\n    </Button>\r\n\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main_web_view.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/res/layout/activity_main_web_view.xml	(date 1633319786902)
+@@ -11,16 +11,17 @@
+ 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
++        android:layout_marginTop="10dp"
+         android:id="@+id/et_address"
+-        android:textSize="60px"
+-        android:hint="주소검색(터치해주세요)">
++        android:textSize="50px"
++        android:hint="주소검색(클릭하세요)">
+ 
+     </EditText>
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/et_address_detail"
+-        android:textSize="60px"
++        android:textSize="50px"
+         android:hint="상세주소 입력">
+ 
+     </EditText>
+Index: app/src/main/res/drawable/btn_background3.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/btn_background3.xml	(date 1633319430787)
++++ app/src/main/res/drawable/btn_background3.xml	(date 1633319430787)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    android:shape="rectangle">
++    <solid android:color="#E6E2D7" />
++    <stroke android:color="#E6E2D7" android:width="1dp" />
++    <corners android:radius="10dp" />
++</shape>
+\ No newline at end of file
+Index: app/src/main/java/com/cookandroid/withmetabbar/NumberPickerDialog.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/cookandroid/withmetabbar/NumberPickerDialog.java	(date 1633331162559)
++++ app/src/main/java/com/cookandroid/withmetabbar/NumberPickerDialog.java	(date 1633331162559)
+@@ -0,0 +1,108 @@
++package com.cookandroid.withmetabbar;
++
++import android.app.AlertDialog;
++import android.app.Dialog;
++import android.content.DialogInterface;
++import android.os.Bundle;
++import android.widget.NumberPicker;
++
++import androidx.fragment.app.Fragment;
++
++import com.cookandroid.withmetabbar.navigation.FragmentPlus;
++
++public class NumberPickerDialog extends FragmentPlus {
++    private NumberPicker.OnValueChangeListener valueChangeListener;
++
++    String title;	//dialog 제목
++    String subtitle;	//dialog 부제목
++    int minvalue;	//입력가능 최소값
++    int maxvalue;	//입력가능 최대값
++    int step;	//선택가능 값들의 간격
++    int defvalue;	//dialog 시작 숫자 (현재값)
++
++    @Override
++    public Dialog onCreateDialog(Bundle savedInstanceState) {
++
++        final NumberPicker numberPicker = new NumberPicker(getActivity());
++
++        //Dialog 시작 시 bundle로 전달된 값을 받아온다
++
++        title = getArguments().getString("title");
++        subtitle = getArguments().getString("subtitle");
++        minvalue = getArguments().getInt("minvalue");
++        maxvalue = getArguments().getInt("maxvalue");
++        step = getArguments().getInt("step");
++        defvalue = getArguments().getInt("defvalue");
++
++        //최소값과 최대값 사이의 값들 중에서 일정한 step사이즈에 맞는 값들을 배열로 만든다.
++        String[] myValues = getArrayWithSteps(minvalue, maxvalue, step);
++
++        //displayedvalues를 사용하지 않고 min/max 값을 설정해서 선택을 받을 때는 선택한 보여지는 값이 바로 리턴되는 값이다.
++        //하지만 이런경우에는 보여지는 값은 최소값과 최대값사이에 값이 1씩 증가되는 값들이 모두 보여지게 된다. (별도의 step을 줄 수 없다)
++        //일정한 간격의 숫자만을 선택할 수 있게 하려면, String 배열에 display가 되는 값들을 입력해서 setDisplayedValues함수로 입력해줘야 하며
++        //이런경우 그 숫자가 리턴값이 아닌 배열의 인덱스가 리턴값이 된다. 따라서 minValue와 maxvalue는 이에 맞게 설정해 주어야 한다.
++
++        numberPicker.setMinValue(0);
++        numberPicker.setMaxValue((maxvalue - minvalue) / step);
++        numberPicker.setDisplayedValues(myValues);
++
++        //현재값 설정 (dialog를 실행했을 때 시작지점)
++        numberPicker.setValue((defvalue - minvalue) / step);
++        //키보드 입력을 방지
++        numberPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
++
++        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
++        //제목 설정
++        builder.setTitle(title);
++        //부제목 설정
++        builder.setMessage(subtitle);
++
++        //Ok button을 눌렀을 때 동작 설정
++        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
++            @Override
++            public void onClick(DialogInterface dialog, int which) {
++
++                //dialog를 종료하면서 값이 변했다는 함수는 onValuechange함수를 실행시킨다.
++                //실제 구현에서는 이 클레스의 함수를 재 정의해서 동작을 수행한다.
++
++                valueChangeListener.onValueChange(numberPicker,
++                        numberPicker.getValue(), numberPicker.getValue());
++            }
++        });
++
++        //취소 버튼을 눌렀을 때 동작 설정
++        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
++            @Override
++            public void onClick(DialogInterface dialog, int which) {
++
++            }
++        });
++
++        builder.setView(numberPicker);
++        //number picker 실행
++        return builder.create();
++    }
++
++    //Listener의 getter
++    public NumberPicker.OnValueChangeListener getValueChangeListener() {
++        return valueChangeListener;
++    }
++
++    //Listener의 setter
++    public void setValueChangeListener(NumberPicker.OnValueChangeListener valueChangeListener) {
++        this.valueChangeListener = valueChangeListener;
++    }
++
++    //최소값부터 최대값가지 일정 간격의 값을 String 배열로 출력
++    public String[] getArrayWithSteps(int min, int max, int step) {
++
++        int number_of_array = (max - min) / step + 1;
++
++        String[] result = new String[number_of_array];
++
++        for (int i = 0; i < number_of_array; i++) {
++            result[i] = String.valueOf(min + step * i);
++        }
++        return result;
++    }
++}
+Index: app/src/main/res/layout/fragment_plus.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"fill_parent\"\r\n    android:layout_height=\"fill_parent\"\r\n    android:orientation=\"vertical\" >\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <Gallery\r\n                android:id=\"@+id/gallery1\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:spacing=\"5dp\">\r\n\r\n            </Gallery>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"300dp\"\r\n                android:layout_gravity=\"center\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/imageView7\"\r\n                    android:layout_width=\"300dp\"\r\n                    android:layout_height=\"300dp\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:scaleType=\"fitXY\"\r\n                    app:srcCompat=\"@drawable/camera\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:orientation=\"horizontal\">\r\n\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/textView1\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"bottom\"\r\n                        android:layout_marginLeft=\"20dp\"\r\n                        android:layout_weight=\"1\"\r\n                        android:text=\"방 제목\"\r\n                        android:textSize=\"40px\" />\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/etTitle\"\r\n                        android:layout_width=\"200dp\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginRight=\"20dp\"\r\n                        android:layout_weight=\"1\"\r\n                        android:ems=\"10\"\r\n                        android:gravity=\"center\"\r\n                        android:inputType=\"textPersonName\"\r\n                        android:text=\"\" />\r\n\r\n                </LinearLayout>\r\n            </LinearLayout>\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"해시태그\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etHash\"\r\n                    android:layout_width=\"200dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView3\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"취미분야\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etHobby\"\r\n                    android:layout_width=\"200dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:hint=\"클릭하세요\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"\"\r\n                    android:textSize=\"40px\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView4\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"날짜/시간\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/Date\"\r\n                    android:layout_width=\"50dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:clickable=\"true\"\r\n                    android:editable=\"false\"\r\n                    android:ems=\"10\"\r\n                    android:focusable=\"false\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"Date\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/Time\"\r\n                    android:layout_width=\"50dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:clickable=\"true\"\r\n                    android:editable=\"false\"\r\n                    android:ems=\"10\"\r\n                    android:focusable=\"false\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"Time\"\r\n                    android:textSize=\"40px\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView5\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"나이\"\r\n                    android:textSize=\"40px\" />\r\n\r\n\r\n                <NumberPicker\r\n\r\n                    android:id=\"@+id/picker1\"\r\n\r\n                    android:layout_width=\"20dp\"\r\n                    android:layout_height=\"60dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n\r\n                    />\r\n\r\n                <Space\r\n                    android:layout_width=\"30dp\"\r\n                    android:layout_height=\"wrap_content\" />\r\n\r\n                <NumberPicker\r\n\r\n                    android:id=\"@+id/picker2\"\r\n                    android:layout_width=\"20dp\"\r\n                    android:layout_height=\"60dp\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n\r\n\r\n                    />\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView6\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"모집인원\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etNumMem\"\r\n                    android:layout_width=\"200dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:maxLength=\"2\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginTop=\"15dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView7\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:text=\"성별\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <RadioGroup\r\n                    android:id=\"@+id/gender_plus\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginLeft=\"80dp\"\r\n                    android:orientation=\"horizontal\">\r\n\r\n                    <RadioButton\r\n                        android:id=\"@+id/check_female\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"1\"\r\n                        android:buttonTint=\"@color/yellow\"\r\n                        android:text=\"여\" />\r\n\r\n                    <RadioButton\r\n                        android:id=\"@+id/check_male\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"1\"\r\n                        android:buttonTint=\"@color/yellow\"\r\n                        android:text=\"남\" />\r\n\r\n                    <RadioButton\r\n                        android:id=\"@+id/checkNo\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"1\"\r\n                        android:buttonTint=\"@color/yellow\"\r\n                        android:text=\"상관없음\" />\r\n\r\n                </RadioGroup>\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView8\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"설명\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etContent\"\r\n                    android:layout_width=\"180dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\">\r\n\r\n\r\n                <TextView\r\n                    android:id=\"@+id/textView9\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"bottom\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"장소\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <EditText\r\n                    android:id=\"@+id/etLocate\"\r\n                    android:layout_width=\"180dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginRight=\"20dp\"\r\n                    android:layout_weight=\"1\"\r\n                    android:ems=\"10\"\r\n                    android:gravity=\"center\"\r\n                    android:hint=\"클릭하세요\"\r\n                    android:inputType=\"textPersonName\"\r\n                    android:text=\"\"\r\n                    android:textSize=\"40px\" />\r\n\r\n\r\n            </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <Space\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\" />\r\n\r\n\r\n\r\n            <Button\r\n                android:id=\"@+id/btnTextToMap\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginRight=\"20dp\"\r\n                android:layout_weight=\"2\"\r\n                android:text=\"지도로보기\" />\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n\r\n        <Button\r\n                android:id=\"@+id/btn_meet\"\r\n                android:layout_width=\"300dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"60dp\"\r\n                android:background=\"@drawable/shape\"\r\n                android:text=\"모임 생성\"\r\n                android:textSize=\"45px\"\r\n                app:backgroundTint=\"@color/Orange\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n    </ScrollView>\r\n\r\n\r\n</LinearLayout>\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_plus.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/res/layout/fragment_plus.xml	(date 1633322329342)
+@@ -76,34 +76,7 @@
+             </LinearLayout>
+ 
+ 
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:orientation="horizontal">
+-
+-
+-                <TextView
+-                    android:id="@+id/textView2"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:layout_gravity="bottom"
+-                    android:layout_marginLeft="20dp"
+-                    android:layout_weight="1"
+-                    android:text="해시태그"
+-                    android:textSize="40px" />
+-
+-                <EditText
+-                    android:id="@+id/etHash"
+-                    android:layout_width="200dp"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginRight="20dp"
+-                    android:layout_weight="1"
+-                    android:ems="10"
+-                    android:gravity="center"
+-                    android:inputType="textPersonName"
+-                    android:text="" />
+-
+-            </LinearLayout>
++
+ 
+             <LinearLayout
+                 android:layout_width="match_parent"
+@@ -201,32 +174,37 @@
+                     android:textSize="40px" />
+ 
+ 
+-                <NumberPicker
+ 
+-                    android:id="@+id/picker1"
+-
++                <EditText
++                    android:id="@+id/Age1"
+                     android:layout_width="20dp"
+-                    android:layout_height="60dp"
++                    android:layout_height="wrap_content"
++                    android:layout_marginRight="10dp"
++
+                     android:layout_weight="1"
++                    android:clickable="true"
++                    android:editable="false"
+                     android:ems="10"
+-
+-                    />
++                    android:focusable="false"
++                    android:gravity="center"
++                    android:inputType="textPersonName"
++                    android:text="최소나이"
++                    android:textSize="40px" />
+ 
+-                <Space
+-                    android:layout_width="30dp"
+-                    android:layout_height="wrap_content" />
+-
+-                <NumberPicker
+-
+-                    android:id="@+id/picker2"
++                <EditText
++                    android:id="@+id/Age2"
+                     android:layout_width="20dp"
+-                    android:layout_height="60dp"
++                    android:layout_height="wrap_content"
+                     android:layout_marginRight="20dp"
+                     android:layout_weight="1"
++                    android:clickable="true"
++                    android:editable="false"
+                     android:ems="10"
+-
+-
+-                    />
++                    android:focusable="false"
++                    android:gravity="center"
++                    android:inputType="textPersonName"
++                    android:text="최대나이"
++                    android:textSize="40px" />
+ 
+ 
+             </LinearLayout>
+@@ -241,23 +219,25 @@
+                     android:id="@+id/textView6"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+-                    android:layout_gravity="bottom"
++                    android:layout_gravity="center"
+                     android:layout_marginLeft="20dp"
+                     android:layout_weight="1"
+                     android:text="모집인원"
+                     android:textSize="40px" />
+ 
+-                <EditText
+-                    android:id="@+id/etNumMem"
+-                    android:layout_width="200dp"
+-                    android:layout_height="wrap_content"
++
++                <NumberPicker
++
++                    android:id="@+id/picker3"
++
++                    android:layout_width="0dp"
++                    android:layout_height="60dp"
+                     android:layout_marginRight="20dp"
+-                    android:layout_weight="1"
++                    android:layout_weight="4"
+                     android:ems="10"
+-                    android:gravity="center"
+-                    android:inputType="textPersonName"
+-                    android:maxLength="2"
+-                    android:text="" />
++
++                    />
++
+ 
+             </LinearLayout>
+ 
+Index: app/src/main/res/layout/mypage_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"wrap_content\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:layout_gravity=\"center\"\r\n    tools:context=\".MainActivity\">\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"150dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <de.hdodenhof.circleimageview.CircleImageView\r\n            android:id=\"@+id/imagemy\"\r\n            android:layout_gravity=\"center_vertical\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_width=\"@dimen/myph\"\r\n            android:layout_height=\"@dimen/myph\"\r\n            android:src=\"@drawable/myph_x\"/>\r\n\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:layout_marginLeft=\"30dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_tName\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:text=\"이름:\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_mName\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:layout_marginLeft=\"5dp\"\r\n                    android:hint=\"이름\"\r\n                    android:textSize=\"40px\" />\r\n\r\n            </LinearLayout>\r\n\r\n\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_tnickname\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:text=\"닉네임:\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tv_nickname\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:layout_marginLeft=\"5dp\"\r\n                    android:hint=\"닉네임\"\r\n                    android:textSize=\"40px\" />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tintro\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:text=\"소개:\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/intro\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginTop=\"8dp\"\r\n                    android:layout_marginLeft=\"5dp\"\r\n                    android:hint=\"소개\"\r\n                    android:textSize=\"40px\" />\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/manner\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"매너온도\"\r\n                    android:layout_marginBottom=\"8dp\"\r\n                    android:textSize=\"40px\" />\r\n\r\n                <Space\r\n                    android:layout_width=\"85dp\"\r\n                    android:layout_height=\"35dp\" />\r\n\r\n                <Button\r\n                    android:id=\"@+id/btn_ondo\"\r\n                    android:layout_width=\"50dp\"\r\n                    android:layout_height=\"40dp\"\r\n                    android:backgroundTint=\"@color/yellow\"\r\n                    android:textSize=\"30px\"\r\n                    android:text=\"확인\" />\r\n\r\n            </LinearLayout>\r\n\r\n        </LinearLayout>\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_gravity=\"center\"\r\n        android:gravity=\"center\"\r\n        android:orientation=\"vertical\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/pointim\"\r\n            android:layout_width=\"@dimen/point\"\r\n            android:layout_height=\"@dimen/point\"\r\n            android:layout_marginTop=\"15dp\"\r\n            app:srcCompat=\"@drawable/point\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/textpoint\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"포인트\"\r\n            android:textSize=\"40px\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:textColor=\"@color/black\"/>\r\n        <Space\r\n            android:layout_width=\"210dp\"\r\n            android:layout_height=\"45dp\"/>\r\n\r\n\r\n\r\n\r\n        <Button\r\n            android:id=\"@+id/charge\"\r\n            android:layout_width=\"50dp\"\r\n            android:layout_height=\"40dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:backgroundTint=\"@color/yellow\"\r\n            android:textSize=\"30px\"\r\n            android:text=\"충전\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/myMeetLayout\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/intromodi\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"내 모임\"\r\n            android:textSize=\"40px\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:textColor=\"@color/black\"/>\r\n        <Space\r\n            android:layout_width=\"270dp\"\r\n            android:layout_height=\"35dp\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_mygroup\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"25dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/check\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"개인정보\"\r\n            android:textSize=\"40px\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:textColor=\"@color/black\"/>\r\n\r\n        <Space\r\n            android:layout_width=\"260dp\"\r\n            android:layout_height=\"35dp\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_certify\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"25dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/flist\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"친구목록\"\r\n            android:textSize=\"40px\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:textColor=\"@color/black\"/>\r\n        <Space\r\n            android:layout_width=\"260dp\"\r\n            android:layout_height=\"35dp\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_friends_list\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"25dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/block\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"지인차단\"\r\n            android:textSize=\"40px\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:textColor=\"@color/black\"/>\r\n        <Space\r\n            android:layout_width=\"260dp\"\r\n            android:layout_height=\"35dp\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_block\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"25dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/finvite\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"친구초대\"\r\n            android:textSize=\"40px\"\r\n            android:layout_marginTop=\"13dp\"\r\n\r\n            android:textColor=\"@color/black\"/>\r\n        <Space\r\n            android:layout_width=\"260dp\"\r\n            android:layout_height=\"35dp\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_friends_invite\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"25dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n\r\n\r\n    </LinearLayout>\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"1dp\"\r\n        android:background=\"@color/yellow\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:layout_marginRight=\"10dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\">\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/center\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"13dp\"\r\n            android:text=\"고객센터\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"40px\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView7\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"12dp\"\r\n            android:layout_marginLeft=\"8dp\"\r\n            android:text=\"평일 오전 9시 ~ 오후 6시 운영\"\r\n            android:textSize=\"9dp\" />\r\n\r\n        <Space\r\n            android:layout_width=\"140dp\"\r\n            android:layout_height=\"35dp\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/btn_center\"\r\n            android:layout_width=\"25dp\"\r\n            android:layout_height=\"25dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/arrowbtn\" />\r\n\r\n\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/mypage_fragment.xml	(revision 0f1b9c1722d2b32c454d3ea3257b0cda28f9dff7)
++++ app/src/main/res/layout/mypage_fragment.xml	(date 1633260724795)
+@@ -279,12 +279,14 @@
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="10dp"
++        android:visibility="gone"
+         android:orientation="horizontal">
+ 
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
++        android:visibility="gone"
+         android:orientation="horizontal">
+ 
+         <TextView
+@@ -315,12 +317,14 @@
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="10dp"
++        android:visibility="gone"
+         android:orientation="horizontal">
+ 
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
++        android:visibility="gone"
+         android:orientation="horizontal">
+ 
+         <TextView
+@@ -351,12 +355,15 @@
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="10dp"
++        android:visibility="gone"
+         android:orientation="horizontal">
+ 
+     </LinearLayout>
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
++        android:id="@+id/friends_invite"
++        android:visibility="gone"
+         android:orientation="horizontal">
+ 
+         <TextView

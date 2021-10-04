@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -55,7 +56,12 @@ public class MainActivity extends AppCompatActivity  {
     AlarmFragment alarmFragment= new AlarmFragment();
     //HomeFragment homeFragment= new HomeFragment();
     MainActivityHome mainActivityHome=new MainActivityHome();
-    FragmentPlus fragmentPlus= new FragmentPlus();
+    FragmentPlus fragmentPlus= new FragmentPlus() {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return null;
+        }
+    };
     MyPageFragment myPageFragment = new MyPageFragment();
     ChatFragment chatFragment= new ChatFragment();//채팅프래그먼트
     //DetailViewFragment detailViewFragment = new DetailViewFragment();

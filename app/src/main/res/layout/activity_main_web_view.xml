@@ -11,16 +11,17 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:id="@+id/et_address"
-        android:textSize="60px"
-        android:hint="주소검색(터치해주세요)">
+        android:textSize="50px"
+        android:hint="주소검색(클릭하세요)">
 
     </EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_address_detail"
-        android:textSize="60px"
+        android:textSize="50px"
         android:hint="상세주소 입력">
 
     </EditText>
