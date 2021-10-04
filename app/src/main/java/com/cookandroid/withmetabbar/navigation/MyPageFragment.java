@@ -3,6 +3,7 @@ package com.cookandroid.withmetabbar.navigation;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -65,7 +66,7 @@ public class MyPageFragment extends Fragment {
         ViewGroup vGroup = (ViewGroup) inflater.inflate(R.layout.mypage_fragment, container, false);
         TextView tvName= vGroup.findViewById(R.id.tv_mName);
         TextView tvNick= vGroup.findViewById(R.id.tv_nickname);
-        TextView tvGen= vGroup.findViewById(R.id.tv_meetGen);
+        TextView tvGen= vGroup.findViewById(R.id.tv_gender);
         TextView tvAge= vGroup.findViewById(R.id.tv_age);
         imageView = vGroup.findViewById(R.id.imagemy);
         myMeetLayout = vGroup.findViewById(R.id.myMeetLayout);
@@ -90,8 +91,17 @@ public class MyPageFragment extends Fragment {
                 //Log.d("memberInput", String.valueOf(member.mName));
                 tvName.setText(member.mName);
                 tvNick.setText(member.nick);
-                tvGen.setText(member.mGen);
-                tvAge.setText(member.mAge);
+                tvAge.setText(""+member.mAge);
+
+                //성별
+//                if (member.mGen==1){
+//                    tvGen.setText("남");
+//
+//                }else if (member.mAge==2){
+//                    tvGen.setText("여");
+//
+//                }else{
+//                }
                 member.getProfileImageUrl();
                 Log.d("getProfileImageUrl",member.getProfileImageUrl());
 //                imageView.setImageURI(Uri.parse(member.getProfileImageUrl()));
@@ -130,15 +140,15 @@ public class MyPageFragment extends Fragment {
             }
         });
 
-        btn_ondo= vGroup.findViewById(R.id.btn_ondo);
-        btn_ondo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OndoFragment ondoFragment= new OndoFragment();
-
-                ((MainActivity)getActivity()).replaceFragment(ondoFragment);
-            }
-        });
+//        btn_ondo= vGroup.findViewById(R.id.btn_ondo);
+//        btn_ondo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                OndoFragment ondoFragment= new OndoFragment();
+//
+//                ((MainActivity)getActivity()).replaceFragment(ondoFragment);
+//            }
+//        });
 
         btn_block= vGroup.findViewById(R.id.btn_block);
         btn_block.setOnClickListener(new View.OnClickListener() {
