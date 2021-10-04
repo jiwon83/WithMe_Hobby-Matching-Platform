@@ -30,6 +30,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.cookandroid.withmetabbar.certify.JoinStartFragment;
 import com.cookandroid.withmetabbar.certify.MainActivity2;
 import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
@@ -91,7 +92,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getImgUrl())
-                .override(150,200)
+                .override(Target.SIZE_ORIGINAL)
+                //.override(150,200)
                 .into(holder.iv_meet);
         holder.tv_meetTitle.setText(" "+ arrayList.get(position).getTitle());
         //Log.d("custom_imgUrl",arrayList.get(position).getImgUrl());
