@@ -255,7 +255,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
 
                                             boolean agePass = memberObj.mAge>arrayList.get(position).getMeetAge();
-                                            boolean genPass = memberObj.mGen>=arrayList.get(position).getMeetGen() || (arrayList.get(position).getMeetGen()==0) ;
+                                            boolean genPass = memberObj.mGen==arrayList.get(position).getMeetGen() || (arrayList.get(position).getMeetGen()==0) ;
                                             boolean numMemberPass =( userCount < arrayList.get(position).getNumMember() );
 
 
