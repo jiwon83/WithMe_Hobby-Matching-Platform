@@ -2,6 +2,7 @@ package com.cookandroid.withmetabbar.navigation;
 
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -36,6 +37,7 @@ import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.MainActivityHome;
 
 import com.cookandroid.withmetabbar.MainActivityWebView;
+import com.cookandroid.withmetabbar.NumberPickerDialog;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.ChatModel;
 import com.cookandroid.withmetabbar.model.Meet;
@@ -60,6 +62,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -70,7 +73,7 @@ import static android.app.Activity.RESULT_OK;
 
 
 @SuppressWarnings("deprecation")
-public class FragmentPlus extends Fragment {
+public abstract class FragmentPlus extends Fragment {
 
     String newKey;
     private Uri file;
@@ -85,6 +88,7 @@ public class FragmentPlus extends Fragment {
     private Uri imageUri;//모임이미지
     private String uid="";
     TimePickerDialog mTimePicker;
+    NumberPicker numberPicker;
     private Date meetDate;
     private int meetDateInt;//int형 데이터
     ArrayList<String> list = new ArrayList<>(); //bundle받기 위해 선택한 취미값들을 받아서 저장할 배열
@@ -101,6 +105,10 @@ public class FragmentPlus extends Fragment {
     String hobbyes="";
     StringBuffer stringBuffer = new StringBuffer();
     private Geocoder geocoder;
+
+
+    
+
 
     //취미목록 2021-09-27
     @Override
@@ -157,11 +165,12 @@ public class FragmentPlus extends Fragment {
 
         btnMeet= vGroup.findViewById(R.id.btn_meet);//버튼
         etTitle=vGroup.findViewById(R.id.etTitle);
-        //etAge=vGroup.findViewById(R.id.etMeetAge);
+        etAge=vGroup.findViewById(R.id.etMeetAge);
         etNumMem=vGroup.findViewById(R.id.etNumMem);
         etContent=vGroup.findViewById(R.id.etContent);
         etHobby=vGroup.findViewById(R.id.etHobby);
         EditText et_date = vGroup.findViewById(R.id.Date);
+        //EditText et_age = vGroup.findViewById(R.id.Age1);
         et_locate =vGroup.findViewById(R.id.etLocate);
         cb_male = vGroup.findViewById(R.id.check_male);
         cb_female = vGroup.findViewById(R.id.check_female);
@@ -169,15 +178,9 @@ public class FragmentPlus extends Fragment {
         gender_plus = vGroup.findViewById(R.id.gender_plus);
         btnTextToMap =vGroup.findViewById(R.id.btnTextToMap);
 
-        NumberPicker picker1 = (NumberPicker)vGroup.findViewById(R.id.picker1);
-        picker1.setMinValue(1);
-        picker1.setMaxValue(100);
-        picker1.setWrapSelectorWheel(false);
 
-        NumberPicker picker2 = (NumberPicker)vGroup.findViewById(R.id.picker2);
-        picker2.setMinValue(1);
-        picker2.setMaxValue(100);
-        picker2.setWrapSelectorWheel(false);
+
+
 
 
 
@@ -236,6 +239,9 @@ public class FragmentPlus extends Fragment {
             }
         };
 
+
+
+
         //취미선택
         etHobby.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,6 +265,9 @@ public class FragmentPlus extends Fragment {
                 new DatePickerDialog(getContext(), myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+
+
 
         //시간선택
         final EditText et_time = vGroup.findViewById(R.id.Time);
@@ -633,6 +642,8 @@ public class FragmentPlus extends Fragment {
         return latLng;
 
     }
+
+    public abstract Dialog onCreateDialog(Bundle savedInstanceState);
 
     /*public class MyGalleryAdapter extends BaseAdapter {
 

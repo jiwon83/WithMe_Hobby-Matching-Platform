@@ -1,0 +1,34 @@
+<changelist name="Uncommitted_changes_before_Update_at_2021-10-04_오후_4_51_[Default_Changelist]" date="1633333923679" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-10-04_오후_4_51_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021-10-04 오후 4:51 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable/title1.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-10-04_오후_4_51_[Default_Changelist]/title1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="app/src/main/res/drawable-hdpi/place_x.png" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable-hdpi/place_x.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-10-04_오후_4_51_[Default_Changelist]/place_x.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="app/src/main/res/drawable-xhdpi/place_x.png" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable-xhdpi/place_x.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-10-04_오후_4_51_[Default_Changelist]/place_x1.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="app/src/main/res/drawable-xxxhdpi/place_x.png" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable-xxxhdpi/place_x.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-10-04_오후_4_51_[Default_Changelist]/place_x2.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="app/src/main/res/drawable-mdpi/place_x.png" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable-mdpi/place_x.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-10-04_오후_4_51_[Default_Changelist]/place_x3.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="app/src/main/res/drawable-xxhdpi/place_x.png" />
+    <option name="AFTER_PATH" value="app/src/main/res/drawable-xxhdpi/place_x.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-10-04_오후_4_51_[Default_Changelist]/place_x4.png" />
+  </binary>
+</changelist>

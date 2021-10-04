@@ -60,7 +60,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/title"
+        android:id="@+id/title1"
         android:layout_width="@dimen/logow"
         android:layout_height="@dimen/logow"
         android:layout_marginTop="16dp"
@@ -68,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_x" />
+        app:srcCompat="@drawable/title1" />
 
     <ImageView
         android:id="@+id/naver"
