@@ -7,5 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface LatLngCallback {
-    void latLangCall(ArrayList<LatLng> list, ArrayList<Meet> meets);
+//    void latLangCall(ArrayList<LatLng> list, ArrayList<Meet> meets);
+    void latLangCall( ArrayList<Meet> meets);
 }

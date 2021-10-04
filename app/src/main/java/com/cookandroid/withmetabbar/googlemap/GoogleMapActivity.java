@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -16,7 +19,9 @@ import android.widget.Toast;
 
 import com.cookandroid.withmetabbar.CustomAdapter;
 import com.cookandroid.withmetabbar.R;
+import com.cookandroid.withmetabbar.chat.GroupMessageActivity;
 import com.cookandroid.withmetabbar.model.Meet;
+import com.cookandroid.withmetabbar.model.Member;
 import com.cookandroid.withmetabbar.navigation.OnItemClick;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,7 +42,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCallback,LatLngCallback,GoogleMap.OnMarkerClickListener {
 
@@ -65,6 +72,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     private ArrayList<Meet> arrayListMeet;
     //
     LatLngCallback mLatLngCallback;
+    Marker marker;
 
 
     @Override
@@ -105,7 +113,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         }
 
 
-        getContactsFromFirebase(this);
+        getContactsFromFirebase(this::latLangCall);
+
         //transferStringToAddress("서울시");
         //Log.d("thisLatLng_seul", String.valueOf(thisLatLng)); 잘 받아옴.
         //맵에 마커 표시
@@ -156,12 +165,13 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
 
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 10));//내위치를 지점으로
-        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(7), 2000, null); //zoomto:클수록 가깝게된다.
 
 
 
         Log.d("allLatLngs_onMapReady", String.valueOf(allLatLngs));//null
         mGoogleMap.setOnMarkerClickListener(this::onMarkerClick);//this?
+//        mGoogleMap.setOnMarkerClickListener(this::onMarkerClick);//this?
 
 
 
@@ -224,6 +234,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         return latLng;
 
     }
+
     public void getContactsFromFirebase(final LatLngCallback myCallback){
         LatLngCallback latLngCallback;
         latLngCallback=myCallback;
@@ -242,31 +253,31 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                     Log.d("allMeetList_getMeetDataFromFirebase", String.valueOf(allMeetList));
 
                     //meet의 장소 allMeetAddress 에 넣기
-                    allMeetAddress= new ArrayList<>();
-                    for (int i =0; i< allMeetList.size(); i++){
-                        allMeetAddress.add(allMeetList.get(i).getPlace());
-                    }
-
-                    Log.d("allMeetAddress_in_method", String.valueOf(allMeetAddress));
-
-                    // allMeetAddress(String) to LatLng (이전방식)
-                    if (allMeetAddress != null){
-                        for (int j=0; j<allMeetAddress.size(); j++){
-                            Log.d("allMeetAddress_size", String.valueOf(allMeetAddress.size()));//14
-                            LatLng latLng1= transferStringToAddress(allMeetAddress.get(j)); //각각의 주소를 Address객체(Address addressLogLat)로 받는다.
-                            Log.d("latLng1_check", String.valueOf(latLng1));
-                            Log.d("addressLogLat_out_method", String.valueOf(addressLogLat)); //ok
-
-                            Log.d("thisLatLng_out_method", String.valueOf(thisLatLng));//ok lat/lng: (37.4831816,127.06186590000002)
-                            //LatLng객체를 다 갯수로 셀 수 없기 때무에 받아온 각각의 LatLng객체를 배열에 담아준다. LatLng 배열 객체는 전역변수여야 한다.
-                            allLatLngs.add(latLng1);
-                            Log.d("allLatLngs_size_before", String.valueOf(allLatLngs.size()));//105
-                            //double 형으로 lat long값 받기
-                            //double lat = addressesLongLat.latitde;
-
-                        }
-
-                    }
+//                    allMeetAddress= new ArrayList<>();
+//                    for (int i =0; i< allMeetList.size(); i++){
+//                        allMeetAddress.add(allMeetList.get(i).getPlace());
+//                    }
+//
+//                    Log.d("allMeetAddress_in_method", String.valueOf(allMeetAddress));
+//
+//                    // allMeetAddress(String) to LatLng (이전방식)
+//                    if (allMeetAddress != null){
+//                        for (int j=0; j<allMeetAddress.size(); j++){
+//                            Log.d("allMeetAddress_size", String.valueOf(allMeetAddress.size()));//14
+//                            LatLng latLng1= transferStringToAddress(allMeetAddress.get(j)); //각각의 주소를 Address객체(Address addressLogLat)로 받는다.
+//                            Log.d("latLng1_check", String.valueOf(latLng1));
+//                            Log.d("addressLogLat_out_method", String.valueOf(addressLogLat)); //ok
+//
+//                            Log.d("thisLatLng_out_method", String.valueOf(thisLatLng));//ok lat/lng: (37.4831816,127.06186590000002)
+//                            //LatLng객체를 다 갯수로 셀 수 없기 때무에 받아온 각각의 LatLng객체를 배열에 담아준다. LatLng 배열 객체는 전역변수여야 한다.
+//                            allLatLngs.add(latLng1);
+//                            Log.d("allLatLngs_size_before", String.valueOf(allLatLngs.size()));//105
+//                            //double 형으로 lat long값 받기
+//                            //double lat = addressesLongLat.latitde;
+//
+//                        }
+//
+//                    }
                     //모임정보에서 아예 위도경도정보를 가져오는 방법 : error 앱종료 : java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
 //                    for (int i=0; i< allMeetList.size(); i++){
 //                        double lat = allMeetList.get(i).getLatLng().get(0);
@@ -279,8 +290,10 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
 
                 }
-                Log.d("allLatLngs_in_method", String.valueOf(allLatLngs));//
-                latLngCallback.latLangCall(allLatLngs,allMeetList);//LatingCallback interface 객체의 메서드에 값 집어 넣기
+                //makeMarkers(allMeetList);
+                Log.d("allMeetList_1004", String.valueOf(allMeetList));
+//                latLngCallback.latLangCall(allLatLngs,allMeetList);//LatingCallback interface 객체의 메서드에 값 집어 넣기
+                latLngCallback.latLangCall(allMeetList);
 
             }
 
@@ -304,40 +317,66 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
 
     @Override
-    public void latLangCall(ArrayList<LatLng> list,ArrayList<Meet> meets) {
-        globalAllLatLngs=list;//latlangCall에서만 사용하는 globalAllLatLngs에 넣어주기
+    public void latLangCall(ArrayList<Meet> meets) { //ArrayList<LatLng> list
+        //globalAllLatLngs=list;//latlangCall에서만 사용하는 globalAllLatLngs에 넣어주기
         globalAllmeet= meets;//latlangCall에서만 사용하는 globalAllmeet에 넣어주기
-        Log.d("globalAllLatLngs_in_callbackmethod", String.valueOf(globalAllLatLngs.size()));//ok//6
+        //Log.d("globalAllLatLngs_in_callbackmethod", String.valueOf(globalAllLatLngs.size()));//ok//6
         Log.d("globalAllmeet_in_callback", String.valueOf(globalAllmeet.size()));//ok//3
 
+        //test can make marker
+//        mGoogleMap.addMarker(new MarkerOptions().
+//                position(new LatLng(35,126))
+//        .title("test")); //ok
 
-        Marker [] markers = new Marker[globalAllLatLngs.size()];
+
+
+        Marker [] markers = new Marker[globalAllmeet.size()];
         //모임리스트의 크기만큼 반복
-        for(int index=0; index<globalAllLatLngs.size(); index++){
-            MarkerOptions makerOp = new MarkerOptions();
+//        for(int index=0; index<globalAllmeet.size(); index++){
+//            MarkerOptions makerOp = new MarkerOptions();
+//            try {
+//                //지금까지의 마커에 같은 위도경도 정보가 존재하지 않는다면
+//
+//                makerOp.position(new LatLng( globalAllLatLngs.get(index).latitude, globalAllLatLngs.get(index).longitude ))//position= Lating객체, 위경도
+//                .title(globalAllmeet.get(index).getTitle())
+////                        .snippet(globalAllmeet.get(index).getMid());
+//                .snippet(globalAllmeet.get(index).getHobbyCate().toString());
+//
+//
+//                markers[index]=mGoogleMap.addMarker(makerOp);
+//                markers[index].setTag(globalAllmeet.get(index).getMid());
+//
+//                Log.d("marker_mid_before",globalAllmeet.get(index).getMid());//ok
+//
+//
+//                Log.d("makerOp", String.valueOf(makerOp));
+//            }catch (Exception e){
+//                //expect null value
+//            }
+//
+//        }
+        for(int index=0; index<globalAllmeet.size(); index++){
+            MarkerOptions makerOp = new MarkerOptions();//1회성 마커옵셥
             try {
                 //지금까지의 마커에 같은 위도경도 정보가 존재하지 않는다면
 
-                makerOp.position(new LatLng( globalAllLatLngs.get(index).latitude, globalAllLatLngs.get(index).longitude ))//position= Lating객체, 위경도
-                .title(globalAllmeet.get(index).getTitle())
+                makerOp.position(new LatLng( globalAllmeet.get(index).latLng.get(0), globalAllmeet.get(index).latLng.get(1)))
+                        .title(globalAllmeet.get(index).getTitle())
 //                        .snippet(globalAllmeet.get(index).getMid());
-                .snippet(globalAllmeet.get(index).getHobbyCate().toString());
-
+                        .snippet(globalAllmeet.get(index).getHobbyCate().toString());
 
                 markers[index]=mGoogleMap.addMarker(makerOp);
                 markers[index].setTag(globalAllmeet.get(index).getMid());
 
-                Log.d("marker_mid_before",globalAllmeet.get(index).getMid());//ok
 
 
-                Log.d("makerOp", String.valueOf(makerOp));
+
             }catch (Exception e){
                 //expect null value
             }
 
-
         }
-        //Log.d("", markers.length);
+
     }
 
     public boolean UniqueMarkerCheck(Marker[] markers, LatLng latLng){
@@ -356,7 +395,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
         Log.d("marker-getTag", String.valueOf(marker.getTag()));
 
-        String mid = String.valueOf(marker.getTag());//null
+        String mid = String.valueOf(marker.getTag());
         Log.d("marker_of_mid",mid);//ok
         //mid로 meet 데이터 조회
         databaseReference2 = database.getReference("meet").child(mid);
@@ -373,6 +412,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
                 Meet meet = dataSnapshot.getValue(Meet.class);
                 Toast.makeText(GoogleMapActivity.this,"meet"+meet.title,Toast.LENGTH_SHORT).show();
+
                 //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
 //                arrayListMeet.clear(); //기존 배열리스트가 존재하지 않게 초기화
 //                for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
@@ -401,5 +441,163 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         //여기서 데이터를 조회하던지
 
         return false;
+    }
+    public void makeMarkers(ArrayList<Meet> meets){
+
+        marker= mGoogleMap.addMarker(new MarkerOptions()
+            .position(new LatLng(127,35))
+            .title("test"));
+        marker.setTag(0);
+
+        globalAllmeet= meets;//받아온 모든 meet정보를 다시 globalAllmeet에 넣어줌.
+
+        Log.d("globalAllmeet_in_callback", String.valueOf(globalAllmeet.size()));//2
+
+        //마커생성
+       // Marker [] markers = new Marker[globalAllmeet.size()];
+
+        //모임리스트의 크기만큼 반복
+        for(int index=0; index<globalAllmeet.size(); index++){
+            MarkerOptions makerOp = new MarkerOptions();//1회성 마커옵셥
+            try {
+                //지금까지의 마커에 같은 위도경도 정보가 존재하지 않는다면
+
+                makerOp.position(new LatLng( globalAllmeet.get(index).latLng.get(0), globalAllmeet.get(index).latLng.get(1)))
+                        .title(globalAllmeet.get(index).getTitle())
+//                        .snippet(globalAllmeet.get(index).getMid());
+                        .snippet(globalAllmeet.get(index).getHobbyCate().toString());
+
+                Log.d("maker_positon_lat", String.valueOf(globalAllmeet.get(index).latLng.get(0)));
+                Log.d("maker_positon_lng", String.valueOf(globalAllmeet.get(index).latLng.get(1)));
+
+
+//                markers[index]=mGoogleMap.addMarker(makerOp);
+                //mGoogleMap.addMarker(makerOp);
+                marker = mGoogleMap.addMarker(makerOp);
+
+                //markers[index].setTag(globalAllmeet.get(index).getMid());
+
+                Log.d("marker_mid_before",globalAllmeet.get(index).getMid());//ok
+
+
+                Log.d("makerOp", String.valueOf(makerOp));
+            }catch (Exception e){
+                //expect null value
+            }
+
+        }
+
+    }
+    public void enterChatRoom(){
+//        try {
+//            //제한 사항이 맞는지 검사.
+//            //user의 Gen, Age 가 meet의(또는 chatroom의) Gen, Age 와 동일한지 확인
+//            //userData 가져오기
+//            List<Member> members = new ArrayList<>();
+//
+//            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//            FirebaseDatabase.getInstance().getReference().child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                    //member 객체에 user에서 받아온 값 넣기
+//                    Member member = snapshot.getValue(Member.class);
+//                    memberObj.mGen =member.mGen;
+//                    memberObj.mAge =member.mAge;
+//
+//
+//                    List<String> keysChatroomUsers = new ArrayList<>();//chatrooms - uid -users 의 uid 값들을 답을 리스트
+//                    //구조변경
+//                    //채팅방에서 userCount 받아오기 chatrooms - chatroom uid(=meet uid)
+//                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//
+//
+//                            for (DataSnapshot item : snapshot.getChildren()){
+//                                keysChatroomUsers.add(item.getKey());
+//                            }
+//                            userCount = keysChatroomUsers.size(); //chatroom에 있는 user의 수
+//
+//
+//                            boolean agePass = memberObj.mAge>arrayList.get(position).getMeetAge();
+//                            boolean genPass = memberObj.mGen>=arrayList.get(position).getMeetGen() || (arrayList.get(position).getMeetGen()==0) ;
+//                            boolean numMemberPass =( userCount < arrayList.get(position).getNumMember() );
+//
+//
+//                            //조건 비교
+//                            try {
+//                                if (  agePass && genPass && numMemberPass){
+//
+//
+//                                    Map<String,Object> map = new HashMap<>();
+//                                    map.put(myUid,true);
+//
+//                                    Intent intent = new Intent (v.getContext(), GroupMessageActivity.class);
+//
+//                                    //chatrooms의 user에 내 uid 넣는것.
+//                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid)
+//                                            .child("users").updateChildren(map);
+//
+//                                    //chatroom 의 userCount에 현재 userCount 넣기.
+//                                    userCount += 1;
+//                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid)
+//                                            .child("userCount").setValue(userCount);
+//
+//                                    intent.putExtra("destinationRoom",arrayList.get(position).mid);// 채팅방을 띄우기 위한 chatroom uid 전송.
+//
+//
+//
+//                                    ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(v.getContext(),R.anim.fromright,R.anim.toleft);
+//                                    v.getContext().startActivity(intent,activityOptions.toBundle());
+//
+//                                }else {
+//
+//                                    //조건 불만족시 처리
+//                                    if (agePass==false){
+//                                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//                                        dialog = builder.setMessage("모임 연령을 확인하세요. 모임연령: "+arrayList.get(position).getMeetAge())
+//                                                .setNegativeButton("OK", null)
+//                                                .create();
+//                                        dialog.show();
+//                                    }else if (genPass ==false ){
+//                                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//                                        dialog = builder.setMessage("모임 성별을 확인하세요.")
+//                                                .setNegativeButton("OK", null)
+//                                                .create();
+//                                        dialog.show();
+//                                    }else {
+//                                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+//                                        dialog = builder.setMessage("인원이 마감되었습니다.")
+//                                                .setNegativeButton("OK", null)
+//                                                .create();
+//                                        dialog.show();
+//                                    }
+////
+//                                }
+//                            }catch (Exception e){
+//                                Toast.makeText(v.getContext(), e.getMessage(),  Toast.LENGTH_SHORT);
+//                            }
+//
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//                        }
+//                    });
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
+
+//        }catch (Exception e){
+//
+//        }
     }
 }

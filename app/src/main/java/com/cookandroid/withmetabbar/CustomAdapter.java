@@ -145,7 +145,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 TextView cu_numMember = v_d.findViewById(R.id.cu_numMember);
                 TextView cu_place = v_d.findViewById(R.id.cu_place);
                 TextView cu_content = v_d.findViewById(R.id.cu_content);
-                Button button_go = v_d.findViewById(R.id.button_go);
+                Button button_more = v_d.findViewById(R.id.button_go);
                 Button cu_map = v_d.findViewById(R.id.cu_map);
 
                 //meet정보출력 onClickview
@@ -217,11 +217,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                     }
                 });
 
-                button_go.setOnClickListener(new View.OnClickListener() {
+                //더보기버튼
+                button_more.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        try{
 
+                        try{
                             //제한 사항이 맞는지 검사.
                             //user의 Gen, Age 가 meet의(또는 chatroom의) Gen, Age 와 동일한지 확인
                             //userData 가져오기
