@@ -48,11 +48,11 @@
 
                 <EditText
                     android:id="@+id/etId"
-                    android:layout_width="220dp"
+                    android:layout_width="225dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:ems="10"
-                    android:hint="아이디"
+                    android:hint="이메일아이디 ex)000@gmail.com"
                     android:inputType="textPersonName"
                     android:textSize="40px" />
 
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:ems="10"
-                    android:hint="비밀번호"
+                    android:hint="비밀번호: 6자리 이상"
                     android:inputType="textPersonName"
                     android:textSize="40px" />
 
