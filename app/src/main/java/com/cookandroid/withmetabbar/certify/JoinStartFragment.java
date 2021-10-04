@@ -2,7 +2,9 @@ package com.cookandroid.withmetabbar.certify;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -30,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.MainActivityHome;
 import com.cookandroid.withmetabbar.MainActivityWebView;
+import com.cookandroid.withmetabbar.ProgressDialog;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.ChatModel;
 import com.cookandroid.withmetabbar.model.Meet;
@@ -89,7 +92,7 @@ public class JoinStartFragment extends Fragment {
     private String uid;
     private EditText etId, etPw, etName, etNick, etBirth, etAge, etPhoneNum, et_Birth;
     private RadioButton cb_male, cb_female, cb_no;
-
+    private ProgressDialog customProgressDialog;
 
 
     Button btn_join, btn_live, btn_hobbys;
@@ -98,8 +101,10 @@ public class JoinStartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        customProgressDialog = new ProgressDialog(getActivity());
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
+    }
 
     protected void onMainActivity(int requestCode, int resultCode, Intent data) {
         if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data !=
@@ -418,6 +423,7 @@ public class JoinStartFragment extends Fragment {
 
     //업로드
     public void contentUpload() {
+        customProgressDialog.show();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_hhmmss");
         sdf.format(timestamp);
@@ -486,6 +492,7 @@ public class JoinStartFragment extends Fragment {
 
                             @Override
                             public void onSuccess(Void aVoid) {
+                                customProgressDialog.dismiss();
                                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                 fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
                                 Intent intent = new Intent(getContext(), MainActivity.class);
