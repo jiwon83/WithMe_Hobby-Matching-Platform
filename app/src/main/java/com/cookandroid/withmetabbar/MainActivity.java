@@ -56,12 +56,7 @@ public class MainActivity extends AppCompatActivity  {
     AlarmFragment alarmFragment= new AlarmFragment();
     //HomeFragment homeFragment= new HomeFragment();
     MainActivityHome mainActivityHome=new MainActivityHome();
-    FragmentPlus fragmentPlus= new FragmentPlus() {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return null;
-        }
-    };
+    FragmentPlus fragmentPlus= new FragmentPlus();
     MyPageFragment myPageFragment = new MyPageFragment();
     ChatFragment chatFragment= new ChatFragment();//채팅프래그먼트
     //DetailViewFragment detailViewFragment = new DetailViewFragment();

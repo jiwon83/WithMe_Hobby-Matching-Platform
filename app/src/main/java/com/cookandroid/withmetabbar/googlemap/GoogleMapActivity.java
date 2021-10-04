@@ -602,6 +602,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                 }
             });
 
+
         }catch (Exception e){
 
         }
