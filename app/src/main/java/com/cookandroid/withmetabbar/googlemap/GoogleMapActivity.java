@@ -73,6 +73,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     //
     LatLngCallback mLatLngCallback;
     Marker marker;
+    private AlertDialog dialog;
+    private int userCount=1;
 
 
     @Override
@@ -412,7 +414,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
             public void onDataChange(@NonNull  DataSnapshot dataSnapshot) {
                 Meet meet = dataSnapshot.getValue(Meet.class);
                 Toast.makeText(GoogleMapActivity.this,"meet"+meet.title,Toast.LENGTH_SHORT).show();
-
+                enterChatRoom(mid,meet);
                 //실제적으로 파이어베이스 데이터베이스의 데이터를 받아오는 곳
 //                arrayListMeet.clear(); //기존 배열리스트가 존재하지 않게 초기화
 //                for (DataSnapshot snapshot : dataSnapshot.getChildren()){//반복문으로 데이터 List를 추출해냄.
@@ -488,116 +490,120 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         }
 
     }
-    public void enterChatRoom(){
-//        try {
-//            //제한 사항이 맞는지 검사.
-//            //user의 Gen, Age 가 meet의(또는 chatroom의) Gen, Age 와 동일한지 확인
-//            //userData 가져오기
-//            List<Member> members = new ArrayList<>();
-//
-//            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//
-//            FirebaseDatabase.getInstance().getReference().child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                    //member 객체에 user에서 받아온 값 넣기
-//                    Member member = snapshot.getValue(Member.class);
-//                    memberObj.mGen =member.mGen;
-//                    memberObj.mAge =member.mAge;
-//
-//
-//                    List<String> keysChatroomUsers = new ArrayList<>();//chatrooms - uid -users 의 uid 값들을 답을 리스트
-//                    //구조변경
-//                    //채팅방에서 userCount 받아오기 chatrooms - chatroom uid(=meet uid)
-//                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//
-//
-//                            for (DataSnapshot item : snapshot.getChildren()){
-//                                keysChatroomUsers.add(item.getKey());
-//                            }
-//                            userCount = keysChatroomUsers.size(); //chatroom에 있는 user의 수
-//
-//
-//                            boolean agePass = memberObj.mAge>arrayList.get(position).getMeetAge();
-//                            boolean genPass = memberObj.mGen>=arrayList.get(position).getMeetGen() || (arrayList.get(position).getMeetGen()==0) ;
-//                            boolean numMemberPass =( userCount < arrayList.get(position).getNumMember() );
-//
-//
-//                            //조건 비교
-//                            try {
-//                                if (  agePass && genPass && numMemberPass){
-//
-//
-//                                    Map<String,Object> map = new HashMap<>();
-//                                    map.put(myUid,true);
-//
-//                                    Intent intent = new Intent (v.getContext(), GroupMessageActivity.class);
-//
-//                                    //chatrooms의 user에 내 uid 넣는것.
-//                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid)
-//                                            .child("users").updateChildren(map);
-//
-//                                    //chatroom 의 userCount에 현재 userCount 넣기.
-//                                    userCount += 1;
-//                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(arrayList.get(position).mid)
-//                                            .child("userCount").setValue(userCount);
-//
-//                                    intent.putExtra("destinationRoom",arrayList.get(position).mid);// 채팅방을 띄우기 위한 chatroom uid 전송.
-//
-//
-//
-//                                    ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(v.getContext(),R.anim.fromright,R.anim.toleft);
-//                                    v.getContext().startActivity(intent,activityOptions.toBundle());
-//
-//                                }else {
-//
-//                                    //조건 불만족시 처리
-//                                    if (agePass==false){
-//                                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//                                        dialog = builder.setMessage("모임 연령을 확인하세요. 모임연령: "+arrayList.get(position).getMeetAge())
-//                                                .setNegativeButton("OK", null)
-//                                                .create();
-//                                        dialog.show();
-//                                    }else if (genPass ==false ){
-//                                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//                                        dialog = builder.setMessage("모임 성별을 확인하세요.")
-//                                                .setNegativeButton("OK", null)
-//                                                .create();
-//                                        dialog.show();
-//                                    }else {
-//                                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//                                        dialog = builder.setMessage("인원이 마감되었습니다.")
-//                                                .setNegativeButton("OK", null)
-//                                                .create();
-//                                        dialog.show();
-//                                    }
-////
-//                                }
-//                            }catch (Exception e){
-//                                Toast.makeText(v.getContext(), e.getMessage(),  Toast.LENGTH_SHORT);
-//                            }
-//
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            });
+    public void enterChatRoom(String mid, Meet meet){
+        Member memberObj = new Member();
+        String meetId = mid;
+        Meet meet_clicked = meet;
+        try {
+            //제한 사항이 맞는지 검사.
+            //user의 Gen, Age 가 meet의(또는 chatroom의) Gen, Age 와 동일한지 확인
+            //userData 가져오기
+            List<Member> members = new ArrayList<>();
 
-//        }catch (Exception e){
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            //user data
+            FirebaseDatabase.getInstance().getReference().child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    //member 객체에 user에서 받아온 값 넣기
+                    Member member = snapshot.getValue(Member.class);
+                    memberObj.mGen =member.mGen;
+                    memberObj.mAge =member.mAge;
+
+
+                    List<String> keysChatroomUsers = new ArrayList<>();//chatrooms - uid -users 의 uid 값들을 답을 리스트
+                    //구조변경
+                    //채팅방에서 userCount 받아오기 chatrooms - chatroom uid(=meet uid)
+                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(meetId).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+
+                            for (DataSnapshot item : snapshot.getChildren()){
+                                keysChatroomUsers.add(item.getKey());
+                            }
+                            userCount = keysChatroomUsers.size(); //chatroom에 있는 user의 수
+
+                            //arrayList.get(position) = 해당 meet정보
+                            boolean agePass = memberObj.mAge> meet_clicked.getMeetAge();
+                            boolean genPass = memberObj.mGen>=meet_clicked.getMeetGen() || (meet_clicked.getMeetGen()==0) ;
+                            boolean numMemberPass =( userCount < meet_clicked.getNumMember() );
+
+
+                            //조건 비교
+                            try {
+                                if (  agePass && genPass && numMemberPass){
+
+
+                                    Map<String,Object> map = new HashMap<>();
+                                    map.put(meetId,true);
+
+                                    Intent intent = new Intent (getApplicationContext(), GroupMessageActivity.class);
+
+                                    //chatrooms의 user에 내 uid 넣는것.
+                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(meet_clicked.mid)
+                                            .child("users").updateChildren(map);
+
+                                    //chatroom 의 userCount에 현재 userCount 넣기.
+                                    userCount += 1;
+                                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(meet_clicked.mid)
+                                            .child("userCount").setValue(userCount);
+
+                                    intent.putExtra("destinationRoom",meet_clicked.mid);// 채팅방을 띄우기 위한 chatroom uid 전송.
+
+
+
+                                    ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(getApplicationContext(),R.anim.fromright,R.anim.toleft);
+                                    getApplicationContext().startActivity(intent,activityOptions.toBundle());
+
+                                }else {
+
+                                    //조건 불만족시 처리
+                                    if (agePass==false){
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                                        dialog = builder.setMessage("모임 연령을 확인하세요. 모임연령: "+meet_clicked.getMeetAge())
+                                                .setNegativeButton("OK", null)
+                                                .create();
+                                        dialog.show();
+                                    }else if (genPass ==false ){
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                                        dialog = builder.setMessage("모임 성별을 확인하세요.")
+                                                .setNegativeButton("OK", null)
+                                                .create();
+                                        dialog.show();
+                                    }else {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                                        dialog = builder.setMessage("인원이 마감되었습니다.")
+                                                .setNegativeButton("OK", null)
+                                                .create();
+                                        dialog.show();
+                                    }
 //
-//        }
+                                }
+                            }catch (Exception e){
+                                Toast.makeText(getApplicationContext(), e.getMessage(),  Toast.LENGTH_SHORT);
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }catch (Exception e){
+
+        }
     }
 }
