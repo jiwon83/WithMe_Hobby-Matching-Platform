@@ -175,7 +175,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_marginLeft="40dp">
+        android:layout_marginLeft="20dp">
+
+        <ImageView
+            android:id="@+id/img_place"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/Orange"
+            android:src="@drawable/place_x"/>
 
 
         <TextView
@@ -230,32 +237,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_marginLeft="20dp">
-
-            <ImageView
-                android:id="@+id/img_place"
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/Orange"
-                android:src="@drawable/place_x"/>
-
+            android:layout_marginLeft="40dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="위치"
+                android:text="취미분야"
                 android:textSize="40px"
                 android:textColor="@color/none">
 
             </TextView>
 
 
+
     <TextView
-        android:id="@+id/cu_content"
+        android:id="@+id/cu_hobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="내용"
+        android:text="취미분야"
         android:textColor="@color/black"
         android:textSize="40px"
         android:layout_margin="5dp">
@@ -263,6 +263,37 @@
     </TextView>
 
         </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="40dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="내용"
+                    android:textSize="40px"
+                    android:textColor="@color/none">
+
+                </TextView>
+
+
+
+                <TextView
+                    android:id="@+id/cu_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내용"
+                    android:textColor="@color/black"
+                    android:textSize="40px"
+                    android:layout_margin="5dp">
+
+                </TextView>
+
+            </LinearLayout>
 
 
             <LinearLayout

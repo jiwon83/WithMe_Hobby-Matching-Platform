@@ -128,7 +128,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.tv_hobbyCate.setText(""+arrayList.get(position).getHobbyCate());
 
         //더보기 버튼
-        holder.button_check.setOnClickListener(new View.OnClickListener() {
+        holder.btn_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View OnCickview) {
 
@@ -147,7 +147,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 TextView cu_numMember = v_d.findViewById(R.id.cu_numMember);
                 TextView cu_place = v_d.findViewById(R.id.cu_place);
                 TextView cu_content = v_d.findViewById(R.id.cu_content);
-                Button button_more = v_d.findViewById(R.id.button_go);
+                Button btn_enter = v_d.findViewById(R.id.button_go);
                 Button cu_map = v_d.findViewById(R.id.cu_map);
 
                 //meet정보출력 onClickview
@@ -219,8 +219,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                     }
                 });
 
-                //더보기버튼
-                button_more.setOnClickListener(new View.OnClickListener() {
+                //채팅입장
+                btn_enter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
@@ -498,7 +498,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         ImageView iv_meet;
         TextView tv_meetTitle,tv_meetDate, tv_meetAge, tv_numMember, tv_meetGen, tv_place, tv_hobbyCate;
         ImageView img_meetDate, img_place;
-        Button button_check;
+        Button btn_more;
 
 
 
@@ -521,7 +521,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.tv_hobbyCate=itemView.findViewById(R.id.tv_hobbyCate);
             this.img_meetDate=itemView.findViewById(R.id.img_meetDate);
             this.img_place=itemView.findViewById(R.id.img_place);
-            this.button_check=itemView.findViewById(R.id.button_check);
+            this.btn_more=itemView.findViewById(R.id.button_check);
 
 
 

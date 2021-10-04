@@ -229,7 +229,7 @@
                     android:layout_weight="40" />
 
                 <Button
-                    android:id="@+id/button_check"
+                    android:id="@+id/btn_more"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="15"
