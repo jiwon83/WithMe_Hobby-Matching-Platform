@@ -3,7 +3,7 @@
     <dimen name="naver">50dp</dimen>
     <dimen name="kakao">50dp</dimen>
     <dimen name="facebook">50dp</dimen>
-    <dimen name="logow">200dp</dimen>
+    <dimen name="logow">300dp</dimen>
     <dimen name="alarm_x">60dp</dimen>
     <dimen name="coin">50dp</dimen>
     <dimen name="coin2">50dp</dimen>
