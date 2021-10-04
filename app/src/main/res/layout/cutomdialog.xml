@@ -22,18 +22,66 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+
+            >
+
+            <ImageView
+                android:id="@+id/img_meetDate"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/Orange"
+                android:src="@drawable/calendar"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간"
+                android:textColor="@color/none"
+                android:textSize="40px"
+                android:layout_margin="5dp">
+
+            </TextView>
 
 
-    <TextView
+
+            <TextView
         android:id="@+id/cu_meetDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="시간"
-        android:textColor="@color/none"
+                android:text="시간"
+        android:textColor="@color/black"
+                android:textSize="40px"
         android:layout_margin="5dp">
 
     </TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="40dp"
+
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="나이"
+                android:textSize="40px"
+                android:textColor="@color/none">
+
+            </TextView>
 
 
     <TextView
@@ -42,9 +90,31 @@
         android:layout_margin="5dp"
         android:id="@+id/cu_meetAge"
         android:text="나이"
-        android:textColor="@color/none">
+        android:textSize="40px"
+        android:textColor="@color/black">
 
     </TextView>
+
+        </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="40dp"
+
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="성별"
+                android:textSize="40px"
+                android:textColor="@color/none">
+
+            </TextView>
 
     <TextView
         android:id="@+id/cu_meetGen"
@@ -52,29 +122,68 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="성별"
-        android:textColor="@color/none">
+        android:textSize="40px"
+        android:textColor="@color/black">
 
     </TextView>
+            </LinearLayout>
 
-    <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="40dp"
+
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="모집인원"
+                android:textSize="40px"
+                android:textColor="@color/none">
+
+            </TextView>
+
+
+            <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="모임인원"
-        android:textColor="@color/none"
+        android:textColor="@color/black"
         android:id="@+id/cu_numMember"
+                android:textSize="40px"
         android:layout_margin="5dp">
 
     </TextView>
 
+        </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="40dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="위치"
+            android:textSize="40px"
+            android:textColor="@color/none">
+
+        </TextView>
         <TextView
             android:id="@+id/cu_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="위치"
-            android:textColor="@color/none"
+            android:textColor="@color/black"
+            android:textSize="40px"
             android:layout_margin="5dp">
         </TextView>
 
@@ -100,12 +209,36 @@
                     android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_weight="15"
-                    android:background="@drawable/btn_background3"
+                    android:background="@color/lite_gray"
                     android:text="지도보기"
                     android:onClick="showDialog"
                     android:textSize="35px" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp">
+
+            <ImageView
+                android:id="@+id/img_place"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/Orange"
+                android:src="@drawable/place_x"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="위치"
+                android:textSize="40px"
+                android:textColor="@color/none">
+
+            </TextView>
 
 
     <TextView
@@ -113,10 +246,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="내용"
-        android:textColor="@color/none"
+        android:textColor="@color/black"
+        android:textSize="40px"
         android:layout_margin="5dp">
 
     </TextView>
+
+        </LinearLayout>
 
 
             <LinearLayout
@@ -139,7 +275,7 @@
                     android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_weight="15"
-                    android:background="@drawable/btn_background"
+                    android:background="@color/Orange"
                     android:text="채팅입장"
                     android:onClick="showDialog"
                     android:textSize="35px" />
