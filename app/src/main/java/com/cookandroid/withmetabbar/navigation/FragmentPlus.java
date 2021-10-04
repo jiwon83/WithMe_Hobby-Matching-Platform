@@ -20,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
@@ -156,7 +157,7 @@ public class FragmentPlus extends Fragment {
 
         btnMeet= vGroup.findViewById(R.id.btn_meet);//버튼
         etTitle=vGroup.findViewById(R.id.etTitle);
-        etAge=vGroup.findViewById(R.id.etMeetAge);
+        //etAge=vGroup.findViewById(R.id.etMeetAge);
         etNumMem=vGroup.findViewById(R.id.etNumMem);
         etContent=vGroup.findViewById(R.id.etContent);
         etHobby=vGroup.findViewById(R.id.etHobby);
@@ -167,6 +168,19 @@ public class FragmentPlus extends Fragment {
         cb_no = vGroup.findViewById(R.id.checkNo);
         gender_plus = vGroup.findViewById(R.id.gender_plus);
         btnTextToMap =vGroup.findViewById(R.id.btnTextToMap);
+
+        NumberPicker picker1 = (NumberPicker)vGroup.findViewById(R.id.picker1);
+        picker1.setMinValue(1);
+        picker1.setMaxValue(100);
+        picker1.setWrapSelectorWheel(false);
+
+        NumberPicker picker2 = (NumberPicker)vGroup.findViewById(R.id.picker2);
+        picker2.setMinValue(1);
+        picker2.setMaxValue(100);
+        picker2.setWrapSelectorWheel(false);
+
+
+
 
         final Geocoder geocoder = new Geocoder(getContext());
 
