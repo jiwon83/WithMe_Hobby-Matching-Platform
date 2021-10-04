@@ -4,6 +4,7 @@ package com.cookandroid.withmetabbar.navigation;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.media.MediaPlayer;
@@ -32,6 +33,7 @@ import com.cookandroid.withmetabbar.MainActivity;
 import com.cookandroid.withmetabbar.MainActivityHome;
 
 import com.cookandroid.withmetabbar.MainActivityWebView;
+import com.cookandroid.withmetabbar.ProgressDialog;
 import com.cookandroid.withmetabbar.R;
 import com.cookandroid.withmetabbar.model.ChatModel;
 import com.cookandroid.withmetabbar.model.Meet;
@@ -96,7 +98,7 @@ public class FragmentPlus extends Fragment {
     String hobbyes="";
     StringBuffer stringBuffer = new StringBuffer();
     private Geocoder geocoder;
-
+    ProgressDialog customProgressDialog;
 
     
 
@@ -105,6 +107,8 @@ public class FragmentPlus extends Fragment {
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        customProgressDialog = new ProgressDialog(getActivity());
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 
 
@@ -468,6 +472,7 @@ public class FragmentPlus extends Fragment {
         }
     }
     public void contentUpload(){
+        customProgressDialog.show();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_hhmmss");
         sdf.format(timestamp);
@@ -576,7 +581,7 @@ public class FragmentPlus extends Fragment {
                                 map.put("mid", key);
                                 FirebaseDatabase.getInstance().getReference().child("meet").child(pushkey).updateChildren(map);//채틸방 경
                                 FirebaseDatabase.getInstance().getReference().child("chatrooms").child(pushkey).setValue(chatModel);
-
+                                customProgressDialog.dismiss();
 
 
 
