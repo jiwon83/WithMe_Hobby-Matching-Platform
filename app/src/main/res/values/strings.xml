@@ -3,18 +3,18 @@
     <string name="home">home</string>
 
     <string-array name="macro">
-        <item>가는 중 입니다.</item>
-        <item>도착 했어요.</item>
-        <item>"\u2103"</item>
-        <item>"\u00AE"</item>
-        <item>"\u1F600"</item>
-        <item>"\u1F60D"</item>
-        <item>\u1F60</item>
-        <item>도착 5.</item>
-        <item>도착 5.</item>
-        <item>도착 5.</item>
-        <item>도착 5.</item>
-        <item>도착 5.</item>
+        <item>가는 중 입니다</item>
+        <item>도착 했어요</item>
+        <item>안녕하세요</item>
+        <item>반가워요</item>
+        <item>즐거웠어요</item>
+        <item>최고에요</item>
+        <item>멋져요</item>
+        <item>찬성합니다</item>
+        <item>반대합니다</item>
+        <item>좋아요</item>
+        <item>수고하셨어요</item>
+        <item>다음에 만나요</item>
     </string-array>
 
 
