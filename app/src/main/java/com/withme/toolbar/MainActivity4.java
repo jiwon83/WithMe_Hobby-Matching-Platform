@@ -1,0 +1,27 @@
+package com.withme.toolbar;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
+import com.withme.R;
+import com.withme.navigation.AlarmFragment;
+import com.withme.navigation.HomeFragment;
+
+public class MainActivity4 extends AppCompatActivity {
+
+    FragmentManager fragmentManager = getSupportFragmentManager();//1
+    AlarmFragment alarmFragment = new AlarmFragment();//2
+    HomeFragment homeFragment = new HomeFragment();
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main4);
+
+
+
+    }
+}
