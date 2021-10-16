@@ -12,7 +12,7 @@
 
     android:orientation="vertical"
 
-    tools:context="com.cookandroid.withmetabbar.DaumWebViewActivity">
+    tools:context="com.withme.DaumWebViewActivity">
 
 
     <WebView
