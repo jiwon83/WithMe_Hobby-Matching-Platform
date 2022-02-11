@@ -437,90 +437,97 @@ public class JoinStartFragment extends Fragment {
 
             StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("userImages").child(imageFileName);
 
-            storageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            //String imageUrl2 = task.getResult().getUploadSessionUri().toString();
-                            Member member = new Member();
-                            member.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            member.id = etId.getText().toString().trim();
-                            member.pw = etPw.getText().toString().trim();
-                            member.mName = etName.getText().toString().trim();
-                            member.nick = etNick.getText().toString().trim();
-//                                                    member.profileImageUrl= file.toString();
-
-                            //프로필 이미지 없을 시 예외처리
-                            if (uri.toString() != null){
-                                member.profileImageUrl = uri.toString();
+            if (imageUri != null){
+                storageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                inputUserDate();
                             }
-                            try {
-                                if (Integer.parseInt(etAge.getText().toString()) != 0) {
-                                    member.mAge = Integer.parseInt(etAge.getText().toString());
-                                }
+                        });
+                        Toast.makeText(getContext(), "image upload success", Toast.LENGTH_SHORT).show();
+                    }
 
-                            } catch (Exception e) {
-
-                            }
-                            member.mPlace = btn_live.getText().toString();
-                            member.mBirth = meetDate;
-
-                            //성별체크
-                            if (cb_male.isChecked()) {
-                                member.mGen = 1; //남자는 1
-                            } else if (cb_female.isChecked()) {
-                                member.mGen = 2; //여자는 2
-                            } else if (cb_no.isChecked()) {
-                                member.mGen = 0; //무관은 0
-                            } else {
-                                Toast.makeText(getContext(), "성별을 체크하세요.", Toast.LENGTH_SHORT);
-                            }
+                });
+            }else{
+                inputUserDate();
+            }
 
 
-                            //
-                            int totalHobbyCount2 = list.size();
-                            for (int index = 0; index < totalHobbyCount2; index++) {
-                                member.hobbyCate.add(list.get(index));
-                            }
-
-
-                            //빈곳이 없는지 체크
-                            if (member.id.equals("") || member.pw.equals("") || member.mName.equals("") || member.nick.equals("") || member.mAge == 0 || member.mPlace.equals("")) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                dialog = builder.setMessage("Empty text exist")
-                                        .setNegativeButton("OK", null)
-                                        .create();
-                                dialog.show();
-                                return;
-                            }
-
-
-                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
-
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    customProgressDialog.dismiss();
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
-                                    Intent intent = new Intent(getContext(), MainActivity.class);
-                                    startActivity(intent);
-
-                                }
-                            });
-                        }
-                    });
-                    Toast.makeText(getContext(), "image upload success", Toast.LENGTH_SHORT).show();
-                }
-            });
         }catch (Exception e){
-            Toast.makeText(getContext(), "앱이 예상치 못하게 종료되었습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "정보 입력에 문제가 있습니다.", Toast.LENGTH_SHORT).show();
         }
 
 
     }
+    //Firebase에 user data input
+    public void inputUserDate(){
+        //String imageUrl2 = task.getResult().getUploadSessionUri().toString();
+        Member member = new Member();
+        member.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        member.id = etId.getText().toString().trim();
+        member.pw = etPw.getText().toString().trim();
+        member.mName = etName.getText().toString().trim();
+        member.nick = etNick.getText().toString().trim();
+//                                                    member.profileImageUrl= file.toString();
 
+        try {
+            if (Integer.parseInt(etAge.getText().toString()) != 0) {
+                member.mAge = Integer.parseInt(etAge.getText().toString());
+            }
+
+        } catch (Exception e) {
+
+        }
+        member.mPlace = btn_live.getText().toString();
+        member.mBirth = meetDate;
+
+        //성별체크
+        if (cb_male.isChecked()) {
+            member.mGen = 1; //남자는 1
+        } else if (cb_female.isChecked()) {
+            member.mGen = 2; //여자는 2
+        } else if (cb_no.isChecked()) {
+            member.mGen = 0; //무관은 0
+        } else {
+            Toast.makeText(getContext(), "성별을 체크하세요.", Toast.LENGTH_SHORT);
+        }
+
+
+        //
+        int totalHobbyCount2 = list.size();
+        for (int index = 0; index < totalHobbyCount2; index++) {
+            member.hobbyCate.add(list.get(index));
+        }
+
+
+        //빈곳이 없는지 체크
+        if (member.id.equals("") || member.pw.equals("") || member.mName.equals("") || member.nick.equals("") || member.mAge == 0 || member.mPlace.equals("")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            dialog = builder.setMessage("Empty text exist")
+                    .setNegativeButton("OK", null)
+                    .create();
+            dialog.show();
+            return;
+        }
+
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+            @Override
+            public void onSuccess(Void aVoid) {
+                customProgressDialog.dismiss();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().remove(JoinStartFragment.this).commit();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+
+            }
+
+
+        });
+    }
 
     //이부분 데이터 TaskJOin 수정
     public class TaskJoin extends AsyncTask<String, Void, String> {
