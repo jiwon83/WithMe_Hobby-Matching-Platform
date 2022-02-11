@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".navigation.PlusActivity">
+    tools:context=".navigation.FragmentPlus">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/sample_logo">
+            android:src="@drawable/withme_logo">
         </ImageView>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout

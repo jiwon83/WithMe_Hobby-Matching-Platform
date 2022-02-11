@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.withme">
+    package="com.appwithme">
 
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
 
     <permission
-        android:name="com.withme.permission.MAPS_RECEIVE"
+        android:name="com.appwithme.permission.MAPS_RECEIVE"
         android:label="signature" />
 
     <uses-permission android:name="android.permission.CAMERA" />
