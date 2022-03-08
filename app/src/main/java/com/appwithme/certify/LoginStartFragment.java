@@ -104,14 +104,20 @@ public class LoginStartFragment extends Fragment {
         return vGroup;
     }//onCreateView
     void loginEvent(){
-        firebaseAuth.signInWithEmailAndPassword(etId.getText().toString(),etPw.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
-                    Toast.makeText(getContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
+        try {
+            firebaseAuth.signInWithEmailAndPassword(etId.getText().toString().trim(),etPw.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(!task.isSuccessful()){
+                        Toast.makeText(getContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e){
+            Toast.makeText(getContext(),"입력정보를 확인하세요.",Toast.LENGTH_SHORT).show();
+        }
+
     }
     @Override
     public void onStart(){

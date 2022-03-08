@@ -322,7 +322,7 @@ public class JoinStartFragment extends Fragment {
 
                         return;
                     } catch (Exception e) {
-                        Toast.makeText(getContext(), "모든 정보를 입력하세요.", Toast.LENGTH_SHORT);
+                        Toast.makeText(getContext(), "모든 정보를 입력하세요.", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -364,6 +364,7 @@ public class JoinStartFragment extends Fragment {
                 }
             }
         }catch (Exception e){
+            Toast.makeText(getContext(), "선택한 파일 또는 예상치 못한 문제가 발생하였습니다. 앱을 종료하고 재실행 하세요.", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -570,6 +571,7 @@ public class JoinStartFragment extends Fragment {
         }
 
     }
+
 }
 //2021-09-19 주소검색
 //    public void onActivityResult(int requestCode, int resultCode, Intent intent){
