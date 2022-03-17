@@ -97,16 +97,6 @@ public class MainActivityHome extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
         Calendar myCalendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -280,6 +270,7 @@ public class MainActivityHome extends Fragment {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                listView.setVisibility(View.GONE);
                 String searchText =editSearch.getText().toString();//검색어를 가져와서
                 searchInMeetToRecyclerView(searchText);//검색기능 메서드호출
 
