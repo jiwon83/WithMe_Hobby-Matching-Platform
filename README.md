@@ -5,6 +5,8 @@
 보다 쉽고 빠르게 공통 목적을 가진 사람들을 
 매칭해주는 플랫폼 앱입니다. 
 
+<img src="https://user-images.githubusercontent.com/88698607/214502475-b5a8888b-7668-4277-b2e6-4e5e35ac5fa9.jpg" width="80" height="80">
+
 
 ![KakaoTalk_20220126_181622508](https://user-images.githubusercontent.com/88698607/214502475-b5a8888b-7668-4277-b2e6-4e5e35ac5fa9.jpg){: width="50% height="50%"}
 
