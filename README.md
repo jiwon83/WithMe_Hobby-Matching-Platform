@@ -12,19 +12,18 @@
 <img src="https://user-images.githubusercontent.com/88698607/214504556-35887153-8705-4951-86a0-468f9387819f.jpg" width="50%" height="50%">
 <img src="https://user-images.githubusercontent.com/88698607/214504560-bda73f1e-bcf6-47bb-8b11-e64340493122.jpg" width="50%" height="50%">
 
+playstore 링크 (https://play.google.com/store/apps/details?id=com.appwithme)
 
-####playstore 링크 (https://play.google.com/store/apps/details?id=com.appwithme)
-
-####우리 앱의 특징
+우리 앱의 특징
 : 방을 성별, 나이, 인원 수의 조건으로 자유롭게 누구나 생성 가능 !
   quick chat으로 간편한 채팅 기능으로 더 편리한 소통 !
 
-####기술 스택
+기술 스택
 : Java, Andriod Studio, FireBase, AWS
 
 initalization
 
-####팀원소개
+팀원소개
 한지원 : Backend, DevOps
 김연동 : Backend
 박소영 : Front, UI
