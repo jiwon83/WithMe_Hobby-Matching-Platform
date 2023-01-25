@@ -18,14 +18,4 @@ playstore 링크 (https://play.google.com/store/apps/details?id=com.appwithme)
 : 방을 성별, 나이, 인원 수의 조건으로 자유롭게 누구나 생성 가능 !
   quick chat으로 간편한 채팅 기능으로 더 편리한 소통 !
 
-기술 스택
-: Java, Andriod Studio, FireBase, AWS
-
-initalization
-
-팀원소개
-한지원 : Backend, DevOps
-김연동 : Backend
-박소영 : Front, UI
-
 
